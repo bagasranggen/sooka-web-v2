@@ -26,10 +26,6 @@ export default {
                 '2xl': '1340px',
             },
         },
-        colors: {
-            'sooka-primary': 'F7613F',
-            'sooka-secondary': 'FF9A00',
-        },
         spacing: Object.assign(
             {},
             ...createArrayFromNumber(20).map((item: number) => ({
@@ -43,6 +39,10 @@ export default {
             md: '2rem',
         },
         extend: {
+            colors: {
+                'sooka-primary': '#F7613F',
+                'sooka-secondary': '#FF9A00',
+            },
             fontFamily: {
                 anglecia: ['var(--font-anglecia)'],
             },
