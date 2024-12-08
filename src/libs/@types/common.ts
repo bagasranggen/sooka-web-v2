@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { JSX } from 'react';
 
 export type ObjectProps<Props> = { [key: string]: Props };
 
@@ -14,3 +14,7 @@ export type RefComponent<Props, Element> = React.ForwardRefExoticComponent<Props
 export type PropsClassname = { className?: string };
 
 export type ArrayString = string[] | string;
+
+export type ElementTagsProps = keyof JSX.IntrinsicElements;
+
+export type ResponsiveProps = 'xs' | 'sm' | 'md' | 'lg' | 'xl' | '2xl';
