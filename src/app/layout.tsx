@@ -3,7 +3,10 @@ import type { Metadata } from 'next';
 import localFont from 'next/font/local';
 
 import '@fontsource/noto-sans-jp';
+import '@fontsource/noto-sans-jp/600.css';
 import '@/assets/styles/css/main.css';
+
+import Navigation from '@/components/layout/Navigation';
 
 const anglecia = localFont({
     src: '../assets/fonts/Anglecia/AngleciaProDisplay-Regular-webfont.woff2',
@@ -20,7 +23,10 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: Readonly<PropsWithChildren>) {
     return (
         <html lang="en">
-            <body className={`${anglecia.variable} antialiased`}>{children}</body>
+            <body className={`${anglecia.variable} antialiased`}>
+                <Navigation />
+                {children}
+            </body>
         </html>
     );
 }
