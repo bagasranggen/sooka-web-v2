@@ -1,15 +1,10 @@
 import React from 'react';
 
 import { PageProps } from '@/libs/@types';
+import HomepageIndex from '@/pages/HomepageIndex';
 
 const Page = ({}: PageProps): React.ReactElement => {
-    return (
-        <>
-            <section className="container">
-                <h1 className="mt-1 text-md/[5rem] font-anglecia">HELLO WORLD</h1>
-            </section>
-        </>
-    );
+    return <HomepageIndex entries={{}} />;
 };
 
 export default Page;
