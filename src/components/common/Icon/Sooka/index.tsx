@@ -1,15 +1,14 @@
-'use client';
-
 import React from 'react';
 
 import { PropsClassname } from '@/libs/@types';
 
 export type SookaProps = {
+    id: string;
     color?: 'primary' | 'light';
     style?: React.CSSProperties;
 } & PropsClassname;
 
-const Sooka = ({ className, color, style }: SookaProps): React.ReactElement => {
+const Sooka = ({ id, className, color, style }: SookaProps): React.ReactElement => {
     let svgStyle = {
         enableBackground: 'new 0 0 1080 1080',
         maxWidth: '100%',
@@ -23,22 +22,16 @@ const Sooka = ({ className, color, style }: SookaProps): React.ReactElement => {
 
     return (
         <>
-            <style jsx>{`
-                .st0 {
-                    fill: var(--icon-color, #f7613f);
-                }
-                .st1 {
-                    fill: #ffffff;
-                }
-                .st2 {
-                    fill: #ff9a00;
-                }
-            `}</style>
+            <style
+                dangerouslySetInnerHTML={{
+                    __html: `#${id} .st0{fill:var(--icon-color, #F7613F);} .st1{fill:#FFFFFF;} .st2{fill:#FF9A00;}`,
+                }}
+            />
 
             <svg
                 suppressHydrationWarning={true}
                 version="1.1"
-                id="sooka_logo"
+                id={id}
                 xmlns="http://www.w3.org/2000/svg"
                 xmlnsXlink="http://www.w3.org/1999/xlink"
                 x="0px"

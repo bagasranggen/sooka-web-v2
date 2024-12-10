@@ -4,6 +4,7 @@ import { CARD_THUMBNAIL_WITH_PRICE } from '@/libs/mock';
 
 import Container from '@/components/common/Container';
 import Card from '@/components/common/Card';
+import Button from '@/components/common/Button';
 
 export type HomepageIndexProps = {
     entries: {};
@@ -17,10 +18,28 @@ const HomepageIndex = ({}: HomepageIndexProps): React.ReactElement => {
             </Container>
 
             <Container as="section">
-                <Card.Thumbnail
-                    spacing={{ x: 3, y: 4 }}
-                    items={CARD_THUMBNAIL_WITH_PRICE}
-                />
+                <div className="mt-5">
+                    <Card.Thumbnail
+                        spacing={{ x: 3, y: 4 }}
+                        columns={{ xs: 1, sm: 2, md: 4 }}
+                        items={CARD_THUMBNAIL_WITH_PRICE}
+                    />
+
+                    <Button.Container
+                        className="mt-5 justify-center"
+                        items={[
+                            {
+                                children: (
+                                    <Button.Arrow
+                                        href="#"
+                                        size="lg">
+                                        View All
+                                    </Button.Arrow>
+                                ),
+                            },
+                        ]}
+                    />
+                </div>
             </Container>
         </>
     );

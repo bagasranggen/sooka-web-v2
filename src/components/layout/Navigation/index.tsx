@@ -1,9 +1,11 @@
 import React from 'react';
-import Container from '@/components/common/Container';
+
+import { NAVIGATION_LINKS } from '@/libs/mock';
+
 import Icon from '@/components/common/Icon';
 import List from '@/components/common/List';
-import { NAVIGATION_LINKS } from '@/libs/mock';
 import Button from '@/components/common/Button';
+import Container from '@/components/common/Container';
 
 export type NavigationProps = {};
 
@@ -16,6 +18,7 @@ const Navigation = ({}: NavigationProps): React.ReactElement => {
                         as="anchor"
                         href="/">
                         <Icon.Sooka
+                            id="logoHeade"
                             color="light"
                             className="h-[4.5rem]"
                         />

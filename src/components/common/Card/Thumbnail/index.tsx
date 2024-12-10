@@ -10,6 +10,7 @@ import Picture, { BaseProps } from '@/components/common/Picture';
 export type ThumbnailItemProps = {
     cta: Omit<BaseAnchorProps, 'as'>;
     media: BaseProps['items'];
+    mediaHover: BaseProps['items'];
     title: string;
     price?: string;
 };
@@ -23,7 +24,7 @@ const Thumbnail = ({ items, width = 3, ...props }: ThumbnailProps): React.ReactE
         <Base
             {...props}
             width={width}
-            items={items.map(({ cta, media, title, price }: ThumbnailItemProps) => {
+            items={items.map(({ cta, media, mediaHover, title, price }: ThumbnailItemProps) => {
                 const hasPrice = !!price;
 
                 let titleClass: ArrayString = ['mt-1'];
@@ -45,8 +46,16 @@ const Thumbnail = ({ items, width = 3, ...props }: ThumbnailProps): React.ReactE
                     children: (
                         <Button
                             as="anchor"
+                            className="group"
                             {...cta}>
-                            <Picture items={media} />
+                            <div className="relative">
+                                <Picture items={media} />
+
+                                <Picture
+                                    className="absolute top-0 opacity-0 group-hover:opacity-1 "
+                                    items={mediaHover}
+                                />
+                            </div>
                             <h3 className={titleClass}>{title}</h3>
                             {priceBlock}
                         </Button>
