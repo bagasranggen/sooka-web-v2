@@ -27,7 +27,7 @@ const Thumbnail = ({ items, width = 3, ...props }: ThumbnailProps): React.ReactE
             items={items.map(({ cta, media, mediaHover, title, price }: ThumbnailItemProps) => {
                 const hasPrice = !!price;
 
-                let titleClass: ArrayString = ['mt-1'];
+                let titleClass: ArrayString = ['mt-1 md:transition-colors md:group-hover:text-sooka-primary'];
                 if (hasPrice) titleClass.push('text-[1.4rem]');
                 if (!hasPrice) titleClass.push('uppercase font-semibold tracking-[.2rem]');
                 titleClass = joinArrayString(titleClass);
@@ -52,7 +52,7 @@ const Thumbnail = ({ items, width = 3, ...props }: ThumbnailProps): React.ReactE
                                 <Picture items={media} />
 
                                 <Picture
-                                    className="absolute top-0 opacity-0 group-hover:opacity-1 "
+                                    className="absolute top-0 opacity-0 md:transition-opacity md:group-hover:opacity-100"
                                     items={mediaHover}
                                 />
                             </div>

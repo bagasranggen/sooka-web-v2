@@ -60,7 +60,6 @@ export type BaseProps = {
 
 const Base = forwardRef<HTMLPictureElement, BaseProps>(({ className, items, style, events, ...props }, ref) => {
     let pictureClass: ArrayString = [];
-    // if (style) pictureClass.push('d-block');
     if (className) pictureClass.push(className);
     pictureClass = joinArrayString(pictureClass);
 
