@@ -1,6 +1,7 @@
 import React from 'react';
 
 import { CARD_THUMBNAIL_WITH_PRICE } from '@/libs/mock';
+import { createPicsumImage } from '@/libs/factory';
 
 import Container from '@/components/common/Container';
 import Card from '@/components/common/Card';
@@ -8,54 +9,19 @@ import Button from '@/components/common/Button';
 import Heading from '@/components/common/Heading';
 import Columns from '@/components/common/Columns';
 import Picture from '@/components/common/Picture';
-import { createPicsumImage } from '@/libs/factory';
-import Overlay from '@/components/common/Overlay';
-import Carousel from '@/components/common/Carousel';
+import Carousel, { BannerProps } from '@/components/common/Carousel';
 
 export type HomepageIndexProps = {
-    entries: {};
+    entries: {
+        banner: BannerProps['items'];
+    };
 };
 
-const HomepageIndex = ({}: HomepageIndexProps): React.ReactElement => {
-    const bg = createPicsumImage({ width: 1600, height: 900 });
-
-    console.log(bg.src);
-
+const HomepageIndex = ({ entries }: HomepageIndexProps): React.ReactElement => {
     return (
         <>
             <section>
-                <Carousel.Banner items={[{}, {}]} />
-                {/*<Button*/}
-                {/*    as="anchor"*/}
-                {/*    href="#">*/}
-                {/*    <Overlay*/}
-                {/*        variant="gradient-right"*/}
-                {/*        opacity={4}>*/}
-                {/*        <div className="bg-[url('https://picsum.photos/id/237/1600/900')] bg-cover">*/}
-                {/*            <Container className="relative z-[2] h-screen">*/}
-                {/*                <Columns.Row className="items-center justify-end h-full">*/}
-                {/*                    <Columns.Column width={{ md: 5 }}>*/}
-                {/*                        <div className="mb-1 flex items-center text-white text-[1.4rem] tracking-[.2rem] font-bold uppercase">*/}
-                {/*                            <span className="w-[8.4rem] h-[.3rem] bg-white me-1.5" />*/}
-                {/*                            New Products*/}
-                {/*                        </div>*/}
-                {/*                        <h1 className="text-white text-[7rem] leading-[6.5rem] font-anglecia">*/}
-                {/*                            Strawberry Shortcake*/}
-                {/*                        </h1>*/}
-                {/*                        <div className="mt-2.5 text-white">*/}
-                {/*                            <p>*/}
-                {/*                                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium*/}
-                {/*                                alias deleniti dolores dolorum, ex non quod. Corporis dolore ea, fugit*/}
-                {/*                                impedit laboriosam necessitatibus neque nostrum optio praesentium quod*/}
-                {/*                                repudiandae unde.*/}
-                {/*                            </p>*/}
-                {/*                        </div>*/}
-                {/*                    </Columns.Column>*/}
-                {/*                </Columns.Row>*/}
-                {/*            </Container>*/}
-                {/*        </div>*/}
-                {/*    </Overlay>*/}
-                {/*</Button>*/}
+                <Carousel.Banner items={entries.banner} />
             </section>
 
             <Container as="section">
@@ -162,7 +128,7 @@ const HomepageIndex = ({}: HomepageIndexProps): React.ReactElement => {
 
             <Container
                 as="section"
-                className="mt-15">
+                className="mt-15 mb-15">
                 <Columns.Row className="justify-center">
                     <Columns.Column width={{ md: 8 }}>
                         <Heading

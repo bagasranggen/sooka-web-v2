@@ -15,7 +15,7 @@ const Overlay = ({ variant, opacity, children }: OverlayProps) => {
         'relative after:content-[""] after:absolute after:top-0 after:left-0 after:w-full after:h-full',
     ];
     if (variant !== 'solid') overlayClass.push('after:from-black');
-    if (variant === 'solid') overlayClass.push('bg-black');
+    if (variant === 'solid') overlayClass.push('after:bg-black');
     if (variant === 'gradient-right') overlayClass.push('after:bg-gradient-to-l');
     if (variant === 'gradient-left') overlayClass.push('after:bg-gradient-to-r');
     overlayClass.push(`after:opacity-${opacity * 10}`);
