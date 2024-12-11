@@ -57,7 +57,7 @@ const Banner = ({ items }: BannerProps): React.ReactElement => {
                                         <Columns.Row className={contentClass}>
                                             <Columns.Column width={{ md: 5 }}>
                                                 {item.category && (
-                                                    <div className="mb-1 flex items-center text-white text-[1.4rem] tracking-[.2rem] font-bold uppercase">
+                                                    <div className="mb-1 flex items-center text-white text-[1.4rem] tracking-0.2 font-bold uppercase">
                                                         <span className="w-[8.4rem] h-[.3rem] bg-white me-1.5" />
                                                         {item.category}
                                                     </div>

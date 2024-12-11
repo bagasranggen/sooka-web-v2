@@ -29,7 +29,7 @@ const Thumbnail = ({ items, width = 3, ...props }: ThumbnailProps): React.ReactE
 
                 let titleClass: ArrayString = ['mt-1 md:transition-colors md:group-hover:text-sooka-primary'];
                 if (hasPrice) titleClass.push('text-[1.4rem]');
-                if (!hasPrice) titleClass.push('uppercase font-semibold tracking-[.2rem]');
+                if (!hasPrice) titleClass.push('uppercase font-semibold tracking-0.2');
                 titleClass = joinArrayString(titleClass);
 
                 let priceBlock = undefined;

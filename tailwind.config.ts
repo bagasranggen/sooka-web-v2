@@ -63,6 +63,16 @@ export default {
             md: '2rem',
         },
         extend: {
+            letterSpacing: Object.assign(
+                {},
+                ...createArrayFromNumber(5).map((item: number) => {
+                    const ls = (item + 1) / 10;
+
+                    return {
+                        [ls]: `${ls}rema`,
+                    };
+                })
+            ),
             width: {
                 '12/12': '100%',
                 '1/100': '100%',

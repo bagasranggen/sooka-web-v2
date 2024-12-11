@@ -31,7 +31,7 @@ const Navigation = ({}: NavigationProps): React.ReactElement => {
                                 <Button
                                     as="anchor"
                                     href={item.href}
-                                    className="uppercase tracking-[.2rem] transition-colors hover:text-black">
+                                    className="uppercase tracking-0.2 transition-colors hover:text-black">
                                     {item.children}
                                 </Button>
                             ),
