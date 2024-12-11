@@ -8,6 +8,7 @@ export default {
         './src/app/**/*.{js,ts,jsx,tsx,mdx}',
     ],
     safelist: [
+        ...createArrayFromNumber(6).map((item: number) => `after:opacity-${item * 10}`),
         {
             pattern: /w-([1-9]|1[0-2])\/12/,
             variants: ['xs', 'sm', 'md', 'lg', 'xl', '2xl'],
