@@ -1,4 +1,4 @@
-import { HomepageIndexProps } from '@/pages/HomepageIndex/index';
+import { HomepageIndexProps } from '@/components/pages/HomepageIndex/index';
 import { CAROUSEL_BANNER } from '@/libs/mock';
 
 export const HomepageData = (): HomepageIndexProps => {
