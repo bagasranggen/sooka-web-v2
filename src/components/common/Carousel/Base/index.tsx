@@ -2,50 +2,42 @@
 
 import React, { PropsWithChildren } from 'react';
 
-import { PaginationOptions, SwiperModule } from 'swiper/types';
+import { SwiperModule, SwiperOptions } from 'swiper/types';
 import { Swiper, SwiperProps, SwiperSlide } from 'swiper/react';
-import { Autoplay, Pagination } from 'swiper/modules';
+import { Autoplay } from 'swiper/modules';
 
 import 'swiper/css';
-import 'swiper/css/pagination';
 
-import BannerPagination, { bannerPaginationOptions } from '@/components/common/Carousel/Banner/BannerPagination';
+export type BaseVariantProps = {
+    modules?: SwiperModule;
+    options?: SwiperOptions;
+    element?: React.ReactElement;
+};
 
 export type BaseItemProps = PropsWithChildren;
 
 export type BaseProps = {
     items: BaseItemProps[];
-    pagination?: { variant: 'banner' } & Omit<PaginationOptions, 'clickable' | 'renderBullet'>;
+    modulesVariant?: BaseVariantProps;
 } & Omit<SwiperProps, 'modules' | 'pagination'>;
 
-const Base = ({ items, pagination, ...props }: BaseProps): React.ReactElement => {
+const Base = ({ items, autoplay, modulesVariant, ...props }: BaseProps): React.ReactElement => {
     const modules: SwiperModule[] = [];
-    if (props.autoplay) modules.push(Autoplay);
-    if (pagination) modules.push(Pagination);
+    if (autoplay) modules.push(Autoplay);
+    if (modulesVariant?.modules) modules.push(modulesVariant.modules);
 
-    let paginationOptions: PaginationOptions = {};
-    if (pagination) {
-        paginationOptions = {
-            clickable: true,
-            ...pagination,
-        };
-    }
-    if (pagination?.variant === 'banner') {
-        paginationOptions = {
-            ...paginationOptions,
-            ...bannerPaginationOptions,
-        };
-    }
+    let swiperProps: SwiperProps = props;
+    if (modulesVariant?.options) swiperProps = { ...swiperProps, ...modulesVariant.options };
 
     return (
         <Swiper
             modules={modules}
-            pagination={paginationOptions}
-            {...props}>
+            {...swiperProps}>
             {items.map((item: BaseItemProps, i: number) => (
                 <SwiperSlide key={i}>{item.children}</SwiperSlide>
             ))}
-            {pagination?.variant === 'banner' && <BannerPagination />}
+
+            {modulesVariant?.element && modulesVariant.element}
         </Swiper>
     );
 };

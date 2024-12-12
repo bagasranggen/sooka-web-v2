@@ -9,6 +9,7 @@ import Button from '@/components/common/Button';
 import Overlay from '@/components/common/Overlay';
 import Container from '@/components/common/Container';
 import { BaseItemProps } from '@/components/common/Picture';
+import BannerVariant from '@/components/common/Carousel/Banner/BannerVariant';
 
 export type BannerItemProps = {
     media: BaseItemProps['src'];
@@ -26,7 +27,7 @@ const Banner = ({ items }: BannerProps): React.ReactElement => {
     return (
         <Base
             className="relative"
-            pagination={{ variant: 'banner' }}
+            modulesVariant={BannerVariant}
             autoplay={{ delay: 8000 }}
             loop
             items={items.map(({ align = 'right', ...item }: BannerItemProps) => {
