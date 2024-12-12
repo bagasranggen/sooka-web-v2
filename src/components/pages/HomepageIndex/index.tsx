@@ -5,16 +5,16 @@ import { createPicsumImage } from '@/libs/factory';
 
 import Container from '@/components/common/Container';
 import Card from '@/components/common/Card';
-import Button from '@/components/common/Button';
 import Heading from '@/components/common/Heading';
 import Columns from '@/components/common/Columns';
 import Picture from '@/components/common/Picture';
-import Carousel, { BannerProps } from '@/components/common/Carousel';
+import Carousel, { BannerProps, TestimonialProps } from '@/components/common/Carousel';
 import Tabs from '@/components/common/Tabs';
 
 export type HomepageIndexProps = {
     entries: {
         banner: BannerProps['items'];
+        testimonials: TestimonialProps['items'];
     };
 };
 
@@ -55,29 +55,6 @@ const HomepageIndex = ({ entries }: HomepageIndexProps): React.ReactElement => {
                         },
                     ]}
                 />
-
-                <div className="mt-5">
-                    <Card.Thumbnail
-                        spacing={{ x: 3, y: 4 }}
-                        columns={{ xs: 1, sm: 2, md: 4 }}
-                        items={CARD_THUMBNAIL_WITH_PRICE}
-                    />
-
-                    <Button.Container
-                        className="mt-5 justify-center"
-                        items={[
-                            {
-                                children: (
-                                    <Button.Arrow
-                                        href="#"
-                                        size="lg">
-                                        View All
-                                    </Button.Arrow>
-                                ),
-                            },
-                        ]}
-                    />
-                </div>
             </Container>
 
             <Container
@@ -149,9 +126,7 @@ const HomepageIndex = ({ entries }: HomepageIndexProps): React.ReactElement => {
                         </Heading>
 
                         <div className="mt-6">
-                            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ea nobis odio, quod repellat rerum
-                            similique sit vero? Atque aut molestiae quidem reiciendis sapiente voluptate voluptatum.
-                            Error in laborum maiores voluptatum?
+                            <Carousel.Testimonial items={entries.testimonials} />
                         </div>
                     </Columns.Column>
                 </Columns.Row>
