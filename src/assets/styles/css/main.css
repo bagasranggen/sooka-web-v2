@@ -6,8 +6,8 @@
     }
 
     body {
-        font-family: 'Noto Sans JP', sans-serif;
-        font-size: 1.6rem;
+        font-family: theme('fontFamily.noto-sans-jp');
+        font-size: theme('fontSize.base');
     }
 
     p:not(:last-child) {
@@ -17,4 +17,3 @@
 
 @tailwind components;
 @tailwind utilities;
-
