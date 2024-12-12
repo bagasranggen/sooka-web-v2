@@ -10,6 +10,7 @@ import Heading from '@/components/common/Heading';
 import Columns from '@/components/common/Columns';
 import Picture from '@/components/common/Picture';
 import Carousel, { BannerProps } from '@/components/common/Carousel';
+import Tabs from '@/components/common/Tabs';
 
 export type HomepageIndexProps = {
     entries: {
@@ -25,6 +26,36 @@ const HomepageIndex = ({ entries }: HomepageIndexProps): React.ReactElement => {
             </section>
 
             <Container as="section">
+                <Tabs
+                    className="mt-5 relative z-10"
+                    items={[
+                        {
+                            id: 'lis',
+                            titleClass: '[&:not(.active)]:opacity-60',
+                            title: <Heading.Number number="01">New</Heading.Number>,
+                            children: (
+                                <Card.Thumbnail
+                                    spacing={{ x: 3, y: 4 }}
+                                    columns={{ xs: 1, sm: 2, md: 4 }}
+                                    items={CARD_THUMBNAIL_WITH_PRICE}
+                                />
+                            ),
+                        },
+                        {
+                            id: 'lis2',
+                            titleClass: '[&:not(.active)]:opacity-60',
+                            title: <Heading.Number number="02">Best Seller</Heading.Number>,
+                            children: (
+                                <>
+                                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Commodi consequatur cum,
+                                    cumque dolorem fuga id odio quos repellat repudiandae ullam! At, culpa delectus
+                                    eaque odit officia quibusdam! Natus, quia, repudiandae.
+                                </>
+                            ),
+                        },
+                    ]}
+                />
+
                 <div className="mt-5">
                     <Card.Thumbnail
                         spacing={{ x: 3, y: 4 }}
