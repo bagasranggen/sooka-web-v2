@@ -69,7 +69,7 @@ export default {
                     const ls = (item + 1) / 10;
 
                     return {
-                        [ls]: `${ls}rema`,
+                        [ls]: `${ls}rem`,
                     };
                 })
             ),
@@ -101,6 +101,7 @@ export default {
             },
             fontFamily: {
                 anglecia: ['var(--font-anglecia)'],
+                'noto-sans-jp': ['Noto Sans JP', 'sans-serif'],
             },
         },
     },
