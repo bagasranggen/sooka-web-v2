@@ -7,6 +7,16 @@ export type PageProps = {
     searchParams?: Promise<ObjectProps<string | string[] | undefined>>;
 };
 
+export type PageDataParamsProps = {
+    type: string;
+};
+
+export type PageDataProps<Props> = {
+    // page: {
+    //     seomatic: any;
+    // };
+} & (Pick<PageDataParamsProps, 'type'> & Props);
+
 export type Component<Props> = { (props: Props): React.ReactElement | null };
 
 export type RefComponent<Props, Element> = React.ForwardRefExoticComponent<Props & React.RefAttributes<Element>>;

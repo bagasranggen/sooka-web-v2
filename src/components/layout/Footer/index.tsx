@@ -1,6 +1,7 @@
 import React from 'react';
-import Container from '@/components/common/Container';
+
 import Icon from '@/components/common/Icon';
+import Container from '@/components/common/Container';
 
 export type FooterProps = {};
 

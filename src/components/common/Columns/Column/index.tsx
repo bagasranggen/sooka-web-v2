@@ -3,7 +3,7 @@ import React, { PropsWithChildren } from 'react';
 import { ArrayString, CreateArrayWithLengthX, NumericRange, PropsClassname, ResponsiveProps } from '@/libs/@types';
 import { getColumnWidth, joinArrayString } from '@/libs/utils';
 
-export type ColumnWidthProps = NumericRange<CreateArrayWithLengthX<0>, 12>;
+export type ColumnWidthProps = NumericRange<CreateArrayWithLengthX<0>, 12> | 'auto';
 
 export type ColumnProps = {
     width?: ColumnWidthProps | Partial<Record<ResponsiveProps, ColumnWidthProps>>;
