@@ -14,7 +14,7 @@ export const IMAGE_COLLAGE: ImageCollageProps['items'] = [
     IMAGE_COLLAGE_3_4,
     IMAGE_COLLAGE_1_1,
     IMAGE_COLLAGE_4_3,
-    IMAGE_COLLAGE_3_2,
-    IMAGE_COLLAGE_3_4,
-    IMAGE_COLLAGE_3_4,
+    // IMAGE_COLLAGE_3_2,
+    // IMAGE_COLLAGE_3_4,
+    // IMAGE_COLLAGE_3_4,
 ];
