@@ -22,6 +22,7 @@ const Base = ({
     if (family === 'anglecia') headingClass.push(`font-anglecia`);
     if (size === 'heading') headingClass.push('text-[10rem] leading-[10rem]');
     if (size === 'section') headingClass.push('text-[8.5rem] leading-[9rem]');
+    if (size === 'callout') headingClass.push('text-[5rem] leading-[6rem]');
     if (className) headingClass.push(className);
     headingClass = joinArrayString(headingClass);
 
