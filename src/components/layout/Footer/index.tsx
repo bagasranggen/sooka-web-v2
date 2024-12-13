@@ -2,6 +2,7 @@ import React from 'react';
 
 import Icon from '@/components/common/Icon';
 import Container from '@/components/common/Container';
+import Columns from '@/components/common/Columns';
 
 export type FooterProps = {};
 
@@ -15,11 +16,14 @@ const Footer = ({}: FooterProps): React.ReactElement => {
                     className="mx-auto w-[30rem]"
                 />
                 <div className="mt-5">
-                    <p>
-                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab alias asperiores eos fugit minima
-                        necessitatibus nobis odit, omnis quasi ratione repellat repellendus vero? Doloremque est ex
-                        facere perferendis sunt voluptas!
-                    </p>
+                    <Columns.Row>
+                        <Columns.Column
+                            width={{ md: 6 }}
+                            className="*:!mb-0 uppercase tracking-0.2 font-semibold text-[1.4rem]">
+                            <p>Sleman, Daerah Istimewa Yogyakarta</p>
+                            <p>Open Daily, 9 AM - 4 PM</p>
+                        </Columns.Column>
+                    </Columns.Row>
                 </div>
             </Container>
         </footer>
