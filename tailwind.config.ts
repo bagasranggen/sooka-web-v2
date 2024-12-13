@@ -52,7 +52,7 @@ export default {
         },
         spacing: Object.assign(
             {},
-            ...createArrayFromNumber(20).map((item: number) => ({
+            ...createArrayFromNumber(21).map((item: number) => ({
                 [item - 0.5]: `${item - 0.5}rem`,
                 [item]: `${item}rem`,
             }))

@@ -75,7 +75,7 @@ const HomepageIndex = ({ entries }: HomepageIndexProps): React.ReactElement => {
 
             <Container
                 as="section"
-                className="mt-15">
+                className="mt-20">
                 <Columns.Row spacing={{ x: 3, md: { x: 6 } }}>
                     <Columns.Column
                         width={{
@@ -84,7 +84,7 @@ const HomepageIndex = ({ entries }: HomepageIndexProps): React.ReactElement => {
                         <Columns.Row className="relative">
                             <Columns.Column
                                 width={{ md: 8 }}
-                                className="mt-6">
+                                className="mt-8">
                                 <Picture items={[createPicsumImage({ width: 550, height: 733 })]} />
                             </Columns.Column>
                             <Columns.Column
@@ -128,7 +128,7 @@ const HomepageIndex = ({ entries }: HomepageIndexProps): React.ReactElement => {
 
             <Container
                 as="section"
-                className="mt-15">
+                className="mt-20">
                 <Columns.Row className="justify-center">
                     <Columns.Column
                         width={{
@@ -141,7 +141,7 @@ const HomepageIndex = ({ entries }: HomepageIndexProps): React.ReactElement => {
                             Testimonials
                         </Heading>
 
-                        <div className="mt-6">
+                        <div className="mt-8">
                             <Carousel.Testimonial items={entries.testimonials} />
                         </div>
                     </Columns.Column>
@@ -150,7 +150,7 @@ const HomepageIndex = ({ entries }: HomepageIndexProps): React.ReactElement => {
 
             <Container
                 as="section"
-                className="mt-15 mb-15">
+                className="mt-20 mb-20">
                 <Columns.Row className="justify-center">
                     <Columns.Column width={{ md: 8 }}>
                         <Heading
@@ -158,10 +158,9 @@ const HomepageIndex = ({ entries }: HomepageIndexProps): React.ReactElement => {
                             size="section"
                             className="text-center"
                             description={
-                                <p>
+                                <p className="text-center">
                                     Lorem ipsum dolor sit amet, consectetur adipisicing elit. Magnam officiis qui quo
-                                    velit. Aperiam, atque consequatur. Cum cumque ducimus eligendi ex incidunt labore
-                                    magnam, nihil nulla numquam provident quibusdam sit.
+                                    velit.
                                 </p>
                             }>
                             First Time <span className="text-sooka-primary">Ordering</span>?

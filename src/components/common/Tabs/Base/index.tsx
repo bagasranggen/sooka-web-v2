@@ -21,7 +21,7 @@ const Base = ({ items, className }: BaseProps): React.ReactElement => {
     const [active, setActive] = useState<BaseItemProps['id']>(items[0].id);
     const [tabFade, setTabFade] = useState<boolean>(false);
 
-    let listClass: ArrayString = ['flex justify-center mb-2'];
+    let listClass: ArrayString = ['flex justify-center mb-3'];
     if (className) listClass.push(className);
     listClass = joinArrayString(listClass);
 
