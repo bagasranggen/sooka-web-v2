@@ -17,7 +17,7 @@ export type TestimonialProps = {
 const Testimonial = ({ items }: TestimonialProps): React.ReactElement => {
     let baseClass: ArrayString = ['relative'];
     baseClass.push(
-        "after:content-[''] after:absolute after:right-0 after:top-0 after:w-5/12 after:h-full after:bg-gradient-to-l after:from-white after:from-60% after:z-10 after:pointer-events-none"
+        "after:content-[''] after:absolute after:right-0 after:top-0 after:w-4/12 after:h-full after:bg-gradient-to-l after:from-white after:from-70% after:z-10 after:pointer-events-none"
     );
     baseClass = joinArrayString(baseClass);
 
