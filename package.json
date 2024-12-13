@@ -10,6 +10,8 @@
   },
   "dependencies": {
     "@fontsource/noto-sans-jp": "^5.1.0",
+    "@gsap/react": "^2.1.1",
+    "gsap": "^3.12.5",
     "html-react-parser": "^5.2.0",
     "next": "15.0.4",
     "react": "^19.0.0",
