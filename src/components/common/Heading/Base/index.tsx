@@ -18,20 +18,28 @@ const Base = ({
     description,
     children,
 }: BaseProps): React.ReactElement => {
+    let wrapperClass: ArrayString = [];
+    if (description && className) wrapperClass.push(className);
+    wrapperClass = joinArrayString(wrapperClass);
+
     let headingClass: ArrayString = [];
     if (family === 'anglecia') headingClass.push(`font-anglecia`);
     if (size === 'heading') headingClass.push('text-[10rem] leading-[10rem]');
     if (size === 'section') headingClass.push('text-[8.5rem] leading-[9rem]');
     if (size === 'callout') headingClass.push('text-[5rem] leading-[6rem]');
-    if (className) headingClass.push(className);
+    if (!description && className) headingClass.push(className);
     headingClass = joinArrayString(headingClass);
 
-    return (
-        <>
-            <Heading className={headingClass}>{children}</Heading>
-            {description && <div className="mt-4">{description}</div>}
-        </>
-    );
+    if (description) {
+        return (
+            <div className={wrapperClass}>
+                <Heading className={headingClass}>{children}</Heading>
+                {description}
+            </div>
+        );
+    }
+
+    return <Heading className={headingClass}>{children}</Heading>;
 };
 
 export default Base;
