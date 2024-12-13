@@ -19,7 +19,7 @@ const Footer = ({}: FooterProps): React.ReactElement => {
                     <Columns.Row>
                         <Columns.Column
                             width={{ md: 6 }}
-                            className="*:!mb-0 uppercase tracking-0.2 font-semibold text-[1.4rem]">
+                            className="*:!mb-0 uppercase tracking-0.2 font-semibold text-[1.2rem]">
                             <p>Sleman, Daerah Istimewa Yogyakarta</p>
                             <p>Open Daily, 9 AM - 4 PM</p>
                         </Columns.Column>
