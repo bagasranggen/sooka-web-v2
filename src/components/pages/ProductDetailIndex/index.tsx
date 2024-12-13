@@ -5,6 +5,7 @@ import Columns from '@/components/common/Columns';
 import Container from '@/components/common/Container';
 import Picture, { BaseProps } from '@/components/common/Picture';
 import ProductDetailInfo, { ProductDetailInfoProps } from '@/components/pages/ProductDetailIndex/ProductDetailInfo';
+import Marquee from '@/components/common/Marquee';
 
 export type ProductDetailIndexProps = {
     entries: {
@@ -49,11 +50,9 @@ const ProductDetailIndex = ({ entries }: ProductDetailIndexProps): React.ReactEl
                 </Columns.Row>
             </Container>
 
-            <Container
-                as="section"
-                className="mt-10 mb-10">
-                MARQUEE
-            </Container>
+            <section className="mt-20 mb-15">
+                <Marquee />
+            </section>
         </>
     );
 };
