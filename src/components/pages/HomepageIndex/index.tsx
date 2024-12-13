@@ -11,6 +11,7 @@ import Picture from '@/components/common/Picture';
 import Carousel, { BannerProps, TestimonialProps } from '@/components/common/Carousel';
 import Tabs from '@/components/common/Tabs';
 import List, { NumberProps } from '@/components/common/List';
+import ImageDivider from '@/components/common/ImageDivider';
 
 export type HomepageIndexProps = {
     entries: {
@@ -147,6 +148,11 @@ const HomepageIndex = ({ entries }: HomepageIndexProps): React.ReactElement => {
                     </Columns.Column>
                 </Columns.Row>
             </Container>
+
+            <ImageDivider
+                className="mt-20"
+                media={[createPicsumImage({ id: 655, width: 1600, height: 900 })]}
+            />
 
             <Container
                 as="section"
