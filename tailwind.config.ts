@@ -18,7 +18,15 @@ export default {
             variants: ['*', '*:sm', '*:md', '*:lg', '*:xl', '*:2xl'],
         },
         {
+            pattern: /w-auto/,
+            variants: ['*', '*:sm', '*:md', '*:lg', '*:xl', '*:2xl'],
+        },
+        {
             pattern: /(mx|mt)-./,
+            variants: ['xs', 'sm', 'md', 'lg', 'xl', '2xl'],
+        },
+        {
+            pattern: /(!|)(flex-grow|flex-shrink|basis)-(0|auto)/,
             variants: ['xs', 'sm', 'md', 'lg', 'xl', '2xl'],
         },
         {
