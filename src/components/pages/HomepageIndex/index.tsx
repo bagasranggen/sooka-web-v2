@@ -10,11 +10,15 @@ import Columns from '@/components/common/Columns';
 import Picture from '@/components/common/Picture';
 import Carousel, { BannerProps, TestimonialProps } from '@/components/common/Carousel';
 import Tabs from '@/components/common/Tabs';
+import List, { NumberProps } from '@/components/common/List';
 
 export type HomepageIndexProps = {
     entries: {
         banner: BannerProps['items'];
         testimonials: TestimonialProps['items'];
+        orders: {
+            steps: NumberProps['items'];
+        };
     };
 };
 
@@ -150,6 +154,11 @@ const HomepageIndex = ({ entries }: HomepageIndexProps): React.ReactElement => {
                             }>
                             First Time <span className="text-sooka-primary">Ordering</span>?
                         </Heading>
+
+                        <List.Number
+                            className="mt-8"
+                            items={entries.orders.steps}
+                        />
                     </Columns.Column>
                 </Columns.Row>
             </Container>
