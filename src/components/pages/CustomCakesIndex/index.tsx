@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { CARD_THUMBNAIL_WITH_PRICE, IMAGE_COLLAGE } from '@/libs/mock';
+import { CARD_THUMBNAIL_WITHOUT_PRICE, IMAGE_COLLAGE } from '@/libs/mock';
 
 import Columns from '@/components/common/Columns';
 import Heading from '@/components/common/Heading';
@@ -56,9 +56,9 @@ const CustomCakesIndex = ({}: CustomCakesIndexProps): React.ReactElement => {
 
                 <div className="mt-5">
                     <Card.Thumbnail
-                        spacing={{ x: 3, y: 4 }}
+                        spacing={{ x: 2, y: 4 }}
                         columns={{ xs: 1, sm: 2, md: 5 }}
-                        items={[...CARD_THUMBNAIL_WITH_PRICE, CARD_THUMBNAIL_WITH_PRICE[0]]}
+                        items={[...CARD_THUMBNAIL_WITHOUT_PRICE, CARD_THUMBNAIL_WITHOUT_PRICE[0]]}
                     />
                 </div>
             </Container>
