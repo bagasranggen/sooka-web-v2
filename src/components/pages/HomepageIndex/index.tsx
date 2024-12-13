@@ -31,12 +31,18 @@ const HomepageIndex = ({ entries }: HomepageIndexProps): React.ReactElement => {
 
             <Container as="section">
                 <Tabs
-                    className="mt-5 relative z-10"
+                    className="mt-10 relative z-10"
                     items={[
                         {
                             id: 'lis',
                             titleClass: '[&:not(.active)]:opacity-60',
-                            title: <Heading.Number number="01">New</Heading.Number>,
+                            title: (
+                                <Heading.Number
+                                    number="01"
+                                    size="lg">
+                                    New
+                                </Heading.Number>
+                            ),
                             children: (
                                 <Card.Thumbnail
                                     spacing={{ x: 3, y: 4 }}
@@ -48,13 +54,19 @@ const HomepageIndex = ({ entries }: HomepageIndexProps): React.ReactElement => {
                         {
                             id: 'lis2',
                             titleClass: '[&:not(.active)]:opacity-60',
-                            title: <Heading.Number number="02">Best Seller</Heading.Number>,
+                            title: (
+                                <Heading.Number
+                                    number="02"
+                                    size="lg">
+                                    Best Seller
+                                </Heading.Number>
+                            ),
                             children: (
-                                <>
-                                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Commodi consequatur cum,
-                                    cumque dolorem fuga id odio quos repellat repudiandae ullam! At, culpa delectus
-                                    eaque odit officia quibusdam! Natus, quia, repudiandae.
-                                </>
+                                <Card.Thumbnail
+                                    spacing={{ x: 3, y: 4 }}
+                                    columns={{ xs: 1, sm: 2, md: 4 }}
+                                    items={CARD_THUMBNAIL_WITH_PRICE}
+                                />
                             ),
                         },
                     ]}
