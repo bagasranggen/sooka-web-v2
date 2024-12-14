@@ -1,4 +1,4 @@
-import { PRODUCT_DETAIL_BANNER, PRODUCT_DETAIL_INFOS } from '@/libs/mock';
+import { MARQUEE, PRODUCT_DETAIL_BANNER, PRODUCT_DETAIL_INFOS } from '@/libs/mock';
 import { PageDataParamsProps, PageDataProps } from '@/libs/@types';
 import { createPicsumImage } from '@/libs/factory';
 
@@ -15,6 +15,7 @@ export const ProductDetailData = async ({
                 media: [createPicsumImage({ id: 682, width: 800, height: 1067 })],
                 contents: PRODUCT_DETAIL_INFOS,
             },
+            marquee: MARQUEE,
         },
     };
 };

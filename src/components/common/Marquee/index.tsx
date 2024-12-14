@@ -1,27 +1,31 @@
 import React from 'react';
-import Columns from '@/components/common/Columns';
-import Picture from '@/components/common/Picture';
-import { createPicsumImage } from '@/libs/factory';
 
-export type MarqueeProps = {};
+import Picture, { BaseProps } from '@/components/common/Picture';
+import Animation from '@/components/Animation';
 
-const Marquee = ({}: MarqueeProps): React.ReactElement => {
+export type MarqueeProps = {
+    items: BaseProps['items'][];
+};
+
+const Marquee = ({ items }: MarqueeProps): React.ReactElement => {
     return (
         <div className="overflow-hidden">
-            <Columns.Row isWrap={false}>
-                <Columns.Column width="auto">
-                    <Picture items={[createPicsumImage({ width: 550, height: 413 })]} />
-                </Columns.Column>
-                <Columns.Column width="auto">
-                    <Picture items={[createPicsumImage({ width: 550, height: 413 })]} />
-                </Columns.Column>
-                <Columns.Column width="auto">
-                    <Picture items={[createPicsumImage({ width: 550, height: 413 })]} />
-                </Columns.Column>
-                <Columns.Column width="auto">
-                    <Picture items={[createPicsumImage({ width: 550, height: 413 })]} />
-                </Columns.Column>
-            </Columns.Row>
+            <Animation type="marquee">
+                <div className="flex flex-nowrap *:flex-shrink-0 *:basis-auto *:flex-grow">
+                    <Animation
+                        type="marquee"
+                        as="item">
+                        <div className="flex flex-nowrap *:ms-2">
+                            {items.map((item: BaseProps['items'], i: number) => (
+                                <Picture
+                                    key={i}
+                                    items={item}
+                                />
+                            ))}
+                        </div>
+                    </Animation>
+                </div>
+            </Animation>
         </div>
     );
 };

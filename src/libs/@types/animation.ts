@@ -1,4 +1,8 @@
-export type BaseAnimationConfigProps = {} & gsap.TweenVars;
+export type BaseAnimationConfigProps = {
+    marquee?: {
+        speed?: number;
+    };
+} & gsap.TweenVars;
 
 export type BaseAnimationProps = {
     element: HTMLElement[] | Element[] | any;
