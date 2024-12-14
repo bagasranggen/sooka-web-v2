@@ -44,12 +44,13 @@ const Animation = ({ as, type, config, children }: AnimationProps): React.ReactE
 
     useGSAP(
         () => {
-            console.log(gsap.effects);
-
             if (as) return;
             if (!type) return;
             if (type && !gsap.effects[type]) {
-                console.warn({ message: `animation ${type} is not registered`, from: animationRef.current });
+                console.warn({
+                    message: `animation ${type} is not registered`,
+                    from: animationRef.current,
+                });
                 return;
             }
 
