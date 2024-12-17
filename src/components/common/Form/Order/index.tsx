@@ -2,51 +2,41 @@
 
 import React, { useEffect } from 'react';
 
-import Columns from '@/components/common/Columns';
-import Heading from '@/components/common/Heading';
+import { BaseHookOptionProps } from '@/libs/@types';
 
 import { useForm } from 'react-hook-form';
 
+import Columns from '@/components/common/Columns';
+import Heading from '@/components/common/Heading';
 import Input from '@/components/common/Input';
 import Button from '@/components/common/Button';
-
-// const ORDER_FORM_FIELD_NAME = {
-//     PRICE: 'price',
-// } as const;
 
 export type OrderFormFields = {
     title: string;
     price: string;
+    addOns: string;
+    dimension: string;
 };
 
-// export type OrderFormFields = Record<(typeof ORDER_FORM_FIELD_NAME)[keyof typeof ORDER_FORM_FIELD_NAME], string>;
-
-// export type OrderItemProps = {}
 export type OrderItemSummariesProps = {
     value: number | string;
     label: string;
-    allowMultiple?: boolean;
 };
 
 export type OrderItemProps = {
     title: string;
     handle: string;
+    allowMultiple?: boolean;
     items: OrderItemSummariesProps[];
-};
+} & Pick<BaseHookOptionProps, 'required'>;
 
 export type OrderProps = {
     title: string;
-    // pricing:
     summaries: OrderItemProps[];
 };
 
 const Order = ({ title, summaries }: OrderProps): React.ReactElement => {
-    const {
-        register,
-        handleSubmit,
-        formState: { errors },
-        setValue,
-    } = useForm<OrderFormFields>();
+    const { register, handleSubmit, setValue } = useForm<OrderFormFields>();
 
     const submitHandler = (data: OrderFormFields) => {
         console.log('submit', data);
@@ -58,7 +48,7 @@ const Order = ({ title, summaries }: OrderProps): React.ReactElement => {
 
     useEffect(() => {
         summaries.forEach((item: OrderItemProps) => {
-            if (item.items.length === 1) {
+            if (item.items.length === 1 && item.required) {
                 setValue(item.handle as any, item.items[0].value);
             }
         });
@@ -68,7 +58,7 @@ const Order = ({ title, summaries }: OrderProps): React.ReactElement => {
         <form onSubmit={handleSubmit(submitHandler)}>
             <Columns.Row className="justify-center">
                 {summaries.map((item: OrderItemProps, i: number) => {
-                    const isMultiple = item.items.length > 1;
+                    const isMultiple = !!(item.items.length > 1 || item.allowMultiple);
                     const items = isMultiple ? item.items : item.items[0];
 
                     return (
@@ -89,80 +79,22 @@ const Order = ({ title, summaries }: OrderProps): React.ReactElement => {
                                     return (
                                         <Input
                                             key={idx}
-                                            type={itm.allowMultiple ? 'radio' : 'radio'}
+                                            type={item.allowMultiple ? 'checkbox' : 'radio'}
                                             id={`${item.handle}-${itm.value}`}
                                             value={itm.value}
-                                            checked={idx === 0}
+                                            checked={!item.allowMultiple && idx === 0}
                                             hook={{
                                                 register,
                                                 name: item.handle,
+                                                required: item.required,
                                             }}>
                                             {itm.label}
                                         </Input>
                                     );
                                 })}
-                            {/*<Input*/}
-                            {/*    type="radio"*/}
-                            {/*    id="radio-260000"*/}
-                            {/*    value={260000}*/}
-                            {/*    hook={{*/}
-                            {/*        register,*/}
-                            {/*        name: 'price',*/}
-                            {/*    }}>*/}
-                            {/*    260.000 (Round 15cm)*/}
-                            {/*</Input>*/}
-                            {/*<Input*/}
-                            {/*    type="radio"*/}
-                            {/*    id="radio-250000"*/}
-                            {/*    value={250000}*/}
-                            {/*    hook={{*/}
-                            {/*        register,*/}
-                            {/*        name: 'price',*/}
-                            {/*    }}>*/}
-                            {/*    250.000 (Square 16cm x 16cm)*/}
-                            {/*</Input>*/}
                         </Columns.Column>
                     );
                 })}
-
-                {/*<Columns.Column width={{ md: 4 }}>*/}
-                {/*    <Heading*/}
-                {/*        as="h4"*/}
-                {/*        className="mb-1 text-[3.7rem]">*/}
-                {/*        Price*/}
-                {/*    </Heading>*/}
-
-                {/*    <Input*/}
-                {/*        type="radio"*/}
-                {/*        id="radio-260000"*/}
-                {/*        value={260000}*/}
-                {/*        hook={{*/}
-                {/*            register,*/}
-                {/*            name: 'price',*/}
-                {/*        }}>*/}
-                {/*        260.000 (Round 15cm)*/}
-                {/*    </Input>*/}
-                {/*    <Input*/}
-                {/*        type="radio"*/}
-                {/*        id="radio-250000"*/}
-                {/*        value={250000}*/}
-                {/*        hook={{*/}
-                {/*            register,*/}
-                {/*            name: 'price',*/}
-                {/*        }}>*/}
-                {/*        250.000 (Square 16cm x 16cm)*/}
-                {/*    </Input>*/}
-                {/*</Columns.Column>*/}
-
-                {/*<Columns.Column width={{ md: 4 }}>*/}
-                {/*    <Heading*/}
-                {/*        as="h4"*/}
-                {/*        className="mb-1 text-[3.7rem]">*/}
-                {/*        Price*/}
-                {/*    </Heading>*/}
-
-                {/*    <p>Square 16cm x 16cm</p>*/}
-                {/*</Columns.Column>*/}
             </Columns.Row>
 
             <Button.Container
