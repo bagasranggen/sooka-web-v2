@@ -1,6 +1,7 @@
 export * from './card';
 export * from './carousel';
 export * from './collage';
+export * from './form';
 export * from './list';
 export * from './marquee';
 export * from './navigation';

@@ -1,4 +1,8 @@
 import React from 'react';
+
+import { ArrayString } from '@/libs/@types';
+import { joinArrayString } from '@/libs/utils';
+
 import Link, { LinkProps } from '@/components/common/Link';
 
 export type BaseAnchorProps = {
@@ -22,6 +26,21 @@ const Base = (props: BaseProps): React.ReactElement => {
                 <Link
                     as={linkAs}
                     {...restAnchor}
+                />
+            );
+
+        case 'button':
+            // eslint-disable-next-line @typescript-eslint/no-unused-vars
+            const { as: btnAs, className: btnClassName, ...restButton } = props;
+
+            let baseButtonClass: ArrayString = ['cursor-pointer'];
+            if (btnClassName) baseButtonClass.push(btnClassName);
+            baseButtonClass = joinArrayString(baseButtonClass);
+
+            return (
+                <button
+                    className={baseButtonClass}
+                    {...restButton}
                 />
             );
 

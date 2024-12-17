@@ -24,7 +24,11 @@ const ProductDetailIndex = ({ entries }: ProductDetailIndexProps): React.ReactEl
             <Container
                 as="section"
                 className="mt-10">
-                <Banner.HalfMedia media={entries.banner.media}>{entries.banner.children}</Banner.HalfMedia>
+                <Banner.HalfMedia
+                    media={entries.banner.media}
+                    form={entries.banner.form}>
+                    {entries.banner.children}
+                </Banner.HalfMedia>
             </Container>
 
             <Container

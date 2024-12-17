@@ -1,4 +1,5 @@
 import { LIST_THUMBNAIL } from '@/libs/mock/list';
+import { FORM_ORDER } from '@/libs/mock/form';
 import { createPicsumImage } from '@/libs/factory/createPicsumImage';
 
 import parse from 'html-react-parser';
@@ -10,6 +11,10 @@ export const PRODUCT_DETAIL_BANNER: HalfMediaProps = {
     media: [createPicsumImage({ id: 682, width: 1200, height: 900 })],
     children: parse(`<span>Straw<span class="text-sooka-primary">berry</span></span> 
 <span>Short<span class="text-sooka-primary">cake</span></span>`),
+    form: {
+        title: 'Strawberry Shortcake',
+        summaries: FORM_ORDER,
+    },
 };
 
 export const PRODUCT_DETAIL_INFOS: ProductDetailInfoProps[] = [

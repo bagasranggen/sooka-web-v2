@@ -4,11 +4,11 @@ import { ArrayString } from '@/libs/@types';
 import { joinArrayString } from '@/libs/utils';
 
 import Icon from '@/components/common/Icon';
-import Base, { BaseAnchorProps } from '@/components/common/Button';
+import Base, { BaseProps } from '@/components/common/Button';
 
 export type ArrowProps = {
     size?: 'md' | 'lg';
-} & Omit<BaseAnchorProps, 'as'>;
+} & BaseProps;
 
 const Arrow = ({ children, size = 'md', ...props }: ArrowProps): React.ReactElement => {
     const transitionClass = 'md:duration-500';
@@ -42,9 +42,8 @@ const Arrow = ({ children, size = 'md', ...props }: ArrowProps): React.ReactElem
 
     return (
         <Base
-            as="anchor"
-            className={btnClass}
-            {...props}>
+            {...props}
+            className={btnClass}>
             <span className={textClass}>{children}</span>
             <div className={circleClass}>
                 <div className={iconClass}>
