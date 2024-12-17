@@ -3,6 +3,9 @@ import { getAnimationElement, getElementRect } from '@/libs/utils';
 import { createArrayFromNumber } from '@/libs/factory';
 
 import { gsap } from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+
+gsap.registerPlugin(ScrollTrigger);
 
 export const marquee = ({ element, config }: BaseAnimationProps) => {
     const el = getAnimationElement(element);
