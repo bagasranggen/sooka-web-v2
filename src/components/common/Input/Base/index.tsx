@@ -4,6 +4,7 @@ import { BaseHookOptionProps, BaseInputHookProps } from '@/libs/@types';
 
 import InputText from '@/components/common/Input/shared/InputText';
 import InputRadio from '@/components/common/Input/shared/InputRadio';
+import InputCheckbox from '@/components/common/Input/shared/InputCheckbox';
 
 export type BaseInputRef = HTMLInputElement;
 
@@ -18,6 +19,15 @@ const Base = forwardRef<HTMLInputElement, BaseInputProps>((props, ref) => {
     if (props.type === 'radio') {
         return (
             <InputRadio
+                ref={ref}
+                {...props}
+            />
+        );
+    }
+
+    if (props.type === 'checkbox') {
+        return (
+            <InputCheckbox
                 ref={ref}
                 {...props}
             />
