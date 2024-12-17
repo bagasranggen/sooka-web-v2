@@ -41,10 +41,10 @@ export const FORM_ORDER: OrderProps['summaries'] = [
                 value: 'candle',
                 label: 'Candle',
             },
-            // {
-            //     value: 'toppers',
-            //     label: 'Toppers',
-            // },
+            {
+                value: 'toppers',
+                label: 'Toppers',
+            },
         ],
     },
 ];
