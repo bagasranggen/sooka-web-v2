@@ -24,7 +24,7 @@ export const fadeIn = ({ element, config, id }: BaseAnimationProps) => {
             // start: () => `top-=${getFadeOffset({ element }) + getSpacingValue({ element }).top} 80%`,
             toggleActions: 'play pause play pause',
             // once: true,
-            markers: true,
+            // markers: true,
         },
     });
 
