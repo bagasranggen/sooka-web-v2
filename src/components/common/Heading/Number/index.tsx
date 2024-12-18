@@ -12,15 +12,21 @@ export type NumberProps = {
 
 const Number = ({ as = 'h2', className, number, size = 'md', children }: NumberProps): React.ReactElement => {
     let headingClass: ArrayString = ['font-anglecia flex items-end'];
-    if (size === 'md') headingClass.push('text-[4.5rem] leading-[4rem]');
-    if (size === 'lg') headingClass.push('text-[8.5rem] leading-[7rem]');
+    if (size === 'md') headingClass.push('text-[3rem] md:text-[4.5rem] leading-[3.25rem] md:leading-[4rem]');
     if (className) headingClass.push(className);
     headingClass = joinArrayString(headingClass);
+
+    let headerProps: Pick<BaseProps, 'className' | 'size'> = {
+        className: headingClass,
+    };
+    if (size === 'lg') {
+        headerProps = { ...headerProps, size: 'section' };
+    }
 
     return (
         <Base
             as={as}
-            className={headingClass}>
+            {...headerProps}>
             <span className="font-bold me-1 font-noto-sans-jp text-[1.4rem] leading-[1.8]">{number}</span>
             {children}
         </Base>

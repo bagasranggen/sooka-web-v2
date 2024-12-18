@@ -25,7 +25,7 @@ const Base = ({
     let headingClass: ArrayString = [];
     if (family === 'anglecia') headingClass.push(`font-anglecia`);
     if (size === 'heading') headingClass.push('text-[10rem] leading-[10rem]');
-    if (size === 'section') headingClass.push('text-[8.5rem] leading-[9rem]');
+    if (size === 'section') headingClass.push('text-[5rem] lg:text-[8.5rem] leading-[5rem] lg:leading-[9rem]');
     if (size === 'callout') headingClass.push('text-[5rem] leading-[6rem]');
     if (!description && className) headingClass.push(className);
     headingClass = joinArrayString(headingClass);
@@ -34,7 +34,8 @@ const Base = ({
         return (
             <div className={wrapperClass}>
                 <Heading className={headingClass}>{children}</Heading>
-                {description}
+
+                {description && <div className="mt-2">{description}</div>}
             </div>
         );
     }
