@@ -9,7 +9,7 @@ import { Autoplay } from 'swiper/modules';
 import 'swiper/css';
 
 export type BaseVariantProps = {
-    modules?: SwiperModule;
+    modules?: SwiperModule | SwiperModule[];
     options?: SwiperOptions;
     element?: React.ReactElement;
 };
@@ -24,7 +24,8 @@ export type BaseProps = {
 const Base = ({ items, autoplay, modulesVariant, ...props }: BaseProps): React.ReactElement => {
     const modules: SwiperModule[] = [];
     if (autoplay) modules.push(Autoplay);
-    if (modulesVariant?.modules) modules.push(modulesVariant.modules);
+    if (modulesVariant?.modules && Array.isArray(modulesVariant.modules)) modules.push(...modulesVariant.modules);
+    if (modulesVariant?.modules && !Array.isArray(modulesVariant.modules)) modules.push(modulesVariant.modules);
 
     let swiperProps: SwiperProps = props;
     if (modulesVariant?.options) swiperProps = { ...swiperProps, ...modulesVariant.options };

@@ -35,7 +35,7 @@ const Banner = ({ items }: BannerProps): React.ReactElement => {
                     '--bg-image': `url("${item.media}")`,
                 } as React.CSSProperties;
 
-                let bgClass: ArrayString = ['bg-cover'];
+                let bgClass: ArrayString = ['bg-cover bg-center'];
                 bgClass.push(`bg-[image:var(--bg-image)]`);
                 bgClass = joinArrayString(bgClass);
 
@@ -51,20 +51,19 @@ const Banner = ({ items }: BannerProps): React.ReactElement => {
                             style={style}>
                             <Overlay
                                 variant={align === 'right' ? 'gradient-right' : 'gradient-left'}
-                                // variant='solid'
                                 opacity={5}>
                                 <div className={bgClass}>
-                                    <Container className="relative z-[2] h-[calc(100vh-7rem)]">
+                                    <Container className="relative z-[2] h-[calc(90vh-7rem)] sm:h-[calc(70vh-7rem)] md:landscape:h-[calc(100vh-7rem)] lg:landscape:h-[calc(100vh-7rem)]">
                                         <Columns.Row className={contentClass}>
-                                            <Columns.Column width={{ md: 5 }}>
+                                            <Columns.Column width={{ md: 7, xl: 5 }}>
                                                 {item.category && (
-                                                    <div className="mb-1 flex items-center text-white text-[1.4rem] tracking-0.2 font-bold uppercase">
-                                                        <span className="w-[8.4rem] h-[.3rem] bg-white me-1.5" />
+                                                    <div className="mb-1 flex items-center text-white text-sm lg:text-[1.4rem] tracking-0.2 font-bold uppercase">
+                                                        <span className="w-[8.4rem] h-[.15rem] lg:h-[.3rem] bg-white me-1.5" />
                                                         {item.category}
                                                     </div>
                                                 )}
 
-                                                <h1 className="text-white text-[7rem] leading-[6.5rem] font-anglecia">
+                                                <h1 className="text-white text-[5rem] md:portrait:text-[6rem] lg:landscape:text-[7rem] leading-none md:landscape:leading-[5.5rem] lg:landscape:leading-[6.5rem] font-anglecia">
                                                     {item.title}
                                                 </h1>
 
