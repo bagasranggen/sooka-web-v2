@@ -133,7 +133,8 @@ const HomepageIndex = ({ entries }: HomepageIndexProps): React.ReactElement => {
                 <Columns.Row className="justify-center">
                     <Columns.Column
                         width={{
-                            md: 9,
+                            md: 10,
+                            lg: 9,
                         }}>
                         <Heading
                             as="h2"

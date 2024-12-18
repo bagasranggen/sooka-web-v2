@@ -17,8 +17,9 @@ export type TestimonialProps = {
 const Testimonial = ({ items }: TestimonialProps): React.ReactElement => {
     let baseClass: ArrayString = ['relative'];
     baseClass.push(
-        "after:content-[''] after:absolute after:right-0 after:top-0 after:w-4/12 after:h-full after:bg-gradient-to-l after:from-white after:from-70% after:z-10 after:pointer-events-none"
+        "after:content-[unset] lg:after:content-[''] after:absolute after:right-0 after:top-0 after:w-4/12 after:h-full after:bg-gradient-to-l after:from-white after:from-70% after:z-10 after:pointer-events-none"
     );
+    baseClass.push('[&>_.swiper-pagination]:lg:hidden !pb-4 lg:!pb-0');
     baseClass = joinArrayString(baseClass);
 
     return (
@@ -31,7 +32,7 @@ const Testimonial = ({ items }: TestimonialProps): React.ReactElement => {
                     children: (
                         <>
                             <Columns.Row>
-                                <Columns.Column width={{ md: 8 }}>
+                                <Columns.Column width={{ lg: 8 }}>
                                     <div className="relative">
                                         <Icon.Quote
                                             size="md"

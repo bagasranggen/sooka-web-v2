@@ -2,14 +2,15 @@
 
 import React from 'react';
 
-import { Navigation } from 'swiper/modules';
+import { Navigation, Pagination } from 'swiper/modules';
+import 'swiper/css/pagination';
 
 import { BaseVariantProps } from '@/components/common/Carousel';
 import Icon from '@/components/common/Icon';
 
 const TestimonialNavigation = () => {
     return (
-        <div className="flex absolute top-0 right-0 z-20">
+        <div className="hidden lg:flex absolute top-0 right-0 z-20">
             <button className="[&:not(.button-disabled)]:opacity-100 opacity-20 button-prev">
                 <Icon.CircleArrow direction="left" />
             </button>
@@ -21,13 +22,17 @@ const TestimonialNavigation = () => {
 };
 
 const TestimonialVariant: BaseVariantProps = {
-    modules: Navigation,
+    modules: [Navigation, Pagination],
     options: {
         navigation: {
             enabled: true,
             nextEl: '.button-next',
             prevEl: '.button-prev',
             disabledClass: 'button-disabled',
+        },
+        pagination: {
+            clickable: true,
+            bulletActiveClass: 'swiper-pagination-bullet-active !bg-sooka-primary',
         },
     },
     element: <TestimonialNavigation />,
