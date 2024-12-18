@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { CARD_THUMBNAIL_WITH_PRICE } from '@/libs/mock';
-import { createPicsumImage } from '@/libs/factory';
+import { createPicsumImage, createPictureImage } from '@/libs/factory';
 
 import Card from '@/components/common/Card';
 import Heading from '@/components/common/Heading';
@@ -77,22 +77,44 @@ const HomepageIndex = ({ entries }: HomepageIndexProps): React.ReactElement => {
 
             <Container
                 as="section"
-                className="mt-20">
-                <Columns.Row spacing={{ x: 3, md: { x: 6 } }}>
+                className="mt-10 md:mt-20">
+                <Columns.Row spacing={{ x: 3, y: 5, lg: { x: 6 } }}>
                     <Columns.Column
                         width={{
                             md: 7,
                         }}>
-                        <Columns.Row className="relative">
+                        <Columns.Row className="relative justify-end md:justify-start">
                             <Columns.Column
-                                width={{ md: 8 }}
-                                className="mt-8">
-                                <Picture items={[createPicsumImage({ width: 550, height: 733 })]} />
+                                className="md:mt-8 absolute md:relative left-0 md:left-[unset]"
+                                width={{ xs: 9, md: 8 }}>
+                                <Picture
+                                    items={[
+                                        createPictureImage({
+                                            item: createPicsumImage({ width: 550, height: 733 }),
+                                            // media: 768,
+                                        }),
+                                        // createPictureImage({
+                                        //     item: createPicsumImage({ width: 600, height: 400 }),
+                                        //     media: 768,
+                                        // }),
+                                    ]}
+                                />
                             </Columns.Column>
                             <Columns.Column
-                                className="absolute right-0 top-0"
-                                width={{ md: 8 }}>
-                                <Picture items={[createPicsumImage({ width: 550, height: 733 })]} />
+                                className="mt-8 md:mt-0 md:absolute md:right-0 md:top-0 z-10"
+                                width={{ xs: 9, md: 8 }}>
+                                <Picture
+                                    items={[
+                                        createPictureImage({
+                                            item: createPicsumImage({ width: 550, height: 733 }),
+                                            // media: 768,
+                                        }),
+                                        // createPictureImage({
+                                        //     item: createPicsumImage({ width: 600, height: 400 }),
+                                        //     media: 768,
+                                        // }),
+                                    ]}
+                                />
                             </Columns.Column>
                         </Columns.Row>
                     </Columns.Column>
@@ -130,7 +152,7 @@ const HomepageIndex = ({ entries }: HomepageIndexProps): React.ReactElement => {
 
             <Container
                 as="section"
-                className="mt-20">
+                className="mt-10 md:mt-20">
                 <Columns.Row className="justify-center">
                     <Columns.Column
                         width={{
@@ -152,13 +174,13 @@ const HomepageIndex = ({ entries }: HomepageIndexProps): React.ReactElement => {
             </Container>
 
             <ImageDivider
-                className="mt-20"
+                className="mt-10 md:mt-20"
                 media={entries.imageDivider}
             />
 
             <Container
                 as="section"
-                className="mt-20 mb-20">
+                className="mt-10 md:mt-20 mb-10 md:mb-20">
                 <Columns.Row className="justify-center">
                     <Columns.Column width={{ lg: 8 }}>
                         <Heading
