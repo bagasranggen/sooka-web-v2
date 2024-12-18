@@ -18,7 +18,7 @@ const ImageDivider = ({ as: Container = 'section', className, media }: ImageDivi
     return (
         <Container {...(containerClass ? { className: containerClass } : {})}>
             <Picture
-                className="md:ms-auto block md:w-[80vw]"
+                className="md:ms-auto block md:w-[88vw] lg:w-[80vw]"
                 items={media}
             />
         </Container>

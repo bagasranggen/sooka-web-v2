@@ -10,13 +10,14 @@ import Carousel, { BannerProps, TestimonialProps } from '@/components/common/Car
 import Tabs from '@/components/common/Tabs';
 import List, { NumberProps } from '@/components/common/List';
 import Picture from '@/components/common/Picture';
-import ImageDivider from '@/components/common/ImageDivider';
+import ImageDivider, { ImageDividerProps } from '@/components/common/ImageDivider';
 import Container from '@/components/common/Container';
 
 export type HomepageIndexProps = {
     entries: {
         banner: BannerProps['items'];
         testimonials: TestimonialProps['items'];
+        imageDivider: ImageDividerProps['media'];
         orders: {
             steps: NumberProps['items'];
         };
@@ -152,7 +153,7 @@ const HomepageIndex = ({ entries }: HomepageIndexProps): React.ReactElement => {
 
             <ImageDivider
                 className="mt-20"
-                media={[createPicsumImage({ id: 655, width: 1600, height: 900 })]}
+                media={entries.imageDivider}
             />
 
             <Container
