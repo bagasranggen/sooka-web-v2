@@ -27,7 +27,7 @@ const Number = ({ items, ...props }: NumberProps): React.ReactElement => {
                 const order = i % 3;
 
                 return {
-                    className: '[&:not(:first-child)]:mt-8',
+                    className: 'mt-4 md:[&:not(:first-child)]:mt-8',
                     children: (
                         <Columns.Row>
                             <Columns.Column

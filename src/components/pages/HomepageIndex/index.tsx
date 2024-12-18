@@ -160,7 +160,7 @@ const HomepageIndex = ({ entries }: HomepageIndexProps): React.ReactElement => {
                 as="section"
                 className="mt-20 mb-20">
                 <Columns.Row className="justify-center">
-                    <Columns.Column width={{ md: 8 }}>
+                    <Columns.Column width={{ lg: 8 }}>
                         <Heading
                             as="h2"
                             size="section"

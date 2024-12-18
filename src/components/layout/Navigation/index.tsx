@@ -13,7 +13,7 @@ const Navigation = ({}: NavigationProps): React.ReactElement => {
     return (
         <nav className="bg-sooka-primary h-[7rem] flex items-center text-white">
             <Container>
-                <div className="flex items-center justify-between">
+                <div className="flex flex-col md:flex-row items-center justify-between">
                     <Button
                         as="anchor"
                         href="/">
