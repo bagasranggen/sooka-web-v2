@@ -57,7 +57,11 @@ const Navigation = ({}: NavigationProps): React.ReactElement => {
             <Modal
                 show={show}
                 onHide={handleModalClose}
-            />
+                className="max-w-[50rem] mx-auto bg-white">
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Blanditiis cum dolores doloribus, earum,
+                facilis fuga illo magnam modi nesciunt officiis rem repellat repudiandae rerum sapiente tenetur, totam
+                veniam! Consequatur, soluta?
+            </Modal>
         </nav>
     );
 };
