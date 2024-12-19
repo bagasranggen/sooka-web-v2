@@ -1,19 +1,23 @@
 import React, { PropsWithChildren } from 'react';
 
-import { ArrayString, PropsClassname } from '@/libs/@types';
+import { ArrayString, PortalTransitionProps, PropsClassname } from '@/libs/@types';
 import { joinArrayString } from '@/libs/utils';
 
-import { BaseTransitionProps } from '@/components/common/Modal/Base';
-
-export type BaseModalProps = BaseTransitionProps &
+export type BaseModalProps = PortalTransitionProps &
     PropsWithChildren &
     PropsClassname &
     Pick<React.HTMLAttributes<HTMLDivElement>, 'onClick'>;
 
-const BaseModal = ({ isShow, isFading, onClick, className, children }: BaseModalProps): React.ReactElement | null => {
+const BaseModal = ({
+    isShow,
+    isTransitioning,
+    onClick,
+    className,
+    children,
+}: BaseModalProps): React.ReactElement | null => {
     let modalClass: ArrayString = ['fixed transition-opacity duration-300 w-full h-full top-0 left-0 z-[1025]'];
-    if (isFading) modalClass.push('opacity-0');
-    if (!isFading) modalClass.push('opacity-100');
+    if (isTransitioning) modalClass.push('opacity-0');
+    if (!isTransitioning) modalClass.push('opacity-100');
     modalClass = joinArrayString(modalClass);
 
     let contentClass: ArrayString = ['relative'];

@@ -1,137 +1,60 @@
 'use client';
 
-import React, { PropsWithChildren, useCallback, useEffect, useState } from 'react';
-import { createPortal } from 'react-dom';
+import React, { PropsWithChildren } from 'react';
 
-import { PropsClassname } from '@/libs/@types';
+import { PortalBaseProps, PortalEventsProps, PropsClassname } from '@/libs/@types';
+import { usePortal } from '@/libs/hooks';
 
 import BaseModal from '@/components/common/Modal/Base/BaseModal';
 import BaseBackdrop from '@/components/common/Modal/Base/BaseBackdrop';
+import Portal from '@/components/common/Portal';
 import Button from '@/components/common/Button';
 
-export type BaseTransitionProps = {
-    isShow: boolean;
-    isFading: boolean;
-};
-
-export type BaseEventsProps = Partial<Record<'onOpen' | 'onOpened' | 'onClose' | 'onClosed', () => void>>;
-
 export type BaseProps = {
-    show: boolean;
-    onHide: () => void;
     closeButton?: boolean | (PropsClassname & PropsWithChildren);
-} & (BaseEventsProps & PropsClassname & PropsWithChildren);
+} & (PortalBaseProps & PortalEventsProps & PropsClassname & PropsWithChildren);
 
 const Base = ({
     className,
     closeButton = true,
     show,
-    onHide,
+    hide,
     onOpen,
     onOpened,
     onClose,
     onClosed,
     children,
-}: BaseProps): React.ReactElement => {
-    const FADE_DURATION = 300;
+}: BaseProps): React.ReactElement | null => {
+    const { isShow, isTransitioning, handleClose } = usePortal({ show, hide, onOpen, onOpened, onClose, onClosed });
 
-    const [mounted, setMounted] = useState(false);
-    const [isShow, setIsShow] = useState(false);
-    const [isFading, setIsFading] = useState(true);
+    return (
+        <Portal>
+            <BaseBackdrop
+                isShow={isShow}
+                isTransitioning={isTransitioning}
+            />
 
-    // Handle open modal
-    const handleModalOpen = useCallback(() => {
-        const body = document.body;
+            <BaseModal
+                className={className}
+                isShow={isShow}
+                isTransitioning={isTransitioning}
+                onClick={handleClose}>
+                {closeButton && (
+                    <Button
+                        as="button"
+                        type="button"
+                        className={typeof closeButton === 'object' ? closeButton?.className : undefined}
+                        onClick={(e) => {
+                            e.stopPropagation();
+                            handleClose();
+                        }}>
+                        {typeof closeButton === 'object' ? closeButton?.children : 'close'}
+                    </Button>
+                )}
 
-        setIsShow(true);
-        if (onOpen) onOpen();
-        body.classList.add('overflow-hidden');
-
-        setTimeout(() => {
-            setIsFading(false);
-        }, 50);
-
-        setTimeout(() => {
-            if (onOpened) onOpened();
-        }, FADE_DURATION);
-    }, [FADE_DURATION, onOpen, onOpened]);
-
-    // Handle close modal
-    const handleModalClose = useCallback(() => {
-        const body = document.body;
-
-        setIsFading(true);
-        if (onClose) onClose();
-
-        setTimeout(() => {
-            setIsShow(false);
-            if (onHide) onHide();
-            if (onClosed) onClosed();
-            body.classList.remove('overflow-hidden');
-        }, FADE_DURATION);
-    }, [FADE_DURATION, onHide, onClose, onClosed]);
-
-    // Detect escape keypress to exit the modal
-    const handleKeyUp = useCallback(
-        (e: KeyboardEvent) => {
-            if (e.key === 'Escape') {
-                handleModalClose();
-            }
-        },
-        [handleModalClose]
-    );
-
-    // Open modal on state change
-    useEffect(() => {
-        if (show) {
-            handleModalOpen();
-        }
-    }, [show, handleModalOpen]);
-
-    // Close modal on escape key
-    useEffect(() => {
-        if (!isShow) return;
-
-        window.addEventListener('keyup', handleKeyUp);
-        return () => window.removeEventListener('keyup', handleKeyUp);
-    }, [isShow, handleKeyUp]);
-
-    // Check window is mounted
-    useEffect(() => setMounted(true), []);
-
-    return mounted ? (
-        createPortal(
-            <>
-                <BaseBackdrop
-                    isShow={isShow}
-                    isFading={isFading}
-                />
-
-                <BaseModal
-                    className={className}
-                    isShow={isShow}
-                    isFading={isFading}
-                    onClick={handleModalClose}>
-                    {closeButton && (
-                        <Button
-                            as="button"
-                            type="button"
-                            className={typeof closeButton === 'object' ? closeButton?.className : undefined}
-                            onClick={(e) => {
-                                e.stopPropagation();
-                                handleModalClose();
-                            }}>
-                            {typeof closeButton === 'object' ? closeButton?.children : 'close'}
-                        </Button>
-                    )}
-
-                    <div className="">{children}</div>
-                </BaseModal>
-            </>,
-            document.body
-        )
-    ) : (
-        <></>
+                <div className="">{children}</div>
+            </BaseModal>
+        </Portal>
     );
 };
 
