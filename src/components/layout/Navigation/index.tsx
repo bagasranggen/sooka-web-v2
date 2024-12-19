@@ -3,17 +3,18 @@
 import React from 'react';
 
 import { NAVIGATION_LINKS } from '@/libs/mock';
+import { useModal } from '@/libs/hooks';
 
 import Icon from '@/components/common/Icon';
 import List from '@/components/common/List';
 import Button from '@/components/common/Button';
-import Container from '@/components/common/Container';
 import Modal from '@/components/common/Modal';
+import Container from '@/components/common/Container';
 
 export type NavigationProps = {};
 
 const Navigation = ({}: NavigationProps): React.ReactElement => {
-    const [showNavigation, setShowNavigation] = React.useState(false);
+    const { show, handleModalOpen, handleModalClose } = useModal();
 
     return (
         <nav className="bg-sooka-primary h-[7rem] flex items-center text-white">
@@ -31,9 +32,12 @@ const Navigation = ({}: NavigationProps): React.ReactElement => {
 
                     <button
                         className="btn"
-                        onClick={() => setShowNavigation(!showNavigation)}>
+                        onClick={() => {
+                            handleModalOpen();
+                        }}>
                         btn
                     </button>
+
                     <List
                         className="hidden md:flex space-x-3"
                         items={NAVIGATION_LINKS.map((item) => ({
@@ -51,8 +55,8 @@ const Navigation = ({}: NavigationProps): React.ReactElement => {
             </Container>
 
             <Modal
-                show={showNavigation}
-                // setShow={setShowNavigation}
+                show={show}
+                onHide={handleModalClose}
             />
         </nav>
     );
