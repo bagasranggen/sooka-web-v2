@@ -13,13 +13,13 @@ const Footer = ({}: FooterProps): React.ReactElement => {
                 <Icon.Sooka
                     id="footerLogo"
                     color="light"
-                    className="mx-auto w-[30rem]"
+                    className="mx-auto w-[20rem] lg:w-[30rem]"
                 />
                 <div className="mt-5">
                     <Columns.Row>
                         <Columns.Column
                             width={{ md: 6 }}
-                            className="*:!mb-0 uppercase tracking-0.2 font-semibold text-[1.2rem]">
+                            className="*:!mb-0 uppercase tracking-0.2 font-semibold text-[1.2rem] text-center lg:text-left">
                             <p>Sleman, Daerah Istimewa Yogyakarta</p>
                             <p>Open Daily, 9 AM - 4 PM</p>
                         </Columns.Column>

@@ -23,7 +23,7 @@ const ProductDetailIndex = ({ entries }: ProductDetailIndexProps): React.ReactEl
         <>
             <Container
                 as="section"
-                className="mt-10">
+                className="md:mt-10">
                 <Banner.HalfMedia
                     media={entries.banner.media}
                     form={entries.banner.form}>
@@ -42,7 +42,7 @@ const ProductDetailIndex = ({ entries }: ProductDetailIndexProps): React.ReactEl
                         />
                     </Columns.Column>
 
-                    <Columns.Column width={{ md: 5 }}>
+                    <Columns.Column width={{ md: 6, lg: 5 }}>
                         {entries.infos.contents.map((item: ProductDetailInfoProps, i: number) => {
                             return (
                                 <ProductDetailInfo
@@ -56,7 +56,7 @@ const ProductDetailIndex = ({ entries }: ProductDetailIndexProps): React.ReactEl
             </Container>
 
             {entries?.marquee && entries.marquee.length > 0 && (
-                <section className="mt-20 mb-15">
+                <section className="mt-10 md:mt-20 mb-10 md:mb-15">
                     <Marquee items={entries.marquee} />
                 </section>
             )}

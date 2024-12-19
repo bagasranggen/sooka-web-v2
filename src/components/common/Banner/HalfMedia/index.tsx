@@ -14,21 +14,23 @@ export type HalfMediaProps = {
 const HalfMedia = ({ media, form, children }: HalfMediaProps): React.ReactElement => {
     return (
         <>
-            <Columns.Row className="items-center">
+            <Columns.Row
+                className="items-center"
+                spacing={{ x: 3, y: 3 }}>
                 <Columns.Column
-                    className="z-10"
-                    width={{ md: 6 }}>
+                    className="z-10 order-last md:order-first"
+                    width={{ md: 5, lg: 6 }}>
                     <Heading
                         as="h1"
                         size="heading"
-                        className="[&>span:nth-child(2)]:ms-2/12 [&>span:nth-child(3)]:ms-4/12">
+                        className="[&>span:nth-child(2)]:md:ms-2/12 [&>span:nth-child(3)]:md:ms-4/12">
                         {children}
                     </Heading>
                 </Columns.Column>
 
                 <Columns.Column
-                    className="-ms-2/12"
-                    width={{ md: 8 }}>
+                    className="md:-ms-2/12 order-first md:order-last !px-0 md:!px-1.5"
+                    width={{ md: 9, lg: 8 }}>
                     <Overlay
                         variant="solid"
                         opacity={1}>
@@ -38,8 +40,8 @@ const HalfMedia = ({ media, form, children }: HalfMediaProps): React.ReactElemen
             </Columns.Row>
 
             <div className="mt-4">
-                <Columns.Row className="justify-end">
-                    <Columns.Column width={{ md: 8 }}>
+                <Columns.Row className="lg:justify-end">
+                    <Columns.Column width={{ md: 12, lg: 8 }}>
                         <Form.Order
                             title={form.title}
                             summaries={form.summaries}

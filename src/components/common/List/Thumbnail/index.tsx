@@ -31,7 +31,7 @@ const Thumbnail = ({ items, ...props }: ThumbnailProps): React.ReactElement => {
                                 <Heading
                                     as="h4"
                                     family="default"
-                                    className="text-[1.8rem] font-bold tracking-0.4 leading-none uppercase">
+                                    className="text-base lg:text-[1.8rem] font-bold tracking-0.4 leading-none uppercase">
                                     {item.title}
                                 </Heading>
 

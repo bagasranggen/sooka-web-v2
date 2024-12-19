@@ -21,7 +21,7 @@ export type RowProps = {
 } & (PropsWithChildren & PropsClassname);
 
 const Row = ({ className, children, spacing = { x: 3 }, columns, isWrap = true }: RowProps): React.ReactElement => {
-    let rowClass: ArrayString = ['flex *:flex-grow *:flex-shrink-0 *:basis-[0%] *:max-w-full'];
+    let rowClass: ArrayString = ['flex *:flex-grow *:flex-shrink-0 *:basis-[0%] *:max-w-full *:w-full'];
     if (isWrap) rowClass.push('flex-wrap');
     rowClass.push(...getRowSpacing({ obj: spacing }));
     if (columns) rowClass.push(...getColumnWidth({ width: columns, isDirectChildren: true, division: 100 }));

@@ -56,7 +56,9 @@ const Order = ({ title, summaries }: OrderProps): React.ReactElement => {
 
     return (
         <form onSubmit={handleSubmit(submitHandler)}>
-            <Columns.Row className="justify-center">
+            <Columns.Row
+                className="justify-center"
+                spacing={{ x: 3, y: 3 }}>
                 {summaries.map((item: OrderItemProps, i: number) => {
                     const isMultiple = !!(item.items.length > 1 || item.allowMultiple);
                     const items = isMultiple ? item.items : item.items[0];
@@ -64,10 +66,10 @@ const Order = ({ title, summaries }: OrderProps): React.ReactElement => {
                     return (
                         <Columns.Column
                             key={i}
-                            width={{ md: 4 }}>
+                            width={{ xs: 12, md: 4, lg: 4 }}>
                             <Heading
                                 as="h4"
-                                className="mb-1 text-[3.7rem]">
+                                className="md:mb-1 text-md md:text-[2.4rem] lg:text-[3.7rem]">
                                 {item.title}
                             </Heading>
 

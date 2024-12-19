@@ -53,7 +53,7 @@ const ProductListingIndex = ({ entries }: ProductListingIndexProps): React.React
                         className="mt-10 mb-15">
                         <Card.Thumbnail
                             spacing={{ x: 3, y: 4 }}
-                            columns={{ xs: 1, sm: 2, md: 4 }}
+                            columns={{ xs: 1, sm: 2, md: 3, lg: 4 }}
                             items={entries.products}
                         />
                     </Container>

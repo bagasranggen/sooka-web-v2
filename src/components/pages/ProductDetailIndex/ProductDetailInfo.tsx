@@ -12,7 +12,7 @@ export type ProductDetailInfoProps = {
 const ProductDetailInfo = ({ title, description, addOns }: ProductDetailInfoProps): React.ReactElement => {
     return (
         <div className="first:mt-2 mt-6">
-            <Heading className="text-[5rem]">{title}</Heading>
+            <Heading className="text-[2.5rem] md:text-[3rem] lg:text-[5rem]">{title}</Heading>
 
             {description && <div className="mt-1">{description}</div>}
 
