@@ -6,6 +6,8 @@ import '@fontsource/noto-sans-jp';
 import '@fontsource/noto-sans-jp/600.css';
 import '@/assets/styles/css/main.css';
 
+import { NAVIGATION_LINKS } from '@/libs/mock';
+
 import Navigation from '@/components/layout/Navigation';
 import Footer from '@/components/layout/Footer';
 
@@ -25,7 +27,7 @@ export default function RootLayout({ children }: Readonly<PropsWithChildren>) {
     return (
         <html lang="en">
             <body className={`${anglecia.variable} antialiased`}>
-                <Navigation />
+                <Navigation items={NAVIGATION_LINKS} />
                 {children}
                 <Footer />
             </body>
