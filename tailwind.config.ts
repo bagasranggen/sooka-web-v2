@@ -111,6 +111,9 @@ export default {
                 anglecia: ['var(--font-anglecia)'],
                 'noto-sans-jp': ['Noto Sans JP', 'sans-serif'],
             },
+            transitionProperty: {
+                width: 'width',
+            },
         },
     },
     plugins: [],
