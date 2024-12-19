@@ -33,7 +33,7 @@ const Base = (props: BaseProps): React.ReactElement => {
             // eslint-disable-next-line @typescript-eslint/no-unused-vars
             const { as: btnAs, className: btnClassName, ...restButton } = props;
 
-            let baseButtonClass: ArrayString = ['cursor-pointer'];
+            let baseButtonClass: ArrayString = ['cursor-pointer focus-visible:outline-0'];
             if (btnClassName) baseButtonClass.push(btnClassName);
             baseButtonClass = joinArrayString(baseButtonClass);
 
