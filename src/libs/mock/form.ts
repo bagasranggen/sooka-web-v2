@@ -39,11 +39,11 @@ export const FORM_ORDER: OrderProps['summaries'] = [
         items: [
             {
                 value: 'candle',
-                label: 'Candle',
+                label: 'Candle (Rp5.000)',
             },
             {
                 value: 'toppers',
-                label: 'Toppers',
+                label: 'Toppers (Rp5.000)',
             },
         ],
     },
