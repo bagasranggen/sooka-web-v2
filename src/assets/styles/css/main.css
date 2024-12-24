@@ -8,6 +8,7 @@
     body {
         font-family: theme('fontFamily.noto-sans-jp');
         font-size: theme('fontSize.base');
+        color: theme('colors.black');
     }
 
     p:not(:last-child) {

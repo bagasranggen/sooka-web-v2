@@ -104,6 +104,7 @@ export default {
                 '11/12': '91.666667%',
             },
             colors: {
+                black: '#231F20',
                 'sooka-primary': '#F7613F',
                 'sooka-secondary': '#FF9A00',
             },
