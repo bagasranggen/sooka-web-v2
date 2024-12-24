@@ -13,6 +13,7 @@ export type ThumbnailItemProps = {
     mediaHover: BaseProps['items'];
     title: string;
     price?: string;
+    salePrice?: string;
 };
 
 export type ThumbnailProps = {
@@ -24,7 +25,7 @@ const Thumbnail = ({ items, width = 3, ...props }: ThumbnailProps): React.ReactE
         <Base
             {...props}
             width={width}
-            items={items.map(({ cta, media, mediaHover, title, price }: ThumbnailItemProps) => {
+            items={items.map(({ cta, media, mediaHover, title, price, salePrice }: ThumbnailItemProps) => {
                 const hasPrice = !!price;
 
                 let titleClass: ArrayString = ['mt-1 md:transition-colors md:group-hover:text-sooka-primary'];
@@ -37,8 +38,17 @@ const Thumbnail = ({ items, width = 3, ...props }: ThumbnailProps): React.ReactE
                     priceBlock = (
                         <div className="flex align-baseline mt-1 gap-x-[.2rem]">
                             <span className="text-sm">RP</span>
-                            <span className="text-[3rem] leading-[2.5rem] font-semibold">{price}</span>
+                            <span className="text-[3rem] leading-[2.5rem] font-semibold">{salePrice ?? price}</span>
                         </div>
+                    );
+                }
+
+                let regularPriceBlock = undefined;
+                if (salePrice && price) {
+                    regularPriceBlock = (
+                        <p className="mt-1 text-[1.4rem] tracking-0.1 uppercase font-semibold opacity-60">
+                            <s>RP{price}</s>
+                        </p>
                     );
                 }
 
@@ -58,6 +68,7 @@ const Thumbnail = ({ items, width = 3, ...props }: ThumbnailProps): React.ReactE
                             </div>
                             <h3 className={titleClass}>{title}</h3>
                             {priceBlock}
+                            {regularPriceBlock}
                         </Button>
                     ),
                 };
