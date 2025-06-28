@@ -12,7 +12,7 @@ import Navigation from '@/components/layout/Navigation';
 import Footer from '@/components/layout/Footer';
 
 const anglecia = localFont({
-    src: '../assets/fonts/Anglecia/AngleciaProDisplay-Regular-webfont.woff2',
+    src: '../../assets/fonts/Anglecia/AngleciaProDisplay-Regular-webfont.woff2',
     variable: '--font-anglecia',
 });
 
