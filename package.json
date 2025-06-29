@@ -11,6 +11,7 @@
     "generate:types": "NODE_OPTIONS=--no-deprecation payload generate:types"
   },
   "dependencies": {
+    "@apollo/client": "^3.13.8",
     "@fontsource/noto-sans-jp": "^5.1.0",
     "@gsap/react": "^2.1.1",
     "@payloadcms/db-postgres": "^3.44.0",
@@ -18,7 +19,7 @@
     "@payloadcms/payload-cloud": "^3.44.0",
     "@payloadcms/plugin-seo": "^3.44.0",
     "@payloadcms/richtext-lexical": "^3.44.0",
-    "graphql": "^16.8.1",
+    "graphql": "^16.11.0",
     "gsap": "^3.12.5",
     "html-react-parser": "^5.2.0",
     "next": "15.0.4",
