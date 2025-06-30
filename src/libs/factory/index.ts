@@ -4,3 +4,4 @@ export * from './createDynamicElement';
 export * from './createInputHooks';
 export * from './createPicsumImage';
 export * from './createPictureImage';
+export * from './createProductItem';
