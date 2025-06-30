@@ -41,7 +41,7 @@ export default buildConfig({
         // storage-adapter-placeholder
         seoPlugin({
             tabbedUI: true,
-            collections: ['products'],
+            collections: ['products', 'categories'],
             uploadsCollection: 'media',
             generateTitle: ({ doc }) => `${doc.title} - Sooka Baked Goods`,
             generateDescription: ({ doc }) => doc.excerpt,
