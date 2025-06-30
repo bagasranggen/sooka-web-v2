@@ -1,5 +1,7 @@
 import { ObjectProps, PropsClassname } from '@/libs/@types';
 
+import { Media } from '@/payload-types';
+
 import { BaseItemProps } from '@/components/common/Picture';
 
 export type PictureItemProps = {
@@ -9,7 +11,7 @@ export type PictureItemProps = {
 
 const INITIAL_STATE: BaseItemProps = {
     src: '',
-    srcRetina: '',
+    // srcRetina: '',
     width: 0,
     height: 0,
     alt: '',
@@ -20,21 +22,23 @@ export const createPictureImage = ({
     media,
     className,
     attribute,
-}: { item: PictureItemProps; media?: BaseItemProps['media']; attribute?: ObjectProps<string> } & PropsClassname) => {
+}: { item: Media; media?: BaseItemProps['media']; attribute?: ObjectProps<string> } & PropsClassname) => {
     let pictureImage = INITIAL_STATE;
 
     if (item) {
-        const { src, srcRetina, width, height, alt, filename, ...restImage } = item;
-
+        const { src, width, height, alt, filename, ...restImage } = item;
         pictureImage = {
             ...pictureImage,
             src,
-            srcRetina,
+            // srcRetina,
             width,
             height,
             alt: alt ?? filename,
             ...(restImage?.mimeType !== 'image/jpeg' ? { type: restImage.mimeType } : {}),
         };
+
+        // console.log({ src, width });
+        // console.log({ pictureImage });
     }
 
     if (media) {
@@ -54,6 +58,8 @@ export const createPictureImage = ({
     if (attribute) {
         pictureImage = { ...pictureImage, ...attribute };
     }
+
+    // console.log({ pictureImage });
 
     return pictureImage;
 };
