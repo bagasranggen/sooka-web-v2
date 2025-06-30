@@ -5,11 +5,13 @@ import Columns from '@/components/common/Columns';
 import Card, { ThumbnailProps } from '@/components/common/Card';
 import Container from '@/components/common/Container';
 import Animation from '@/components/Animation';
+import RichText, { RichTextProps } from '@/components/common/RichText';
 
 export type ProductListingIndexProps = {
     entries: {
         banner: {
-            description?: React.ReactNode;
+            // description?: React.ReactNode;
+            description?: RichTextProps['children'];
         } & Pick<BaseProps, 'children'>;
         products: ThumbnailProps['items'];
     };
@@ -37,7 +39,7 @@ const ProductListingIndex = ({ entries }: ProductListingIndexProps): React.React
                             <Animation
                                 type="fade-in"
                                 config={{ delay: 0.15 }}>
-                                <div className="mt-1.5 text-md">{entries.banner.description}</div>
+                                <RichText className="mt-1.5 text-md">{entries.banner.description}</RichText>
                             </Animation>
                         )}
                     </Columns.Column>
