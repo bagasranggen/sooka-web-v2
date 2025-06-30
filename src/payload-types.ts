@@ -159,6 +159,24 @@ export interface Media {
   height?: number | null;
   focalX?: number | null;
   focalY?: number | null;
+  sizes?: {
+    productListingThumbnail?: {
+      url?: string | null;
+      width?: number | null;
+      height?: number | null;
+      mimeType?: string | null;
+      filesize?: number | null;
+      filename?: string | null;
+    };
+    productListingThumbnailMobile?: {
+      url?: string | null;
+      width?: number | null;
+      height?: number | null;
+      mimeType?: string | null;
+      filesize?: number | null;
+      filename?: string | null;
+    };
+  };
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -166,9 +184,22 @@ export interface Media {
  */
 export interface Product {
   id: number;
+  typeHandle?: string | null;
   title: string;
   slug?: string | null;
-  category?: (number | null) | Category;
+  url?: string | null;
+  uri?: string | null;
+  thumbnail?: (number | null) | Media;
+  thumbnailHover?: (number | null) | Media;
+  category: number | Category;
+  prices?:
+    | {
+        price: number;
+        salePrice?: number | null;
+        note?: string | null;
+        id?: string | null;
+      }[]
+    | null;
   meta?: {
     title?: string | null;
     description?: string | null;
@@ -186,8 +217,34 @@ export interface Product {
  */
 export interface Category {
   id: number;
+  typeHandle?: string | null;
   title: string;
   slug?: string | null;
+  url?: string | null;
+  uri?: string | null;
+  description?: {
+    root: {
+      type: string;
+      children: {
+        type: string;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  } | null;
+  meta?: {
+    title?: string | null;
+    description?: string | null;
+    /**
+     * Maximum upload file size: 12MB. Recommended file size for images is <500KB.
+     */
+    image?: (number | null) | Media;
+  };
   updatedAt: string;
   createdAt: string;
 }
@@ -295,15 +352,52 @@ export interface MediaSelect<T extends boolean = true> {
   height?: T;
   focalX?: T;
   focalY?: T;
+  sizes?:
+    | T
+    | {
+        productListingThumbnail?:
+          | T
+          | {
+              url?: T;
+              width?: T;
+              height?: T;
+              mimeType?: T;
+              filesize?: T;
+              filename?: T;
+            };
+        productListingThumbnailMobile?:
+          | T
+          | {
+              url?: T;
+              width?: T;
+              height?: T;
+              mimeType?: T;
+              filesize?: T;
+              filename?: T;
+            };
+      };
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "products_select".
  */
 export interface ProductsSelect<T extends boolean = true> {
+  typeHandle?: T;
   title?: T;
   slug?: T;
+  url?: T;
+  uri?: T;
+  thumbnail?: T;
+  thumbnailHover?: T;
   category?: T;
+  prices?:
+    | T
+    | {
+        price?: T;
+        salePrice?: T;
+        note?: T;
+        id?: T;
+      };
   meta?:
     | T
     | {
@@ -319,8 +413,19 @@ export interface ProductsSelect<T extends boolean = true> {
  * via the `definition` "categories_select".
  */
 export interface CategoriesSelect<T extends boolean = true> {
+  typeHandle?: T;
   title?: T;
   slug?: T;
+  url?: T;
+  uri?: T;
+  description?: T;
+  meta?:
+    | T
+    | {
+        title?: T;
+        description?: T;
+        image?: T;
+      };
   updatedAt?: T;
   createdAt?: T;
 }
