@@ -8,7 +8,9 @@ export type PageProps = {
 };
 
 export type PageDataParamsProps = {
-    type: string;
+    type?: string;
+    uri?: string;
+    slug?: string;
 };
 
 export type PageDataProps<Props> = {
