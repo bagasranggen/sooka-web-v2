@@ -160,6 +160,30 @@ export interface Media {
   focalX?: number | null;
   focalY?: number | null;
   sizes?: {
+    productDetailBanner?: {
+      url?: string | null;
+      width?: number | null;
+      height?: number | null;
+      mimeType?: string | null;
+      filesize?: number | null;
+      filename?: string | null;
+    };
+    productDetailSticky?: {
+      url?: string | null;
+      width?: number | null;
+      height?: number | null;
+      mimeType?: string | null;
+      filesize?: number | null;
+      filename?: string | null;
+    };
+    productDetailMobile?: {
+      url?: string | null;
+      width?: number | null;
+      height?: number | null;
+      mimeType?: string | null;
+      filesize?: number | null;
+      filename?: string | null;
+    };
     productListingThumbnail?: {
       url?: string | null;
       width?: number | null;
@@ -191,6 +215,21 @@ export interface Product {
   uri?: string | null;
   thumbnail?: (number | null) | Media;
   thumbnailHover?: (number | null) | Media;
+  description: {
+    root: {
+      type: string;
+      children: {
+        type: string;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  };
   category: number | Category;
   prices?:
     | {
@@ -355,6 +394,36 @@ export interface MediaSelect<T extends boolean = true> {
   sizes?:
     | T
     | {
+        productDetailBanner?:
+          | T
+          | {
+              url?: T;
+              width?: T;
+              height?: T;
+              mimeType?: T;
+              filesize?: T;
+              filename?: T;
+            };
+        productDetailSticky?:
+          | T
+          | {
+              url?: T;
+              width?: T;
+              height?: T;
+              mimeType?: T;
+              filesize?: T;
+              filename?: T;
+            };
+        productDetailMobile?:
+          | T
+          | {
+              url?: T;
+              width?: T;
+              height?: T;
+              mimeType?: T;
+              filesize?: T;
+              filename?: T;
+            };
         productListingThumbnail?:
           | T
           | {
@@ -389,6 +458,7 @@ export interface ProductsSelect<T extends boolean = true> {
   uri?: T;
   thumbnail?: T;
   thumbnailHover?: T;
+  description?: T;
   category?: T;
   prices?:
     | T
