@@ -1,5 +1,5 @@
 import type { CollectionConfig } from 'payload';
-import { BasePageTab } from '@/collections/shared';
+import { BasePageTab, BasePrice } from '@/collections/shared';
 
 export const Products: CollectionConfig = {
     slug: 'products',
@@ -68,32 +68,15 @@ export const Products: CollectionConfig = {
                         {
                             type: 'array',
                             name: 'prices',
-                            fields: [
-                                {
-                                    type: 'row',
-                                    fields: [
-                                        {
-                                            type: 'number',
-                                            name: 'price',
-                                            required: true,
-                                            admin: {
-                                                width: '50%',
-                                            },
-                                        },
-                                        {
-                                            type: 'number',
-                                            name: 'salePrice',
-                                            admin: {
-                                                width: '50%',
-                                            },
-                                        },
-                                    ],
-                                },
-                                {
-                                    type: 'text',
-                                    name: 'note',
-                                },
-                            ],
+                            fields: BasePrice,
+                            required: true,
+                        },
+                        {
+                            type: 'relationship',
+                            name: 'addons',
+                            label: 'Add-on(s)',
+                            hasMany: true,
+                            relationTo: 'addons',
                         },
                     ],
                 },
