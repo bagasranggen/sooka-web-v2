@@ -1,4 +1,4 @@
-import { ObjectProps, PropsClassname } from '@/libs/@types';
+import { BareMediaProps, ObjectProps, PropsClassname } from '@/libs/@types';
 
 import { Media } from '@/payload-types';
 
@@ -22,19 +22,20 @@ export const createPictureImage = ({
     media,
     className,
     attribute,
-}: { item: Media; media?: BaseItemProps['media']; attribute?: ObjectProps<string> } & PropsClassname) => {
+}: { item: BareMediaProps; media?: BaseItemProps['media']; attribute?: ObjectProps<string> } & PropsClassname) => {
     let pictureImage = INITIAL_STATE;
 
     if (item) {
         const { src, width, height, alt, filename, ...restImage } = item;
+
         pictureImage = {
             ...pictureImage,
             src,
             // srcRetina,
-            width,
-            height,
+            width: width as any,
+            height: height as any,
             alt: alt ?? filename,
-            ...(restImage?.mimeType !== 'image/jpeg' ? { type: restImage.mimeType } : {}),
+            // ...(restImage?.mimeType !== 'image/jpeg' ? { type: restImage.mimeType } : {}),
         };
 
         // console.log({ src, width });

@@ -1,8 +1,9 @@
 import { Product } from '@/payload-types';
 
 import { createPictureImage } from './createPictureImage';
-import { createPicsumImage } from './createPicsumImage';
+// import { createPicsumImage } from './createPicsumImage';
 import { convertIntToCurrency } from '../utils/convertIntToCurrency';
+import { checkMediaStatus } from '../utils/checkMediaStatus';
 
 import { BaseItemProps } from '@/components/common/Picture';
 
@@ -12,26 +13,27 @@ export const createProductItem = (item: Product) => {
     const price = item?.prices?.[0];
     const priceIsSale = !!price?.salePrice;
 
+    const mediaThumbnail = checkMediaStatus({ item: item?.thumbnail as any, handles: ['productListingThumbnail'] });
+    const mediaThumbnailHover = checkMediaStatus({
+        item: item?.thumbnailHover as any,
+        handles: ['productListingThumbnail'],
+    });
+
     const media: BaseItemProps[] = [];
-    if (item?.thumbnail && 'sizes' in item?.thumbnail && item?.thumbnail?.sizes?.productListingThumbnail) {
-        // console.log({ me: item?.thumbnail?.sizes?.productListingThumbnail });
-        media.push(createPictureImage({ item: item?.thumbnail?.sizes?.productListingThumbnail }));
+    if (mediaThumbnail?.productListingThumbnail) {
+        media.push(createPictureImage({ item: mediaThumbnail?.productListingThumbnail }));
     }
 
     const mediaHover: BaseItemProps[] = [];
-    if (
-        item?.thumbnailHover &&
-        'sizes' in item?.thumbnailHover &&
-        item?.thumbnailHover?.sizes?.productListingThumbnail
-    ) {
-        mediaHover.push(createPictureImage({ item: item?.thumbnailHover?.sizes?.productListingThumbnail }));
+    if (mediaThumbnailHover?.productListingThumbnail) {
+        mediaHover.push(createPictureImage({ item: mediaThumbnailHover?.productListingThumbnail }));
     }
 
-    console.log({ media });
+    // console.log({ media });
 
     return {
         cta: {
-            href: item?.url,
+            href: item?.url as any,
         },
         media,
         mediaHover,

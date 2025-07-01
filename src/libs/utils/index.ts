@@ -1,6 +1,7 @@
 export * from './animation';
 export * from './columns';
 
+export * from './checkMediaStatus';
 export * from './cleanArrayString';
 export * from './convertIntToCurrency';
 export * from './getElementRect';
