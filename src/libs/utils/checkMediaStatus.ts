@@ -5,11 +5,13 @@ export const checkMediaStatus = (props: {
     item: { src: BareMediaProps['src'] } & Omit<Media, 'url'>;
     handles: string[];
 }): Record<string, BareMediaProps> => {
-    const { src, width, height, alt, filename } = props.item;
+    const item: Record<string, BareMediaProps> = {};
 
-    const item: Record<string, BareMediaProps> = {
-        original: { src, width, height, alt, filename },
-    };
+    if (props?.item) {
+        const { src, width, height, alt, filename } = props.item;
+
+        item.original = { src, width, height, alt, filename };
+    }
 
     props.handles.forEach((handle) => {
         const media = (props?.item?.sizes as any)?.[handle];

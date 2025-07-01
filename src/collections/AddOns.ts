@@ -26,6 +26,17 @@ export const AddOns: CollectionConfig = {
                     },
                 }),
                 {
+                    label: 'Media',
+                    fields: [
+                        {
+                            type: 'upload',
+                            name: 'thumbnail',
+                            relationTo: 'media',
+                            required: true,
+                        },
+                    ],
+                },
+                {
                     label: 'Content',
                     fields: [
                         {

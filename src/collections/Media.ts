@@ -32,6 +32,11 @@ export const Media: CollectionConfig = {
                 height: 449,
             },
             {
+                name: 'productAddon',
+                width: 400,
+                height: 400,
+            },
+            {
                 name: 'productListingThumbnail',
                 width: 400,
                 height: 619,

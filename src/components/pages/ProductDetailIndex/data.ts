@@ -6,8 +6,10 @@ import { checkMediaStatus } from '@/libs/utils';
 import { apolloClient } from '@/libs/fetcher';
 import { PRODUCT_DETAIL_QUERY } from '@/graphql';
 
-import { ProductDetailIndexProps } from '@/components/pages/ProductDetailIndex';
 import parse from 'html-react-parser';
+
+import { ProductDetailIndexProps } from '@/components/pages/ProductDetailIndex';
+import { ProductDetailInfoProps } from '@/components/pages/ProductDetailIndex/ProductDetailInfo';
 
 export const ProductDetailData = async ({
     type,
@@ -77,6 +79,34 @@ export const ProductDetailData = async ({
             description: d.description,
         });
     }
+
+    // Content Add-on(s)
+    if (d?.addons && d.addons.length > 0) {
+        const tmp: ProductDetailInfoProps['addOns'] = [];
+
+        d.addons.forEach((item: any) => {
+            const price = item?.prices?.[0];
+
+            const mediaItem = checkMediaStatus({ item: item?.thumbnail, handles: ['productAddon'] });
+
+            const media = [];
+            if (mediaItem?.productAddon) {
+                media.push(createPictureImage({ item: mediaItem.productAddon }));
+            }
+
+            tmp.push({
+                media,
+                title: item.title,
+                description: parse(price?.note ?? ''),
+            });
+        });
+
+        infos.contents.push({
+            title: 'Product Add-on(s)',
+            addOns: tmp,
+        });
+    }
+
     console.log({ d });
 
     return {
