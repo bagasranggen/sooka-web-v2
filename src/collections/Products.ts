@@ -55,8 +55,13 @@ export const Products: CollectionConfig = {
                     label: 'Content',
                     fields: [
                         {
-                            name: 'category',
+                            type: 'richText',
+                            name: 'description',
+                            required: true,
+                        },
+                        {
                             type: 'relationship',
+                            name: 'category',
                             relationTo: 'categories',
                             required: true,
                         },
