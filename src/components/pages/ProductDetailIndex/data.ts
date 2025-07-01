@@ -55,7 +55,6 @@ export const ProductDetailData = async ({
 
     const infos: ProductDetailIndexProps['entries']['infos'] = {
         media: [],
-        // contents: PRODUCT_DETAIL_INFOS,
         contents: [],
     };
 
