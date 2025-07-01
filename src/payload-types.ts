@@ -71,6 +71,7 @@ export interface Config {
     media: Media;
     products: Product;
     categories: Category;
+    addons: Addon;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
     'payload-migrations': PayloadMigration;
@@ -81,6 +82,7 @@ export interface Config {
     media: MediaSelect<false> | MediaSelect<true>;
     products: ProductsSelect<false> | ProductsSelect<true>;
     categories: CategoriesSelect<false> | CategoriesSelect<true>;
+    addons: AddonsSelect<false> | AddonsSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
     'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
     'payload-migrations': PayloadMigrationsSelect<false> | PayloadMigrationsSelect<true>;
@@ -231,14 +233,13 @@ export interface Product {
     [k: string]: unknown;
   };
   category: number | Category;
-  prices?:
-    | {
-        price: number;
-        salePrice?: number | null;
-        note?: string | null;
-        id?: string | null;
-      }[]
-    | null;
+  prices: {
+    price: number;
+    salePrice?: number | null;
+    note?: string | null;
+    id?: string | null;
+  }[];
+  addons?: (number | Addon)[] | null;
   meta?: {
     title?: string | null;
     description?: string | null;
@@ -289,6 +290,28 @@ export interface Category {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "addons".
+ */
+export interface Addon {
+  id: number;
+  typeHandle?: string | null;
+  title: string;
+  slug?: string | null;
+  url?: string | null;
+  uri?: string | null;
+  prices?:
+    | {
+        price: number;
+        salePrice?: number | null;
+        note?: string | null;
+        id?: string | null;
+      }[]
+    | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-locked-documents".
  */
 export interface PayloadLockedDocument {
@@ -309,6 +332,10 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'categories';
         value: number | Category;
+      } | null)
+    | ({
+        relationTo: 'addons';
+        value: number | Addon;
       } | null);
   globalSlug?: string | null;
   user: {
@@ -468,6 +495,7 @@ export interface ProductsSelect<T extends boolean = true> {
         note?: T;
         id?: T;
       };
+  addons?: T;
   meta?:
     | T
     | {
@@ -495,6 +523,27 @@ export interface CategoriesSelect<T extends boolean = true> {
         title?: T;
         description?: T;
         image?: T;
+      };
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "addons_select".
+ */
+export interface AddonsSelect<T extends boolean = true> {
+  typeHandle?: T;
+  title?: T;
+  slug?: T;
+  url?: T;
+  uri?: T;
+  prices?:
+    | T
+    | {
+        price?: T;
+        salePrice?: T;
+        note?: T;
+        id?: T;
       };
   updatedAt?: T;
   createdAt?: T;
