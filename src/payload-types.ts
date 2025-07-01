@@ -187,6 +187,14 @@ export interface Media {
       filesize?: number | null;
       filename?: string | null;
     };
+    productAddon?: {
+      url?: string | null;
+      width?: number | null;
+      height?: number | null;
+      mimeType?: string | null;
+      filesize?: number | null;
+      filename?: string | null;
+    };
     productListingThumbnail?: {
       url?: string | null;
       width?: number | null;
@@ -300,6 +308,7 @@ export interface Addon {
   slug?: string | null;
   url?: string | null;
   uri?: string | null;
+  thumbnail: number | Media;
   prices?:
     | {
         price: number;
@@ -453,6 +462,16 @@ export interface MediaSelect<T extends boolean = true> {
               filesize?: T;
               filename?: T;
             };
+        productAddon?:
+          | T
+          | {
+              url?: T;
+              width?: T;
+              height?: T;
+              mimeType?: T;
+              filesize?: T;
+              filename?: T;
+            };
         productListingThumbnail?:
           | T
           | {
@@ -539,6 +558,7 @@ export interface AddonsSelect<T extends boolean = true> {
   slug?: T;
   url?: T;
   uri?: T;
+  thumbnail?: T;
   prices?:
     | T
     | {
