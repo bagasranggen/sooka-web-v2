@@ -1,3 +1,5 @@
+export * from './productDetail';
+
 export * from './createAnimationHandles';
 export * from './createArrayFromNumber';
 export * from './createDynamicElement';

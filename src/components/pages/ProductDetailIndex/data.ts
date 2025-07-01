@@ -1,6 +1,6 @@
 import { FORM_ORDER } from '@/libs/mock';
 import { PageDataParamsProps, PageDataProps } from '@/libs/@types';
-import { createPictureImage } from '@/libs/factory';
+import { createPictureImage, createProductDetailPrices } from '@/libs/factory';
 import { checkMediaStatus } from '@/libs/utils';
 
 import { apolloClient } from '@/libs/fetcher';
@@ -41,6 +41,8 @@ export const ProductDetailData = async ({
             summaries: FORM_ORDER,
         },
     };
+
+    console.log({ d, price: createProductDetailPrices({ prices: d?.prices }) });
 
     if (mediaMain?.productDetailBanner) {
         banner.media.push(
