@@ -2,10 +2,11 @@ import React from 'react';
 
 import Heading, { BaseProps } from '@/components/common/Heading';
 import List, { ThumbnailProps } from '@/components/common/List';
+import RichText, { RichTextProps } from '@/components/common/RichText';
 
 export type ProductDetailInfoProps = {
     title: BaseProps['children'];
-    description?: React.ReactNode;
+    description?: RichTextProps['children'];
     addOns?: ThumbnailProps['items'];
 };
 
@@ -14,7 +15,7 @@ const ProductDetailInfo = ({ title, description, addOns }: ProductDetailInfoProp
         <div className="first:mt-2 mt-6">
             <Heading className="text-[2.5rem] md:text-[3rem] lg:text-[5rem]">{title}</Heading>
 
-            {description && <div className="mt-1">{description}</div>}
+            {description && <RichText className="mt-1">{description}</RichText>}
 
             {addOns && addOns.length > 0 && (
                 <div className="mt-2">

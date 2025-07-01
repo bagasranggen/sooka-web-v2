@@ -38,6 +38,24 @@ export const FRAGMENT_PRODUCT = gql`
         alt
 
         sizes {
+            productDetailBanner {
+                src: url
+                width
+                height
+            }
+
+            productDetailSticky {
+                src: url
+                width
+                height
+            }
+
+            productDetailMobile {
+                src: url
+                width
+                height
+            }
+
             productListingThumbnail {
                 src: url
                 width
