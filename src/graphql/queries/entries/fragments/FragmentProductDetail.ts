@@ -6,7 +6,33 @@ export const FRAGMENT_PRODUCT_DETAIL = gql`
         addons {
             ...addon
         }
+
+        marquee {
+            ...marqueeMedia
+        }
     }
 
     ${FRAGMENT_ADDON}
+
+    fragment marqueeMedia on Media {
+        src: url
+        width
+        height
+        filename
+        alt
+
+        sizes {
+            productMarquee {
+                src: url
+                width
+                height
+            }
+
+            productMarqueeMobile {
+                src: url
+                width
+                height
+            }
+        }
+    }
 `;

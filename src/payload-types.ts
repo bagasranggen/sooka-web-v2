@@ -195,6 +195,22 @@ export interface Media {
       filesize?: number | null;
       filename?: string | null;
     };
+    productMarquee?: {
+      url?: string | null;
+      width?: number | null;
+      height?: number | null;
+      mimeType?: string | null;
+      filesize?: number | null;
+      filename?: string | null;
+    };
+    productMarqueeMobile?: {
+      url?: string | null;
+      width?: number | null;
+      height?: number | null;
+      mimeType?: string | null;
+      filesize?: number | null;
+      filename?: string | null;
+    };
     productListingThumbnail?: {
       url?: string | null;
       width?: number | null;
@@ -226,6 +242,7 @@ export interface Product {
   uri?: string | null;
   thumbnail?: (number | null) | Media;
   thumbnailHover?: (number | null) | Media;
+  marquee?: (number | Media)[] | null;
   description: {
     root: {
       type: string;
@@ -472,6 +489,26 @@ export interface MediaSelect<T extends boolean = true> {
               filesize?: T;
               filename?: T;
             };
+        productMarquee?:
+          | T
+          | {
+              url?: T;
+              width?: T;
+              height?: T;
+              mimeType?: T;
+              filesize?: T;
+              filename?: T;
+            };
+        productMarqueeMobile?:
+          | T
+          | {
+              url?: T;
+              width?: T;
+              height?: T;
+              mimeType?: T;
+              filesize?: T;
+              filename?: T;
+            };
         productListingThumbnail?:
           | T
           | {
@@ -506,6 +543,7 @@ export interface ProductsSelect<T extends boolean = true> {
   uri?: T;
   thumbnail?: T;
   thumbnailHover?: T;
+  marquee?: T;
   description?: T;
   category?: T;
   prices?:

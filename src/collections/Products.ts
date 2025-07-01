@@ -49,6 +49,12 @@ export const Products: CollectionConfig = {
                                 },
                             ],
                         },
+                        {
+                            type: 'upload',
+                            name: 'marquee',
+                            relationTo: 'media',
+                            hasMany: true,
+                        },
                     ],
                 },
                 {

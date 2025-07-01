@@ -37,6 +37,16 @@ export const Media: CollectionConfig = {
                 height: 400,
             },
             {
+                name: 'productMarquee',
+                width: 550,
+                height: 413,
+            },
+            {
+                name: 'productMarqueeMobile',
+                width: 250,
+                height: 333,
+            },
+            {
                 name: 'productListingThumbnail',
                 width: 400,
                 height: 619,

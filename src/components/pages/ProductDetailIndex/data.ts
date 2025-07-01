@@ -1,4 +1,4 @@
-import { FORM_ORDER, MARQUEE } from '@/libs/mock';
+import { FORM_ORDER } from '@/libs/mock';
 import { PageDataParamsProps, PageDataProps } from '@/libs/@types';
 import { createPictureImage } from '@/libs/factory';
 import { checkMediaStatus } from '@/libs/utils';
@@ -10,6 +10,7 @@ import parse from 'html-react-parser';
 
 import { ProductDetailIndexProps } from '@/components/pages/ProductDetailIndex';
 import { ProductDetailInfoProps } from '@/components/pages/ProductDetailIndex/ProductDetailInfo';
+import { BaseProps } from '@/components/common/Picture';
 
 export const ProductDetailData = async ({
     type,
@@ -106,14 +107,38 @@ export const ProductDetailData = async ({
         });
     }
 
-    console.log({ d });
+    // Marquee
+    const marquee: ProductDetailIndexProps['entries']['marquee'] = [];
+
+    if (d?.marquee && d.marquee.length > 0) {
+        d.marquee.forEach((item: any) => {
+            const tmp: BaseProps['items'] = [];
+
+            const media = checkMediaStatus({ item: item, handles: ['productMarquee', 'productMarqueeMobile'] });
+
+            if (media?.productMarquee) {
+                tmp.push(
+                    createPictureImage({
+                        item: media.productMarquee,
+                        media: media?.productMarqueeMobile ? 992 : undefined,
+                    })
+                );
+            }
+
+            if (media?.productMarqueeMobile) {
+                tmp.push(createPictureImage({ item: media.productMarqueeMobile }));
+            }
+
+            marquee.push(tmp);
+        });
+    }
 
     return {
         type,
         entries: {
             banner,
             infos,
-            marquee: MARQUEE,
+            marquee,
         },
     };
 };
