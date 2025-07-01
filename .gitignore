@@ -41,3 +41,6 @@ next-env.d.ts
 
 # jetbrain
 .idea
+
+# payload local media
+/media
