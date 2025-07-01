@@ -37,7 +37,7 @@ const ProductDetailIndex = ({ entries }: ProductDetailIndexProps): React.ReactEl
                 <Columns.Row className="justify-between">
                     <Columns.Column width={{ md: 6 }}>
                         <Picture
-                            className="sticky top-5"
+                            className="sticky top-2 lg:top-5"
                             items={entries.infos.media}
                         />
                     </Columns.Column>
