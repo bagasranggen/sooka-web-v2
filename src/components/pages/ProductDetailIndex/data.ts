@@ -1,4 +1,4 @@
-import { FORM_ORDER, MARQUEE, PRODUCT_DETAIL_INFOS } from '@/libs/mock';
+import { FORM_ORDER, MARQUEE } from '@/libs/mock';
 import { PageDataParamsProps, PageDataProps } from '@/libs/@types';
 import { createPictureImage } from '@/libs/factory';
 import { checkMediaStatus } from '@/libs/utils';

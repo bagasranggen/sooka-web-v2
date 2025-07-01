@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { CARD_THUMBNAIL_WITH_PRICE } from '@/libs/mock';
-import { createPicsumImage, createPictureImage } from '@/libs/factory';
+// import { createPicsumImage, createPictureImage } from '@/libs/factory';
 
 import Card from '@/components/common/Card';
 import Heading from '@/components/common/Heading';
@@ -9,7 +9,7 @@ import Columns from '@/components/common/Columns';
 import Carousel, { BannerProps, TestimonialProps } from '@/components/common/Carousel';
 import Tabs from '@/components/common/Tabs';
 import List, { NumberProps } from '@/components/common/List';
-import Picture from '@/components/common/Picture';
+// import Picture from '@/components/common/Picture';
 import ImageDivider, { ImageDividerProps } from '@/components/common/ImageDivider';
 import Container from '@/components/common/Container';
 
@@ -87,34 +87,34 @@ const HomepageIndex = ({ entries }: HomepageIndexProps): React.ReactElement => {
                             <Columns.Column
                                 className="md:mt-8 absolute md:relative left-0 md:left-[unset]"
                                 width={{ xs: 9, md: 8 }}>
-                                <Picture
-                                    items={[
-                                        createPictureImage({
-                                            item: createPicsumImage({ width: 550, height: 733 }),
-                                            // media: 768,
-                                        }),
-                                        // createPictureImage({
-                                        //     item: createPicsumImage({ width: 600, height: 400 }),
-                                        //     media: 768,
-                                        // }),
-                                    ]}
-                                />
+                                {/*<Picture*/}
+                                {/*    items={[*/}
+                                {/*        createPictureImage({*/}
+                                {/*            item: createPicsumImage({ width: 550, height: 733 }),*/}
+                                {/*            // media: 768,*/}
+                                {/*        }),*/}
+                                {/*        // createPictureImage({*/}
+                                {/*        //     item: createPicsumImage({ width: 600, height: 400 }),*/}
+                                {/*        //     media: 768,*/}
+                                {/*        // }),*/}
+                                {/*    ]}*/}
+                                {/*/>*/}
                             </Columns.Column>
                             <Columns.Column
                                 className="mt-8 md:mt-0 md:absolute md:right-0 md:top-0 z-10"
                                 width={{ xs: 9, md: 8 }}>
-                                <Picture
-                                    items={[
-                                        createPictureImage({
-                                            item: createPicsumImage({ width: 550, height: 733 }),
-                                            // media: 768,
-                                        }),
-                                        // createPictureImage({
-                                        //     item: createPicsumImage({ width: 600, height: 400 }),
-                                        //     media: 768,
-                                        // }),
-                                    ]}
-                                />
+                                {/*<Picture*/}
+                                {/*    items={[*/}
+                                {/*        createPictureImage({*/}
+                                {/*            item: createPicsumImage({ width: 550, height: 733 }),*/}
+                                {/*            // media: 768,*/}
+                                {/*        }),*/}
+                                {/*        // createPictureImage({*/}
+                                {/*        //     item: createPicsumImage({ width: 600, height: 400 }),*/}
+                                {/*        //     media: 768,*/}
+                                {/*        // }),*/}
+                                {/*    ]}*/}
+                                {/*/>*/}
                             </Columns.Column>
                         </Columns.Row>
                     </Columns.Column>

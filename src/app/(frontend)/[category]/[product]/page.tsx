@@ -4,9 +4,9 @@ import React from 'react';
 import ProductDetailIndex from '@/components/pages/ProductDetailIndex';
 import { ProductDetailData } from '@/components/pages/ProductDetailIndex/data';
 
-export const generateStaticParams = async () => {
-    return [{ category: 'cakes', product: 'raspberry-yuzu' }];
-};
+// export const generateStaticParams = async () => {
+//     return [{ category: 'cakes', product: 'raspberry-yuzu' }];
+// };
 
 const Page = async ({ params }: PageProps): Promise<React.ReactElement> => {
     const par = await params;

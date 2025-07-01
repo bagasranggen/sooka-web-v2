@@ -1,13 +1,7 @@
 import React from 'react';
 
 import { PageProps } from '@/libs/@types';
-import { createDynamicElement } from '@/libs/factory';
 
-import { PAGES_HANDLES } from '@/components/pages/handles';
-import { PAGES_DATA_HANDLES } from '@/components/pages/handlesData';
-import { PAGES_INDEX_HANDLES } from '@/components/pages/handlesIndex';
-import { apolloClient } from '@/libs/fetcher';
-import { CATEGORY_QUERY } from '@/graphql';
 import ProductListingIndex from '@/components/pages/ProductListingIndex';
 import { ProductListingData } from '@/components/pages/ProductListingIndex/data';
 
@@ -32,10 +26,10 @@ import { ProductListingData } from '@/components/pages/ProductListingIndex/data'
 //     return data;
 // };
 
-export const generateStaticParams = async () => {
-    // return [{ products: ['cakes'] }, { products: ['cakes', 'strawberry-shortcake'] }];
-    return [{ category: 'cakes' }];
-};
+// export const generateStaticParams = async () => {
+//     // return [{ products: ['cakes'] }, { products: ['cakes', 'strawberry-shortcake'] }];
+//     return [{ category: 'cakes' }];
+// };
 
 const Page = async ({ params }: PageProps): Promise<React.ReactElement> => {
     const par = await params;

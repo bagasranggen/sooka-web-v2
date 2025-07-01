@@ -1,7 +1,5 @@
 import { BareMediaProps, ObjectProps, PropsClassname } from '@/libs/@types';
 
-import { Media } from '@/payload-types';
-
 import { BaseItemProps } from '@/components/common/Picture';
 
 export type PictureItemProps = {
@@ -26,7 +24,7 @@ export const createPictureImage = ({
     let pictureImage = INITIAL_STATE;
 
     if (item) {
-        const { src, width, height, alt, filename, ...restImage } = item;
+        const { src, width, height, alt, filename } = item;
 
         pictureImage = {
             ...pictureImage,
