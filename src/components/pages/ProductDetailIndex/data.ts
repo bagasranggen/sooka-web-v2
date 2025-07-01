@@ -53,9 +53,11 @@ export const ProductDetailData = async ({
 
     const infos: ProductDetailIndexProps['entries']['infos'] = {
         media: [],
-        contents: PRODUCT_DETAIL_INFOS,
+        // contents: PRODUCT_DETAIL_INFOS,
+        contents: [],
     };
 
+    // Media Info
     if (mediaSecondary?.productDetailSticky) {
         infos.media.push(
             createPictureImage({
@@ -67,6 +69,15 @@ export const ProductDetailData = async ({
     if (mediaSecondary?.productDetailMobile) {
         infos.media.push(createPictureImage({ item: mediaSecondary.productDetailMobile }));
     }
+
+    // Media Content Description
+    if (d?.description) {
+        infos.contents.push({
+            title: 'Product Description',
+            description: d.description,
+        });
+    }
+    console.log({ d });
 
     return {
         type,

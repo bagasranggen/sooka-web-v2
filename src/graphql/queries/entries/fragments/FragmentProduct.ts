@@ -8,6 +8,7 @@ export const FRAGMENT_PRODUCT = gql`
         slug
         url
         uri
+        description
 
         thumbnail {
             ...thumbnail
