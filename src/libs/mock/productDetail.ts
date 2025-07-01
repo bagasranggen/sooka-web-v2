@@ -20,9 +20,10 @@ export const PRODUCT_DETAIL_BANNER: HalfMediaProps = {
 export const PRODUCT_DETAIL_INFOS: ProductDetailInfoProps[] = [
     {
         title: 'Product Description',
-        description: parse(
-            `<p>Three tier of our soft, cottony vanilla cake, paired so nicely with the tanginess from our strawberry confit in the middle of fluffy whipped mascarpone.</p><p>Is there a better trio? I think not!</p>`
-        ),
+        description: undefined,
+        // description: parse(
+        //     `<p>Three tier of our soft, cottony vanilla cake, paired so nicely with the tanginess from our strawberry confit in the middle of fluffy whipped mascarpone.</p><p>Is there a better trio? I think not!</p>`
+        // ),
     },
     {
         title: 'Product Add-on(s)',
