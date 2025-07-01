@@ -17,6 +17,21 @@ export const Media: CollectionConfig = {
         // staticDir: 'media',
         imageSizes: [
             {
+                name: 'productDetailBanner',
+                width: 1200,
+                height: 900,
+            },
+            {
+                name: 'productDetailSticky',
+                width: 800,
+                height: 1067,
+            },
+            {
+                name: 'productDetailMobile',
+                width: 600,
+                height: 449,
+            },
+            {
                 name: 'productListingThumbnail',
                 width: 400,
                 height: 619,
