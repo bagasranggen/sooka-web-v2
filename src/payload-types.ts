@@ -236,6 +236,7 @@ export interface Media {
 export interface Product {
   id: number;
   typeHandle?: string | null;
+  entryStatus?: ('disabled' | 'live') | null;
   title: string;
   slug?: string | null;
   url?: string | null;
@@ -284,6 +285,7 @@ export interface Product {
 export interface Category {
   id: number;
   typeHandle?: string | null;
+  entryStatus?: ('disabled' | 'live') | null;
   title: string;
   slug?: string | null;
   url?: string | null;
@@ -321,6 +323,7 @@ export interface Category {
 export interface Addon {
   id: number;
   typeHandle?: string | null;
+  entryStatus?: ('disabled' | 'live') | null;
   title: string;
   slug?: string | null;
   url?: string | null;
@@ -537,6 +540,7 @@ export interface MediaSelect<T extends boolean = true> {
  */
 export interface ProductsSelect<T extends boolean = true> {
   typeHandle?: T;
+  entryStatus?: T;
   title?: T;
   slug?: T;
   url?: T;
@@ -571,6 +575,7 @@ export interface ProductsSelect<T extends boolean = true> {
  */
 export interface CategoriesSelect<T extends boolean = true> {
   typeHandle?: T;
+  entryStatus?: T;
   title?: T;
   slug?: T;
   url?: T;
@@ -592,6 +597,7 @@ export interface CategoriesSelect<T extends boolean = true> {
  */
 export interface AddonsSelect<T extends boolean = true> {
   typeHandle?: T;
+  entryStatus?: T;
   title?: T;
   slug?: T;
   url?: T;

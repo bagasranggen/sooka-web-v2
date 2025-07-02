@@ -15,6 +15,8 @@ export const Products: CollectionConfig = {
             tabs: [
                 BasePageTab({
                     typeHandle: 'typeSectionProductsIndex',
+                    withStatus: true,
+                    withUrl: true,
                     updateUrl: async ({ url, siblingData, req: { payload } }) => {
                         // Get Category Slug
                         try {

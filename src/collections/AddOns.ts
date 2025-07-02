@@ -16,6 +16,7 @@ export const AddOns: CollectionConfig = {
             tabs: [
                 BasePageTab({
                     typeHandle: 'typeSectionCategoriesIndex',
+                    withStatus: true,
                     updateUrl: async ({ url, siblingData }) => {
                         await new Promise((resolve) => {
                             setTimeout(() => {

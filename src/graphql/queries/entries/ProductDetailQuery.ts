@@ -5,7 +5,7 @@ import { FRAGMENT_PRODUCT_DETAIL } from '@/graphql/queries/entries/fragments/Fra
 
 export const PRODUCT_DETAIL_QUERY = gql`
     query ProductDetailQuery($slug: String) {
-        products: Products(where: { slug: { equals: $slug } }) {
+        products: Products(where: { slug: { equals: $slug }, entryStatus: { equals: live } }) {
             docs {
                 ...product
                 ...productDetail

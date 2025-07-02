@@ -3,7 +3,7 @@ import { FRAGMENT_PRODUCT } from '@/graphql/queries/entries/fragments/FragmentPr
 
 export const PRODUCT_LISTING_QUERY = gql`
     query ProductListingQuery($category: JSON) {
-        products: Products(where: { category: { equals: $category } }) {
+        products: Products(where: { category: { equals: $category }, entryStatus: { equals: live } }) {
             docs {
                 ...product
             }

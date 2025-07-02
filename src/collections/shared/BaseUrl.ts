@@ -4,6 +4,7 @@ import { ArrayString } from '@/libs/@types';
 import { joinArrayString } from '@/libs/utils';
 
 export type BaseUrlProps = {
+    withUrl?: boolean;
     beforeChange?: FieldHook;
     updateUrl?: (props: { url: string[] } & FieldHookArgs<TypeWithID, any, any>) => void;
 };
@@ -11,6 +12,9 @@ export type BaseUrlProps = {
 export const BaseUrl = (props?: BaseUrlProps): Field => {
     return {
         type: 'row',
+        admin: {
+            hidden: !props?.withUrl,
+        },
         fields: [
             {
                 type: 'text',
