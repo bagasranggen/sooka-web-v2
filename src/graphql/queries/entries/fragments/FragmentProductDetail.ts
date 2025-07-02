@@ -1,5 +1,7 @@
 import { gql } from '@apollo/client';
+
 import { FRAGMENT_ADDON } from '@/graphql/queries/entries/fragments/FragmentAddon';
+import { FRAGMENT_MEDIA } from '@/graphql/queries/fragments/FragmentMedia';
 
 export const FRAGMENT_PRODUCT_DETAIL = gql`
     fragment productDetail on Product {
@@ -13,26 +15,5 @@ export const FRAGMENT_PRODUCT_DETAIL = gql`
     }
 
     ${FRAGMENT_ADDON}
-
-    fragment marqueeMedia on Media {
-        src: url
-        width
-        height
-        filename
-        alt
-
-        sizes {
-            productMarquee {
-                src: url
-                width
-                height
-            }
-
-            productMarqueeMobile {
-                src: url
-                width
-                height
-            }
-        }
-    }
+    ${FRAGMENT_MEDIA({ name: 'marquee', sizesHandles: ['productMarquee', 'productMarqueeMobile'] })}
 `;

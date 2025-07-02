@@ -1,24 +1,14 @@
 import { gql } from '@apollo/client';
 
+import { FRAGMENT_MEDIA } from '@/graphql/queries/fragments/FragmentMedia';
+
 export const FRAGMENT_ADDON = gql`
     fragment addon on Addon {
         title
         slug
 
         thumbnail {
-            src: url
-            width
-            height
-            filename
-            alt
-
-            sizes {
-                productAddon {
-                    src: url
-                    width
-                    height
-                }
-            }
+            ...addonThumbnailMedia
         }
 
         prices {
@@ -27,4 +17,6 @@ export const FRAGMENT_ADDON = gql`
             note
         }
     }
+
+    ${FRAGMENT_MEDIA({ name: 'addonThumbnail', sizesHandles: ['productAddon'] })}
 `;
