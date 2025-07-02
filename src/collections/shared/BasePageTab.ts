@@ -1,11 +1,11 @@
 import { Tab } from 'payload';
 import { BaseTitle } from '@/collections/shared/BaseTitle';
 import { BaseUrl, BaseUrlProps } from '@/collections/shared/BaseUrl';
+import { BaseStatus, BaseStatusProps } from '@/collections/shared/BaseStatus';
 
 export type BasePageTabProps = {
     typeHandle: string;
-    withStatus?: boolean;
-} & Pick<BaseUrlProps, 'updateUrl' | 'withUrl'>;
+} & (Pick<BaseUrlProps, 'updateUrl' | 'withUrl'> & Pick<BaseStatusProps, 'withStatus'>);
 
 export const BasePageTab = (props?: BasePageTabProps): Tab => {
     return {
@@ -30,26 +30,10 @@ export const BasePageTab = (props?: BasePageTabProps): Tab => {
                             width: props?.withStatus ? '90%' : '100%',
                         },
                     },
-                    {
-                        type: 'select',
-                        name: 'entryStatus',
-                        label: 'Status',
-                        defaultValue: 'live',
-                        options: [
-                            {
-                                value: 'disabled',
-                                label: 'Disabled',
-                            },
-                            {
-                                value: 'live',
-                                label: 'Live',
-                            },
-                        ],
-                        admin: {
-                            hidden: !props?.withStatus,
-                            width: '10%',
-                        },
-                    },
+                    BaseStatus({
+                        withStatus: props?.withStatus,
+                        width: '10%',
+                    }),
                 ],
             },
             {
