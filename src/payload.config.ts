@@ -16,6 +16,8 @@ import { Products } from '@/collections/Products';
 import { Categories } from '@/collections/Categories';
 import { AddOns } from '@/collections/AddOns';
 
+import { Homepage } from '@/globals/Homepage';
+
 const filename = fileURLToPath(import.meta.url);
 const dirname = path.dirname(filename);
 
@@ -27,6 +29,7 @@ export default buildConfig({
         },
     },
     collections: [Users, Media, Products, Categories, AddOns],
+    globals: [Homepage],
     editor: lexicalEditor(),
     secret: process.env.PAYLOAD_SECRET || '',
     typescript: {
