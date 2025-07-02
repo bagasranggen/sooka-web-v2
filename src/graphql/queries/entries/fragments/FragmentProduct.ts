@@ -34,6 +34,9 @@ export const FRAGMENT_PRODUCT = gql`
     ${FRAGMENT_MEDIA({
         name: 'thumbnail',
         sizesHandles: [
+            'bannerDesktop',
+            'bannerTablet',
+            'bannerMobile',
             'productDetailBanner',
             'productDetailSticky',
             'productDetailMobile',
