@@ -116,6 +116,71 @@ export const Homepage: GlobalConfig = {
                         },
                     ],
                 },
+                {
+                    label: 'Highlight',
+                    fields: [],
+                },
+                {
+                    label: 'Story',
+                    fields: [
+                        {
+                            type: 'row',
+                            fields: [
+                                {
+                                    type: 'upload',
+                                    name: 'storyMediaMain',
+                                    relationTo: 'media',
+                                },
+                                {
+                                    type: 'upload',
+                                    name: 'storyMediaSecondary',
+                                    relationTo: 'media',
+                                },
+                            ],
+                        },
+                        {
+                            type: 'richText',
+                            name: 'storyDescription',
+                        },
+                    ],
+                },
+                {
+                    label: 'Testimonials',
+                    fields: [],
+                },
+                {
+                    label: 'Image Divider',
+                    fields: [
+                        {
+                            type: 'upload',
+                            name: 'imageDividerMedia',
+                            relationTo: 'media',
+                        },
+                    ],
+                },
+                {
+                    label: 'Order Steps',
+                    fields: [
+                        {
+                            type: 'richText',
+                            name: 'orderDescription',
+                        },
+                        {
+                            type: 'array',
+                            name: 'orderSteps',
+                            fields: [
+                                {
+                                    type: 'textarea',
+                                    name: 'title',
+                                },
+                                {
+                                    type: 'richText',
+                                    name: 'description',
+                                },
+                            ],
+                        },
+                    ],
+                },
             ],
         },
     ],
