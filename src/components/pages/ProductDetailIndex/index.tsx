@@ -1,5 +1,8 @@
 import React from 'react';
 
+import { ArrayString } from '@/libs/@types';
+import { joinArrayString } from '@/libs/utils';
+
 import Banner, { HalfMediaProps } from '@/components/common/Banner';
 import Columns from '@/components/common/Columns';
 import Container from '@/components/common/Container';
@@ -19,6 +22,10 @@ export type ProductDetailIndexProps = {
 };
 
 const ProductDetailIndex = ({ entries }: ProductDetailIndexProps): React.ReactElement => {
+    let infoClass: ArrayString = ['mt-10'];
+    if (!entries.marquee || entries.marquee.length === 0) infoClass.push('mb-10 md:mb-15');
+    infoClass = joinArrayString(infoClass);
+
     return (
         <>
             <Container
@@ -33,7 +40,7 @@ const ProductDetailIndex = ({ entries }: ProductDetailIndexProps): React.ReactEl
 
             <Container
                 as="section"
-                className="mt-10">
+                className={infoClass}>
                 <Columns.Row className="justify-between">
                     <Columns.Column width={{ md: 6 }}>
                         <Picture
