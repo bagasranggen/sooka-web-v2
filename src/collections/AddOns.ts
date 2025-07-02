@@ -15,16 +15,8 @@ export const AddOns: CollectionConfig = {
             type: 'tabs',
             tabs: [
                 BasePageTab({
-                    typeHandle: 'typeSectionCategoriesIndex',
+                    typeHandle: 'typeSectionAddonsEntry',
                     withStatus: true,
-                    updateUrl: async ({ url, siblingData }) => {
-                        await new Promise((resolve) => {
-                            setTimeout(() => {
-                                if (siblingData.slug) url.push(siblingData.slug);
-                                resolve(true);
-                            }, 30);
-                        });
-                    },
                 }),
                 {
                     label: 'Media',
