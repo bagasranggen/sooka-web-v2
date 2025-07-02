@@ -10,11 +10,12 @@ import { buildConfig } from 'payload';
 import { fileURLToPath } from 'url';
 import sharp from 'sharp';
 
-import { Users } from '@/collections/Users';
+import { AddOns } from '@/collections/AddOns';
+import { Categories } from '@/collections/Categories';
 import { Media } from '@/collections/Media';
 import { Products } from '@/collections/Products';
-import { Categories } from '@/collections/Categories';
-import { AddOns } from '@/collections/AddOns';
+import { Tags } from '@/collections/Tags';
+import { Users } from '@/collections/Users';
 
 import { Homepage } from '@/globals/Homepage';
 
@@ -28,7 +29,7 @@ export default buildConfig({
             baseDir: path.resolve(dirname),
         },
     },
-    collections: [Users, Media, Products, Categories, AddOns],
+    collections: [AddOns, Categories, Media, Products, Tags, Users],
     globals: [Homepage],
     editor: lexicalEditor(),
     secret: process.env.PAYLOAD_SECRET || '',
