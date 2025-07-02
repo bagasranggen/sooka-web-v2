@@ -1,4 +1,3 @@
-import { FORM_ORDER } from '@/libs/mock';
 import { PageDataParamsProps, PageDataProps } from '@/libs/@types';
 import { createPictureImage, createProductDetailPrices } from '@/libs/factory';
 import { checkMediaStatus } from '@/libs/utils';
@@ -37,13 +36,12 @@ export const ProductDetailData = async ({
             `<span>Straw<span class="text-sooka-primary">berry</span></span> <span>Short<span class="text-sooka-primary">cake</span></span>`
         ),
         form: {
-            title: 'Strawberry Shortcake',
-            summaries: FORM_ORDER,
+            title: d?.title,
+            summaries: createProductDetailPrices({ prices: d?.prices, addons: d?.addons }),
         },
     };
 
-    console.log({ d, price: createProductDetailPrices({ prices: d?.prices }) });
-
+    // Banner Media
     if (mediaMain?.productDetailBanner) {
         banner.media.push(
             createPictureImage({

@@ -20,7 +20,7 @@ export type OrderFormFields = {
 
 export type OrderItemSummariesProps = {
     value: number | string;
-    label: string;
+    label: string | React.ReactNode;
 };
 
 export type OrderItemProps = {

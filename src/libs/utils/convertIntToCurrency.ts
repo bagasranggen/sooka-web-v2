@@ -6,6 +6,10 @@ export const convertIntToCurrency = (price: number, withCurrency: boolean = fals
         maximumFractionDigits: 0,
     }).format(price);
 
+    if (price === 0) {
+        return currency.replace('0', '').replace(/\s/g, '');
+    }
+
     if (!withCurrency) {
         return currency.replace('IDR', '').replace(/\s/g, '');
     }
