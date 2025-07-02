@@ -783,6 +783,60 @@ export interface Homepage {
         id?: string | null;
       }[]
     | null;
+  storyMediaMain?: (number | null) | Media;
+  storyMediaSecondary?: (number | null) | Media;
+  storyDescription?: {
+    root: {
+      type: string;
+      children: {
+        type: string;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  } | null;
+  imageDividerMedia?: (number | null) | Media;
+  orderDescription?: {
+    root: {
+      type: string;
+      children: {
+        type: string;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  } | null;
+  orderSteps?:
+    | {
+        title?: string | null;
+        description?: {
+          root: {
+            type: string;
+            children: {
+              type: string;
+              version: number;
+              [k: string]: unknown;
+            }[];
+            direction: ('ltr' | 'rtl') | null;
+            format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+            indent: number;
+            version: number;
+          };
+          [k: string]: unknown;
+        } | null;
+        id?: string | null;
+      }[]
+    | null;
   updatedAt?: string | null;
   createdAt?: string | null;
 }
@@ -813,6 +867,18 @@ export interface HomepageSelect<T extends boolean = true> {
             };
         product?: T;
         productTarget?: T;
+        id?: T;
+      };
+  storyMediaMain?: T;
+  storyMediaSecondary?: T;
+  storyDescription?: T;
+  imageDividerMedia?: T;
+  orderDescription?: T;
+  orderSteps?:
+    | T
+    | {
+        title?: T;
+        description?: T;
         id?: T;
       };
   updatedAt?: T;
