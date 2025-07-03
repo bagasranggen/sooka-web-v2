@@ -18,6 +18,7 @@ import { Tags } from '@/collections/Tags';
 import { Testimonials } from '@/collections/Testimonials';
 import { Users } from '@/collections/Users';
 
+import { Navigation } from '@/globals/Navigation';
 import { Homepage } from '@/globals/Homepage';
 
 const filename = fileURLToPath(import.meta.url);
@@ -31,7 +32,7 @@ export default buildConfig({
         },
     },
     collections: [AddOns, Categories, Media, Products, Tags, Testimonials, Users],
-    globals: [Homepage],
+    globals: [Navigation, Homepage],
     editor: lexicalEditor(),
     secret: process.env.PAYLOAD_SECRET || '',
     typescript: {

@@ -95,9 +95,11 @@ export interface Config {
     defaultIDType: number;
   };
   globals: {
+    navigation: Navigation;
     homepage: Homepage;
   };
   globalsSelect: {
+    navigation: NavigationSelect<false> | NavigationSelect<true>;
     homepage: HomepageSelect<false> | HomepageSelect<true>;
   };
   locale: null;
@@ -866,6 +868,32 @@ export interface PayloadMigrationsSelect<T extends boolean = true> {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "navigation".
+ */
+export interface Navigation {
+  id: number;
+  navigations?:
+    | {
+        entryStatus?: ('disabled' | 'live') | null;
+        link?:
+          | {
+              source?: ('products' | 'categories' | 'custom') | null;
+              product?: (number | null) | Product;
+              category?: (number | null) | Category;
+              custom?: string | null;
+              target?: boolean | null;
+              label?: string | null;
+              id?: string | null;
+            }[]
+          | null;
+        id?: string | null;
+      }[]
+    | null;
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "homepage".
  */
 export interface Homepage {
@@ -895,8 +923,9 @@ export interface Homepage {
         } | null;
         link?:
           | {
-              source?: ('products' | 'custom') | null;
+              source?: ('products' | 'categories' | 'custom') | null;
               product?: (number | null) | Product;
+              category?: (number | null) | Category;
               custom?: string | null;
               target?: boolean | null;
               label?: string | null;
@@ -975,6 +1004,32 @@ export interface Homepage {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "navigation_select".
+ */
+export interface NavigationSelect<T extends boolean = true> {
+  navigations?:
+    | T
+    | {
+        entryStatus?: T;
+        link?:
+          | T
+          | {
+              source?: T;
+              product?: T;
+              category?: T;
+              custom?: T;
+              target?: T;
+              label?: T;
+              id?: T;
+            };
+        id?: T;
+      };
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "homepage_select".
  */
 export interface HomepageSelect<T extends boolean = true> {
@@ -993,6 +1048,7 @@ export interface HomepageSelect<T extends boolean = true> {
           | {
               source?: T;
               product?: T;
+              category?: T;
               custom?: T;
               target?: T;
               label?: T;
