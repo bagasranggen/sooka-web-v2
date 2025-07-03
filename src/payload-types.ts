@@ -347,7 +347,7 @@ export interface Page {
   slug?: string | null;
   url?: string | null;
   uri?: string | null;
-  contentBlocks?: (ContentBlockGallery | ContentBlockHeading)[] | null;
+  contentBlocks?: (ContentBlockGallery | ContentBlockHeading | ContentBlockRelatedProducts)[] | null;
   updatedAt: string;
   createdAt: string;
 }
@@ -356,7 +356,9 @@ export interface Page {
  * via the `definition` "ContentBlockGallery".
  */
 export interface ContentBlockGallery {
-  media?: (number | null) | Media;
+  media?: (number | Media)[] | null;
+  marginTop?: ('1' | '2' | '3' | '4' | '5' | '6' | '7' | '8' | '9' | '10') | null;
+  marginBottom?: ('1' | '2' | '3' | '4' | '5' | '6' | '7' | '8' | '9' | '10') | null;
   id?: string | null;
   blockName?: string | null;
   blockType: 'gallery';
@@ -367,9 +369,25 @@ export interface ContentBlockGallery {
  */
 export interface ContentBlockHeading {
   title?: string | null;
+  headingLevel?: ('1' | '2' | '3' | '4' | '5') | null;
+  marginTop?: ('1' | '2' | '3' | '4' | '5' | '6' | '7' | '8' | '9' | '10') | null;
+  marginBottom?: ('1' | '2' | '3' | '4' | '5' | '6' | '7' | '8' | '9' | '10') | null;
   id?: string | null;
   blockName?: string | null;
   blockType: 'heading';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "ContentBlockRelatedProducts".
+ */
+export interface ContentBlockRelatedProducts {
+  title?: string | null;
+  products?: (number | null) | Product;
+  marginTop?: ('1' | '2' | '3' | '4' | '5' | '6' | '7' | '8' | '9' | '10') | null;
+  marginBottom?: ('1' | '2' | '3' | '4' | '5' | '6' | '7' | '8' | '9' | '10') | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'relatedProducts';
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -805,6 +823,7 @@ export interface PagesSelect<T extends boolean = true> {
     | {
         gallery?: T | ContentBlockGallerySelect<T>;
         heading?: T | ContentBlockHeadingSelect<T>;
+        relatedProducts?: T | ContentBlockRelatedProductsSelect<T>;
       };
   updatedAt?: T;
   createdAt?: T;
@@ -815,6 +834,8 @@ export interface PagesSelect<T extends boolean = true> {
  */
 export interface ContentBlockGallerySelect<T extends boolean = true> {
   media?: T;
+  marginTop?: T;
+  marginBottom?: T;
   id?: T;
   blockName?: T;
 }
@@ -824,6 +845,21 @@ export interface ContentBlockGallerySelect<T extends boolean = true> {
  */
 export interface ContentBlockHeadingSelect<T extends boolean = true> {
   title?: T;
+  headingLevel?: T;
+  marginTop?: T;
+  marginBottom?: T;
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "ContentBlockRelatedProducts_select".
+ */
+export interface ContentBlockRelatedProductsSelect<T extends boolean = true> {
+  title?: T;
+  products?: T;
+  marginTop?: T;
+  marginBottom?: T;
   id?: T;
   blockName?: T;
 }
