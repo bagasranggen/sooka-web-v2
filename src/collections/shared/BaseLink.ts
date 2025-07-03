@@ -24,6 +24,7 @@ export const BaseLink = (props?: BaseLinkProps): Field => {
                         options: [
                             { value: 'products', label: 'Products' },
                             { value: 'categories', label: 'Categories' },
+                            { value: 'pages', label: 'Pages' },
                             { value: 'custom', label: 'Custom' },
                         ],
                     },
@@ -34,6 +35,15 @@ export const BaseLink = (props?: BaseLinkProps): Field => {
                         relationTo: 'products',
                         admin: {
                             condition: (data, siblingData) => siblingData?.source === 'products',
+                        },
+                    },
+                    {
+                        type: 'relationship',
+                        name: 'page',
+                        label: false,
+                        relationTo: 'pages',
+                        admin: {
+                            condition: (data, siblingData) => siblingData?.source === 'pages',
                         },
                     },
                     {

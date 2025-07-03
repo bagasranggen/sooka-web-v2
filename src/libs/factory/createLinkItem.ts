@@ -23,6 +23,15 @@ export const createLinkItem = (item: any) => {
             });
             break;
 
+        case 'pages':
+            const page = item?.page;
+
+            link = Object.assign({
+                href: page?.url,
+                label: page?.title,
+            });
+            break;
+
         default:
             link = Object.assign({
                 href: item?.custom,

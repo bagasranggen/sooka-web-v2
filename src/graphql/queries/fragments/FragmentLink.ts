@@ -17,6 +17,11 @@ export const FRAGMENT_LINK = ({ name, handle }: { name: string; handle: string }
                 url
                 title
             }
+            
+            page {
+                url
+                title
+            }
         }
     `}
 `;
