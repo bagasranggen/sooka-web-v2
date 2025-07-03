@@ -1,7 +1,6 @@
 import React from 'react';
 
 import { CARD_THUMBNAIL_WITH_PRICE } from '@/libs/mock';
-// import { createPicsumImage, createPictureImage } from '@/libs/factory';
 
 import Card from '@/components/common/Card';
 import Heading from '@/components/common/Heading';
@@ -9,7 +8,6 @@ import Columns from '@/components/common/Columns';
 import Carousel, { BannerProps, TestimonialProps } from '@/components/common/Carousel';
 import Tabs from '@/components/common/Tabs';
 import List, { NumberProps } from '@/components/common/List';
-// import Picture from '@/components/common/Picture';
 import ImageDivider, { ImageDividerProps } from '@/components/common/ImageDivider';
 import Container from '@/components/common/Container';
 import HomepageStory, { HomepageStoryProps } from '@/components/pages/HomepageIndex/HomepageStory';
