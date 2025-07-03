@@ -925,6 +925,7 @@ export interface Homepage {
     };
     [k: string]: unknown;
   } | null;
+  testimonials?: (number | Testimonial)[] | null;
   imageDividerMedia?: (number | null) | Media;
   orderDescription?: {
     root: {
@@ -997,6 +998,7 @@ export interface HomepageSelect<T extends boolean = true> {
   storyMediaMain?: T;
   storyMediaSecondary?: T;
   storyDescription?: T;
+  testimonials?: T;
   imageDividerMedia?: T;
   orderDescription?: T;
   orderSteps?:

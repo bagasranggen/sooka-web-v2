@@ -80,28 +80,30 @@ const HomepageIndex = ({ entries }: HomepageIndexProps): React.ReactElement => {
 
             {entries?.story?.description && <HomepageStory {...entries?.story} />}
 
-            <Container
-                as="section"
-                className="mt-10 md:mt-20">
-                <Columns.Row className="justify-center">
-                    <Columns.Column
-                        width={{
-                            md: 10,
-                            lg: 9,
-                        }}>
-                        <Heading
-                            as="h2"
-                            size="section"
-                            className="text-center">
-                            Testimonials
-                        </Heading>
+            {entries?.testimonials && entries.testimonials.length > 0 && (
+                <Container
+                    as="section"
+                    className="mt-10 md:mt-20">
+                    <Columns.Row className="justify-center">
+                        <Columns.Column
+                            width={{
+                                md: 10,
+                                lg: 9,
+                            }}>
+                            <Heading
+                                as="h2"
+                                size="section"
+                                className="text-center">
+                                Testimonials
+                            </Heading>
 
-                        <div className="mt-8">
-                            <Carousel.Testimonial items={entries.testimonials} />
-                        </div>
-                    </Columns.Column>
-                </Columns.Row>
-            </Container>
+                            <div className="mt-8">
+                                <Carousel.Testimonial items={entries.testimonials} />
+                            </div>
+                        </Columns.Column>
+                    </Columns.Row>
+                </Container>
+            )}
 
             <ImageDivider
                 className="mt-10 md:mt-20"

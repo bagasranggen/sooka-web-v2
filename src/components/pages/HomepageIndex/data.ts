@@ -1,6 +1,5 @@
 import { Homepage } from '@/payload-types';
 
-import { TESTIMONIALS } from '@/libs/mock';
 import { PageDataProps } from '@/libs/@types';
 import { createHomepageBanner, createPictureImage } from '@/libs/factory';
 import { checkMediaStatus } from '@/libs/utils';
@@ -69,6 +68,20 @@ export const HomepageData = async (): Promise<PageDataProps<HomepageIndexProps>>
         story?.mediaSecondary?.push(createPictureImage({ item: mediaSecondary.storyMediaMobile }));
     }
 
+    // Testimonials
+    const testimonials: HomepageIndexProps['entries']['testimonials'] = [];
+
+    if (d?.testimonials && d?.testimonials.length > 0) {
+        d.testimonials.forEach((item) => {
+            if (typeof item === 'number') return;
+            if (item?.entryStatus !== 'live') return;
+
+            testimonials.push({
+                author: item?.author,
+                quote: item?.testimonial as any,
+            });
+        });
+    }
 
     // Image Divider
     const imageDivider: HomepageIndexProps['entries']['imageDivider'] = [];
@@ -124,7 +137,7 @@ export const HomepageData = async (): Promise<PageDataProps<HomepageIndexProps>>
     return {
         entries: {
             banner,
-            testimonials: TESTIMONIALS,
+            testimonials,
             imageDivider,
             story,
             orders,

@@ -146,7 +146,14 @@ export const Homepage: GlobalConfig = {
                 },
                 {
                     label: 'Testimonials',
-                    fields: [],
+                    fields: [
+                        {
+                            type: 'relationship',
+                            name: 'testimonials',
+                            relationTo: 'testimonials',
+                            hasMany: true,
+                        },
+                    ],
                 },
                 {
                     label: 'Image Divider',

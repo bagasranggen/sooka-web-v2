@@ -3,6 +3,7 @@ import { gql } from '@apollo/client';
 import { FRAGMENT_HOMEPAGE_BANNER } from '@/graphql/queries/entries/fragments/FragmentHomepageBanner';
 import { FRAGMENT_HOMEPAGE_STORY } from '@/graphql/queries/entries/fragments/FragmentHomepageStory';
 import { FRAGMENT_MEDIA } from '@/graphql/queries/fragments/FragmentMedia';
+import { FRAGMENT_TESTIMONIAL } from '@/graphql/queries/entries/fragments/FragmentTestimonial';
 
 export const HOMEPAGE_QUERY = gql`
     query HomepageQuery {
@@ -22,6 +23,10 @@ export const HOMEPAGE_QUERY = gql`
             imageDividerMedia {
                 ...homepageDividerMedia
             }
+
+            testimonials {
+                ...testimonial
+            }
         }
     }
 
@@ -31,4 +36,5 @@ export const HOMEPAGE_QUERY = gql`
         name: 'homepageDivider',
         sizesHandles: ['bannerDesktop', 'mediaDividerTablet', 'mediaDividerMobile'],
     })}
+    ${FRAGMENT_TESTIMONIAL}
 `;
