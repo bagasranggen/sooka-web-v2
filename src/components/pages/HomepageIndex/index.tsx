@@ -81,7 +81,7 @@ const HomepageIndex = ({ entries }: HomepageIndexProps): React.ReactElement => {
                 />
             </Container>
 
-            {entries?.story && <HomepageStory {...entries?.story} />}
+            {entries?.story?.description && <HomepageStory {...entries?.story} />}
 
             <Container
                 as="section"
@@ -111,28 +111,30 @@ const HomepageIndex = ({ entries }: HomepageIndexProps): React.ReactElement => {
                 media={entries.imageDivider}
             />
 
-            <Container
-                as="section"
-                className="mt-10 md:mt-20 mb-10 md:mb-20">
-                <Columns.Row className="justify-center">
-                    <Columns.Column width={{ lg: 8 }}>
-                        <Heading
-                            as="h2"
-                            size="section"
-                            className="text-center"
-                            description={
-                                <RichText className="text-center">{entries?.orders?.children as any}</RichText>
-                            }>
-                            First Time <span className="text-sooka-primary">Ordering</span>?
-                        </Heading>
+            {entries?.orders?.steps && entries.orders.steps.length > 0 && (
+                <Container
+                    as="section"
+                    className="mt-10 md:mt-20 mb-10 md:mb-20">
+                    <Columns.Row className="justify-center">
+                        <Columns.Column width={{ lg: 8 }}>
+                            <Heading
+                                as="h2"
+                                size="section"
+                                className="text-center"
+                                description={
+                                    <RichText className="text-center">{entries?.orders?.children as any}</RichText>
+                                }>
+                                First Time <span className="text-sooka-primary">Ordering</span>?
+                            </Heading>
 
-                        <List.Number
-                            className="mt-8"
-                            items={entries.orders.steps}
-                        />
-                    </Columns.Column>
-                </Columns.Row>
-            </Container>
+                            <List.Number
+                                className="mt-8"
+                                items={entries.orders.steps}
+                            />
+                        </Columns.Column>
+                    </Columns.Row>
+                </Container>
+            )}
         </>
     );
 };
