@@ -118,7 +118,29 @@ export const Homepage: GlobalConfig = {
                 },
                 {
                     label: 'Highlight',
-                    fields: [],
+                    fields: [
+                        {
+                            type: 'array',
+                            name: 'highlights',
+                            maxRows: 2,
+                            fields: [
+                                {
+                                    type: 'relationship',
+                                    name: 'tag',
+                                    label: 'Title',
+                                    relationTo: 'tags',
+                                    required: true,
+                                },
+                                {
+                                    type: 'relationship',
+                                    name: 'products',
+                                    relationTo: 'products',
+                                    hasMany: true,
+                                    required: true,
+                                },
+                            ],
+                        },
+                    ],
                 },
                 {
                     label: 'Story',

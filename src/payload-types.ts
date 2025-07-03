@@ -908,6 +908,13 @@ export interface Homepage {
         id?: string | null;
       }[]
     | null;
+  highlights?:
+    | {
+        tag: number | Tag;
+        products: (number | Product)[];
+        id?: string | null;
+      }[]
+    | null;
   storyMediaMain?: (number | null) | Media;
   storyMediaSecondary?: (number | null) | Media;
   storyDescription?: {
@@ -993,6 +1000,13 @@ export interface HomepageSelect<T extends boolean = true> {
             };
         product?: T;
         productTarget?: T;
+        id?: T;
+      };
+  highlights?:
+    | T
+    | {
+        tag?: T;
+        products?: T;
         id?: T;
       };
   storyMediaMain?: T;
