@@ -1,3 +1,4 @@
+export * from './BaseContentBlocks';
 export * from './BaseLink';
 export * from './BasePageTab';
 export * from './BasePrice';

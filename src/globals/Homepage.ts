@@ -7,7 +7,7 @@ export const Homepage: GlobalConfig = {
         read: () => true,
     },
     admin: {
-        group: 'Single',
+        group: 'Content',
     },
     fields: [
         {

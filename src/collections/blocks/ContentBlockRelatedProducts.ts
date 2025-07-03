@@ -1,9 +1,9 @@
 import { Block } from 'payload';
 import { ContentBlockSettings } from '@/collections/blocks/ContentBlockSettings';
 
-export const ContentBlockGallery: Block = {
-    slug: 'gallery',
-    interfaceName: 'ContentBlockGallery',
+export const ContentBlockRelatedProducts: Block = {
+    slug: 'relatedProducts',
+    interfaceName: 'ContentBlockRelatedProducts',
     fields: [
         {
             type: 'tabs',
@@ -12,11 +12,13 @@ export const ContentBlockGallery: Block = {
                     label: 'Content',
                     fields: [
                         {
-                            type: 'upload',
-                            name: 'media',
-                            relationTo: 'media',
-                            hasMany: true,
-                            maxRows: 6,
+                            type: 'text',
+                            name: 'title',
+                        },
+                        {
+                            type: 'relationship',
+                            name: 'products',
+                            relationTo: 'products',
                         },
                     ],
                 },

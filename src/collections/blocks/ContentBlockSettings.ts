@@ -1,4 +1,5 @@
 import { Field } from 'payload';
+import { createArrayFromNumber } from '../../libs/factory/createArrayFromNumber';
 
 export const ContentBlockSettings: Field[] = [
     {
@@ -11,13 +12,19 @@ export const ContentBlockSettings: Field[] = [
                     {
                         type: 'select',
                         name: 'marginTop',
-                        options: [{ value: 'mt-1', label: '1' }],
+                        options: createArrayFromNumber(10).map((item) => ({
+                            value: (item + 1).toString(),
+                            label: `${item + 1}`,
+                        })),
                     },
-                    // {
-                    //     type: 'select',
-                    //     name: 'bottoms',
-                    //     options: [],
-                    // },
+                    {
+                        type: 'select',
+                        name: 'marginBottom',
+                        options: createArrayFromNumber(10).map((item) => ({
+                            value: (item + 1).toString(),
+                            label: `${item + 1}`,
+                        })),
+                    },
                 ],
             },
         ],
