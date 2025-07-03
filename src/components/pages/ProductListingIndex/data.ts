@@ -28,8 +28,6 @@ export const ProductListingData = async ({
         },
     });
 
-    // const products = productsData?.products?.docs;
-
     if (!category) return notFound();
 
     const banner: ProductListingIndexProps['entries']['banner'] = {
@@ -42,33 +40,13 @@ export const ProductListingData = async ({
     if (productsData?.products?.docs && productsData?.products?.docs?.length > 0) {
         productsData.products.docs.forEach((item: any) => {
             products.push(createProductItem(item));
-
-            // products.push({
-            //     cta: {
-            //         href: '/cakes/strawberry-shortcake',
-            //     },
-            //     media: [
-            //         createPictureImage({ item: createPicsumImage({ id: 237, width: 400, height: 619 }), media: 768 }),
-            //         createPictureImage({ item: createPicsumImage({ id: 237, width: 400, height: 400 }) }),
-            //     ],
-            //     mediaHover: [
-            //         createPictureImage({ item: createPicsumImage({ id: 22, width: 400, height: 619 }), media: 768 }),
-            //         createPictureImage({ item: createPicsumImage({ id: 22, width: 400, height: 400 }) }),
-            //     ],
-            //     title: item?.title ?? '',
-            //     price: item === 0 ? '500.000' : '230.000',
-            //     ...(item === 0 ? { salePrice: '230.000' } : {}),
-            // });
         });
     }
-
-    // console.log({ category, products });
 
     return {
         type,
         entries: {
             banner,
-            // products: [...CARD_THUMBNAIL_WITH_PRICE, CARD_THUMBNAIL_WITH_PRICE[0], CARD_THUMBNAIL_WITH_PRICE[0]],
             products,
         },
     };
