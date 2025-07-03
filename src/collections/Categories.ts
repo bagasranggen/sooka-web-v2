@@ -5,6 +5,7 @@ export const Categories: CollectionConfig = {
     slug: 'categories',
     admin: {
         useAsTitle: 'title',
+        group: 'Entries',
     },
     access: {
         read: () => true,

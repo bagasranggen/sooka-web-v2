@@ -5,6 +5,7 @@ export const Tags: CollectionConfig = {
     slug: 'tags',
     admin: {
         useAsTitle: 'title',
+        group: 'Entries',
     },
     access: {
         read: () => true,

@@ -6,6 +6,7 @@ export const AddOns: CollectionConfig = {
     labels: { plural: 'Add-ons', singular: 'Add-on' },
     admin: {
         useAsTitle: 'title',
+        group: 'Entries',
     },
     access: {
         read: () => true,

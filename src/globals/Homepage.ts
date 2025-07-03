@@ -6,6 +6,9 @@ export const Homepage: GlobalConfig = {
     access: {
         read: () => true,
     },
+    admin: {
+        group: 'Single',
+    },
     fields: [
         {
             type: 'tabs',

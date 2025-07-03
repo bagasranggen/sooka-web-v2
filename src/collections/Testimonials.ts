@@ -8,6 +8,7 @@ export const Testimonials: CollectionConfig = {
     },
     admin: {
         useAsTitle: 'title',
+        group: 'Entries',
     },
     fields: [
         {
