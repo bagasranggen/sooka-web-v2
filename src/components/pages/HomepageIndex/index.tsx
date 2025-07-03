@@ -1,21 +1,19 @@
 import React from 'react';
 
-import { CARD_THUMBNAIL_WITH_PRICE } from '@/libs/mock';
-
-import Card from '@/components/common/Card';
 import Heading from '@/components/common/Heading';
 import Columns from '@/components/common/Columns';
 import Carousel, { BannerProps, TestimonialProps } from '@/components/common/Carousel';
-import Tabs from '@/components/common/Tabs';
 import List, { NumberProps } from '@/components/common/List';
 import ImageDivider, { ImageDividerProps } from '@/components/common/ImageDivider';
 import Container from '@/components/common/Container';
 import HomepageStory, { HomepageStoryProps } from '@/components/pages/HomepageIndex/HomepageStory';
 import RichText, { RichTextProps } from '@/components/common/RichText';
+import HomepageHighlight, { HomepageHighlightProps } from '@/components/pages/HomepageIndex/HomepageHighlight';
 
 export type HomepageIndexProps = {
     entries: {
         banner: BannerProps['items'];
+        highlights: HomepageHighlightProps['items'];
         testimonials: TestimonialProps['items'];
         imageDivider: ImageDividerProps['media'];
         story: HomepageStoryProps;
@@ -34,49 +32,7 @@ const HomepageIndex = ({ entries }: HomepageIndexProps): React.ReactElement => {
                 </section>
             )}
 
-            <Container as="section">
-                <Tabs
-                    className="mt-10 relative z-10"
-                    items={[
-                        {
-                            id: 'lis',
-                            titleClass: '[&:not(.active)]:opacity-60',
-                            title: (
-                                <Heading.Number
-                                    number="01"
-                                    size="lg">
-                                    New
-                                </Heading.Number>
-                            ),
-                            children: (
-                                <Card.Thumbnail
-                                    spacing={{ x: 3, y: 4 }}
-                                    columns={{ xs: 1, sm: 2, md: 4 }}
-                                    items={CARD_THUMBNAIL_WITH_PRICE}
-                                />
-                            ),
-                        },
-                        {
-                            id: 'lis2',
-                            titleClass: '[&:not(.active)]:opacity-60',
-                            title: (
-                                <Heading.Number
-                                    number="02"
-                                    size="lg">
-                                    Best Seller
-                                </Heading.Number>
-                            ),
-                            children: (
-                                <Card.Thumbnail
-                                    spacing={{ x: 3, y: 4 }}
-                                    columns={{ xs: 1, sm: 2, md: 4 }}
-                                    items={CARD_THUMBNAIL_WITH_PRICE}
-                                />
-                            ),
-                        },
-                    ]}
-                />
-            </Container>
+            <HomepageHighlight items={entries.highlights} />
 
             {entries?.story?.description && <HomepageStory {...entries?.story} />}
 

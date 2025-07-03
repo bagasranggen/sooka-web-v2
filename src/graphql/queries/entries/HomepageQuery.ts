@@ -4,12 +4,17 @@ import { FRAGMENT_HOMEPAGE_BANNER } from '@/graphql/queries/entries/fragments/Fr
 import { FRAGMENT_HOMEPAGE_STORY } from '@/graphql/queries/entries/fragments/FragmentHomepageStory';
 import { FRAGMENT_MEDIA } from '@/graphql/queries/fragments/FragmentMedia';
 import { FRAGMENT_TESTIMONIAL } from '@/graphql/queries/entries/fragments/FragmentTestimonial';
+import { FRAGMENT_HOMEPAGE_HIGHLIGHT } from '@/graphql/queries/entries/fragments/FragmentHomepageHighlight';
 
 export const HOMEPAGE_QUERY = gql`
     query HomepageQuery {
         entry: Homepage {
             bannerMedia {
                 ...homepageBanner
+            }
+
+            highlights {
+                ...homepageHighlight
             }
 
             ...homepageStory
@@ -31,6 +36,7 @@ export const HOMEPAGE_QUERY = gql`
     }
 
     ${FRAGMENT_HOMEPAGE_BANNER}
+    ${FRAGMENT_HOMEPAGE_HIGHLIGHT}
     ${FRAGMENT_HOMEPAGE_STORY}
     ${FRAGMENT_MEDIA({
         name: 'homepageDivider',

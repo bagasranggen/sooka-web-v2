@@ -1,7 +1,7 @@
 import { Homepage } from '@/payload-types';
 
 import { PageDataProps } from '@/libs/@types';
-import { createHomepageBanner, createPictureImage } from '@/libs/factory';
+import { createHomepageBanner, createPictureImage, createProductItem } from '@/libs/factory';
 import { checkMediaStatus } from '@/libs/utils';
 
 import { apolloClient } from '@/libs/fetcher';
@@ -10,6 +10,7 @@ import { HOMEPAGE_QUERY } from '@/graphql';
 import parse from 'html-react-parser';
 
 import { HomepageIndexProps } from '@/components/pages/HomepageIndex';
+import { HomepageHighlightItemProps } from '@/components/pages/HomepageIndex/HomepageHighlight';
 
 export const HomepageData = async (): Promise<PageDataProps<HomepageIndexProps>> => {
     const { data } = await apolloClient.query({
@@ -23,6 +24,29 @@ export const HomepageData = async (): Promise<PageDataProps<HomepageIndexProps>>
     if (d?.bannerMedia && d.bannerMedia.length > 0) {
         d.bannerMedia.forEach((item) => {
             if (item?.entryStatus === 'live') banner.push(createHomepageBanner(item));
+        });
+    }
+
+    // Highlights
+    const highlights: HomepageIndexProps['entries']['highlights'] = [];
+
+    if (d?.highlights && d.highlights.length > 0) {
+        d.highlights.forEach((item) => {
+            const tag = typeof item?.tag !== 'number' ? item?.tag : undefined;
+
+            const tmp: HomepageHighlightItemProps = {
+                id: tag?.slug ?? '',
+                title: tag?.title ?? '',
+                items: [],
+            };
+
+            if (item?.products && item?.products.length > 0) {
+                item.products.forEach((item: any) => {
+                    tmp.items.push(createProductItem(item));
+                });
+            }
+
+            if (tmp.items.length > 0) highlights.push(tmp);
         });
     }
 
@@ -137,6 +161,7 @@ export const HomepageData = async (): Promise<PageDataProps<HomepageIndexProps>>
     return {
         entries: {
             banner,
+            highlights,
             testimonials,
             imageDivider,
             story,
