@@ -22,6 +22,7 @@ export const BaseUrl = (props?: BaseUrlProps): Field => {
                 label: 'URL',
                 admin: {
                     width: '50%',
+                    readOnly: true,
                 },
                 hooks: {
                     beforeChange: [
@@ -42,6 +43,7 @@ export const BaseUrl = (props?: BaseUrlProps): Field => {
                 label: 'URI',
                 admin: {
                     width: '50%',
+                    readOnly: true,
                 },
                 hooks: {
                     beforeChange: [
