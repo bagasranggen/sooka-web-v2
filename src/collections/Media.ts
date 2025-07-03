@@ -71,6 +71,16 @@ export const Media: CollectionConfig = {
                 width: 400,
                 height: 400,
             },
+            {
+                name: 'storyMediaDesktop',
+                width: 550,
+                height: 733,
+            },
+            {
+                name: 'storyMediaMobile',
+                width: 600,
+                height: 400,
+            },
         ],
     },
 };

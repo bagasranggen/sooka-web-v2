@@ -6,7 +6,7 @@ import { FRAGMENT_MEDIA } from '@/graphql/queries/fragments/FragmentMedia';
 import { FRAGMENT_LINK } from '@/graphql/queries/fragments/FragmentLink';
 
 export const FRAGMENT_HOMEPAGE_BANNER = gql`
-    fragment banner on Homepage_BannerMedia {
+    fragment homepageBanner on Homepage_BannerMedia {
         entryStatus
         source
         textAlign

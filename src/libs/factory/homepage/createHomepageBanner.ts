@@ -1,4 +1,3 @@
-// import { createPicsumImage } from '../../factory/createPicsumImage';
 import { checkMediaStatus } from '../../utils/checkMediaStatus';
 import { createLinkItem } from '../../factory/createLinkItem';
 
@@ -7,8 +6,6 @@ import { BannerItemProps } from '@/components/common/Carousel';
 export const createHomepageBanner = (item: any): BannerItemProps => {
     const isProduct = item?.source === 'products';
     const product = item?.product;
-
-    console.log({ item, product });
 
     const mediaProduct = checkMediaStatus({
         item: product?.thumbnail,
@@ -48,8 +45,5 @@ export const createHomepageBanner = (item: any): BannerItemProps => {
         title,
         description,
         cta,
-        // cta: {
-        //     href: '#',
-        // },
     };
 };
