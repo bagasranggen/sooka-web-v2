@@ -8,8 +8,9 @@ import { checkMediaStatus } from '@/libs/utils';
 import { apolloClient } from '@/libs/fetcher';
 import { HOMEPAGE_QUERY } from '@/graphql';
 
-import { HomepageIndexProps } from '@/components/pages/HomepageIndex/index';
 import parse from 'html-react-parser';
+
+import { HomepageIndexProps } from '@/components/pages/HomepageIndex';
 
 export const HomepageData = async (): Promise<PageDataProps<HomepageIndexProps>> => {
     const { data } = await apolloClient.query({
@@ -17,8 +18,6 @@ export const HomepageData = async (): Promise<PageDataProps<HomepageIndexProps>>
     });
 
     const d: Homepage = data.entry;
-
-    console.log({ d });
 
     const banner: HomepageIndexProps['entries']['banner'] = [];
 
@@ -28,6 +27,7 @@ export const HomepageData = async (): Promise<PageDataProps<HomepageIndexProps>>
         });
     }
 
+    // Story
     const story: HomepageIndexProps['entries']['story'] = {
         mediaMain: [],
         mediaSecondary: [],
@@ -43,6 +43,7 @@ export const HomepageData = async (): Promise<PageDataProps<HomepageIndexProps>>
         handles: ['storyMediaDesktop', 'storyMediaMobile'],
     });
 
+    // Story Main Media
     if (mediaMain && mediaMain?.storyMediaDesktop) {
         story?.mediaMain?.push(
             createPictureImage({
@@ -55,6 +56,7 @@ export const HomepageData = async (): Promise<PageDataProps<HomepageIndexProps>>
         story?.mediaMain?.push(createPictureImage({ item: mediaMain.storyMediaMobile }));
     }
 
+    // Story Secondary Media
     if (mediaSecondary && mediaSecondary?.storyMediaDesktop) {
         story?.mediaSecondary?.push(
             createPictureImage({

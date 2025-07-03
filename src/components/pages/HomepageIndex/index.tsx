@@ -22,7 +22,6 @@ export type HomepageIndexProps = {
         imageDivider: ImageDividerProps['media'];
         story: HomepageStoryProps;
         orders: {
-            // description?: RichTextProps['children'];
             steps: NumberProps['items'];
         } & Pick<RichTextProps, 'children'>;
     };
