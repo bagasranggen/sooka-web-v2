@@ -15,6 +15,7 @@ import { Categories } from '@/collections/Categories';
 import { Media } from '@/collections/Media';
 import { Products } from '@/collections/Products';
 import { Tags } from '@/collections/Tags';
+import { Testimonials } from '@/collections/Testimonials';
 import { Users } from '@/collections/Users';
 
 import { Homepage } from '@/globals/Homepage';
@@ -29,7 +30,7 @@ export default buildConfig({
             baseDir: path.resolve(dirname),
         },
     },
-    collections: [AddOns, Categories, Media, Products, Tags, Users],
+    collections: [AddOns, Categories, Media, Products, Tags, Testimonials, Users],
     globals: [Homepage],
     editor: lexicalEditor(),
     secret: process.env.PAYLOAD_SECRET || '',
