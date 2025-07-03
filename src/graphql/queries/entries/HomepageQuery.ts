@@ -11,6 +11,12 @@ export const HOMEPAGE_QUERY = gql`
             }
 
             ...homepageStory
+
+            orderDescription
+            orderSteps {
+                title
+                description
+            }
         }
     }
 

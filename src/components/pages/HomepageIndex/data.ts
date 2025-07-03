@@ -1,6 +1,6 @@
 import { Homepage } from '@/payload-types';
 
-import { LIST_NUMBER, TESTIMONIALS } from '@/libs/mock';
+import { TESTIMONIALS } from '@/libs/mock';
 import { PageDataProps } from '@/libs/@types';
 import { createHomepageBanner, createPictureImage } from '@/libs/factory';
 import { checkMediaStatus } from '@/libs/utils';
@@ -31,7 +31,7 @@ export const HomepageData = async (): Promise<PageDataProps<HomepageIndexProps>>
     const story: HomepageIndexProps['entries']['story'] = {
         mediaMain: [],
         mediaSecondary: [],
-        description: d?.storyDescription ?? undefined,
+        description: (d?.storyDescription as any) ?? undefined,
     };
 
     const mediaMain = checkMediaStatus({
@@ -67,17 +67,18 @@ export const HomepageData = async (): Promise<PageDataProps<HomepageIndexProps>>
         story?.mediaSecondary?.push(createPictureImage({ item: mediaSecondary.storyMediaMobile }));
     }
 
-    // console.log({ mediaMain });
-
     const orders: HomepageIndexProps['entries']['orders'] = {
-        children: d?.orderDescription ?? undefined,
+        children: (d?.orderDescription as any) ?? undefined,
         steps: [],
     };
 
     if (d?.orderSteps && d.orderSteps.length > 0) {
         d.orderSteps.forEach((item) => {
+            let title = item?.title ?? '';
+            if (title) title = title.replace(/\n/, '<br />');
+
             orders.steps.push({
-                title: parse(item?.title ?? ''),
+                title: parse(title),
                 description: item?.description ?? (undefined as any),
             });
         });
@@ -95,7 +96,6 @@ export const HomepageData = async (): Promise<PageDataProps<HomepageIndexProps>>
             ],
             story,
             orders,
-            // steps: LIST_NUMBER,
         },
     };
 };
