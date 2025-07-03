@@ -19,15 +19,12 @@ export const BasePageTab = (props?: BasePageTabProps): Tab => {
                         name: 'typeHandle',
                         label: 'Type',
                         defaultValue: props?.typeHandle ?? '',
-                        access: {
-                            update: () => false,
-                            create: () => false,
-                        },
                         hooks: {
                             beforeChange: [() => props?.typeHandle ?? ''],
                         },
                         admin: {
                             width: props?.withStatus ? '90%' : '100%',
+                            readOnly: true,
                         },
                     },
                     BaseStatus({

@@ -13,12 +13,9 @@ export const BaseTitle: Field[] = [
     {
         name: 'slug',
         type: 'text',
-        access: {
-            create: () => false,
-            update: () => false,
-        },
         admin: {
             width: '20%',
+            readOnly: true,
         },
         hooks: {
             beforeChange: [
