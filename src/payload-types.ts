@@ -347,8 +347,29 @@ export interface Page {
   slug?: string | null;
   url?: string | null;
   uri?: string | null;
+  contentBlocks?: (ContentBlockGallery | ContentBlockHeading)[] | null;
   updatedAt: string;
   createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "ContentBlockGallery".
+ */
+export interface ContentBlockGallery {
+  media?: (number | null) | Media;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'gallery';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "ContentBlockHeading".
+ */
+export interface ContentBlockHeading {
+  title?: string | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'heading';
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -779,8 +800,32 @@ export interface PagesSelect<T extends boolean = true> {
   slug?: T;
   url?: T;
   uri?: T;
+  contentBlocks?:
+    | T
+    | {
+        gallery?: T | ContentBlockGallerySelect<T>;
+        heading?: T | ContentBlockHeadingSelect<T>;
+      };
   updatedAt?: T;
   createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "ContentBlockGallery_select".
+ */
+export interface ContentBlockGallerySelect<T extends boolean = true> {
+  media?: T;
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "ContentBlockHeading_select".
+ */
+export interface ContentBlockHeadingSelect<T extends boolean = true> {
+  title?: T;
+  id?: T;
+  blockName?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema

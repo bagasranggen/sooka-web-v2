@@ -1,5 +1,6 @@
 import { CollectionConfig } from 'payload';
 import { BasePageTab } from '@/collections/shared';
+import { ContentBlockGallery, ContentBlockHeading } from '@/collections/blocks';
 
 export const Pages: CollectionConfig = {
     slug: 'pages',
@@ -27,6 +28,16 @@ export const Pages: CollectionConfig = {
                         });
                     },
                 }),
+                {
+                    label: 'Content',
+                    fields: [
+                        {
+                            type: 'blocks',
+                            name: 'contentBlocks',
+                            blocks: [ContentBlockGallery, ContentBlockHeading],
+                        },
+                    ],
+                },
             ],
         },
     ],
