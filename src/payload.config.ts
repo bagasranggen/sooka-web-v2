@@ -13,6 +13,7 @@ import sharp from 'sharp';
 import { AddOns } from '@/collections/AddOns';
 import { Categories } from '@/collections/Categories';
 import { Media } from '@/collections/Media';
+import { Pages } from '@/collections/Pages';
 import { Products } from '@/collections/Products';
 import { Tags } from '@/collections/Tags';
 import { Testimonials } from '@/collections/Testimonials';
@@ -31,7 +32,7 @@ export default buildConfig({
             baseDir: path.resolve(dirname),
         },
     },
-    collections: [AddOns, Categories, Media, Products, Tags, Testimonials, Users],
+    collections: [AddOns, Categories, Media, Pages, Products, Tags, Testimonials, Users],
     globals: [Navigation, Homepage],
     editor: lexicalEditor(),
     secret: process.env.PAYLOAD_SECRET || '',

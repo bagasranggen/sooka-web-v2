@@ -70,6 +70,7 @@ export interface Config {
     addons: Addon;
     categories: Category;
     media: Media;
+    pages: Page;
     products: Product;
     tags: Tag;
     testimonials: Testimonial;
@@ -83,6 +84,7 @@ export interface Config {
     addons: AddonsSelect<false> | AddonsSelect<true>;
     categories: CategoriesSelect<false> | CategoriesSelect<true>;
     media: MediaSelect<false> | MediaSelect<true>;
+    pages: PagesSelect<false> | PagesSelect<true>;
     products: ProductsSelect<false> | ProductsSelect<true>;
     tags: TagsSelect<false> | TagsSelect<true>;
     testimonials: TestimonialsSelect<false> | TestimonialsSelect<true>;
@@ -335,6 +337,21 @@ export interface Category {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "pages".
+ */
+export interface Page {
+  id: number;
+  typeHandle?: string | null;
+  entryStatus?: ('disabled' | 'live') | null;
+  title: string;
+  slug?: string | null;
+  url?: string | null;
+  uri?: string | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "products".
  */
 export interface Product {
@@ -470,6 +487,10 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'media';
         value: number | Media;
+      } | null)
+    | ({
+        relationTo: 'pages';
+        value: number | Page;
       } | null)
     | ({
         relationTo: 'products';
@@ -749,6 +770,20 @@ export interface MediaSelect<T extends boolean = true> {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "pages_select".
+ */
+export interface PagesSelect<T extends boolean = true> {
+  typeHandle?: T;
+  entryStatus?: T;
+  title?: T;
+  slug?: T;
+  url?: T;
+  uri?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "products_select".
  */
 export interface ProductsSelect<T extends boolean = true> {
@@ -877,8 +912,9 @@ export interface Navigation {
         entryStatus?: ('disabled' | 'live') | null;
         link?:
           | {
-              source?: ('products' | 'categories' | 'custom') | null;
+              source?: ('products' | 'categories' | 'pages' | 'custom') | null;
               product?: (number | null) | Product;
+              page?: (number | null) | Page;
               category?: (number | null) | Category;
               custom?: string | null;
               target?: boolean | null;
@@ -923,8 +959,9 @@ export interface Homepage {
         } | null;
         link?:
           | {
-              source?: ('products' | 'categories' | 'custom') | null;
+              source?: ('products' | 'categories' | 'pages' | 'custom') | null;
               product?: (number | null) | Product;
+              page?: (number | null) | Page;
               category?: (number | null) | Category;
               custom?: string | null;
               target?: boolean | null;
@@ -1016,6 +1053,7 @@ export interface NavigationSelect<T extends boolean = true> {
           | {
               source?: T;
               product?: T;
+              page?: T;
               category?: T;
               custom?: T;
               target?: T;
@@ -1048,6 +1086,7 @@ export interface HomepageSelect<T extends boolean = true> {
           | {
               source?: T;
               product?: T;
+              page?: T;
               category?: T;
               custom?: T;
               target?: T;
