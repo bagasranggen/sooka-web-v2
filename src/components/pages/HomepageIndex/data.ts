@@ -67,6 +67,41 @@ export const HomepageData = async (): Promise<PageDataProps<HomepageIndexProps>>
         story?.mediaSecondary?.push(createPictureImage({ item: mediaSecondary.storyMediaMobile }));
     }
 
+
+    // Image Divider
+    const imageDivider: HomepageIndexProps['entries']['imageDivider'] = [];
+
+    const mediaDivider = checkMediaStatus({
+        item: d?.imageDividerMedia as any,
+        handles: ['bannerDesktop', 'mediaDividerTablet', 'mediaDividerMobile'],
+    });
+    const mediaDividerHasTabletSize = mediaDivider?.mediaDividerTablet;
+    const mediaDividerHasMobileSize = mediaDivider?.mediaDividerMobile;
+
+    if (mediaDivider?.bannerDesktop) {
+        imageDivider.push(
+            createPictureImage({
+                item: mediaDivider.bannerDesktop,
+                media: mediaDividerHasTabletSize && mediaDividerHasMobileSize ? 992 : undefined,
+            })
+        );
+    }
+    if (mediaDivider?.mediaDividerTablet) {
+        imageDivider.push(
+            createPictureImage({
+                item: mediaDivider.mediaDividerTablet,
+                media: mediaDividerHasMobileSize ? 576 : undefined,
+            })
+        );
+    }
+    if (mediaDivider?.mediaDividerMobile) {
+        imageDivider.push(
+            createPictureImage({
+                item: mediaDivider.mediaDividerMobile,
+            })
+        );
+    }
+
     const orders: HomepageIndexProps['entries']['orders'] = {
         children: (d?.orderDescription as any) ?? undefined,
         steps: [],
@@ -87,13 +122,8 @@ export const HomepageData = async (): Promise<PageDataProps<HomepageIndexProps>>
     return {
         entries: {
             banner,
-            // banner: CAROUSEL_BANNER,
             testimonials: TESTIMONIALS,
-            imageDivider: [
-                // createPictureImage({ item: createPicsumImage({ id: 655, width: 1600, height: 900 }), media: 992 }),
-                // createPictureImage({ item: createPicsumImage({ id: 655, width: 1000, height: 600 }), media: 576 }),
-                // createPictureImage({ item: createPicsumImage({ id: 655, width: 600, height: 600 }) }),
-            ],
+            imageDivider,
             story,
             orders,
         },

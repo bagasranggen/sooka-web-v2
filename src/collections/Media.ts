@@ -81,6 +81,16 @@ export const Media: CollectionConfig = {
                 width: 600,
                 height: 400,
             },
+            {
+                name: 'mediaDividerTablet',
+                width: 1000,
+                height: 600,
+            },
+            {
+                name: 'mediaDividerMobile',
+                width: 600,
+                height: 600,
+            },
         ],
     },
 };
