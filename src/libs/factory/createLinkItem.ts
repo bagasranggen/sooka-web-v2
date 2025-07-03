@@ -4,21 +4,31 @@ export const createLinkItem = (item: any) => {
 
     let link = undefined;
 
-    const isProduct = item?.source === 'products';
-    const product = item?.product;
+    switch (item?.source) {
+        case 'products':
+            const product = item?.product;
 
-    if (isProduct && product) {
-        link = Object.assign({
-            href: product?.url,
-            label: product?.title,
-        });
-    }
+            link = Object.assign({
+                href: product?.url,
+                label: product?.title,
+            });
+            break;
 
-    if (!isProduct) {
-        link = Object.assign({
-            href: item?.custom,
-            label: item?.title,
-        });
+        case 'categories':
+            const category = item?.category;
+
+            link = Object.assign({
+                href: category?.url,
+                label: category?.title,
+            });
+            break;
+
+        default:
+            link = Object.assign({
+                href: item?.custom,
+                label: item?.title,
+            });
+            break;
     }
 
     if (link && item?.target) {
