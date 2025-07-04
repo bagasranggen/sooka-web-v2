@@ -12,8 +12,6 @@ export type CbCalloutProps = {
 } & (Pick<CbWrapperProps, 'className'> & Pick<CbContainerProps, 'isNested'>);
 
 const CbCallout = ({ className, isNested, title, cta }: CbCalloutProps): React.ReactElement => {
-    console.log({ cta });
-
     return (
         <CbWrapper className={className}>
             <CbContainer isNested={isNested}>

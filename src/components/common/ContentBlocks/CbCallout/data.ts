@@ -7,7 +7,5 @@ export const CbCalloutData = (props: any) => {
     let cta: CbCalloutProps['cta'] = undefined;
     if (linkIsValid) cta = { ...link, children: link.label };
 
-    console.log({ props });
-
     return { cta };
 };
