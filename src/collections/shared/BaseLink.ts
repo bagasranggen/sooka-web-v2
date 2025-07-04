@@ -6,9 +6,9 @@ export type BaseLinkProps = Pick<ArrayField, 'name' | 'maxRows'>;
 
 export const BaseLink = (props?: BaseLinkProps): Field => {
     return {
-        type: 'array',
+        type: 'group',
         name: props?.name ?? 'link',
-        maxRows: props?.maxRows ?? 1,
+        interfaceName: 'Link',
         fields: [
             {
                 type: 'row',
@@ -33,6 +33,7 @@ export const BaseLink = (props?: BaseLinkProps): Field => {
                         name: 'product',
                         label: false,
                         relationTo: 'products',
+                        required: true,
                         admin: {
                             condition: (data, siblingData) => siblingData?.source === 'products',
                         },
@@ -42,6 +43,7 @@ export const BaseLink = (props?: BaseLinkProps): Field => {
                         name: 'page',
                         label: false,
                         relationTo: 'pages',
+                        required: true,
                         admin: {
                             condition: (data, siblingData) => siblingData?.source === 'pages',
                         },
@@ -51,6 +53,7 @@ export const BaseLink = (props?: BaseLinkProps): Field => {
                         name: 'category',
                         label: false,
                         relationTo: 'categories',
+                        required: true,
                         admin: {
                             condition: (data, siblingData) => siblingData?.source === 'categories',
                         },
@@ -59,6 +62,7 @@ export const BaseLink = (props?: BaseLinkProps): Field => {
                         type: 'text',
                         name: 'custom',
                         label: false,
+                        required: true,
                         admin: {
                             condition: (data, siblingData) => siblingData?.source === 'custom',
                             placeholder: 'Type your custom URL (ex. https://www.sookabakedgoods.com/)',
