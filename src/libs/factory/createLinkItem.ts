@@ -44,7 +44,7 @@ export const createLinkItem = (item: any) => {
         link = Object.assign({ ...link, target: '_blank' });
     }
 
-    if (!link || !link?.href) status = false;
+    if (!link || !link?.href || !item?.source) status = false;
 
     return { linkIsValid: status, link };
 };
