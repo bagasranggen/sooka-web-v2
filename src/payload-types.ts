@@ -347,7 +347,9 @@ export interface Page {
   slug?: string | null;
   url?: string | null;
   uri?: string | null;
-  contentBlocks?: (ContentBlockGallery | ContentBlockHeading | ContentBlockRelatedProducts)[] | null;
+  contentBlocks?:
+    | (ContentBlockGallery | ContentBlockHeading | ContentBlockRelatedProducts | ContentBlockCallout)[]
+    | null;
   updatedAt: string;
   createdAt: string;
 }
@@ -357,11 +359,18 @@ export interface Page {
  */
 export interface ContentBlockGallery {
   media?: (number | Media)[] | null;
-  marginTop?: ('1' | '2' | '3' | '4' | '5' | '6' | '7' | '8' | '9' | '10') | null;
-  marginBottom?: ('1' | '2' | '3' | '4' | '5' | '6' | '7' | '8' | '9' | '10') | null;
+  cbSpacing?: CbSpacing;
   id?: string | null;
   blockName?: string | null;
   blockType: 'gallery';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "CbSpacing".
+ */
+export interface CbSpacing {
+  marginTop?: ('1' | '2' | '3' | '4' | '5' | '6' | '7' | '8' | '9' | '10') | null;
+  marginBottom?: ('1' | '2' | '3' | '4' | '5' | '6' | '7' | '8' | '9' | '10') | null;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -370,8 +379,7 @@ export interface ContentBlockGallery {
 export interface ContentBlockHeading {
   title?: string | null;
   headingLevel?: ('1' | '2' | '3' | '4' | '5') | null;
-  marginTop?: ('1' | '2' | '3' | '4' | '5' | '6' | '7' | '8' | '9' | '10') | null;
-  marginBottom?: ('1' | '2' | '3' | '4' | '5' | '6' | '7' | '8' | '9' | '10') | null;
+  cbSpacing?: CbSpacing;
   id?: string | null;
   blockName?: string | null;
   blockType: 'heading';
@@ -382,9 +390,8 @@ export interface ContentBlockHeading {
  */
 export interface ContentBlockRelatedProducts {
   title?: string | null;
-  products?: (number | null) | Product;
-  marginTop?: ('1' | '2' | '3' | '4' | '5' | '6' | '7' | '8' | '9' | '10') | null;
-  marginBottom?: ('1' | '2' | '3' | '4' | '5' | '6' | '7' | '8' | '9' | '10') | null;
+  products?: (number | Product)[] | null;
+  cbSpacing?: CbSpacing;
   id?: string | null;
   blockName?: string | null;
   blockType: 'relatedProducts';
@@ -437,6 +444,16 @@ export interface Product {
   };
   updatedAt: string;
   createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "ContentBlockCallout".
+ */
+export interface ContentBlockCallout {
+  cbSpacing?: CbSpacing;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'callout';
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -824,6 +841,7 @@ export interface PagesSelect<T extends boolean = true> {
         gallery?: T | ContentBlockGallerySelect<T>;
         heading?: T | ContentBlockHeadingSelect<T>;
         relatedProducts?: T | ContentBlockRelatedProductsSelect<T>;
+        callout?: T | ContentBlockCalloutSelect<T>;
       };
   updatedAt?: T;
   createdAt?: T;
@@ -834,10 +852,17 @@ export interface PagesSelect<T extends boolean = true> {
  */
 export interface ContentBlockGallerySelect<T extends boolean = true> {
   media?: T;
-  marginTop?: T;
-  marginBottom?: T;
+  cbSpacing?: T | CbSpacingSelect<T>;
   id?: T;
   blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "CbSpacing_select".
+ */
+export interface CbSpacingSelect<T extends boolean = true> {
+  marginTop?: T;
+  marginBottom?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -846,8 +871,7 @@ export interface ContentBlockGallerySelect<T extends boolean = true> {
 export interface ContentBlockHeadingSelect<T extends boolean = true> {
   title?: T;
   headingLevel?: T;
-  marginTop?: T;
-  marginBottom?: T;
+  cbSpacing?: T | CbSpacingSelect<T>;
   id?: T;
   blockName?: T;
 }
@@ -858,8 +882,16 @@ export interface ContentBlockHeadingSelect<T extends boolean = true> {
 export interface ContentBlockRelatedProductsSelect<T extends boolean = true> {
   title?: T;
   products?: T;
-  marginTop?: T;
-  marginBottom?: T;
+  cbSpacing?: T | CbSpacingSelect<T>;
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "ContentBlockCallout_select".
+ */
+export interface ContentBlockCalloutSelect<T extends boolean = true> {
+  cbSpacing?: T | CbSpacingSelect<T>;
   id?: T;
   blockName?: T;
 }
