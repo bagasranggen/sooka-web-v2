@@ -8,6 +8,8 @@ import { FRAGMENT_CB_SETTINGS } from '@/graphql/queries/contentBlocks/fragment/F
 
 export const FRAGMENT_CB_CALLOUT = gql`
     fragment cbCallout on ContentBlockCallout {
+        title
+        
         link {
             ...link
         }
