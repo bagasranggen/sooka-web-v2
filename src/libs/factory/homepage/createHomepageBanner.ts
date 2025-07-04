@@ -27,7 +27,7 @@ export const createHomepageBanner = (item: any): BannerItemProps => {
 
     let cta = undefined;
 
-    const { linkIsValid, link } = createLinkItem(item?.link?.[0]);
+    const { linkIsValid, link } = createLinkItem(item?.link);
     if (linkIsValid) {
         cta = link;
     }

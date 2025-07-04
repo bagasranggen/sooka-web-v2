@@ -15,7 +15,7 @@ export const FRAGMENT_HOMEPAGE_BANNER = gql`
         productTarget
 
         link {
-            ...bannerCustomLink
+            ...link
         }
 
         media {
@@ -33,6 +33,6 @@ export const FRAGMENT_HOMEPAGE_BANNER = gql`
 
     ${FRAGMENT_TAG}
     ${FRAGMENT_PRODUCT}
+    ${FRAGMENT_LINK}
     ${FRAGMENT_MEDIA({ name: 'banner', sizesHandles: ['bannerDesktop', 'bannerTablet', 'bannerMobile'] })}
-    ${FRAGMENT_LINK({ name: 'bannerCustomLink', handle: 'Homepage_BannerMedia_Link' })}
 `;

@@ -9,11 +9,11 @@ export const NAVIGATION_QUERY = gql`
                 entryStatus
 
                 link {
-                    ...navigationLink
+                    ...link
                 }
             }
         }
     }
 
-    ${FRAGMENT_LINK({ name: 'navigationLink', handle: 'Navigation_Navigations_Link' })}
+    ${FRAGMENT_LINK}
 `;
