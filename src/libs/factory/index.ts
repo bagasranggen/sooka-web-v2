@@ -1,3 +1,4 @@
+export * from './contentBlocks';
 export * from './homepage';
 export * from './productDetail';
 

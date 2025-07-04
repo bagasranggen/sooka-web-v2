@@ -1,7 +1,7 @@
 export const CONTENT_BLOCK_TYPE = {
     HEADING: 'heading',
-};
+} as const;
 
 export const CONTENT_BLOCK_INTERFACE = {
-    HEADING: 'ContentBlockHeading',
-};
+    [CONTENT_BLOCK_TYPE.HEADING]: 'ContentBlockHeading',
+} as const;

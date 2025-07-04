@@ -1,9 +1,35 @@
 import React from 'react';
 
-export type CbWrapperProps = {};
+import { ArrayString } from '@/libs/@types';
+import { joinArrayString } from '@/libs/utils';
 
-const CbWrapper = ({}: CbWrapperProps): React.ReactElement => {
-    return <></>;
+import { ContentBlocksItemProps } from '@/components/common/ContentBlocks';
+
+export type CbWrapperProps = {
+    children: React.ReactElement;
+    ref?: React.Ref<HTMLDivElement> | undefined;
+} & Pick<ContentBlocksItemProps, 'className'>;
+
+const CbWrapper = ({ children, ref, className }: CbWrapperProps): React.ReactElement => {
+    let wrapperClass: ArrayString = [];
+    if (
+        children?.props &&
+        typeof children?.props === 'object' &&
+        'className' in children?.props &&
+        children?.props?.className
+    ) {
+        wrapperClass.push(children.props.className as string);
+    }
+    if (className) wrapperClass.push(className);
+    wrapperClass = joinArrayString(wrapperClass);
+
+    const props = {
+        ...(ref ? { ref: ref } : {}),
+        ...(wrapperClass ? { className: wrapperClass } : {}),
+        // ...(id ? { id: id } : {}),
+    };
+
+    return React.cloneElement(children, props);
 };
 
 export default CbWrapper;

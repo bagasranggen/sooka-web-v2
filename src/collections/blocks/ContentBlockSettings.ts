@@ -13,7 +13,7 @@ export const ContentBlockSettings: Field[] = [
                         type: 'select',
                         name: 'marginTop',
                         options: createArrayFromNumber(10).map((item) => ({
-                            value: (item + 1).toString(),
+                            value: `${item + 1}`,
                             label: `${item + 1}`,
                         })),
                     },
@@ -21,7 +21,7 @@ export const ContentBlockSettings: Field[] = [
                         type: 'select',
                         name: 'marginBottom',
                         options: createArrayFromNumber(10).map((item) => ({
-                            value: (item + 1).toString(),
+                            value: `${item + 1}`,
                             label: `${item + 1}`,
                         })),
                     },

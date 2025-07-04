@@ -1,9 +1,32 @@
 import React from 'react';
 
-export type CbHeadingProps = {};
+import Columns from '@/components/common/Columns';
+import Heading, { BaseProps } from '@/components/common/Heading';
+import CbWrapper, { CbWrapperProps } from '@/components/common/ContentBlocks/CbWrapper';
+import CbContainer from '@/components/common/ContentBlocks/CbContainer';
 
-const CbHeading = ({}: CbHeadingProps): React.ReactElement => {
-    return <>HEADING</>;
+export type CbHeadingProps = {
+    title: BaseProps['children'];
+} & Pick<CbWrapperProps, 'className'>;
+
+const CbHeading = ({ title, className }: CbHeadingProps): React.ReactElement => {
+    return (
+        <CbWrapper className={className}>
+            <CbContainer>
+                <Columns.Row className="justify-center">
+                    <Columns.Column width={{ md: 8 }}>
+                        <Heading
+                            as="h1"
+                            size="heading"
+                            className="text-center">
+                            {/*Custom <span className="text-sooka-primary">Cakes</span>*/}
+                            {title}
+                        </Heading>
+                    </Columns.Column>
+                </Columns.Row>
+            </CbContainer>
+        </CbWrapper>
+    );
 };
 
 export default CbHeading;
