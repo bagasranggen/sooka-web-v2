@@ -5,6 +5,8 @@ export const ContentBlockSettings: Field[] = [
     {
         type: 'group',
         label: 'Spacing',
+        name: 'cbSpacing',
+        interfaceName: 'CbSpacing',
         fields: [
             {
                 type: 'row',

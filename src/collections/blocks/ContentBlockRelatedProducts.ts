@@ -19,6 +19,7 @@ export const ContentBlockRelatedProducts: Block = {
                             type: 'relationship',
                             name: 'products',
                             relationTo: 'products',
+                            hasMany: true,
                         },
                     ],
                 },
