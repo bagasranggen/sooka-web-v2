@@ -10,7 +10,7 @@ export const createLinkItem = (item: any) => {
 
             link = Object.assign({
                 href: product?.url,
-                label: item?.label ?? product?.title,
+                label: item?.label || product?.title,
             });
             break;
 
@@ -19,7 +19,7 @@ export const createLinkItem = (item: any) => {
 
             link = Object.assign({
                 href: category?.url,
-                label: item?.label ?? category?.title,
+                label: item?.label || category?.title,
             });
             break;
 
@@ -28,7 +28,7 @@ export const createLinkItem = (item: any) => {
 
             link = Object.assign({
                 href: page?.url,
-                label: item?.label ?? page?.title,
+                label: item?.label || page?.title,
             });
             break;
 
