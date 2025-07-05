@@ -23,7 +23,7 @@ const Base = ({
     onClosed,
     children,
 }: BaseProps): React.ReactElement | null => {
-    const { isShow, isTransitioning, handleClose } = usePortal({ show, hide, onOpen, onOpened, onClose, onClosed });
+    const { isShow, isTransitioning } = usePortal({ show, hide, onOpen, onOpened, onClose, onClosed });
 
     return (
         <Portal>

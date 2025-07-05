@@ -32,6 +32,8 @@ export const NavigationEvents = ({ startHandler, endHandler }: NavigationEventsP
         return () => {
             handleStart();
         };
+
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [pathname, searchParams]);
 
     return null;
