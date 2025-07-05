@@ -1,6 +1,6 @@
 import { Block } from 'payload';
 import { ContentBlockSettings } from '@/collections/blocks/ContentBlockSettings';
-import { BaseLink } from '@/collections/shared';
+import { BaseLink } from '@/collections/shared/BaseLink';
 
 export const ContentBlockCallout: Block = {
     slug: 'callout',

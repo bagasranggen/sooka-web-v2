@@ -1,5 +1,5 @@
 import { Field } from 'payload';
-import { createArrayFromNumber } from '../../libs/factory/createArrayFromNumber';
+import { createArrayFromNumber } from '@/libs/factory/createArrayFromNumber';
 
 export const ContentBlockSettings: Field[] = [
     {

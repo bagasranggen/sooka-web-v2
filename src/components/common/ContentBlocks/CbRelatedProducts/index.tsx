@@ -1,7 +1,5 @@
 import React from 'react';
 
-import { CARD_THUMBNAIL_WITHOUT_PRICE } from '@/libs/mock';
-
 import Columns from '@/components/common/Columns';
 import Heading, { BaseProps } from '@/components/common/Heading';
 import Card, { ThumbnailProps } from '@/components/common/Card';

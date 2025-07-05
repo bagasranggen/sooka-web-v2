@@ -450,10 +450,25 @@ export interface Product {
  * via the `definition` "ContentBlockCallout".
  */
 export interface ContentBlockCallout {
+  title?: string | null;
+  link?: Link;
   cbSpacing?: CbSpacing;
   id?: string | null;
   blockName?: string | null;
   blockType: 'callout';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "Link".
+ */
+export interface Link {
+  source?: ('products' | 'categories' | 'pages' | 'custom') | null;
+  product?: (number | null) | Product;
+  page?: (number | null) | Page;
+  category?: (number | null) | Category;
+  custom?: string | null;
+  target?: boolean | null;
+  label?: string | null;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -891,9 +906,24 @@ export interface ContentBlockRelatedProductsSelect<T extends boolean = true> {
  * via the `definition` "ContentBlockCallout_select".
  */
 export interface ContentBlockCalloutSelect<T extends boolean = true> {
+  title?: T;
+  link?: T | LinkSelect<T>;
   cbSpacing?: T | CbSpacingSelect<T>;
   id?: T;
   blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "Link_select".
+ */
+export interface LinkSelect<T extends boolean = true> {
+  source?: T;
+  product?: T;
+  page?: T;
+  category?: T;
+  custom?: T;
+  target?: T;
+  label?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -1023,18 +1053,7 @@ export interface Navigation {
   navigations?:
     | {
         entryStatus?: ('disabled' | 'live') | null;
-        link?:
-          | {
-              source?: ('products' | 'categories' | 'pages' | 'custom') | null;
-              product?: (number | null) | Product;
-              page?: (number | null) | Page;
-              category?: (number | null) | Category;
-              custom?: string | null;
-              target?: boolean | null;
-              label?: string | null;
-              id?: string | null;
-            }[]
-          | null;
+        link?: Link;
         id?: string | null;
       }[]
     | null;
@@ -1070,18 +1089,7 @@ export interface Homepage {
           };
           [k: string]: unknown;
         } | null;
-        link?:
-          | {
-              source?: ('products' | 'categories' | 'pages' | 'custom') | null;
-              product?: (number | null) | Product;
-              page?: (number | null) | Page;
-              category?: (number | null) | Category;
-              custom?: string | null;
-              target?: boolean | null;
-              label?: string | null;
-              id?: string | null;
-            }[]
-          | null;
+        link?: Link;
         product?: (number | null) | Product;
         productTarget?: boolean | null;
         id?: string | null;
@@ -1161,18 +1169,7 @@ export interface NavigationSelect<T extends boolean = true> {
     | T
     | {
         entryStatus?: T;
-        link?:
-          | T
-          | {
-              source?: T;
-              product?: T;
-              page?: T;
-              category?: T;
-              custom?: T;
-              target?: T;
-              label?: T;
-              id?: T;
-            };
+        link?: T | LinkSelect<T>;
         id?: T;
       };
   updatedAt?: T;
@@ -1194,18 +1191,7 @@ export interface HomepageSelect<T extends boolean = true> {
         media?: T;
         title?: T;
         description?: T;
-        link?:
-          | T
-          | {
-              source?: T;
-              product?: T;
-              page?: T;
-              category?: T;
-              custom?: T;
-              target?: T;
-              label?: T;
-              id?: T;
-            };
+        link?: T | LinkSelect<T>;
         product?: T;
         productTarget?: T;
         id?: T;
