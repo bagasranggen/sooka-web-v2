@@ -14,7 +14,10 @@ const authLink = setContext((_, { headers }) => {
             ...headers,
             'Content-Type': 'application/json',
             Accept: 'application/json',
+
+            // credentials: 'include',
             // Authorization: `Bearer ${process.env.STRAPI_KEY}`,
+            Authorization: `token API-Key ${process.env.GQL_TOKEN}`,
         },
     };
 });
