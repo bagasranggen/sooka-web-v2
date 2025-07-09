@@ -3,7 +3,7 @@ import { BaseLink, BaseStatus } from '@/collections/shared';
 
 export const Navigation: GlobalConfig = {
     slug: 'navigation',
-    label: 'Header Navigation',
+    label: 'Header',
     admin: {
         group: 'Navigation',
     },
