@@ -33,7 +33,6 @@ export default buildConfig({
             baseDir: path.resolve(dirname),
         },
     },
-
     collections: [AddOns, Categories, Media, Pages, Products, Tags, Testimonials, Tokens, Users],
     globals: [Navigation, Homepage],
     editor: lexicalEditor(),
