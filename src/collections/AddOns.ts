@@ -8,9 +8,6 @@ export const AddOns: CollectionConfig = {
         useAsTitle: 'title',
         group: 'Entries',
     },
-    access: {
-        read: () => true,
-    },
     fields: [
         {
             type: 'tabs',

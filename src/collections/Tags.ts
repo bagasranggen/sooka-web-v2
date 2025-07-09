@@ -7,9 +7,6 @@ export const Tags: CollectionConfig = {
         useAsTitle: 'title',
         group: 'Entries',
     },
-    access: {
-        read: () => true,
-    },
     fields: [
         {
             type: 'tabs',

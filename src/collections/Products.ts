@@ -7,9 +7,6 @@ export const Products: CollectionConfig = {
         useAsTitle: 'title',
         group: 'Content',
     },
-    access: {
-        read: () => true,
-    },
     fields: [
         {
             type: 'tabs',

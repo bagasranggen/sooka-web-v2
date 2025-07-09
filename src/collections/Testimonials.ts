@@ -3,9 +3,6 @@ import { BasePageTab } from '@/collections/shared';
 
 export const Testimonials: CollectionConfig = {
     slug: 'testimonials',
-    access: {
-        read: () => true,
-    },
     admin: {
         useAsTitle: 'title',
         group: 'Entries',
