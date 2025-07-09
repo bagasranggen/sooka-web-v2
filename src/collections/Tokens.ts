@@ -3,7 +3,8 @@ import { CollectionConfig } from 'payload';
 export const Tokens: CollectionConfig = {
     slug: 'tokens',
     admin: {
-        useAsTitle: 'title'
+        useAsTitle: 'title',
+        group: 'User',
     },
     auth: {
         useAPIKey: true,
@@ -11,9 +12,9 @@ export const Tokens: CollectionConfig = {
     },
     fields: [
         {
-            type:'text',
+            type: 'text',
             name: 'title',
-            required:true
-        }
+            required: true,
+        },
     ],
 };
