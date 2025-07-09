@@ -4,9 +4,6 @@ import { BaseLink, BaseStatus } from '@/collections/shared';
 export const Navigation: GlobalConfig = {
     slug: 'navigation',
     label: 'Header Navigation',
-    access: {
-        read: () => true,
-    },
     admin: {
         group: 'Navigation',
     },

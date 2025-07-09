@@ -1,5 +1,6 @@
 import { ApolloClient, InMemoryCache, createHttpLink } from '@apollo/client';
 import { setContext } from '@apollo/client/link/context';
+import { Tokens } from '@/collections/Tokens';
 
 const API_URL = process.env.GQL_URL;
 
@@ -14,7 +15,8 @@ const authLink = setContext((_, { headers }) => {
             ...headers,
             'Content-Type': 'application/json',
             Accept: 'application/json',
-            // Authorization: `Bearer ${process.env.STRAPI_KEY}`,
+            Authorization: `${Tokens.slug} API-Key ${process.env.GQL_TOKEN}`,
+            'x-vercel-protection-bypass': process.env.VERCEL_AUTOMATION_BYPASS_SECRET,
         },
     };
 });

@@ -3,9 +3,6 @@ import { BaseLink, BaseStatus, BaseTarget } from '@/collections/shared';
 
 export const Homepage: GlobalConfig = {
     slug: 'homepage',
-    access: {
-        read: () => true,
-    },
     admin: {
         group: 'Content',
     },
