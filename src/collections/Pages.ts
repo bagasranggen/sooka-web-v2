@@ -26,9 +26,7 @@ export const Pages: CollectionConfig = {
                 }),
                 {
                     label: 'Content',
-                    fields: [
-                        BaseContentBlocks(),
-                    ],
+                    fields: [BaseContentBlocks()],
                 },
             ],
         },
