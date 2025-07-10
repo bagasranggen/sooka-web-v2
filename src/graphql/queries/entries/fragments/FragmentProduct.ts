@@ -41,7 +41,7 @@ export const FRAGMENT_PRODUCT = gql`
             'productDetailSticky',
             'productDetailMobile',
             'productListingThumbnail',
-            'productListingThumbnailMobile',
+            'assets400x400',
         ],
     })}
 `;

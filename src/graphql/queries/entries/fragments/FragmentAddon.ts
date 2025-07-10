@@ -18,5 +18,5 @@ export const FRAGMENT_ADDON = gql`
         }
     }
 
-    ${FRAGMENT_MEDIA({ name: 'addonThumbnail', sizesHandles: ['productAddon'] })}
+    ${FRAGMENT_MEDIA({ name: 'addonThumbnail', sizesHandles: ['assets400x400'] })}
 `;

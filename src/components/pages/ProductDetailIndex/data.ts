@@ -87,11 +87,11 @@ export const ProductDetailData = async ({
         d.addons.forEach((item: any) => {
             const price = item?.prices?.[0];
 
-            const mediaItem = checkMediaStatus({ item: item?.thumbnail, handles: ['productAddon'] });
+            const mediaItem = checkMediaStatus({ item: item?.thumbnail, handles: ['assets400x400'] });
 
             const media = [];
-            if (mediaItem?.productAddon) {
-                media.push(createPictureImage({ item: mediaItem.productAddon }));
+            if (mediaItem?.assets400x400) {
+                media.push(createPictureImage({ item: mediaItem.assets400x400 }));
             }
 
             tmp.push({
