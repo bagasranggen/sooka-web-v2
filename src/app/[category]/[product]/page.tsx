@@ -1,11 +1,12 @@
-import { PageProps } from '@/libs/@types';
 import React from 'react';
+
+import { PageProps } from '@/libs/@types';
 
 import ProductDetailIndex from '@/components/pages/ProductDetailIndex';
 import { ProductDetailData } from '@/components/pages/ProductDetailIndex/data';
 
 // export const generateStaticParams = async () => {
-//     return [{ category: 'cakes', product: 'raspberry-yuzu' }];
+//     return [{ category: 'cakes', product: 'strawberry-fields' }];
 // };
 
 const Page = async ({ params }: PageProps): Promise<React.ReactElement> => {
