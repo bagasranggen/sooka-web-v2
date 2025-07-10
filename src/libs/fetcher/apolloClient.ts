@@ -9,12 +9,6 @@ const httpLink = createHttpLink({
 });
 
 const authLink = setContext((_, { headers }) => {
-    console.log({
-        API_URL,
-        Authorization: `tokens API-Key ${process.env.GQL_TOKEN}`,
-        'x-vercel-protection-bypass': process.env.VERCEL_AUTOMATION_BYPASS_SECRET,
-    });
-
     return {
         headers: {
             ...headers,

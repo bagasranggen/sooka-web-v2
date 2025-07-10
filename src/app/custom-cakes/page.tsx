@@ -12,5 +12,3 @@ const Page = async ({}: PageProps): Promise<React.ReactElement> => {
 };
 
 export default Page;
-
-export const dynamic = 'force-dynamic';
