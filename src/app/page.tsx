@@ -2,8 +2,8 @@ import React from 'react';
 
 import { PageProps } from '@/libs/@types';
 
-import HomepageIndex from '@/components/pages/HomepageIndex';
-import { HomepageData } from '@/components/pages/HomepageIndex/data';
+// import HomepageIndex from '@/components/pages/HomepageIndex';
+// import { HomepageData } from '@/components/pages/HomepageIndex/data';
 
 const Page = async ({}: PageProps): Promise<React.ReactElement> => {
     // const { entries } = await HomepageData();

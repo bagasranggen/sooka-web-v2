@@ -6,12 +6,12 @@ import '@fontsource/noto-sans-jp';
 import '@fontsource/noto-sans-jp/600.css';
 import '@/assets/styles/css/main.css';
 
-import { createLinkItem } from '@/libs/factory';
-
-import { apolloClient } from '@/libs/fetcher';
-import { NAVIGATION_QUERY } from '@/graphql';
-
-import { Navigation as NavigationProps } from '@/libs/@types';
+// import { createLinkItem } from '@/libs/factory';
+//
+// import { apolloClient } from '@/libs/fetcher';
+// import { NAVIGATION_QUERY } from '@/graphql';
+//
+// import { Navigation as NavigationProps } from '@/libs/@types';
 
 import Navigation from '@/components/layout/Navigation';
 import Footer from '@/components/layout/Footer';
