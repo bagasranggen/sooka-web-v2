@@ -6,9 +6,10 @@ import HomepageIndex from '@/components/pages/HomepageIndex';
 import { HomepageData } from '@/components/pages/HomepageIndex/data';
 
 const Page = async ({}: PageProps): Promise<React.ReactElement> => {
-    const { entries } = await HomepageData();
+    // const { entries } = await HomepageData();
 
-    return <HomepageIndex entries={entries} />;
+    // return <HomepageIndex entries={entries} />;
+    return <>HOME</>;
 };
 
 export default Page;

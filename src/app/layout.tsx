@@ -29,26 +29,26 @@ export const metadata: Metadata = {
 };
 
 export default async function RootLayout({ children }: Readonly<PropsWithChildren>) {
-    const { data } = await apolloClient.query({
-        query: NAVIGATION_QUERY,
-    });
+    // const { data } = await apolloClient.query({
+    //     query: NAVIGATION_QUERY,
+    // });
 
-    const d: NavigationProps = data?.entry;
+    // const d: NavigationProps = data?.entry;
 
     const navigation: any[] = [];
 
-    if (d?.navigations && d.navigations.length > 0) {
-        d.navigations.forEach((item) => {
-            const { linkIsValid, link } = createLinkItem(item?.link);
-
-            if (linkIsValid && item?.entryStatus === 'live') {
-                navigation.push({
-                    href: link?.href,
-                    children: link?.label,
-                });
-            }
-        });
-    }
+    // if (d?.navigations && d.navigations.length > 0) {
+    //     d.navigations.forEach((item) => {
+    //         const { linkIsValid, link } = createLinkItem(item?.link);
+    //
+    //         if (linkIsValid && item?.entryStatus === 'live') {
+    //             navigation.push({
+    //                 href: link?.href,
+    //                 children: link?.label,
+    //             });
+    //         }
+    //     });
+    // }
 
     return (
         <html lang="en">
