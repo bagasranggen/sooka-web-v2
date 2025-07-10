@@ -1,4 +1,4 @@
-import { Media } from '@/payload-types';
+import { Media } from './payload-types';
 import { BaseItemProps } from '@/components/common/Picture';
 
 export type BareMediaProps = {

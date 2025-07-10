@@ -11,13 +11,13 @@ import { createLinkItem } from '@/libs/factory';
 import { apolloClient } from '@/libs/fetcher';
 import { NAVIGATION_QUERY } from '@/graphql';
 
-import { Navigation as NavigationProps } from '@/payload-types';
+import { Navigation as NavigationProps } from '@/libs/@types';
 
 import Navigation from '@/components/layout/Navigation';
 import Footer from '@/components/layout/Footer';
 
 const anglecia = localFont({
-    src: '../../assets/fonts/Anglecia/AngleciaProDisplay-Regular-webfont.woff2',
+    src: '../assets/fonts/Anglecia/AngleciaProDisplay-Regular-webfont.woff2',
     variable: '--font-anglecia',
 });
 

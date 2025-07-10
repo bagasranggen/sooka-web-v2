@@ -1,4 +1,4 @@
-import { Product } from '@/payload-types';
+import { Product } from '@/libs/@types';
 
 import { convertIntToCurrency } from '../../utils/convertIntToCurrency';
 

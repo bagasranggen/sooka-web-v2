@@ -1,7 +1,5 @@
-import { Product } from '@/payload-types';
-
+import { Product } from '@/libs/@types';
 import { createPictureImage } from './createPictureImage';
-// import { createPicsumImage } from './createPicsumImage';
 import { convertIntToCurrency } from '../utils/convertIntToCurrency';
 import { checkMediaStatus } from '../utils/checkMediaStatus';
 

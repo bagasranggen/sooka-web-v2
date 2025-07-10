@@ -1,6 +1,4 @@
-import { Homepage } from '@/payload-types';
-
-import { PageDataProps } from '@/libs/@types';
+import { PageDataProps, Homepage } from '@/libs/@types';
 import { createHomepageBanner, createPictureImage, createProductItem } from '@/libs/factory';
 import { checkMediaStatus } from '@/libs/utils';
 

@@ -1,5 +1,4 @@
-import { Media } from '@/payload-types';
-import { BareMediaProps } from '@/libs/@types';
+import { BareMediaProps, Media } from '@/libs/@types';
 
 export const checkMediaStatus = (props: {
     item: { src: BareMediaProps['src'] } & Omit<Media, 'url'>;
