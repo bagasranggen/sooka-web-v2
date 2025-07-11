@@ -4,14 +4,8 @@ import { FRAGMENT_CATEGORY } from '@/graphql/queries/entries/fragments/FragmentC
 import { FRAGMENT_PRICE } from '@/graphql/queries/entries/fragments/FragmentPrice';
 import { FRAGMENT_MEDIA } from '@/graphql/queries/fragments/FragmentMedia';
 
-export const FRAGMENT_PRODUCT = gql`
-    fragment product on Product {
-        title
-        slug
-        url
-        uri
-        description
-
+export const FRAGMENT_PRODUCT_INFO = gql`
+    fragment productInfo on Product {
         thumbnail {
             ...thumbnailMedia
         }
