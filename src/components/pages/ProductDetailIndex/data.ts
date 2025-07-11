@@ -24,9 +24,9 @@ export const ProductDetailData = async ({
 
     const d = data?.products?.docs?.[0];
 
-    const mediaMain = checkMediaStatus({ item: d.thumbnail, handles: ['productDetailBanner', 'productDetailMobile'] });
+    const mediaMain = checkMediaStatus({ item: d?.thumbnail, handles: ['productDetailBanner', 'productDetailMobile'] });
     const mediaSecondary = checkMediaStatus({
-        item: d.thumbnailHover,
+        item: d?.thumbnailHover,
         handles: ['productDetailSticky', 'productDetailMobile'],
     });
 
@@ -135,6 +135,7 @@ export const ProductDetailData = async ({
 
     return {
         type,
+        meta: d?.meta,
         entries: {
             banner,
             infos,
