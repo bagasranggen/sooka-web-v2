@@ -27,30 +27,31 @@ export const createProductDetailPrices = (props?: { prices?: Product['prices']; 
 
         props.prices.forEach((item, i: number, array: Product['prices']) => {
             const isSinglePrice = array.length === 1;
+            const price = item?.price;
 
             const tmpPrice: OrderItemSummariesProps = {
-                value: item?.salePrice ?? item?.price ?? '',
+                value: price?.salePrice ?? price?.normalPrice ?? '',
                 label: '',
             };
 
             if (isSinglePrice) {
-                tmpPrice.label = convertIntToCurrency(item?.salePrice ?? item?.price, true);
+                tmpPrice.label = convertIntToCurrency(price?.salePrice ?? price?.normalPrice, true);
 
-                if (item?.note) {
+                if (price?.note) {
                     tmpDimensionItem.items.push({
-                        value: item.note,
-                        label: item.note,
+                        value: price.note,
+                        label: price.note,
                     });
                 }
             }
 
             if (!isSinglePrice) {
-                let tmpLabel = convertIntToCurrency(item.price, !item?.salePrice);
+                let tmpLabel = convertIntToCurrency(price?.normalPrice, !price?.salePrice);
 
-                if (item?.salePrice)
-                    tmpLabel = `${convertIntToCurrency(0, true)} ${convertIntToCurrency(item.salePrice)} <s>${tmpLabel}</s>`;
+                if (price?.salePrice)
+                    tmpLabel = `${convertIntToCurrency(0, true)} ${convertIntToCurrency(price.salePrice)} <s>${tmpLabel}</s>`;
 
-                if (item?.note) tmpLabel += ` (${item.note})`;
+                if (price?.note) tmpLabel += ` (${price.note})`;
 
                 tmpPrice.label = parse(`<p>${tmpLabel}</p>`);
             }
@@ -79,7 +80,7 @@ export const createProductDetailPrices = (props?: { prices?: Product['prices']; 
 
             tmp.items.push({
                 value: item?.slug ?? 0,
-                label: `${item.title} (${convertIntToCurrency(price?.price ?? 0, true)})`,
+                label: `${item.title} (${convertIntToCurrency(price?.price?.normalPrice ?? 0, true)})`,
             });
         });
 

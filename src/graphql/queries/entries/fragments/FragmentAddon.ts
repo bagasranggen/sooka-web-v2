@@ -1,5 +1,6 @@
 import { gql } from '@apollo/client';
 
+import { FRAGMENT_PRICE } from '@/graphql/queries/entries/fragments/FragmentPrice';
 import { FRAGMENT_MEDIA } from '@/graphql/queries/fragments/FragmentMedia';
 
 export const FRAGMENT_ADDON = gql`
@@ -12,11 +13,12 @@ export const FRAGMENT_ADDON = gql`
         }
 
         prices {
-            price
-            salePrice
-            note
+            price {
+                ...price
+            }
         }
     }
 
+    ${FRAGMENT_PRICE}
     ${FRAGMENT_MEDIA({ name: 'addonThumbnail', sizesHandles: ['assets400x400'] })}
 `;
