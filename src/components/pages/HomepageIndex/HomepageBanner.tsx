@@ -2,7 +2,6 @@
 
 import React from 'react';
 
-import Container from '@/components/common/Container';
 import Carousel, { BannerProps } from '@/components/common/Carousel';
 
 export type HomepageBannerProps = Pick<BannerProps, 'items'>;
