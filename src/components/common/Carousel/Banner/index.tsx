@@ -1,3 +1,5 @@
+'use client';
+
 import React from 'react';
 
 import { ArrayString } from '@/libs/@types';
@@ -29,7 +31,7 @@ const Banner = ({ items }: BannerProps): React.ReactElement => {
     return (
         <Base
             className="relative"
-            modulesVariant={BannerVariant}
+            modulesVariant={BannerVariant({ length: items.length })}
             autoplay={{ delay: 8000 }}
             loop
             items={items.map(({ align = 'right', cta, ...item }: BannerItemProps) => {

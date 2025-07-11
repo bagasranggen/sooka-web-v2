@@ -38,9 +38,11 @@ const BannerPagination = (): React.ReactElement => {
     return <div className={paginationClass} />;
 };
 
-const BannerVariant: BaseVariantProps = {
+const BannerVariant = (props?: { length: number }): BaseVariantProps => ({
     modules: Pagination,
     options: {
+        enabled: !!(props && props?.length > 1),
+        loop: !!(props && props?.length > 1),
         pagination: {
             clickable: true,
             el: `.${ELEMENT}`,
@@ -51,6 +53,6 @@ const BannerVariant: BaseVariantProps = {
         },
     },
     element: <BannerPagination />,
-};
+});
 
 export default BannerVariant;

@@ -2,17 +2,18 @@ import React from 'react';
 
 import Heading from '@/components/common/Heading';
 import Columns from '@/components/common/Columns';
-import Carousel, { BannerProps, TestimonialProps } from '@/components/common/Carousel';
+import Carousel, { TestimonialProps } from '@/components/common/Carousel';
 import List, { NumberProps } from '@/components/common/List';
 import ImageDivider, { ImageDividerProps } from '@/components/common/ImageDivider';
 import Container from '@/components/common/Container';
 import HomepageStory, { HomepageStoryProps } from '@/components/pages/HomepageIndex/HomepageStory';
 import RichText, { RichTextProps } from '@/components/common/RichText';
 import HomepageHighlight, { HomepageHighlightProps } from '@/components/pages/HomepageIndex/HomepageHighlight';
+import HomepageBanner, { HomepageBannerProps } from '@/components/pages/HomepageIndex/HomepageBanner';
 
 export type HomepageIndexProps = {
     entries: {
-        banner: BannerProps['items'];
+        banner: HomepageBannerProps['items'];
         highlights: HomepageHighlightProps['items'];
         testimonials: TestimonialProps['items'];
         imageDivider: ImageDividerProps['media'];
@@ -26,11 +27,7 @@ export type HomepageIndexProps = {
 const HomepageIndex = ({ entries }: HomepageIndexProps): React.ReactElement => {
     return (
         <>
-            {entries?.banner && entries.banner.length > 0 && (
-                <section>
-                    <Carousel.Banner items={entries.banner} />
-                </section>
-            )}
+            <HomepageBanner items={entries.banner} />
 
             <HomepageHighlight items={entries.highlights} />
 
