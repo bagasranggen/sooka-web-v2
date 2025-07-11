@@ -171,9 +171,7 @@ export interface Addon {
     thumbnail: number | Media;
     prices?:
         | {
-              price: number;
-              salePrice?: number | null;
-              note?: string | null;
+              price: Price;
               id?: string | null;
           }[]
         | null;
@@ -316,6 +314,15 @@ export interface Media {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "Price".
+ */
+export interface Price {
+    normalPrice: number;
+    salePrice?: number | null;
+    note?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "categories".
  */
 export interface Category {
@@ -341,16 +348,21 @@ export interface Category {
         };
         [k: string]: unknown;
     } | null;
-    meta?: {
-        title?: string | null;
-        description?: string | null;
-        /**
-         * Maximum upload file size: 12MB. Recommended file size for images is <500KB.
-         */
-        image?: (number | null) | Media;
-    };
+    meta?: Meta;
     updatedAt: string;
     createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "Meta".
+ */
+export interface Meta {
+    title?: string | null;
+    description?: string | null;
+    /**
+     * Maximum upload file size: 12MB. Recommended file size for images is <500KB.
+     */
+    image?: (number | null) | Media;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -445,20 +457,11 @@ export interface Product {
     };
     category: number | Category;
     prices: {
-        price: number;
-        salePrice?: number | null;
-        note?: string | null;
+        price: Price;
         id?: string | null;
     }[];
     addons?: (number | Addon)[] | null;
-    meta?: {
-        title?: string | null;
-        description?: string | null;
-        /**
-         * Maximum upload file size: 12MB. Recommended file size for images is <500KB.
-         */
-        image?: (number | null) | Media;
-    };
+    meta?: Meta;
     updatedAt: string;
     createdAt: string;
 }
@@ -680,13 +683,20 @@ export interface AddonsSelect<T extends boolean = true> {
     prices?:
         | T
         | {
-              price?: T;
-              salePrice?: T;
-              note?: T;
+              price?: T | PriceSelect<T>;
               id?: T;
           };
     updatedAt?: T;
     createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "Price_select".
+ */
+export interface PriceSelect<T extends boolean = true> {
+    normalPrice?: T;
+    salePrice?: T;
+    note?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -700,15 +710,18 @@ export interface CategoriesSelect<T extends boolean = true> {
     url?: T;
     uri?: T;
     description?: T;
-    meta?:
-        | T
-        | {
-              title?: T;
-              description?: T;
-              image?: T;
-          };
+    meta?: T | MetaSelect<T>;
     updatedAt?: T;
     createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "Meta_select".
+ */
+export interface MetaSelect<T extends boolean = true> {
+    title?: T;
+    description?: T;
+    image?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -978,19 +991,11 @@ export interface ProductsSelect<T extends boolean = true> {
     prices?:
         | T
         | {
-              price?: T;
-              salePrice?: T;
-              note?: T;
+              price?: T | PriceSelect<T>;
               id?: T;
           };
     addons?: T;
-    meta?:
-        | T
-        | {
-              title?: T;
-              description?: T;
-              image?: T;
-          };
+    meta?: T | MetaSelect<T>;
     updatedAt?: T;
     createdAt?: T;
 }
