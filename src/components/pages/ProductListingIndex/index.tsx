@@ -45,21 +45,30 @@ const ProductListingIndex = ({ entries }: ProductListingIndexProps): React.React
                 </Columns.Row>
             </Container>
 
-            {entries.products.length > 0 && (
-                <Animation
-                    type="fade-in"
-                    config={{ delay: 0.25 }}>
-                    <Container
-                        as="section"
-                        className="mt-10 mb-15">
+            <Animation
+                type="fade-in"
+                config={{ delay: 0.25 }}>
+                <Container
+                    as="section"
+                    className="mt-10 mb-15">
+                    {entries.products.length > 0 && (
                         <Card.Thumbnail
                             spacing={{ x: 3, y: 4 }}
                             columns={{ xs: 1, sm: 2, md: 3, lg: 4 }}
                             items={entries.products}
                         />
-                    </Container>
-                </Animation>
-            )}
+                    )}
+
+                    {entries.products.length === 0 && (
+                        <Heading
+                            as="h2"
+                            family="default"
+                            className="text-center text-[3rem]">
+                            Sorry we have no items yet.
+                        </Heading>
+                    )}
+                </Container>
+            </Animation>
         </>
     );
 };
