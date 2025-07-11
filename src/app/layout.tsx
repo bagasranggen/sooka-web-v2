@@ -44,6 +44,7 @@ export default async function RootLayout({ children }: Readonly<PropsWithChildre
             if (linkIsValid && item?.entryStatus === 'live') {
                 navigation.push({
                     href: link?.href,
+                    target: link?.target,
                     children: link?.label,
                 });
             }
