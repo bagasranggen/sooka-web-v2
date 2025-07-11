@@ -10,7 +10,7 @@ import Button, { BaseAnchorProps } from '@/components/common/Button';
 import Offcanvas from '@/components/common/Offcanvas';
 import Container from '@/components/common/Container';
 
-export type NavigationItemProps = Pick<BaseAnchorProps, 'href' | 'children'>;
+export type NavigationItemProps = Pick<BaseAnchorProps, 'href' | 'children' | 'target'>;
 
 export type NavigationProps = {
     items: NavigationItemProps[];
@@ -64,10 +64,9 @@ const Navigation = ({ items }: NavigationProps): React.ReactElement => {
                                 children: (
                                     <Button
                                         as="anchor"
-                                        href={item.href}
-                                        className="uppercase text-[1.4rem] tracking-0.2 transition-colors hover:text-black">
-                                        {item.children}
-                                    </Button>
+                                        {...item}
+                                        className="uppercase text-[1.4rem] tracking-0.2 transition-colors hover:text-black"
+                                    />
                                 ),
                             }))}
                         />
