@@ -10,7 +10,6 @@ import RichText, { RichTextProps } from '@/components/common/RichText';
 export type ProductListingIndexProps = {
     entries: {
         banner: {
-            // description?: React.ReactNode;
             description?: RichTextProps['children'];
         } & Pick<BaseProps, 'children'>;
         products: ThumbnailProps['items'];

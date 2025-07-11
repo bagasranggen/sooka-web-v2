@@ -22,10 +22,11 @@ const anglecia = localFont({
 });
 
 export const metadata: Metadata = {
-    title: {
-        default: 'Sooka Baked Goods',
-        template: '%s | Sooka Baked Goods',
-    },
+    // title: {
+    //     default: 'Sooka Baked Goods',
+    //     template: '%s | Sooka Baked Goods',
+    // },
+    title: 'Sooka Baked Goods',
 };
 
 export default async function RootLayout({ children }: Readonly<PropsWithChildren>) {

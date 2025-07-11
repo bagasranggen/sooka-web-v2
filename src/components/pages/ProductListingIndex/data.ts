@@ -30,6 +30,8 @@ export const ProductListingData = async ({
 
     if (!category) return notFound();
 
+    console.log({ productsData, category });
+
     const banner: ProductListingIndexProps['entries']['banner'] = {
         children: category?.title ?? '',
         description: category?.description,
@@ -45,6 +47,9 @@ export const ProductListingData = async ({
 
     return {
         type,
+        meta: {
+            title: category?.meta?.title,
+        },
         entries: {
             banner,
             products,
