@@ -3,10 +3,11 @@ import React from 'react';
 import Base, { BaseProps } from '@/components/common/List/Base';
 import Columns, { ColumnProps } from '@/components/common/Columns';
 import Heading, { NumberProps as HeadingNumberProps } from '@/components/common/Heading';
+import RichText, { RichTextProps } from '@/components/common/RichText';
 
 export type NumberItemProps = {
     title: HeadingNumberProps['children'];
-    description: React.ReactNode;
+    description: RichTextProps['children'];
 };
 
 export type NumberProps = {
@@ -35,7 +36,7 @@ const Number = ({ items, ...props }: NumberProps): React.ReactElement => {
                                 width={{ md: 8 }}>
                                 <Heading.Number number={`0${i + 1}`}>{item.title}</Heading.Number>
 
-                                <div className="mt-1.5">{item.description}</div>
+                                <RichText className="mt-1.5">{item.description}</RichText>
                             </Columns.Column>
                         </Columns.Row>
                     ),

@@ -1,4 +1,4 @@
-import { ObjectProps, PropsClassname } from '@/libs/@types';
+import { BareMediaProps, ObjectProps, PropsClassname } from '@/libs/@types';
 
 import { BaseItemProps } from '@/components/common/Picture';
 
@@ -9,7 +9,7 @@ export type PictureItemProps = {
 
 const INITIAL_STATE: BaseItemProps = {
     src: '',
-    srcRetina: '',
+    // srcRetina: '',
     width: 0,
     height: 0,
     alt: '',
@@ -20,21 +20,24 @@ export const createPictureImage = ({
     media,
     className,
     attribute,
-}: { item: PictureItemProps; media?: BaseItemProps['media']; attribute?: ObjectProps<string> } & PropsClassname) => {
+}: { item: BareMediaProps; media?: BaseItemProps['media']; attribute?: ObjectProps<string> } & PropsClassname) => {
     let pictureImage = INITIAL_STATE;
 
     if (item) {
-        const { src, srcRetina, width, height, alt, filename, ...restImage } = item;
+        const { src, width, height, alt, filename } = item;
 
         pictureImage = {
             ...pictureImage,
             src,
-            srcRetina,
-            width,
-            height,
+            // srcRetina,
+            width: width as any,
+            height: height as any,
             alt: alt ?? filename,
-            ...(restImage?.mimeType !== 'image/jpeg' ? { type: restImage.mimeType } : {}),
+            // ...(restImage?.mimeType !== 'image/jpeg' ? { type: restImage.mimeType } : {}),
         };
+
+        // console.log({ src, width });
+        // console.log({ pictureImage });
     }
 
     if (media) {
@@ -54,6 +57,8 @@ export const createPictureImage = ({
     if (attribute) {
         pictureImage = { ...pictureImage, ...attribute };
     }
+
+    // console.log({ pictureImage });
 
     return pictureImage;
 };

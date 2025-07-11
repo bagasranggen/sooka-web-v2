@@ -1,4 +1,5 @@
 import React, { JSX } from 'react';
+import { Metadata } from 'next';
 
 export type ObjectProps<Props> = { [key: string]: Props };
 
@@ -8,13 +9,16 @@ export type PageProps = {
 };
 
 export type PageDataParamsProps = {
-    type: string;
+    type?: string;
+    uri?: string;
+    slug?: string;
 };
 
 export type PageDataProps<Props> = {
     // page: {
     //     seomatic: any;
     // };
+    meta?: Metadata;
 } & (Pick<PageDataParamsProps, 'type'> & Props);
 
 export type Component<Props> = { (props: Props): React.ReactElement | null };

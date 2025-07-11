@@ -4,11 +4,15 @@ import { ArrayString } from '@/libs/@types';
 import { joinArrayString } from '@/libs/utils';
 
 import Base from '@/components/common/Carousel/Base';
+import RichText, { RichTextProps } from '@/components/common/RichText';
 import Columns from '@/components/common/Columns';
 import Icon from '@/components/common/Icon';
 import TestimonialVariant from '@/components/common/Carousel/Testimonial/TestimonialVariant';
 
-export type TestimonialItemProps = Record<'quote' | 'author', string>;
+export type TestimonialItemProps = {
+    author: string;
+    quote: RichTextProps['children'];
+};
 
 export type TestimonialProps = {
     items: TestimonialItemProps[];
@@ -38,7 +42,9 @@ const Testimonial = ({ items }: TestimonialProps): React.ReactElement => {
                                             size="md"
                                             className="opacity-10 absolute"
                                         />
-                                        <blockquote className="text-[2.2rem] pt-1 pl-2">{quote}</blockquote>
+                                        <blockquote className="text-[2.2rem] pt-1 pl-2">
+                                            <RichText>{quote}</RichText>
+                                        </blockquote>
 
                                         <div className="mt-4 uppercase text-end text-[1.4rem] tracking-0.2 font-semibold">
                                             {author}

@@ -5,8 +5,8 @@ import { PageProps } from '@/libs/@types';
 import HomepageIndex from '@/components/pages/HomepageIndex';
 import { HomepageData } from '@/components/pages/HomepageIndex/data';
 
-const Page = ({}: PageProps): React.ReactElement => {
-    const { entries } = HomepageData();
+const Page = async ({}: PageProps): Promise<React.ReactElement> => {
+    const { entries } = await HomepageData();
 
     return <HomepageIndex entries={entries} />;
 };

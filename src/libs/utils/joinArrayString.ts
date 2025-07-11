@@ -1,3 +1,3 @@
-import { cleanArrayString } from '@/libs/utils/cleanArrayString';
+import { cleanArrayString } from './cleanArrayString';
 
-export const joinArrayString = (arr: string[]) => cleanArrayString(arr).join(' ');
+export const joinArrayString = (arr: string[], join: string = ' ') => cleanArrayString(arr).join(join);

@@ -22,7 +22,7 @@ export default {
             variants: ['*', '*:sm', '*:md', '*:lg', '*:xl', '*:2xl'],
         },
         {
-            pattern: /(mx|mt)-./,
+            pattern: /(mx|mt|mb)-./,
             variants: ['xs', 'sm', 'md', 'lg', 'xl', '2xl'],
         },
         {

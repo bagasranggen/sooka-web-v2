@@ -6,7 +6,7 @@ import { joinArrayString } from '@/libs/utils';
 import Base, { BaseProps } from '@/components/common/Heading';
 
 export type NumberProps = {
-    number: string;
+    number?: string;
     size?: 'md' | 'lg';
 } & Pick<BaseProps, 'className' | 'as' | 'children'>;
 
@@ -27,7 +27,7 @@ const Number = ({ as = 'h2', className, number, size = 'md', children }: NumberP
         <Base
             as={as}
             {...headerProps}>
-            <span className="font-bold me-1 font-noto-sans-jp text-[1.4rem] leading-[1.8]">{number}</span>
+            {number && <span className="font-bold me-1 font-noto-sans-jp text-[1.4rem] leading-[1.8]">{number}</span>}
             {children}
         </Base>
     );

@@ -3,19 +3,23 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev --turbopack",
+    "dev": "next dev --turbopack -p 80",
     "build": "next build",
-    "start": "next start",
+    "start": "next start -p 80",
     "lint": "next lint"
   },
   "dependencies": {
+    "@apollo/client": "^3.13.8",
     "@fontsource/noto-sans-jp": "^5.1.0",
     "@gsap/react": "^2.1.1",
+    "@payloadcms/richtext-lexical": "^3.46.0",
+    "graphql": "^16.11.0",
     "gsap": "^3.12.5",
     "html-react-parser": "^5.2.0",
-    "next": "15.0.4",
-    "react": "^19.0.0",
-    "react-dom": "^19.0.0",
+    "next": "^15.3.5",
+    "payload": "^3.46.0",
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0",
     "react-hook-form": "^7.54.1",
     "swiper": "^11.1.15"
   },

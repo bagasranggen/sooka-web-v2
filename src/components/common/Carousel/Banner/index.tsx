@@ -1,3 +1,5 @@
+'use client';
+
 import React from 'react';
 
 import { ArrayString } from '@/libs/@types';
@@ -5,18 +7,20 @@ import { joinArrayString } from '@/libs/utils';
 
 import Base from '@/components/common/Carousel';
 import Columns from '@/components/common/Columns';
-import Button from '@/components/common/Button';
+import Button, { BaseAnchorProps } from '@/components/common/Button';
 import Overlay from '@/components/common/Overlay';
 import Container from '@/components/common/Container';
 import { BaseItemProps } from '@/components/common/Picture';
 import BannerVariant from '@/components/common/Carousel/Banner/BannerVariant';
+import RichText, { RichTextProps } from '@/components/common/RichText';
 
 export type BannerItemProps = {
     media: BaseItemProps['src'];
     align?: 'left' | 'right';
     category?: string;
     title: string;
-    description?: React.ReactNode;
+    description?: RichTextProps['children'];
+    cta?: Pick<BaseAnchorProps, 'href' | 'target'>;
 };
 
 export type BannerProps = {
@@ -27,10 +31,10 @@ const Banner = ({ items }: BannerProps): React.ReactElement => {
     return (
         <Base
             className="relative"
-            modulesVariant={BannerVariant}
+            modulesVariant={BannerVariant({ length: items.length })}
             autoplay={{ delay: 8000 }}
             loop
-            items={items.map(({ align = 'right', ...item }: BannerItemProps) => {
+            items={items.map(({ align = 'right', cta, ...item }: BannerItemProps) => {
                 const style = {
                     '--bg-image': `url("${item.media}")`,
                 } as React.CSSProperties;
@@ -43,11 +47,21 @@ const Banner = ({ items }: BannerProps): React.ReactElement => {
                 if (align === 'right') contentClass.push('justify-end');
                 contentClass = joinArrayString(contentClass);
 
+                let Wrapper: any = 'div';
+                if (cta) Wrapper = Button;
+
+                let wrapperProps = {};
+                if (cta) {
+                    wrapperProps = {
+                        as: 'anchor',
+                        ...cta,
+                    };
+                }
+
                 return {
                     children: (
-                        <Button
-                            as="anchor"
-                            href="#"
+                        <Wrapper
+                            {...wrapperProps}
                             style={style}>
                             <Overlay
                                 variant={align === 'right' ? 'gradient-right' : 'gradient-left'}
@@ -68,14 +82,16 @@ const Banner = ({ items }: BannerProps): React.ReactElement => {
                                                 </h1>
 
                                                 {item?.description && (
-                                                    <div className="mt-2.5 text-white">{item.description}</div>
+                                                    <RichText className="mt-2.5 text-white">
+                                                        {item.description}
+                                                    </RichText>
                                                 )}
                                             </Columns.Column>
                                         </Columns.Row>
                                     </Container>
                                 </div>
                             </Overlay>
-                        </Button>
+                        </Wrapper>
                     ),
                 };
             })}
