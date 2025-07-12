@@ -11,18 +11,19 @@ export const getPagesEntry = async ({ uri, uriArr }: { uri?: string; uriArr?: st
 
     try {
         if (!uri) return;
+
         const { data } = await apolloClient.query({
             query: ENTRY_CHECK_QUERY,
             variables: { uri },
         });
-
-        // console.log({ data });
 
         if (data) {
             Object.values(data).forEach((item) => {
                 if (!typeHandle && item?.docs?.[0]?.typeHandle) typeHandle = item.docs[0].typeHandle;
             });
         }
+
+        if (!typeHandle) typeHandle = 'not-found';
     } catch {}
 
     return { typeHandle, slug };

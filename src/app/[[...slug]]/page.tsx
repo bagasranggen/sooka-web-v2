@@ -1,4 +1,5 @@
 import React from 'react';
+import { notFound } from 'next/navigation';
 
 import { PageProps } from '@/libs/@types';
 import { getPagesEntry, joinArrayString } from '@/libs/utils';
@@ -24,6 +25,10 @@ const Page = async ({ params }: PageProps): Promise<React.ReactElement> => {
         try {
             data = await PAGES_DATA_HANDLES[typeHandle]({ type: typeHandle, uri, slug });
         } catch {}
+    }
+
+    if (typeHandle === 'not-found') {
+        notFound();
     }
 
     return (
