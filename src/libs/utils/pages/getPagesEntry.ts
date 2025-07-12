@@ -19,7 +19,7 @@ export const getPagesEntry = async ({ uri, uriArr }: { uri?: string; uriArr?: st
         });
 
         if (data) {
-            Object.values(data).forEach((item) => {
+            Object.values(data).forEach((item: any) => {
                 if (!typeHandle && item?.docs?.[0]?.typeHandle) typeHandle = item.docs[0].typeHandle;
             });
         }

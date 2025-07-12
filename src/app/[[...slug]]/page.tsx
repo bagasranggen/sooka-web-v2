@@ -18,20 +18,29 @@ const Page = async ({ params }: PageProps): Promise<React.ReactElement> => {
     let uri = '__home__';
     if (Array.isArray(par.slug) && par.slug.length > 0) uri = joinArrayString(par.slug, '/');
 
-    const { typeHandle, slug } = await getPagesEntry({
+    const entry = await getPagesEntry({
         uri,
         uriArr: Array.isArray(par.slug) ? par.slug : [],
     });
 
+    let dataProcessor = undefined;
+    if (entry?.typeHandle) {
+        dataProcessor = PAGES_DATA_HANDLES?.[entry.typeHandle as keyof typeof PAGES_DATA_HANDLES];
+    }
+
     let data = undefined;
 
-    if (typeHandle && PAGES_DATA_HANDLES?.[typeHandle]) {
+    if (entry?.typeHandle && dataProcessor) {
         try {
-            data = await PAGES_DATA_HANDLES[typeHandle]({ type: typeHandle, uri, slug });
+            data = await dataProcessor({
+                type: entry.typeHandle,
+                uri,
+                slug: entry?.slug,
+            });
         } catch {}
     }
 
-    if (typeHandle === 'not-found') {
+    if (entry?.typeHandle && entry.typeHandle === 'not-found') {
         notFound();
     }
 
@@ -39,7 +48,7 @@ const Page = async ({ params }: PageProps): Promise<React.ReactElement> => {
         <>
             {createDynamicElement({
                 handles: PAGES_INDEX_HANDLES,
-                selector: typeHandle,
+                selector: entry?.typeHandle ?? '',
                 props: data,
             })}
         </>
