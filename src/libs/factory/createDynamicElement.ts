@@ -9,6 +9,10 @@ type CreateDynamicElementProps = {
 
 export const createDynamicElement = ({ handles, selector, props }: CreateDynamicElementProps) => {
     if (!handles?.[selector]) {
+        if (process.env.NODE_ENV === 'development') {
+            return `cannot render component with handle: ${selector}`;
+        }
+
         return null;
     }
 
