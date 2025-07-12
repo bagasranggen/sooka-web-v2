@@ -5,10 +5,15 @@ import { FRAGMENT_HOMEPAGE_STORY } from '@/graphql/queries/entries/fragments/Fra
 import { FRAGMENT_MEDIA } from '@/graphql/queries/fragments/FragmentMedia';
 import { FRAGMENT_TESTIMONIAL } from '@/graphql/queries/entries/fragments/FragmentTestimonial';
 import { FRAGMENT_HOMEPAGE_HIGHLIGHT } from '@/graphql/queries/entries/fragments/FragmentHomepageHighlight';
+import { FRAGMENT_META } from '@/graphql/queries/fragments/FragmentMeta';
 
 export const HOMEPAGE_QUERY = gql`
     query HomepageQuery {
         entry: Homepage {
+            meta {
+                ...meta
+            }
+
             bannerMedia {
                 ...homepageBanner
             }
@@ -35,6 +40,7 @@ export const HOMEPAGE_QUERY = gql`
         }
     }
 
+    ${FRAGMENT_META}
     ${FRAGMENT_HOMEPAGE_BANNER}
     ${FRAGMENT_HOMEPAGE_HIGHLIGHT}
     ${FRAGMENT_HOMEPAGE_STORY}
