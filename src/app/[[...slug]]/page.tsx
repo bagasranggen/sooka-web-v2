@@ -2,11 +2,15 @@ import React from 'react';
 import { notFound } from 'next/navigation';
 
 import { PageProps } from '@/libs/@types';
-import { getPagesEntry, joinArrayString } from '@/libs/utils';
+import { getPagesEntry, getPagesUri, joinArrayString } from '@/libs/utils';
 import { createDynamicElement } from '@/libs/factory';
 
 import { PAGES_INDEX_HANDLES } from '@/components/pages/handlesIndex';
 import { PAGES_DATA_HANDLES } from '@/components/pages/handlesData';
+
+export const generateStaticParams = async () => {
+    return await getPagesUri();
+};
 
 const Page = async ({ params }: PageProps): Promise<React.ReactElement> => {
     const par = await params;

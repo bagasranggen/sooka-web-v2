@@ -14,6 +14,10 @@ export type PageDataParamsProps = {
     slug?: string;
 };
 
+export type PageUriItemProps = {
+    slug: string[];
+};
+
 export type PageDataProps<Props> = {
     // page: {
     //     seomatic: any;
