@@ -1,5 +1,6 @@
 export * from './animation';
 export * from './columns';
+export * from './pages';
 
 export * from './checkMediaStatus';
 export * from './checkStringIsNumber';

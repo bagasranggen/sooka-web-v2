@@ -1,4 +1,6 @@
 export const PAGES_HANDLES = {
-    PRODUCT_DETAIL: 'productDetail',
-    PRODUCT_LISTING: 'productListing',
+    CUSTOM_PAGE: 'typeSectionPagesIndex',
+    HOMEPAGE: 'typeSectionHomepageIndex',
+    PRODUCT_DETAIL: 'typeSectionProductsIndex',
+    PRODUCT_LISTING: 'typeSectionCategoriesIndex',
 } as const;
