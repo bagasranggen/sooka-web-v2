@@ -3,15 +3,13 @@ import { PageUriItemProps } from '@/libs/@types';
 import { apolloClient } from '@/libs/fetcher';
 import { ENTRY_URI_QUERY } from '@/graphql';
 
-export const getPagesUri = async () => {
+export const getPagesUri = async (props?: { limit?: any }) => {
     const uri: PageUriItemProps[] = [{ slug: [''] }];
 
     try {
         const { data } = await apolloClient.query({
             query: ENTRY_URI_QUERY,
-            variables: {
-                limitPages: 1,
-            },
+            variables: props?.limit ?? {},
         });
 
         if (data) {

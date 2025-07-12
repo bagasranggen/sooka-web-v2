@@ -7,9 +7,10 @@ import { createDynamicElement } from '@/libs/factory';
 
 import { PAGES_INDEX_HANDLES } from '@/components/pages/handlesIndex';
 import { PAGES_DATA_HANDLES } from '@/components/pages/handlesData';
+import { PAGES_LIMIT_HANDLES } from '@/components/pages/handlesLimit';
 
 export const generateStaticParams = async () => {
-    return await getPagesUri();
+    return await getPagesUri({ limit: PAGES_LIMIT_HANDLES });
 };
 
 const Page = async ({ params }: PageProps): Promise<React.ReactElement> => {
