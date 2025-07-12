@@ -3,7 +3,12 @@ import { ENTRY_CHECK_QUERY } from '@/graphql';
 
 import { PAGES_HANDLES } from '@/components/pages/handles';
 
-export const getPagesEntry = async ({ uri, uriArr }: { uri?: string; uriArr?: string[] }) => {
+export type GetPagesEntryTypes = {
+    uri?: string;
+    uriArr?: string[];
+};
+
+export const getPagesEntry = async ({ uri, uriArr }: GetPagesEntryTypes) => {
     let slug = undefined;
     if (uriArr && uriArr.length > 0) slug = uriArr[uriArr.length - 1];
 
