@@ -7,7 +7,8 @@ export const getPagesEntry = async ({ uri, uriArr }: { uri?: string; uriArr?: st
     let slug = undefined;
     if (uriArr && uriArr.length > 0) slug = uriArr[uriArr.length - 1];
 
-    let typeHandle: undefined | string = uri === '__home__' ? PAGES_HANDLES.HOMEPAGE : undefined;
+    let typeHandle: string | undefined = undefined;
+    if (uri === '__home__') typeHandle = PAGES_HANDLES.HOMEPAGE;
 
     try {
         if (!uri) return;
