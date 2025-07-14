@@ -7,5 +7,6 @@ export const FRAGMENT_PRODUCT_BASE = gql`
         url
         uri
         description
+        bannerTitle
     }
 `;
