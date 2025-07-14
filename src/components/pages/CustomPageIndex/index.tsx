@@ -1,4 +1,5 @@
 import React from 'react';
+
 import ContentBlocks, { ContentBlocksProps } from '@/components/common/ContentBlocks';
 
 export type CustomPageIndexProps = {

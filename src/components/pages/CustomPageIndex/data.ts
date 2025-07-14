@@ -1,18 +1,19 @@
-import { PageDataProps } from '@/libs/@types';
+import { PageDataParamsProps, PageDataProps } from '@/libs/@types';
+
+import { createContentBlocks } from '@/libs/factory';
 
 import { apolloClient } from '@/libs/fetcher';
 import { PAGE_QUERY } from '@/graphql';
-import { CustomPageIndexProps } from '@/components/pages/CustomPageIndex/index';
-import { createContentBlocks } from '@/libs/factory';
 
-export const CustomPageData = async (): Promise<PageDataProps<CustomPageIndexProps>> => {
+import { CustomPageIndexProps } from '@/components/pages/CustomPageIndex/index';
+
+export const CustomPageData = async ({ uri }: PageDataParamsProps): Promise<PageDataProps<CustomPageIndexProps>> => {
     const { data } = await apolloClient.query({
         query: PAGE_QUERY,
+        variables: { uri },
     });
 
     const d = data?.entries?.docs?.[0];
-
-    // console.log({ data: d });
 
     return {
         entries: {

@@ -99,7 +99,7 @@ export const HomepageData = async (): Promise<PageDataProps<HomepageIndexProps>>
             if (item?.entryStatus !== 'live') return;
 
             testimonials.push({
-                author: item?.author,
+                author: item?.author ?? '',
                 quote: item?.testimonial as any,
             });
         });
@@ -157,6 +157,7 @@ export const HomepageData = async (): Promise<PageDataProps<HomepageIndexProps>>
     }
 
     return {
+        meta: d?.meta,
         entries: {
             banner,
             highlights,

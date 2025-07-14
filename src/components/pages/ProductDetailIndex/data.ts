@@ -10,6 +10,7 @@ import parse from 'html-react-parser';
 import { ProductDetailIndexProps } from '@/components/pages/ProductDetailIndex';
 import { ProductDetailInfoProps } from '@/components/pages/ProductDetailIndex/ProductDetailInfo';
 import { BaseProps } from '@/components/common/Picture';
+import { BaseProps as HeadingBaseProps } from '@/components/common/Heading';
 
 export const ProductDetailData = async ({
     type,
@@ -32,14 +33,31 @@ export const ProductDetailData = async ({
 
     const banner: ProductDetailIndexProps['entries']['banner'] = {
         media: [],
-        children: parse(
-            `<span>Straw<span class="text-sooka-primary">berry</span></span> <span>Short<span class="text-sooka-primary">cake</span></span>`
-        ),
+        children: '',
         form: {
             title: d?.title,
             summaries: createProductDetailPrices({ prices: d?.prices, addons: d?.addons }),
         },
     };
+
+    // Banner Title
+    const hasBannerTitle = !!d?.bannerTitle;
+
+    let tmpTitle: HeadingBaseProps['children'] = '';
+    let title = d?.title;
+    if (hasBannerTitle) title = d.bannerTitle;
+    title = title.split(hasBannerTitle ? '\n' : ' ');
+
+    if (Array.isArray(title)) {
+        title.forEach((item, i, arr) => {
+            tmpTitle += `<span>${item}</span>`;
+
+            if (i !== arr.length - 1) tmpTitle += '<br/>';
+            if (i === arr.length - 1 && typeof tmpTitle === 'string') tmpTitle = parse(tmpTitle);
+        });
+
+        banner.children = tmpTitle;
+    }
 
     // Banner Media
     if (mediaMain?.productDetailBanner) {
