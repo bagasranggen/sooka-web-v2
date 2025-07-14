@@ -19,17 +19,17 @@ const HalfMedia = ({ media, form, children }: HalfMediaProps): React.ReactElemen
                 spacing={{ x: 3, y: 3 }}>
                 <Columns.Column
                     className="z-10 order-last md:order-first"
-                    width={{ md: 5, lg: 6 }}>
+                    width={{ md: 6, lg: 10 }}>
                     <Heading
                         as="h1"
                         size="heading"
-                        className="[&>span:nth-child(2)]:md:ms-2/12 [&>span:nth-child(3)]:md:ms-4/12">
+                        className="[&>span:nth-child(3)]:md:ms-2/12 [&>span:nth-child(5)]:md:ms-4/12">
                         {children}
                     </Heading>
                 </Columns.Column>
 
                 <Columns.Column
-                    className="md:-ms-2/12 order-first md:order-last !px-0 md:!px-1.5"
+                    className="md:-ms-6/12 order-first md:order-last !px-0 md:!px-1.5"
                     width={{ md: 9, lg: 8 }}>
                     <Overlay
                         variant="solid"
