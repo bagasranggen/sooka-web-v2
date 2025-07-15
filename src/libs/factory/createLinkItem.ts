@@ -1,4 +1,6 @@
-export const createLinkItem = (item: any) => {
+import { Link } from '@/libs/@types';
+
+export const createLinkItem = (item?: Link) => {
     let status = true;
     if (!item) status = false;
 
@@ -6,7 +8,7 @@ export const createLinkItem = (item: any) => {
 
     switch (item?.source) {
         case 'products':
-            const product = item?.product;
+            const product = item?.product && typeof item.product !== 'number' ? item.product : undefined;
 
             link = Object.assign({
                 href: product?.url,
@@ -15,7 +17,7 @@ export const createLinkItem = (item: any) => {
             break;
 
         case 'categories':
-            const category = item?.category;
+            const category = item?.category && typeof item.category !== 'number' ? item.category : undefined;
 
             link = Object.assign({
                 href: category?.url,
@@ -24,11 +26,18 @@ export const createLinkItem = (item: any) => {
             break;
 
         case 'pages':
-            const page = item?.page;
+            const page = item?.page && typeof item.page !== 'number' ? item.page : undefined;
 
             link = Object.assign({
                 href: page?.url,
                 label: item?.label || page?.title,
+            });
+            break;
+
+        case 'mail':
+            link = Object.assign({
+                href: item?.mail ? `mailto:${item?.mail}` : undefined,
+                label: item?.mail || item?.label,
             });
             break;
 
