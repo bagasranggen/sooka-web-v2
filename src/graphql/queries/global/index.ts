@@ -1,1 +1,1 @@
-export * from './NavigationQuery';
+export * from './LayoutQuery';
