@@ -1131,6 +1131,7 @@ export interface Homepage {
               entryStatus?: ('disabled' | 'live') | null;
               tag?: (number | null) | Tag;
               textAlign?: ('left' | 'right') | null;
+              bannerOverlay?: ('0' | '1' | '2' | '3' | '4' | '5') | null;
               media?: (number | null) | Media;
               title?: string | null;
               description?: {
@@ -1254,6 +1255,7 @@ export interface HomepageSelect<T extends boolean = true> {
               entryStatus?: T;
               tag?: T;
               textAlign?: T;
+              bannerOverlay?: T;
               media?: T;
               title?: T;
               description?: T;

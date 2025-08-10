@@ -38,6 +38,12 @@ export const createHomepageBanner = (item: any): BannerItemProps => {
         });
     }
 
+    let overlay = 3;
+    if (item?.bannerOverlay) {
+        const oly = item.bannerOverlay.replace('_', '');
+        overlay = parseInt(oly);
+    }
+
     return {
         media,
         align: item?.textAlign,
@@ -45,5 +51,6 @@ export const createHomepageBanner = (item: any): BannerItemProps => {
         title,
         description,
         cta,
+        overlay,
     };
 };

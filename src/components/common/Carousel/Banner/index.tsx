@@ -8,7 +8,7 @@ import { joinArrayString } from '@/libs/utils';
 import Base from '@/components/common/Carousel';
 import Columns from '@/components/common/Columns';
 import Button, { BaseAnchorProps } from '@/components/common/Button';
-import Overlay from '@/components/common/Overlay';
+import Overlay, { OverlayProps } from '@/components/common/Overlay';
 import Container from '@/components/common/Container';
 import { BaseItemProps } from '@/components/common/Picture';
 import BannerVariant from '@/components/common/Carousel/Banner/BannerVariant';
@@ -21,6 +21,7 @@ export type BannerItemProps = {
     title: string;
     description?: RichTextProps['children'];
     cta?: Pick<BaseAnchorProps, 'href' | 'target'>;
+    overlay?: OverlayProps['opacity'];
 };
 
 export type BannerProps = {
@@ -34,7 +35,7 @@ const Banner = ({ items }: BannerProps): React.ReactElement => {
             modulesVariant={BannerVariant({ length: items.length })}
             autoplay={{ delay: 8000 }}
             loop
-            items={items.map(({ align = 'right', cta, ...item }: BannerItemProps) => {
+            items={items.map(({ align = 'right', cta, overlay, ...item }: BannerItemProps) => {
                 const style = {
                     '--bg-image': `url("${item.media}")`,
                 } as React.CSSProperties;
@@ -65,7 +66,7 @@ const Banner = ({ items }: BannerProps): React.ReactElement => {
                             style={style}>
                             <Overlay
                                 variant={align === 'right' ? 'gradient-right' : 'gradient-left'}
-                                opacity={5}>
+                                opacity={overlay}>
                                 <div className={bgClass}>
                                     <Container className="relative z-[2] h-[calc(90vh-7rem)] sm:h-[calc(70vh-7rem)] md:landscape:h-[calc(100vh-7rem)] lg:landscape:h-[calc(100vh-7rem)]">
                                         <Columns.Row className={contentClass}>

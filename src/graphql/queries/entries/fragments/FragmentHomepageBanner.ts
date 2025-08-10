@@ -14,6 +14,7 @@ export const FRAGMENT_HOMEPAGE_BANNER = gql`
         title
         description
         productTarget
+        bannerOverlay
 
         link {
             ...link
