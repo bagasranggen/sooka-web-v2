@@ -14,11 +14,11 @@ export type BaseAnimationProps = {
 };
 
 export type AnimationProps =
-    | {
+    | ({
           type?: Exclude<
               (typeof ANIMATION_VARIANTS)[keyof typeof ANIMATION_VARIANTS],
               typeof ANIMATION_VARIANTS.MARQUEE | typeof ANIMATION_VARIANTS.SLIDE_Y
           >;
-      }
+      } & Pick<BaseAnimationProps, 'config'>)
     | BaseAnimationConfigProps<typeof ANIMATION_VARIANTS.MARQUEE, MarqueeConfigProps>
     | BaseAnimationConfigProps<typeof ANIMATION_VARIANTS.SLIDE_Y, SlideYConfigProps>;
