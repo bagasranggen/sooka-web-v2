@@ -36,9 +36,13 @@ const Banner = ({ items }: BannerProps): React.ReactElement => {
             autoplay={{ delay: 8000 }}
             loop
             items={items.map(({ align = 'right', cta, overlay, ...item }: BannerItemProps) => {
-                const style = {
-                    '--bg-image': `url("${item.media}")`,
-                } as React.CSSProperties;
+                let style = {} as React.CSSProperties;
+
+                if (item?.media) {
+                    style = Object.assign(style, {
+                        '--bg-image': `url("${item.media}")`,
+                    });
+                }
 
                 let bgClass: ArrayString = ['bg-cover bg-center'];
                 bgClass.push(`bg-[image:var(--bg-image)]`);
