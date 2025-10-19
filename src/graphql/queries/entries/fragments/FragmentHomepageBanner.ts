@@ -38,5 +38,9 @@ export const FRAGMENT_HOMEPAGE_BANNER = gql`
     ${FRAGMENT_PRODUCT_BASE}
     ${FRAGMENT_PRODUCT_INFO}
     ${FRAGMENT_LINK}
-    ${FRAGMENT_MEDIA({ name: 'banner', sizesHandles: ['bannerDesktop', 'bannerTablet', 'bannerMobile'] })}
+    ${FRAGMENT_MEDIA({
+        name: 'banner',
+        on: 'MediaGlobal',
+        sizesHandles: ['bannerDesktop', 'bannerTablet', 'bannerMobile'],
+    })}
 `;

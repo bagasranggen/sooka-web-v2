@@ -46,6 +46,7 @@ export const HOMEPAGE_QUERY = gql`
     ${FRAGMENT_HOMEPAGE_STORY}
     ${FRAGMENT_MEDIA({
         name: 'homepageDivider',
+        on: 'MediaGlobal',
         sizesHandles: ['bannerDesktop', 'mediaDividerTablet', 'mediaDividerMobile'],
     })}
     ${FRAGMENT_TESTIMONIAL}
