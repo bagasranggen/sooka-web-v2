@@ -2,12 +2,11 @@
 
 import React, { cloneElement, useRef } from 'react';
 
-import { BaseAnimationConfigProps } from '@/libs/@types';
+import { AnimationProps as BaseAnimationProps } from '@/libs/@types';
 
 import { gsap } from 'gsap';
 import { useGSAP } from '@gsap/react';
 
-import { ANIMATION_VARIANTS } from '@/components/Animation/handles';
 import { registerAnimation } from '@/components/Animation/register';
 
 gsap.registerPlugin(useGSAP);
@@ -15,32 +14,33 @@ gsap.registerPlugin(useGSAP);
 registerAnimation();
 
 export type AnimationProps = {
-    type?: (typeof ANIMATION_VARIANTS)[keyof typeof ANIMATION_VARIANTS];
     as?: string;
-    config?: BaseAnimationConfigProps;
     children?: any;
-};
+} & BaseAnimationProps;
 
-const Animation = ({ as, type, config, children }: AnimationProps): React.ReactElement => {
+const Animation = ({ as, type, children, ...props }: AnimationProps): React.ReactElement => {
     const animationRef = useRef<null | any>(null);
 
-    let props: any = {
+    let animationProps: any = {
         ref: animationRef,
     };
 
     if (!children?.ref?.current) {
-        props = {
+        animationProps = {
             ref: animationRef,
         };
     }
 
     if (type && !as) {
-        props = { ...props, 'data-animation': type };
+        animationProps = { ...animationProps, 'data-animation': type };
     }
 
     if (type && as) {
-        props = { ...props, [`data-animation-${type}`]: as };
+        animationProps = { ...animationProps, [`data-animation-${type}`]: as };
     }
+
+    let config = {};
+    if ('config' in props && props?.config) config = Object.assign(config, props?.config);
 
     useGSAP(
         () => {
@@ -55,12 +55,12 @@ const Animation = ({ as, type, config, children }: AnimationProps): React.ReactE
             }
 
             // gsap.effects[type](props.ref.current, config, id);
-            gsap.effects[type](props.ref.current, config);
+            gsap.effects[type](animationProps.ref.current, config);
         },
-        { scope: props.ref, dependencies: [type, as] }
+        { scope: animationProps.ref, dependencies: [type, as] }
     );
 
-    return cloneElement(children, props);
+    return cloneElement(children, animationProps);
 };
 
 export default Animation;
