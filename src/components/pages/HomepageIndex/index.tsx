@@ -27,9 +27,9 @@ export type HomepageIndexProps = {
 const HomepageIndex = ({ entries }: HomepageIndexProps): React.ReactElement => {
     return (
         <>
-            <HomepageBanner items={entries.banner} />
+            {entries?.banner && <HomepageBanner items={entries.banner} />}
 
-            <HomepageHighlight items={entries.highlights} />
+            {entries?.highlights && <HomepageHighlight items={entries.highlights} />}
 
             {entries?.story?.description && <HomepageStory {...entries?.story} />}
 
@@ -58,10 +58,12 @@ const HomepageIndex = ({ entries }: HomepageIndexProps): React.ReactElement => {
                 </Container>
             )}
 
-            <ImageDivider
-                className="mt-10 md:mt-20"
-                media={entries.imageDivider}
-            />
+            {entries?.imageDivider && entries.imageDivider.length > 0 && (
+                <ImageDivider
+                    className="mt-10 md:mt-20"
+                    media={entries.imageDivider}
+                />
+            )}
 
             {entries?.orders?.steps && entries.orders.steps.length > 0 && (
                 <Container
