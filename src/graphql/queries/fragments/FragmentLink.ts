@@ -6,6 +6,7 @@ export const FRAGMENT_LINK = gql`
         target
         label
         custom
+        mail
 
         product {
             url

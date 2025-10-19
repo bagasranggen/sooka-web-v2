@@ -6,15 +6,15 @@ import '@fontsource/noto-sans-jp';
 import '@fontsource/noto-sans-jp/600.css';
 import '@/assets/styles/css/main.css';
 
-import { createLinkItem } from '@/libs/factory';
+import { createIconItem, createLinkItem } from '@/libs/factory';
 
 import { apolloClient } from '@/libs/fetcher';
-import { NAVIGATION_QUERY } from '@/graphql';
+import { LAYOUT_QUERY } from '@/graphql';
 
-import { Navigation as NavigationProps } from '@/libs/@types';
+import { Navigation as NavigationProps, Footer as FooterProps } from '@/libs/@types';
 
-import Navigation from '@/components/layout/Navigation';
-import Footer from '@/components/layout/Footer';
+import Navigation, { NavigationItemProps } from '@/components/layout/Navigation';
+import Footer, { FooterSocialProps } from '@/components/layout/Footer';
 
 const anglecia = localFont({
     src: '../assets/fonts/Anglecia/AngleciaProDisplay-Regular-webfont.woff2',
@@ -30,15 +30,15 @@ export const metadata: Metadata = {
 
 export default async function RootLayout({ children }: Readonly<PropsWithChildren>) {
     const { data } = await apolloClient.query({
-        query: NAVIGATION_QUERY,
+        query: LAYOUT_QUERY,
     });
 
-    const d: NavigationProps = data?.entry;
+    const headerNavigation: NavigationProps = data?.headerNavigation;
+    const footerNavigation: FooterProps = data?.footerNavigation;
 
-    const navigation: any[] = [];
-
-    if (d?.navigations && d.navigations.length > 0) {
-        d.navigations.forEach((item) => {
+    const navigation: NavigationItemProps[] = [];
+    if (headerNavigation?.navigations && headerNavigation.navigations.length > 0) {
+        headerNavigation.navigations.forEach((item) => {
             const { linkIsValid, link } = createLinkItem(item?.link);
 
             if (linkIsValid && item?.entryStatus === 'live') {
@@ -51,12 +51,31 @@ export default async function RootLayout({ children }: Readonly<PropsWithChildre
         });
     }
 
+    const socialMedia: FooterSocialProps['items'] = [];
+    if (footerNavigation?.socialMedia && footerNavigation.socialMedia.length > 0) {
+        footerNavigation.socialMedia.forEach((item) => {
+            const { linkIsValid, link } = createLinkItem(item?.link);
+            const { icon } = createIconItem(item?.icon);
+
+            socialMedia.push({
+                cta: linkIsValid ? link : { href: '#' },
+                icon: icon ?? '',
+            });
+        });
+    }
+
     return (
         <html lang="en">
             <body className={`${anglecia.variable} antialiased`}>
                 <Navigation items={navigation} />
+
                 {children}
-                <Footer />
+
+                <Footer
+                    address={footerNavigation?.address}
+                    businessHour={footerNavigation?.businessHours}
+                    socialMedia={socialMedia}
+                />
             </body>
         </html>
     );
