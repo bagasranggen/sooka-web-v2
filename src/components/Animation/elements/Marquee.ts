@@ -7,13 +7,17 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
 gsap.registerPlugin(ScrollTrigger);
 
-export const marquee = ({ element, config }: BaseAnimationProps) => {
+export type MarqueeConfigProps = {
+    speed?: number;
+};
+
+export const marquee = ({ element, config }: Omit<BaseAnimationProps, 'config'> & { config?: MarqueeConfigProps }) => {
     const el = getAnimationElement(element);
     const item = el.querySelector('[data-animation-marquee="item"]');
     const itemRect = getElementRect(item);
     const itemWidth = itemRect.width;
     const repeat = Math.ceil(window.innerWidth / itemWidth) + 1;
-    const speed = config?.marquee?.speed ?? 1;
+    const speed = config?.speed ?? 1;
     const loopDuration = (itemWidth / 60) * speed;
 
     // Cloned items to fill screen width
