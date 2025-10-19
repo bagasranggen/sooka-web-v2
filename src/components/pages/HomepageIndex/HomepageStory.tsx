@@ -5,6 +5,7 @@ import Heading from '@/components/common/Heading';
 import Picture, { BaseProps } from '@/components/common/Picture';
 import Container from '@/components/common/Container';
 import RichText, { RichTextProps } from '@/components/common/RichText';
+import Animation from '@/components/Animation';
 
 export type HomepageStoryProps = {
     mediaMain?: BaseProps['items'];
@@ -25,10 +26,20 @@ const HomepageStory = ({ mediaMain, mediaSecondary, description }: HomepageStory
                             width={{ xs: 9, md: 8 }}>
                             {mediaMain && <Picture items={mediaMain} />}
                         </Columns.Column>
+
                         <Columns.Column
                             className="mt-8 md:mt-0 md:absolute md:right-0 md:top-0 z-10"
                             width={{ xs: 9, md: 8 }}>
-                            {mediaSecondary && <Picture items={mediaSecondary} />}
+                            {mediaSecondary && (
+                                <Animation
+                                    type="slide-y"
+                                    config={{
+                                        from: 0,
+                                        to: 180,
+                                    }}>
+                                    <Picture items={mediaSecondary} />
+                                </Animation>
+                            )}
                         </Columns.Column>
                     </Columns.Row>
                 </Columns.Column>
