@@ -1,7 +1,7 @@
-import { BareMediaProps, Media } from '@/libs/@types';
+import { BareMediaProps, MediaGlobal } from '@/libs/@types';
 
 export const checkMediaStatus = (props: {
-    item: { src: BareMediaProps['src'] } & Omit<Media, 'url'>;
+    item: { src: BareMediaProps['src'] } & Omit<MediaGlobal, 'url'>;
     handles: string[];
 }): Record<string, BareMediaProps> => {
     const item: Record<string, BareMediaProps> = {};

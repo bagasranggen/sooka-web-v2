@@ -38,10 +38,10 @@ export const createHomepageBanner = (item: any): BannerItemProps => {
         });
     }
 
-    let overlay = 3;
+    let overlay: BannerItemProps['overlay'] = 3;
     if (item?.bannerOverlay) {
         const oly = item.bannerOverlay.replace('_', '');
-        overlay = parseInt(oly);
+        overlay = parseInt(oly) as BannerItemProps['overlay'];
     }
 
     return {
