@@ -98,6 +98,15 @@ export const ProductDetailData = async ({
         });
     }
 
+    infos.contents.push({
+        title: 'Product Flavours',
+        flavours: [
+            { start: 'Fresh', end: 'Creamy', value: 30 },
+            { start: 'Custardy', end: 'Spongy', value: 60 },
+            { start: 'Tangy', end: 'Sweet', value: 30 },
+        ],
+    });
+
     // Content Add-on(s)
     if (d?.addons && d.addons.length > 0) {
         const tmp: ProductDetailInfoProps['addOns'] = [];
