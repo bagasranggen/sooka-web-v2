@@ -131,7 +131,7 @@ export const ProductDetailData = async ({
         const tmp: ProductDetailInfoProps['addOns'] = [];
 
         d.addons.forEach((item: any) => {
-            const price = item?.prices?.[0];
+            const price = item?.prices?.[0]?.price;
 
             const mediaItem = checkMediaStatus({ item: item?.thumbnail, handles: ['assets400x400'] });
 
