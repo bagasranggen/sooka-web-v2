@@ -22,7 +22,7 @@ export const FRAGMENT_ADDON = gql`
     ${FRAGMENT_PRICE}
     ${FRAGMENT_MEDIA({
         name: 'addonThumbnail',
-        on: 'MediaGlobal',
+        on: 'MediaAddon',
         sizesHandles: ['assets400x400'],
     })}
 `;

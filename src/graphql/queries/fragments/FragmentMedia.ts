@@ -1,7 +1,7 @@
 import { gql } from '@apollo/client';
 
 export type FragmentMediaProps = {
-    on: 'MediaGlobal' | 'MediaProduct';
+    on: 'MediaGlobal' | 'MediaProduct' | 'MediaAddon';
     name?: string;
     sizesHandles?: string[];
 };
