@@ -1,5 +1,6 @@
 import { ApolloClient, InMemoryCache, createHttpLink } from '@apollo/client';
 import { setContext } from '@apollo/client/link/context';
+import { loadDevMessages, loadErrorMessages } from '@apollo/client/dev';
 
 const API_URL = process.env.GQL_URL;
 
@@ -30,3 +31,8 @@ export const apolloClient = new ApolloClient({
         },
     },
 });
+
+if (process.env.NODE_ENV !== 'production') {
+    loadDevMessages();
+    loadErrorMessages();
+}
