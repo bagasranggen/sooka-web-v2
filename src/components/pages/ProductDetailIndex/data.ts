@@ -1,4 +1,5 @@
-import { PageDataParamsProps, PageDataProps } from '@/libs/@types';
+import { FLAVOURS } from '@/libs/data';
+import { Flavour, PageDataParamsProps, PageDataProps } from '@/libs/@types';
 import { createPictureImage, createProductDetailPrices } from '@/libs/factory';
 import { checkMediaStatus } from '@/libs/utils';
 
@@ -11,6 +12,7 @@ import { ProductDetailIndexProps } from '@/components/pages/ProductDetailIndex';
 import { ProductDetailInfoProps } from '@/components/pages/ProductDetailIndex/ProductDetailInfo';
 import { BaseProps } from '@/components/common/Picture';
 import { BaseProps as HeadingBaseProps } from '@/components/common/Heading';
+import { RangeProps } from '@/components/common/Range';
 
 export const ProductDetailData = async ({
     type,
@@ -98,14 +100,31 @@ export const ProductDetailData = async ({
         });
     }
 
-    infos.contents.push({
-        title: 'Product Flavours',
-        flavours: [
-            { start: 'Fresh', end: 'Creamy', value: 30 },
-            { start: 'Custardy', end: 'Spongy', value: 60 },
-            { start: 'Tangy', end: 'Sweet', value: 30 },
-        ],
-    });
+    const flavour: Flavour = d?.flavour;
+
+    // Content Flavours
+    if (flavour?.custardySpongy && flavour?.freshCreamy && flavour?.tangySweet) {
+        const flavours: [string, number][] = [];
+        Object.entries(flavour).forEach(([key, value]) => {
+            if (key !== '__typename') flavours.push([key, parseInt(value.replace('_', ''))]);
+        });
+
+        const tmp: RangeProps[] = [];
+        if (flavours.length > 0) {
+            flavours.forEach(([key, value]) => {
+                const text = FLAVOURS?.[key];
+
+                if (text) tmp.push({ ...text, value: value as RangeProps['value'] });
+            });
+        }
+
+        if (tmp.length > 0) {
+            infos.contents.push({
+                title: 'Product Flavours',
+                flavours: tmp,
+            });
+        }
+    }
 
     // Content Add-on(s)
     if (d?.addons && d.addons.length > 0) {

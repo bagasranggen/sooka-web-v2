@@ -17,6 +17,12 @@ export const FRAGMENT_PRODUCT_DETAIL = gql`
         marquee {
             ...marqueeMedia
         }
+
+        flavour {
+            freshCreamy
+            custardySpongy
+            tangySweet
+        }
     }
 
     ${FRAGMENT_META}
