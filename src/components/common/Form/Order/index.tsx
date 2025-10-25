@@ -38,6 +38,9 @@ export type OrderProps = {
 const Order = ({ title, summaries }: OrderProps): React.ReactElement => {
     const { register, handleSubmit, setValue } = useForm<OrderFormFields>();
 
+    let isTwoColumn = false;
+    if (summaries && summaries.length === 2) isTwoColumn = true;
+
     const submitHandler = (data: OrderFormFields) => {
         console.log('submit', data);
     };
@@ -66,7 +69,11 @@ const Order = ({ title, summaries }: OrderProps): React.ReactElement => {
                     return (
                         <Columns.Column
                             key={i}
-                            width={{ xs: 12, md: 4, lg: 4 }}>
+                            width={{
+                                xs: 12,
+                                md: isTwoColumn ? 5 : 4,
+                                lg: isTwoColumn ? 5 : 4,
+                            }}>
                             <Heading
                                 as="h4"
                                 className="md:mb-1 text-md md:text-[2.4rem] lg:text-[3.7rem]">
