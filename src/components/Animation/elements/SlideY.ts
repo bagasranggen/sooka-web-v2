@@ -15,6 +15,7 @@ export const slideY = ({ element, config }: Omit<BaseAnimationProps, 'config'> &
             // ...(id ? { id: `fade-in-${id}` } : {}),
             trigger: element,
             scrub: true,
+            start: 'top+=10% bottom',
             // markers: true,
         },
     });
