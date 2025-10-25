@@ -16,7 +16,7 @@ export const LAYOUT_QUERY = gql`
         }
 
         footerNavigation: Footer {
-            # address
+            address
             businessHours
 
             socialMedia {
