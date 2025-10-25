@@ -1,5 +1,7 @@
 import React from 'react';
 
+import { PropsClassname } from '@/libs/@types';
+
 import Columns from '@/components/common/Columns';
 import Heading from '@/components/common/Heading';
 import Picture, { BaseProps } from '@/components/common/Picture';
@@ -11,13 +13,18 @@ export type HomepageStoryProps = {
     mediaMain?: BaseProps['items'];
     mediaSecondary?: BaseProps['items'];
     description?: RichTextProps['children'];
-};
+} & PropsClassname;
 
-const HomepageStory = ({ mediaMain, mediaSecondary, description }: HomepageStoryProps): React.ReactElement => {
+const HomepageStory = ({
+    mediaMain,
+    mediaSecondary,
+    description,
+    className,
+}: HomepageStoryProps): React.ReactElement => {
     return (
         <Container
             as="section"
-            className="mt-10 md:mt-20">
+            className={className}>
             <Columns.Row spacing={{ x: 3, y: 5, lg: { x: 6 } }}>
                 <Columns.Column width={{ md: 7 }}>
                     <Columns.Row className="relative justify-end md:justify-start">

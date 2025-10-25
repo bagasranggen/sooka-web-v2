@@ -18,7 +18,7 @@ export type HomepageIndexProps = {
         highlights: HomepageHighlightProps['items'];
         testimonials: TestimonialProps['items'];
         imageDivider: ImageDividerProps['media'];
-        story: HomepageStoryProps;
+        story: Omit<HomepageStoryProps, 'className'>;
         orders: {
             steps: NumberProps['items'];
         } & Pick<RichTextProps, 'children'>;
@@ -32,13 +32,19 @@ const HomepageIndex = ({ entries }: HomepageIndexProps): React.ReactElement => {
 
             {entries?.highlights && entries.highlights.length > 0 && (
                 <Animation type="fade-in">
-                    <HomepageHighlight items={entries.highlights} />
+                    <HomepageHighlight
+                        className="mt-10 last:mb-10 last:md:mb-20"
+                        items={entries.highlights}
+                    />
                 </Animation>
             )}
 
             {entries?.story?.description && (
                 <Animation type="fade-in">
-                    <HomepageStory {...entries?.story} />
+                    <HomepageStory
+                        className="mt-10 md:mt-20 last:mb-10 last:md:mb-20"
+                        {...entries?.story}
+                    />
                 </Animation>
             )}
 
@@ -46,7 +52,7 @@ const HomepageIndex = ({ entries }: HomepageIndexProps): React.ReactElement => {
                 <Animation type="fade-in">
                     <Container
                         as="section"
-                        className="mt-10 md:mt-20">
+                        className="mt-10 md:mt-20 last:mb-10 last:md:mb-20">
                         <Columns.Row className="justify-center">
                             <Columns.Column
                                 width={{
@@ -72,7 +78,7 @@ const HomepageIndex = ({ entries }: HomepageIndexProps): React.ReactElement => {
             {entries?.imageDivider && entries.imageDivider.length > 0 && (
                 <Animation type="fade-in">
                     <ImageDivider
-                        className="mt-10 md:mt-20"
+                        className="mt-10 md:mt-20 last:mb-10 last:md:mb-20"
                         media={entries.imageDivider}
                     />
                 </Animation>
@@ -82,7 +88,7 @@ const HomepageIndex = ({ entries }: HomepageIndexProps): React.ReactElement => {
                 <Animation type="fade-in">
                     <Container
                         as="section"
-                        className="mt-10 md:mt-20 mb-10 md:mb-20">
+                        className="mt-10 md:mt-20 last:mb-10 last:md:mb-20">
                         <Columns.Row className="justify-center">
                             <Columns.Column width={{ lg: 8 }}>
                                 <Heading
