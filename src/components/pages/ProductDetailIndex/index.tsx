@@ -9,6 +9,7 @@ import Container from '@/components/common/Container';
 import Picture, { BaseProps } from '@/components/common/Picture';
 import ProductDetailInfo, { ProductDetailInfoProps } from '@/components/pages/ProductDetailIndex/ProductDetailInfo';
 import Marquee, { MarqueeProps } from '@/components/common/Marquee';
+import Animation from '@/components/Animation';
 
 export type ProductDetailIndexProps = {
     entries: {
@@ -46,10 +47,12 @@ const ProductDetailIndex = ({ entries }: ProductDetailIndexProps): React.ReactEl
                     className={infoClass}>
                     <Columns.Row className="justify-between">
                         <Columns.Column width={{ md: 6 }}>
-                            <Picture
-                                className="sticky top-2 lg:top-5"
-                                items={entries.infos.media}
-                            />
+                            <Animation type="fade-in">
+                                <Picture
+                                    className="sticky top-2 lg:top-5"
+                                    items={entries.infos.media}
+                                />
+                            </Animation>
                         </Columns.Column>
 
                         <Columns.Column width={{ md: 6, lg: 5 }}>
