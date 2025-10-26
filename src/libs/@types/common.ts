@@ -3,6 +3,10 @@ import { Metadata } from 'next';
 
 export type ObjectProps<Props> = { [key: string]: Props };
 
+export type TypesProps<Type, Props> = {
+    type: Type;
+} & Props;
+
 export type PageProps = {
     params: Promise<ObjectProps<string | string[]>>;
     searchParams?: Promise<ObjectProps<string | string[] | undefined>>;

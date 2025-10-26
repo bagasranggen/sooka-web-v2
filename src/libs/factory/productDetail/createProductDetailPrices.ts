@@ -38,6 +38,8 @@ export const createProductDetailPrices = (props?: { prices?: Product['prices']; 
                 tmpPrice.label = convertIntToCurrency(price?.salePrice ?? price?.normalPrice, true);
 
                 if (price?.note) {
+                    tmpPrice.value = price.note;
+
                     tmpDimensionItem.items.push({
                         value: price.note,
                         label: price.note,
@@ -48,10 +50,14 @@ export const createProductDetailPrices = (props?: { prices?: Product['prices']; 
             if (!isSinglePrice) {
                 let tmpLabel = convertIntToCurrency(price?.normalPrice, !price?.salePrice);
 
-                if (price?.salePrice)
+                if (price?.salePrice) {
                     tmpLabel = `${convertIntToCurrency(0, true)} ${convertIntToCurrency(price.salePrice)} <s>${tmpLabel}</s>`;
+                }
 
-                if (price?.note) tmpLabel += ` (${price.note})`;
+                if (price?.note) {
+                    tmpPrice.value = price.note;
+                    tmpLabel += ` (${price.note})`;
+                }
 
                 tmpPrice.label = parse(`<p>${tmpLabel}</p>`);
             }
@@ -79,7 +85,7 @@ export const createProductDetailPrices = (props?: { prices?: Product['prices']; 
             const price = item.prices?.[0];
 
             tmp.items.push({
-                value: item?.slug ?? 0,
+                value: item?.title ?? 0,
                 label: `${item.title} (${convertIntToCurrency(price?.price?.normalPrice ?? 0, true)})`,
             });
         });

@@ -1,7 +1,10 @@
+'use client';
+
 import React from 'react';
 
 import { ArrayString } from '@/libs/@types';
-import { joinArrayString } from '@/libs/utils';
+import { joinArrayString, sendWhatsappMessage } from '@/libs/utils';
+import { createMessageText } from '@/libs/factory';
 
 import Banner, { HalfMediaProps } from '@/components/common/Banner';
 import Columns from '@/components/common/Columns';
@@ -35,7 +38,20 @@ const ProductDetailIndex = ({ entries }: ProductDetailIndexProps): React.ReactEl
                     className="md:mt-10">
                     <Banner.HalfMedia
                         media={entries.banner.media}
-                        form={entries.banner.form}>
+                        form={{
+                            ...entries.banner.form,
+                            onSubmit: (data) => {
+                                sendWhatsappMessage(
+                                    createMessageText({
+                                        type: 'regular-cake',
+                                        isEncoded: true,
+                                        dimension: data?.price,
+                                        flavour: data?.title,
+                                        addon: data?.addOns ?? undefined,
+                                    })
+                                );
+                            },
+                        }}>
                         {entries.banner.children}
                     </Banner.HalfMedia>
                 </Container>

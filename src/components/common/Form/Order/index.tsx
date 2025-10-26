@@ -14,7 +14,7 @@ import Button from '@/components/common/Button';
 export type OrderFormFields = {
     title: string;
     price: string;
-    addOns: string;
+    addOns: string[] | undefined;
     dimension: string;
 };
 
@@ -33,16 +33,17 @@ export type OrderItemProps = {
 export type OrderProps = {
     title: string;
     summaries: OrderItemProps[];
+    onSubmit?: (data: OrderFormFields) => void;
 };
 
-const Order = ({ title, summaries }: OrderProps): React.ReactElement => {
+const Order = ({ title, summaries, onSubmit }: OrderProps): React.ReactElement => {
     const { register, handleSubmit, setValue } = useForm<OrderFormFields>();
 
     let isTwoColumn = false;
     if (summaries && summaries.length === 2) isTwoColumn = true;
 
     const submitHandler = (data: OrderFormFields) => {
-        console.log('submit', data);
+        if (onSubmit) onSubmit(data);
     };
 
     useEffect(() => {
