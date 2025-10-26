@@ -38,6 +38,7 @@ export const FRAGMENT_PRODUCT_INFO = gql`
             'productDetailSticky',
             'productDetailMobile',
             'productListingThumbnail',
+            'productListingThumbnailMobile',
         ],
     })}
 `;
