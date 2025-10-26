@@ -86,9 +86,11 @@ const ProductDetailIndex = ({ entries }: ProductDetailIndexProps): React.ReactEl
             )}
 
             {entries?.marquee && entries.marquee.length > 0 && (
-                <section className="mt-10 md:mt-20 mb-10 md:mb-15">
-                    <Marquee items={entries.marquee} />
-                </section>
+                <Animation type="fade-in">
+                    <section className="mt-10 md:mt-20 mb-10 md:mb-15">
+                        <Marquee items={entries.marquee} />
+                    </section>
+                </Animation>
             )}
         </>
     );
