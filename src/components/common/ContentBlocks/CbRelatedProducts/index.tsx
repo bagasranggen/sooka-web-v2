@@ -30,6 +30,7 @@ const CbRelatedProducts = ({ title, className, isNested, products }: CbRelatedPr
                 {products && products.length > 0 && (
                     <div className="mt-5">
                         <Card.Thumbnail
+                            className="justify-center"
                             spacing={{ x: 2, y: 4 }}
                             columns={{ xs: 1, sm: 2, md: 5 }}
                             items={products}
