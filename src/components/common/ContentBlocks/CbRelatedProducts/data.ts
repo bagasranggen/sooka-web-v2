@@ -7,7 +7,7 @@ export const CbRelatedProductsData = (props: any) => {
 
     if (props?.products && props.products.length > 0) {
         props.products.forEach((item: any) => {
-            products.push(createProductItem(item));
+            products.push(createProductItem({ item, hasPrice: false }));
         });
     }
 

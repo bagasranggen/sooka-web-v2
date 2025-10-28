@@ -40,7 +40,7 @@ export const HomepageData = async (): Promise<PageDataProps<HomepageIndexProps>>
 
             if (item?.products && item?.products.length > 0) {
                 item.products.forEach((item: any) => {
-                    tmp.items.push(createProductItem(item));
+                    tmp.items.push(createProductItem({ item }));
                 });
             }
 

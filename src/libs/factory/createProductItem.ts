@@ -5,11 +5,20 @@ import { checkMediaStatus } from '../utils/checkMediaStatus';
 
 import { BaseItemProps } from '@/components/common/Picture';
 
-export const createProductItem = (item: Product) => {
-    // console.log({ item, sizes: item?.thumbnail?.sizes });
+export type CreateProductItemProps = {
+    item: Product;
+    hasPrice?: boolean;
+};
 
-    const price = item?.prices?.[0]?.price;
-    const priceIsSale = !!price?.salePrice;
+export const createProductItem = ({ item, hasPrice = true }: CreateProductItemProps) => {
+    const priceItem = item?.prices?.[0]?.price;
+    const priceIsSale = !!priceItem?.salePrice;
+
+    let price = undefined;
+    if (hasPrice) price = convertIntToCurrency(priceItem?.normalPrice ?? 0);
+
+    let salePrice = undefined;
+    if (hasPrice && priceIsSale) salePrice = convertIntToCurrency(priceItem?.salePrice ?? 0);
 
     const mediaThumbnail = checkMediaStatus({
         item: item?.thumbnail as any,
@@ -25,7 +34,7 @@ export const createProductItem = (item: Product) => {
         media.push(
             createPictureImage({
                 item: mediaThumbnail?.productListingThumbnail,
-                media: mediaThumbnail?.productListingThumbnailMobile ? 992 : undefined,
+                media: mediaThumbnail?.productListingThumbnailMobile ? 768 : undefined,
             })
         );
     }
@@ -38,7 +47,7 @@ export const createProductItem = (item: Product) => {
         mediaHover.push(
             createPictureImage({
                 item: mediaThumbnailHover?.productListingThumbnail,
-                media: mediaThumbnailHover?.productListingThumbnailMobile ? 992 : undefined,
+                media: mediaThumbnailHover?.productListingThumbnailMobile ? 768 : undefined,
             })
         );
     }
@@ -51,7 +60,7 @@ export const createProductItem = (item: Product) => {
         media,
         mediaHover,
         title: item?.title ?? '',
-        price: convertIntToCurrency(price?.normalPrice ?? 0),
-        salePrice: priceIsSale ? convertIntToCurrency(price?.salePrice ?? 0) : undefined,
+        price,
+        salePrice,
     };
 };
