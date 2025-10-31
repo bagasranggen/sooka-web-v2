@@ -1,6 +1,6 @@
 import { FLAVOURS } from '@/libs/data';
 import { Flavour, PageDataParamsProps, PageDataProps } from '@/libs/@types';
-import { createPictureImage, createProductDetailPrices } from '@/libs/factory';
+import { createMarqueeItem, createPictureImage, createProductDetailPrices } from '@/libs/factory';
 import { checkMediaStatus } from '@/libs/utils';
 
 import { apolloClient } from '@/libs/fetcher';
@@ -10,7 +10,6 @@ import parse from 'html-react-parser';
 
 import { ProductDetailIndexProps } from '@/components/pages/ProductDetailIndex';
 import { ProductDetailInfoProps } from '@/components/pages/ProductDetailIndex/ProductDetailInfo';
-import { BaseProps } from '@/components/common/Picture';
 import { BaseProps as HeadingBaseProps } from '@/components/common/Heading';
 import { RangeProps } from '@/components/common/Range';
 
@@ -158,24 +157,9 @@ export const ProductDetailData = async ({
 
     if (d?.marquee && d.marquee.length > 0) {
         d.marquee.forEach((item: any) => {
-            const tmp: BaseProps['items'] = [];
+            const marqueeItem = createMarqueeItem({ item, handles: ['productMarquee', 'productMarqueeMobile'] });
 
-            const media = checkMediaStatus({ item: item, handles: ['productMarquee', 'productMarqueeMobile'] });
-
-            if (media?.productMarquee) {
-                tmp.push(
-                    createPictureImage({
-                        item: media.productMarquee,
-                        media: media?.productMarqueeMobile ? 992 : undefined,
-                    })
-                );
-            }
-
-            if (media?.productMarqueeMobile) {
-                tmp.push(createPictureImage({ item: media.productMarqueeMobile }));
-            }
-
-            marquee.push(tmp);
+            if (marqueeItem.length > 0) marquee.push(marqueeItem);
         });
     }
 
