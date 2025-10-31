@@ -1,9 +1,11 @@
 import { BareMediaProps, MediaGlobal } from '@/libs/@types';
 
-export const checkMediaStatus = (props: {
-    item: { src: BareMediaProps['src'] } & Omit<MediaGlobal, 'url'>;
+export type CheckMediaStatusProps = {
+    item: Omit<MediaGlobal, 'url'> & Pick<BareMediaProps, 'src'>;
     handles: string[];
-}): Record<string, BareMediaProps> => {
+};
+
+export const checkMediaStatus = (props: CheckMediaStatusProps): Record<string, BareMediaProps> => {
     const item: Record<string, BareMediaProps> = {};
 
     if (props?.item) {
