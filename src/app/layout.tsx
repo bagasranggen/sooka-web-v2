@@ -69,7 +69,7 @@ export default async function RootLayout({ children }: Readonly<PropsWithChildre
             <body className={`${anglecia.variable} antialiased`}>
                 <Navigation items={navigation} />
 
-                {children}
+                <main>{children}</main>
 
                 <Footer
                     address={footerNavigation?.address}

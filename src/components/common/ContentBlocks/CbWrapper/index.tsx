@@ -4,6 +4,7 @@ import { ArrayString } from '@/libs/@types';
 import { joinArrayString } from '@/libs/utils';
 
 import { ContentBlocksItemProps } from '@/components/common/ContentBlocks';
+import Animation from '@/components/Animation';
 
 export type CbWrapperProps = {
     children: React.ReactElement;
@@ -29,7 +30,11 @@ const CbWrapper = ({ children, ref, className }: CbWrapperProps): React.ReactEle
         // ...(id ? { id: id } : {}),
     };
 
-    return React.cloneElement(children, props);
+    return (
+        <Animation type="fade-in">
+            <>{React.cloneElement(children, props)}</>
+        </Animation>
+    );
 };
 
 export default CbWrapper;

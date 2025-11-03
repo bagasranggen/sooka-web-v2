@@ -1,6 +1,12 @@
 import { gql } from '@apollo/client';
 
-export const FRAGMENT_MEDIA = (props?: { name?: string; sizesHandles?: string[] }) => {
+export type FragmentMediaProps = {
+    on: 'MediaGlobal' | 'MediaProduct' | 'MediaAddon' | 'MediaGallery';
+    name?: string;
+    sizesHandles?: string[];
+};
+
+export const FRAGMENT_MEDIA = (props?: FragmentMediaProps) => {
     const base = `
         src: url
         width
@@ -22,9 +28,12 @@ export const FRAGMENT_MEDIA = (props?: { name?: string; sizesHandles?: string[] 
     let fragmentName = 'media';
     if (props?.name) fragmentName = `${props?.name}Media`;
 
+    let assetVolume = 'Media';
+    if (props?.on) assetVolume = props.on;
+
     return gql`
         ${`
-            fragment ${fragmentName} on Media {
+            fragment ${fragmentName} on ${assetVolume} {
                 ${base}
                 filename
                 alt

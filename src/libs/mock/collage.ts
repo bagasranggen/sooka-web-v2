@@ -1,4 +1,4 @@
-import { createPicsumImage } from '@/libs/factory';
+import { createPicsumImage } from '../factory/createPicsumImage';
 import { ImageCollageProps } from '@/components/common/ImageCollage';
 
 export const IMAGE_COLLAGE_1_1 = [createPicsumImage({ id: 53, width: 600, height: 600 })];

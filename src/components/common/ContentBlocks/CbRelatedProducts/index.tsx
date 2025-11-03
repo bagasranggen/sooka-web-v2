@@ -11,7 +11,14 @@ export type CbRelatedProductsProps = {
     products: ThumbnailProps['items'];
 } & (Pick<CbWrapperProps, 'className'> & Pick<CbContainerProps, 'isNested'>);
 
-const CbRelatedProducts = ({ title, className, isNested, products }: CbRelatedProductsProps): React.ReactElement => {
+const CbRelatedProducts = ({
+    title,
+    className,
+    isNested,
+    products,
+}: CbRelatedProductsProps): React.ReactElement | null => {
+    if (!products || products.length === 0) return null;
+
     return (
         <CbWrapper className={className}>
             <CbContainer isNested={isNested}>
@@ -30,6 +37,7 @@ const CbRelatedProducts = ({ title, className, isNested, products }: CbRelatedPr
                 {products && products.length > 0 && (
                     <div className="mt-5">
                         <Card.Thumbnail
+                            className="justify-center"
                             spacing={{ x: 2, y: 4 }}
                             columns={{ xs: 1, sm: 2, md: 5 }}
                             items={products}
