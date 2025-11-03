@@ -16,7 +16,7 @@ const CbGallery = ({ className, isNested, items }: CbGalleryProps): React.ReactE
         <CbWrapper className={className}>
             <CbContainer isNested={isNested}>
                 <Columns.Row className="justify-center">
-                    <Columns.Column width={{ md: 10 }}>
+                    <Columns.Column width={{ md: 11, lg: 10 }}>
                         <ImageCollage items={items} />
                     </Columns.Column>
                 </Columns.Row>
