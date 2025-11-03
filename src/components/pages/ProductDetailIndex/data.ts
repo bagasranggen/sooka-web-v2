@@ -94,7 +94,7 @@ export const ProductDetailData = async ({
     // Media Content Description
     if (d?.description) {
         infos.contents.push({
-            title: 'Product Description',
+            title: 'Description',
             description: d.description,
         });
     }
@@ -119,7 +119,7 @@ export const ProductDetailData = async ({
 
         if (tmp.length > 0) {
             infos.contents.push({
-                title: 'Product Flavours',
+                title: 'Flavours',
                 flavours: tmp,
             });
         }
@@ -147,7 +147,7 @@ export const ProductDetailData = async ({
         });
 
         infos.contents.push({
-            title: 'Product Add-on(s)',
+            title: 'Add-on(s)',
             addOns: tmp,
         });
     }
