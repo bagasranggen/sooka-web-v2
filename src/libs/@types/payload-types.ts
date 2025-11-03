@@ -493,6 +493,22 @@ export interface MediaGallery {
     focalX?: number | null;
     focalY?: number | null;
     sizes?: {
+        marquee?: {
+            url?: string | null;
+            width?: number | null;
+            height?: number | null;
+            mimeType?: string | null;
+            filesize?: number | null;
+            filename?: string | null;
+        };
+        marqueeMobile?: {
+            url?: string | null;
+            width?: number | null;
+            height?: number | null;
+            mimeType?: string | null;
+            filesize?: number | null;
+            filename?: string | null;
+        };
         collage1x1?: {
             url?: string | null;
             width?: number | null;
@@ -533,6 +549,38 @@ export interface MediaGallery {
             filesize?: number | null;
             filename?: string | null;
         };
+        media950x594?: {
+            url?: string | null;
+            width?: number | null;
+            height?: number | null;
+            mimeType?: string | null;
+            filesize?: number | null;
+            filename?: string | null;
+        };
+        media950x975?: {
+            url?: string | null;
+            width?: number | null;
+            height?: number | null;
+            mimeType?: string | null;
+            filesize?: number | null;
+            filename?: string | null;
+        };
+        mediaSquare?: {
+            url?: string | null;
+            width?: number | null;
+            height?: number | null;
+            mimeType?: string | null;
+            filesize?: number | null;
+            filename?: string | null;
+        };
+        media4x3?: {
+            url?: string | null;
+            width?: number | null;
+            height?: number | null;
+            mimeType?: string | null;
+            filesize?: number | null;
+            filename?: string | null;
+        };
     };
 }
 /**
@@ -548,53 +596,43 @@ export interface Page {
     url?: string | null;
     uri?: string | null;
     contentBlocks?:
-        | (ContentBlockGallery | ContentBlockHeading | ContentBlockRelatedProducts | ContentBlockCallout)[]
+        | (
+              | ContentBlockCallout
+              | ContentBlockDualPanel
+              | ContentBlockGallery
+              | ContentBlockHeading
+              | ContentBlockMarquee
+              | ContentBlockRelatedProducts
+          )[]
         | null;
     updatedAt: string;
     createdAt: string;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "ContentBlockGallery".
+ * via the `definition` "ContentBlockCallout".
  */
-export interface ContentBlockGallery {
-    media?: (number | MediaGallery)[] | null;
-    cbSpacing?: CbSpacing;
-    id?: string | null;
-    blockName?: string | null;
-    blockType: 'gallery';
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "CbSpacing".
- */
-export interface CbSpacing {
-    marginTop?: ('1' | '2' | '3' | '4' | '5' | '6' | '7' | '8' | '9' | '10') | null;
-    marginBottom?: ('1' | '2' | '3' | '4' | '5' | '6' | '7' | '8' | '9' | '10') | null;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "ContentBlockHeading".
- */
-export interface ContentBlockHeading {
+export interface ContentBlockCallout {
     title?: string | null;
-    headingLevel?: ('1' | '2' | '3' | '4' | '5') | null;
+    link?: Link;
     cbSpacing?: CbSpacing;
     id?: string | null;
     blockName?: string | null;
-    blockType: 'heading';
+    blockType: 'callout';
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "ContentBlockRelatedProducts".
+ * via the `definition` "Link".
  */
-export interface ContentBlockRelatedProducts {
-    title?: string | null;
-    products?: (number | Product)[] | null;
-    cbSpacing?: CbSpacing;
-    id?: string | null;
-    blockName?: string | null;
-    blockType: 'relatedProducts';
+export interface Link {
+    source?: ('products' | 'categories' | 'pages' | 'mail' | 'custom') | null;
+    product?: (number | null) | Product;
+    page?: (number | null) | Page;
+    category?: (number | null) | Category;
+    custom?: string | null;
+    mail?: string | null;
+    target?: boolean | null;
+    label?: string | null;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -649,29 +687,105 @@ export interface Flavour {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "ContentBlockCallout".
+ * via the `definition` "CbSpacing".
  */
-export interface ContentBlockCallout {
-    title?: string | null;
-    link?: Link;
-    cbSpacing?: CbSpacing;
-    id?: string | null;
-    blockName?: string | null;
-    blockType: 'callout';
+export interface CbSpacing {
+    marginTop?: ('1' | '2' | '3' | '4' | '5' | '6' | '7' | '8' | '9' | '10') | null;
+    marginBottom?: ('1' | '2' | '3' | '4' | '5' | '6' | '7' | '8' | '9' | '10') | null;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "Link".
+ * via the `definition` "ContentBlockDualPanel".
  */
-export interface Link {
-    source?: ('products' | 'categories' | 'pages' | 'mail' | 'custom') | null;
-    product?: (number | null) | Product;
-    page?: (number | null) | Page;
-    category?: (number | null) | Category;
-    custom?: string | null;
-    mail?: string | null;
-    target?: boolean | null;
-    label?: string | null;
+export interface ContentBlockDualPanel {
+    contents?:
+        | {
+              type: 'text' | 'media';
+              description?: {
+                  root: {
+                      type: string;
+                      children: {
+                          type: any;
+                          version: number;
+                          [k: string]: unknown;
+                      }[];
+                      direction: ('ltr' | 'rtl') | null;
+                      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+                      indent: number;
+                      version: number;
+                  };
+                  [k: string]: unknown;
+              } | null;
+              media?: (number | null) | MediaGallery;
+              id?: string | null;
+          }[]
+        | null;
+    layout?: ('_2_3' | '_3_2' | '_1_1') | null;
+    cbSpacing?: CbSpacing;
+    id?: string | null;
+    blockName?: string | null;
+    blockType: 'dualPanel';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "ContentBlockGallery".
+ */
+export interface ContentBlockGallery {
+    media?: (number | MediaGallery)[] | null;
+    cbSpacing?: CbSpacing;
+    id?: string | null;
+    blockName?: string | null;
+    blockType: 'gallery';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "ContentBlockHeading".
+ */
+export interface ContentBlockHeading {
+    title?: string | null;
+    description?: {
+        root: {
+            type: string;
+            children: {
+                type: any;
+                version: number;
+                [k: string]: unknown;
+            }[];
+            direction: ('ltr' | 'rtl') | null;
+            format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+            indent: number;
+            version: number;
+        };
+        [k: string]: unknown;
+    } | null;
+    headingLevel?: ('1' | '2' | '3' | '4' | '5') | null;
+    cbSpacing?: CbSpacing;
+    id?: string | null;
+    blockName?: string | null;
+    blockType: 'heading';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "ContentBlockMarquee".
+ */
+export interface ContentBlockMarquee {
+    media?: (number | MediaGallery)[] | null;
+    cbSpacing?: CbSpacing;
+    id?: string | null;
+    blockName?: string | null;
+    blockType: 'marquee';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "ContentBlockRelatedProducts".
+ */
+export interface ContentBlockRelatedProducts {
+    title?: string | null;
+    products?: (number | Product)[] | null;
+    cbSpacing?: CbSpacing;
+    id?: string | null;
+    blockName?: string | null;
+    blockType: 'relatedProducts';
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -972,6 +1086,26 @@ export interface MediaGallerySelect<T extends boolean = true> {
     sizes?:
         | T
         | {
+              marquee?:
+                  | T
+                  | {
+                        url?: T;
+                        width?: T;
+                        height?: T;
+                        mimeType?: T;
+                        filesize?: T;
+                        filename?: T;
+                    };
+              marqueeMobile?:
+                  | T
+                  | {
+                        url?: T;
+                        width?: T;
+                        height?: T;
+                        mimeType?: T;
+                        filesize?: T;
+                        filename?: T;
+                    };
               collage1x1?:
                   | T
                   | {
@@ -1013,6 +1147,46 @@ export interface MediaGallerySelect<T extends boolean = true> {
                         filename?: T;
                     };
               collage2x3?:
+                  | T
+                  | {
+                        url?: T;
+                        width?: T;
+                        height?: T;
+                        mimeType?: T;
+                        filesize?: T;
+                        filename?: T;
+                    };
+              media950x594?:
+                  | T
+                  | {
+                        url?: T;
+                        width?: T;
+                        height?: T;
+                        mimeType?: T;
+                        filesize?: T;
+                        filename?: T;
+                    };
+              media950x975?:
+                  | T
+                  | {
+                        url?: T;
+                        width?: T;
+                        height?: T;
+                        mimeType?: T;
+                        filesize?: T;
+                        filename?: T;
+                    };
+              mediaSquare?:
+                  | T
+                  | {
+                        url?: T;
+                        width?: T;
+                        height?: T;
+                        mimeType?: T;
+                        filesize?: T;
+                        filename?: T;
+                    };
+              media4x3?:
                   | T
                   | {
                         url?: T;
@@ -1254,53 +1428,15 @@ export interface PagesSelect<T extends boolean = true> {
     contentBlocks?:
         | T
         | {
+              callout?: T | ContentBlockCalloutSelect<T>;
+              dualPanel?: T | ContentBlockDualPanelSelect<T>;
               gallery?: T | ContentBlockGallerySelect<T>;
               heading?: T | ContentBlockHeadingSelect<T>;
+              marquee?: T | ContentBlockMarqueeSelect<T>;
               relatedProducts?: T | ContentBlockRelatedProductsSelect<T>;
-              callout?: T | ContentBlockCalloutSelect<T>;
           };
     updatedAt?: T;
     createdAt?: T;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "ContentBlockGallery_select".
- */
-export interface ContentBlockGallerySelect<T extends boolean = true> {
-    media?: T;
-    cbSpacing?: T | CbSpacingSelect<T>;
-    id?: T;
-    blockName?: T;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "CbSpacing_select".
- */
-export interface CbSpacingSelect<T extends boolean = true> {
-    marginTop?: T;
-    marginBottom?: T;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "ContentBlockHeading_select".
- */
-export interface ContentBlockHeadingSelect<T extends boolean = true> {
-    title?: T;
-    headingLevel?: T;
-    cbSpacing?: T | CbSpacingSelect<T>;
-    id?: T;
-    blockName?: T;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "ContentBlockRelatedProducts_select".
- */
-export interface ContentBlockRelatedProductsSelect<T extends boolean = true> {
-    title?: T;
-    products?: T;
-    cbSpacing?: T | CbSpacingSelect<T>;
-    id?: T;
-    blockName?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -1326,6 +1462,75 @@ export interface LinkSelect<T extends boolean = true> {
     mail?: T;
     target?: T;
     label?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "CbSpacing_select".
+ */
+export interface CbSpacingSelect<T extends boolean = true> {
+    marginTop?: T;
+    marginBottom?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "ContentBlockDualPanel_select".
+ */
+export interface ContentBlockDualPanelSelect<T extends boolean = true> {
+    contents?:
+        | T
+        | {
+              type?: T;
+              description?: T;
+              media?: T;
+              id?: T;
+          };
+    layout?: T;
+    cbSpacing?: T | CbSpacingSelect<T>;
+    id?: T;
+    blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "ContentBlockGallery_select".
+ */
+export interface ContentBlockGallerySelect<T extends boolean = true> {
+    media?: T;
+    cbSpacing?: T | CbSpacingSelect<T>;
+    id?: T;
+    blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "ContentBlockHeading_select".
+ */
+export interface ContentBlockHeadingSelect<T extends boolean = true> {
+    title?: T;
+    description?: T;
+    headingLevel?: T;
+    cbSpacing?: T | CbSpacingSelect<T>;
+    id?: T;
+    blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "ContentBlockMarquee_select".
+ */
+export interface ContentBlockMarqueeSelect<T extends boolean = true> {
+    media?: T;
+    cbSpacing?: T | CbSpacingSelect<T>;
+    id?: T;
+    blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "ContentBlockRelatedProducts_select".
+ */
+export interface ContentBlockRelatedProductsSelect<T extends boolean = true> {
+    title?: T;
+    products?: T;
+    cbSpacing?: T | CbSpacingSelect<T>;
+    id?: T;
+    blockName?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
