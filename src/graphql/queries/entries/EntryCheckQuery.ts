@@ -7,7 +7,7 @@ export const ENTRY_CHECK_QUERY = gql`
         ${`
             ${PAGES_TYPES.map(
                 (handle) => `
-                    ${handle}(where: { uri: { equals: $uri } }) {
+                    ${handle}(where: { uri: { equals: $uri }, entryStatus: { equals: live } }) {
                         docs {
                             typeHandle
                             uri
