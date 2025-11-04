@@ -1,6 +1,7 @@
-import { Product } from '@/libs/@types';
+import { ArrayString, Product } from '@/libs/@types';
 
 import { convertIntToCurrency } from '../../utils/convertIntToCurrency';
+import { joinArrayString } from '../../utils/joinArrayString';
 
 import parse from 'html-react-parser';
 
@@ -83,10 +84,18 @@ export const createProductDetailPrices = (props?: { prices?: Product['prices']; 
             if (typeof item === 'number') return;
 
             const price = item.prices?.[0];
+            const priceItem = price?.price;
+            const priceIsFree = priceItem?.isFree;
+
+            let label: ArrayString = [];
+            if (item?.title) label.push(item.title);
+            if (priceIsFree) label.push('(Free)');
+            if (!priceIsFree) label.push(`(${convertIntToCurrency(priceItem?.normalPrice ?? 0, true)})`);
+            label = joinArrayString(label);
 
             tmp.items.push({
                 value: item?.title ?? 0,
-                label: `${item.title} (${convertIntToCurrency(price?.price?.normalPrice ?? 0, true)})`,
+                label,
             });
         });
 
