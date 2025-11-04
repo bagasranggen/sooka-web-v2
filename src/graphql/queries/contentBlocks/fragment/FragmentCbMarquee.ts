@@ -19,7 +19,7 @@ export const FRAGMENT_CB_MARQUEE = gql`
     ${FRAGMENT_CB_SETTINGS[CONTENT_BLOCK_INTERFACE[CONTENT_BLOCK_TYPE.MARQUEE]]}
     ${FRAGMENT_MEDIA({
         name: 'cbMarquee',
-        on: 'MediaGallery',
+        on: 'MediaMarquee',
         sizesHandles: ['marquee', 'marqueeMobile'],
     })} 
 `;
