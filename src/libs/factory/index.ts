@@ -13,3 +13,4 @@ export * from './createMessageText';
 export * from './createPicsumImage';
 export * from './createPictureImage';
 export * from './createProductItem';
+export * from './createWhatsappMessage';
