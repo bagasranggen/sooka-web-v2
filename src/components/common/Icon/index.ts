@@ -1,6 +1,7 @@
 import { Component } from '@/libs/@types';
 
 import Arrow, { ArrowProps } from '@/components/common/Icon/Arrow';
+import Cake, { CakeProps } from '@/components/common/Icon/Cake';
 import Check, { CheckProps } from '@/components/common/Icon/Check';
 import CircleArrow, { CircleArrowProps } from '@/components/common/Icon/CircleArrow';
 import Quote, { QuoteProps } from '@/components/common/Icon/Quote';
@@ -15,6 +16,7 @@ export type * from '@/components/common/Icon/Toggle';
 
 type IconComposition = {
     Arrow: Component<ArrowProps>;
+    Cake: Component<CakeProps>;
     Check: Component<CheckProps>;
     CircleArrow: Component<CircleArrowProps>;
     Quote: Component<QuoteProps>;
@@ -22,4 +24,4 @@ type IconComposition = {
     Toggle: Component<ToggleProps>;
 };
 
-export default Object.assign<{}, IconComposition>({}, { Arrow, Check, CircleArrow, Quote, Sooka, Toggle });
+export default Object.assign<{}, IconComposition>({}, { Arrow, Cake, Check, CircleArrow, Quote, Sooka, Toggle });
