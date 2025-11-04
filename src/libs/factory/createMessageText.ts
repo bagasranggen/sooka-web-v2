@@ -31,14 +31,18 @@ Note : (tulisan / ucapan diatas cake)`;
 
 export type CreateMessageTextProps = {
     isEncoded?: boolean;
-} & TypesProps<'regular-cake', RegularCakeMessageProps>;
+} & (TypesProps<'regular-cake', RegularCakeMessageProps> | TypesProps<'custom', { message: string }>);
 
 export const createMessageText = ({ isEncoded, type, ...props }: CreateMessageTextProps) => {
     let message = '';
 
     switch (type) {
         case 'regular-cake':
-            message = regularCakeMessage(props);
+            message = regularCakeMessage(props as RegularCakeMessageProps);
+            break;
+
+        default:
+            if ('message' in props && props?.message) message = props?.message;
             break;
     }
 
