@@ -5,5 +5,6 @@ export const FRAGMENT_PRICE = gql`
         normalPrice
         salePrice
         note
+        isFree
     }
 `;
