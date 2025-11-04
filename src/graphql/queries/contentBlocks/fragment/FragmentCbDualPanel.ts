@@ -26,7 +26,7 @@ export const FRAGMENT_CB_DUAL_PANEL = gql`
     ${FRAGMENT_CB_SETTINGS[CONTENT_BLOCK_INTERFACE[CONTENT_BLOCK_TYPE.DUAL_PANEL]]}
     ${FRAGMENT_MEDIA({
         name: 'dualPanel',
-        on: 'MediaGallery',
+        on: 'MediaDualPanel',
         sizesHandles: ['media950x594', 'media950x975', 'mediaSquare', 'media4x3'],
     })} 
 `;
