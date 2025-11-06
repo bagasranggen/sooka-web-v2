@@ -56,7 +56,7 @@ const ProductListingIndex = ({ entries }: ProductListingIndexProps): React.React
                     <Container
                         as="section"
                         className="mt-10 mb-15">
-                        {entries?.products && entries?.products.length > 0 && (
+                        {entries.products.length > 0 && (
                             <Card.Thumbnail
                                 spacing={{ x: 3, y: 4 }}
                                 columns={{ xs: 1, sm: 2, md: 3, lg: 4 }}
@@ -64,7 +64,7 @@ const ProductListingIndex = ({ entries }: ProductListingIndexProps): React.React
                             />
                         )}
 
-                        {entries?.products.length === 0 && (
+                        {entries.products.length === 0 && (
                             <Heading
                                 as="h2"
                                 family="default"
