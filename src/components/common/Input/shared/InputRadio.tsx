@@ -2,9 +2,9 @@ import React, { forwardRef } from 'react';
 
 import { ArrayString } from '@/libs/@types';
 import { joinArrayString } from '@/libs/utils';
+import { createInputHooks } from '@/libs/factory';
 
 import { BaseInputProps, BaseInputRef } from '@/components/common/Input';
-import { createInputHooks } from '@/libs/factory';
 
 export type InputRadioProps = BaseInputProps;
 

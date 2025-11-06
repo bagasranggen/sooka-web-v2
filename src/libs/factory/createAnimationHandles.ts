@@ -2,7 +2,7 @@ import { BaseAnimationProps } from '@/libs/@types';
 
 type CreateAnimationHandlesProps = {
     handles: string;
-    animation: ({ element, config, id }: BaseAnimationProps) => void;
+    animation: ({ element, config, id }: Omit<BaseAnimationProps, 'config'> & { config?: any }) => void;
     extendTimeline?: boolean;
 };
 

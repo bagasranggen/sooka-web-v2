@@ -9,3 +9,4 @@ export * from './convertIntToCurrency';
 export * from './getElementRect';
 export * from './getTailwindConfig';
 export * from './joinArrayString';
+export * from './sendWhatsappMessage';

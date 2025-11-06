@@ -45,6 +45,7 @@ const HalfMedia = ({ media, form, children }: HalfMediaProps): React.ReactElemen
                         <Form.Order
                             title={form.title}
                             summaries={form.summaries}
+                            onSubmit={form.onSubmit}
                         />
                     </Columns.Column>
                 </Columns.Row>

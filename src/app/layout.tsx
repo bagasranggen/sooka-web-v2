@@ -12,6 +12,7 @@ import { apolloClient } from '@/libs/fetcher';
 import { LAYOUT_QUERY } from '@/graphql';
 
 import { Navigation as NavigationProps, Footer as FooterProps } from '@/libs/@types';
+import ContextProvider from '@/store/context';
 
 import Navigation, { NavigationItemProps } from '@/components/layout/Navigation';
 import Footer, { FooterSocialProps } from '@/components/layout/Footer';
@@ -65,18 +66,20 @@ export default async function RootLayout({ children }: Readonly<PropsWithChildre
     }
 
     return (
-        <html lang="en">
-            <body className={`${anglecia.variable} antialiased`}>
-                <Navigation items={navigation} />
+        <ContextProvider>
+            <html lang="en">
+                <body className={`${anglecia.variable} antialiased`}>
+                    <Navigation items={navigation} />
 
-                {children}
+                    <main>{children}</main>
 
-                <Footer
-                    address={footerNavigation?.address}
-                    businessHour={footerNavigation?.businessHours}
-                    socialMedia={socialMedia}
-                />
-            </body>
-        </html>
+                    <Footer
+                        address={footerNavigation?.address}
+                        businessHour={footerNavigation?.businessHours}
+                        socialMedia={socialMedia}
+                    />
+                </body>
+            </html>
+        </ContextProvider>
     );
 }
