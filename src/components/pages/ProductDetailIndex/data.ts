@@ -3,8 +3,7 @@ import { Flavour, PageDataParamsProps, PageDataProps } from '@/libs/@types';
 import { createMarqueeItem, createPictureImage, createProductDetailPrices } from '@/libs/factory';
 import { checkMediaStatus } from '@/libs/utils';
 
-import { apolloClient } from '@/libs/fetcher';
-import { PRODUCT_DETAIL_QUERY } from '@/graphql';
+import { axiosClient } from '@/libs/fetcher';
 
 import parse from 'html-react-parser';
 
@@ -17,12 +16,7 @@ export const ProductDetailData = async ({
     type,
     slug,
 }: PageDataParamsProps): Promise<PageDataProps<ProductDetailIndexProps>> => {
-    const { data } = await apolloClient.query({
-        query: PRODUCT_DETAIL_QUERY,
-        variables: {
-            slug,
-        },
-    });
+    const { data } = await axiosClient().get(`/products?slug=${slug}`);
 
     const d = data?.products?.docs?.[0];
 
