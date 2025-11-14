@@ -7,7 +7,10 @@ export type CheckMediaStatusProps = {
 
 export const checkMediaStatus = (
     props: CheckMediaStatusProps
-): { data: (Partial<{ mobileAssets: Record<string, BareMediaProps> }> & Record<string, BareMediaProps>) | null } => {
+): {
+    data: (Partial<{ mobileAssets: Record<string, BareMediaProps> }> & Record<string, BareMediaProps>) | null;
+    hasMobile: boolean;
+} => {
     let data: (Partial<{ mobileAssets: Record<string, BareMediaProps> }> & Record<string, BareMediaProps>) | null =
         null;
 
@@ -53,5 +56,6 @@ export const checkMediaStatus = (
 
     return {
         data,
+        hasMobile: !!mobileAsset,
     };
 };

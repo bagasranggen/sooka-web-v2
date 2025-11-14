@@ -7,11 +7,11 @@ export const createHomepageBanner = (item: any): BannerItemProps => {
     const isProduct = item?.source === 'products';
     const product = item?.product;
 
-    const { data: mediaProduct } = checkMediaStatus({
+    const { data: mediaProduct, hasMobile: mediaProductHasMobile } = checkMediaStatus({
         item: product?.thumbnail,
         handles: ['bannerDesktop', 'bannerTablet', 'bannerMobile'],
     });
-    const { data: mediaCustom } = checkMediaStatus({
+    const { data: mediaCustom, hasMobile: mediaCustomHasMobile } = checkMediaStatus({
         item: item?.media,
         handles: ['bannerDesktop', 'bannerTablet', 'bannerMobile'],
     });
@@ -20,11 +20,9 @@ export const createHomepageBanner = (item: any): BannerItemProps => {
     if (isProduct && mediaProduct?.bannerDesktop?.src) media = mediaProduct.bannerDesktop.src;
 
     let mediaMobile = mediaCustom?.bannerMobile?.src;
-    if (mediaCustom?.mobileAssets?.bannerMobile?.src) mediaMobile = mediaCustom?.mobileAssets?.bannerMobile?.src;
+    if (mediaCustomHasMobile) mediaMobile = mediaCustom?.mobileAssets?.bannerMobile?.src;
     if (isProduct && mediaProduct?.bannerMobile?.src) mediaMobile = mediaProduct.bannerMobile.src;
-    if (isProduct && mediaProduct?.mobileAssets?.bannerMobile?.src) {
-        mediaMobile = mediaProduct?.mobileAssets?.bannerMobile?.src;
-    }
+    if (isProduct && mediaProductHasMobile) mediaMobile = mediaProduct?.mobileAssets?.bannerMobile?.src;
 
     let title = item?.title;
     if (isProduct && product?.title) title = product?.title;

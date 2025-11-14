@@ -52,11 +52,11 @@ export const HomepageData = async (): Promise<PageDataProps<HomepageIndexProps>>
         description: (d?.storyDescription as any) ?? undefined,
     };
 
-    const mediaMain = checkMediaStatus({
+    const { data: mediaMain } = checkMediaStatus({
         item: d?.storyMediaMain as any,
         handles: ['storyMediaDesktop', 'storyMediaMobile'],
     });
-    const mediaSecondary = checkMediaStatus({
+    const { data: mediaSecondary } = checkMediaStatus({
         item: d?.storyMediaSecondary as any,
         handles: ['storyMediaDesktop', 'storyMediaMobile'],
     });
@@ -105,7 +105,7 @@ export const HomepageData = async (): Promise<PageDataProps<HomepageIndexProps>>
     // Image Divider
     const imageDivider: HomepageIndexProps['entries']['imageDivider'] = [];
 
-    const mediaDivider = checkMediaStatus({
+    const { data: mediaDivider } = checkMediaStatus({
         item: d?.imageDividerMedia as any,
         handles: ['bannerDesktop', 'mediaDividerTablet', 'mediaDividerMobile'],
     });

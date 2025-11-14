@@ -20,8 +20,11 @@ export const ProductDetailData = async ({
 
     const d = data?.products?.docs?.[0];
 
-    const mediaMain = checkMediaStatus({ item: d?.thumbnail, handles: ['productDetailBanner', 'productDetailMobile'] });
-    const mediaSecondary = checkMediaStatus({
+    const { data: mediaMain } = checkMediaStatus({
+        item: d?.thumbnail,
+        handles: ['productDetailBanner', 'productDetailMobile'],
+    });
+    const { data: mediaSecondary } = checkMediaStatus({
         item: d?.thumbnailHover,
         handles: ['productDetailSticky', 'productDetailMobile'],
     });
@@ -126,7 +129,7 @@ export const ProductDetailData = async ({
         d.addons.forEach((item: any) => {
             const price = item?.prices?.[0]?.price;
 
-            const mediaItem = checkMediaStatus({ item: item?.thumbnail, handles: ['assets400x400'] });
+            const { data: mediaItem } = checkMediaStatus({ item: item?.thumbnail, handles: ['assets400x400'] });
 
             const media = [];
             if (mediaItem?.assets400x400) {

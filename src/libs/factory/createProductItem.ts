@@ -20,11 +20,11 @@ export const createProductItem = ({ item, hasPrice = true }: CreateProductItemPr
     let salePrice = undefined;
     if (hasPrice && priceIsSale) salePrice = convertIntToCurrency(priceItem?.salePrice ?? 0);
 
-    const mediaThumbnail = checkMediaStatus({
+    const { data: mediaThumbnail } = checkMediaStatus({
         item: item?.thumbnail as any,
         handles: ['productListingThumbnail', 'productListingThumbnailMobile'],
     });
-    const mediaThumbnailHover = checkMediaStatus({
+    const { data: mediaThumbnailHover } = checkMediaStatus({
         item: item?.thumbnailHover as any,
         handles: ['productListingThumbnail', 'productListingThumbnailMobile'],
     });

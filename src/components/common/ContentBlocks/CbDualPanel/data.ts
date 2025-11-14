@@ -50,7 +50,7 @@ export const CbDualPanelData = (props?: any): Pick<CbDualPanelProps, 'items'> =>
             }
 
             if (type === 'media' && item?.media) {
-                const media = checkMediaStatus({
+                const { data: media } = checkMediaStatus({
                     item: item?.media,
                     handles: ['media950x594', 'media950x975', 'mediaSquare', 'media4x3'],
                 });
