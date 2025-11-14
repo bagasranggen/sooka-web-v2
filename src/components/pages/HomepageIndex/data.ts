@@ -49,6 +49,7 @@ export const HomepageData = async (): Promise<PageDataProps<HomepageIndexProps>>
     const story: HomepageIndexProps['entries']['story'] = {
         mediaMain: [],
         mediaSecondary: [],
+        mediaCarousel: [],
         description: (d?.storyDescription as any) ?? undefined,
     };
 
@@ -62,30 +63,48 @@ export const HomepageData = async (): Promise<PageDataProps<HomepageIndexProps>>
     });
 
     // Story Main Media
+    const tmpMediaMainCarousel = [];
     if (mediaMain && mediaMain?.storyMediaDesktop) {
         story?.mediaMain?.push(
             createPictureImage({
                 item: mediaMain?.storyMediaDesktop as any,
-                media: mediaMain?.storyMediaDesktop ? 992 : undefined,
+                media: mediaMain?.storyMediaDesktop ? 768 : undefined,
+            })
+        );
+        tmpMediaMainCarousel.push(
+            createPictureImage({
+                item: mediaMain?.storyMediaDesktop as any,
+                media: mediaMain?.storyMediaDesktop ? 576 : undefined,
             })
         );
     }
     if (mediaMain && mediaMain?.storyMediaMobile) {
         story?.mediaMain?.push(createPictureImage({ item: mediaMain.storyMediaMobile }));
+        tmpMediaMainCarousel?.push(createPictureImage({ item: mediaMain.storyMediaMobile }));
     }
+    if (tmpMediaMainCarousel.length > 0) story?.mediaCarousel?.push(tmpMediaMainCarousel);
 
     // Story Secondary Media
+    const tmpMediaSecondaryCarousel = [];
     if (mediaSecondary && mediaSecondary?.storyMediaDesktop) {
         story?.mediaSecondary?.push(
             createPictureImage({
                 item: mediaSecondary?.storyMediaDesktop as any,
-                media: mediaSecondary?.storyMediaDesktop ? 992 : undefined,
+                media: mediaSecondary?.storyMediaDesktop ? 768 : undefined,
+            })
+        );
+        tmpMediaSecondaryCarousel.push(
+            createPictureImage({
+                item: mediaSecondary?.storyMediaDesktop as any,
+                media: mediaSecondary?.storyMediaDesktop ? 576 : undefined,
             })
         );
     }
     if (mediaSecondary && mediaSecondary?.storyMediaMobile) {
         story?.mediaSecondary?.push(createPictureImage({ item: mediaSecondary.storyMediaMobile }));
+        tmpMediaSecondaryCarousel?.push(createPictureImage({ item: mediaSecondary.storyMediaMobile }));
     }
+    if (tmpMediaSecondaryCarousel.length > 0) story?.mediaCarousel?.push(tmpMediaSecondaryCarousel);
 
     // Testimonials
     const testimonials: HomepageIndexProps['entries']['testimonials'] = [];
