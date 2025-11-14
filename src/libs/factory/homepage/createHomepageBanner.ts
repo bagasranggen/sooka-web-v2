@@ -46,6 +46,7 @@ export const createHomepageBanner = (item: any): BannerItemProps => {
     let overlay: BannerItemProps['overlay'] = 3;
     if (item?.bannerOverlay) {
         const oly = item.bannerOverlay.replace('_', '');
+
         overlay = parseInt(oly) as BannerItemProps['overlay'];
     }
 
