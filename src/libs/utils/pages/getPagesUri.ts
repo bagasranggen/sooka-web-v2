@@ -1,9 +1,9 @@
 import { PageUriItemProps } from '@/libs/@types';
 
-import { PAGES_LIMIT_DEFAULT, PAGES_LIMIT_HANDLES } from '@/components/pages/handlesLimit';
+import { PAGES_HANDLES } from '@/components/pages/handles';
+import { PAGES_LIMIT_DEFAULT } from '@/components/pages/handlesLimit';
 
-import { apolloClient, axiosClient } from '@/libs/fetcher';
-import { ENTRY_URI_QUERY } from '@/graphql';
+import { axiosClient } from '@/libs/fetcher';
 
 export const getPagesUri = async (props?: { limit?: any }) => {
     const uri: PageUriItemProps[] = [{ slug: [''] }];
@@ -11,68 +11,46 @@ export const getPagesUri = async (props?: { limit?: any }) => {
     try {
         const { data: pagesData } = await axiosClient().get(`/pages`);
 
-        // console.log({
-        //     limit: props?.limit,
-        //     PAGES_LIMIT_HANDLES,
-        //     // pagesData: pagesData?.pages?.docs,
-        // });
-
-        // let pages: Record<string, { slug: string[] }[]> | undefined = undefined;
+        let pages:
+            | Record<string, { typeHandle: string; items: PageUriItemProps[] }>
+            | { typeHandle: string; items: PageUriItemProps[] }[]
+            | undefined = undefined;
 
         if (pagesData?.pages?.docs && pagesData.pages.docs.length > 0) {
-            pagesData.pages.docs.forEach((item: any, i: number) => {
+            pagesData.pages.docs.forEach((item: any) => {
                 const handle = item.typeHandle;
-                const limit = props?.limit?.[handle] ?? PAGES_LIMIT_DEFAULT;
                 const uriArr = item.uri.split('/');
 
-                console.log({
-                    limit,
-                    index: i + 1,
-                });
+                if (handle === PAGES_HANDLES.HOMEPAGE) return;
 
-                if (limit === 0) return;
-                if (limit === i + 1) return;
+                if (pages && !Array.isArray(pages) && pages?.[handle]) {
+                    pages[handle].items.push({ slug: uriArr });
+                }
 
-                uri.push({ slug: uriArr });
-
-                // if (!pages?.[handle]) {
-                //     pages = Object.assign(pages ?? {}, {
-                //         // [handle]: {
-                //         //     // limit: props?.limit?.[handle] ?? PAGES_LIMIT_DEFAULT,
-                //         //     items: [item.uri.split('/')],
-                //         // },
-                //         [handle]: [{ slug: uriArr }],
-                //     });
-                //
-                //     // pages[handle] = [];
-                // }
-                //
-                // if (pages?.[handle]) {
-                //     pages[handle].push({ slug: uriArr });
-                // }
+                if (!Array.isArray(pages) && !pages?.[handle]) {
+                    pages = Object.assign(pages ?? {}, {
+                        [handle]: {
+                            typeHandle: handle,
+                            items: [{ slug: uriArr }],
+                        },
+                    });
+                }
             });
+
+            if (pages) pages = Object.values(pages);
         }
 
-        // console.log({ pages });
+        if (pages && Array.isArray(pages)) {
+            pages.forEach(({ typeHandle, items }) => {
+                const limit = props?.limit?.[typeHandle] ?? PAGES_LIMIT_DEFAULT;
 
-        console.log({ uri, length: uri.length });
+                items.forEach((item, i: number) => {
+                    if (limit > PAGES_LIMIT_DEFAULT && limit < i + 1) return;
 
-        // const { data } = await apolloClient.query({
-        //     query: ENTRY_URI_QUERY,
-        //     variables: props?.limit ?? {},
-        // });
-        //
-        // if (data) {
-        //     Object.values(data).forEach((item: any) => {
-        //         if (item?.docs && item.docs.length > 0) {
-        //             item.docs.forEach((itm: any) => {
-        //                 const uriArr = itm.uri.split('/');
-        //
-        //                 if (uriArr.length > 0) uri.push({ slug: uriArr });
-        //             });
-        //         }
-        //     });
-        // }
+                    uri.push(item);
+                });
+            });
+        }
     } catch {}
 
     return uri;
