@@ -1,6 +1,7 @@
-import { Product } from '@/libs/@types';
+import { ArrayString, Product } from '@/libs/@types';
 
 import { convertIntToCurrency } from '../../utils/convertIntToCurrency';
+import { joinArrayString } from '../../utils/joinArrayString';
 
 import parse from 'html-react-parser';
 
@@ -38,6 +39,8 @@ export const createProductDetailPrices = (props?: { prices?: Product['prices']; 
                 tmpPrice.label = convertIntToCurrency(price?.salePrice ?? price?.normalPrice, true);
 
                 if (price?.note) {
+                    tmpPrice.value = price.note;
+
                     tmpDimensionItem.items.push({
                         value: price.note,
                         label: price.note,
@@ -48,10 +51,14 @@ export const createProductDetailPrices = (props?: { prices?: Product['prices']; 
             if (!isSinglePrice) {
                 let tmpLabel = convertIntToCurrency(price?.normalPrice, !price?.salePrice);
 
-                if (price?.salePrice)
+                if (price?.salePrice) {
                     tmpLabel = `${convertIntToCurrency(0, true)} ${convertIntToCurrency(price.salePrice)} <s>${tmpLabel}</s>`;
+                }
 
-                if (price?.note) tmpLabel += ` (${price.note})`;
+                if (price?.note) {
+                    tmpPrice.value = price.note;
+                    tmpLabel += ` (${price.note})`;
+                }
 
                 tmpPrice.label = parse(`<p>${tmpLabel}</p>`);
             }
@@ -77,10 +84,18 @@ export const createProductDetailPrices = (props?: { prices?: Product['prices']; 
             if (typeof item === 'number') return;
 
             const price = item.prices?.[0];
+            const priceItem = price?.price;
+            const priceIsFree = priceItem?.isFree;
+
+            let label: ArrayString = [];
+            if (item?.title) label.push(item.title);
+            if (priceIsFree) label.push('(Free)');
+            if (!priceIsFree) label.push(`(${convertIntToCurrency(priceItem?.normalPrice ?? 0, true)})`);
+            label = joinArrayString(label);
 
             tmp.items.push({
-                value: item?.slug ?? 0,
-                label: `${item.title} (${convertIntToCurrency(price?.price?.normalPrice ?? 0, true)})`,
+                value: item?.title ?? 0,
+                label,
             });
         });
 

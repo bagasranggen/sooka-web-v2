@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@apollo/client": "^3.13.8",
+    "@bprogress/next": "^3.2.12",
     "@fontsource/noto-sans-jp": "^5.1.0",
     "@gsap/react": "^2.1.1",
     "@payloadcms/richtext-lexical": "^3.46.0",

@@ -1,6 +1,8 @@
 import React from 'react';
+
 import Picture, { BaseProps } from '@/components/common/Picture';
 import Columns from '@/components/common/Columns';
+import ImageCollageCarousel from '@/components/common/ImageCollage/ImageCollageCarousel';
 
 export type ImageCollageItemProps = BaseProps['items'];
 
@@ -8,7 +10,9 @@ export type ImageCollageProps = {
     items: ImageCollageItemProps[];
 };
 
-const ImageCollage = ({ items }: ImageCollageProps): React.ReactElement => {
+const ImageCollage = ({ items }: ImageCollageProps): React.ReactElement | null => {
+    if (!items || items.length === 0) return null;
+
     const COLLAGE_SPACE: Record<number, string> = {
         0: 'md:mt-8',
         1: '',
@@ -25,7 +29,9 @@ const ImageCollage = ({ items }: ImageCollageProps): React.ReactElement => {
 
     return (
         <>
-            <Columns.Row spacing={{ x: 2, y: 2 }}>
+            <Columns.Row
+                className="hidden md:flex"
+                spacing={{ x: 2, y: 2 }}>
                 {collage.map((item: ImageCollageProps['items'], i: number) => {
                     const order = i % 3;
 
@@ -47,6 +53,11 @@ const ImageCollage = ({ items }: ImageCollageProps): React.ReactElement => {
                     );
                 })}
             </Columns.Row>
+
+            <ImageCollageCarousel
+                className="md:!hidden"
+                items={items}
+            />
         </>
     );
 };

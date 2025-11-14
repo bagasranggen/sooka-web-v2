@@ -8,7 +8,7 @@ import Container from '@/components/common/Container';
 import FooterSocial, { FooterSocialProps } from '@/components/layout/Footer/FooterSocial';
 
 export type FooterProps = {
-    address?: string;
+    address?: string | null;
     businessHour?: string | null;
     socialMedia?: FooterSocialProps['items'];
 };

@@ -29,6 +29,7 @@ export const FRAGMENT_PRODUCT_INFO = gql`
     ${FRAGMENT_PRICE}
     ${FRAGMENT_MEDIA({
         name: 'thumbnail',
+        on: 'MediaProduct',
         sizesHandles: [
             'bannerDesktop',
             'bannerTablet',
@@ -37,7 +38,7 @@ export const FRAGMENT_PRODUCT_INFO = gql`
             'productDetailSticky',
             'productDetailMobile',
             'productListingThumbnail',
-            'assets400x400',
+            'productListingThumbnailMobile',
         ],
     })}
 `;

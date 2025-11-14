@@ -39,7 +39,7 @@ export const ProductListingData = async ({
 
     if (productsData?.products?.docs && productsData?.products?.docs?.length > 0) {
         productsData.products.docs.forEach((item: any) => {
-            products.push(createProductItem(item));
+            products.push(createProductItem({ item }));
         });
     }
 

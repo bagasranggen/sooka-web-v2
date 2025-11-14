@@ -11,7 +11,7 @@ export type RichTextProps = {
 
 const RichText = ({ children, ...props }: RichTextProps): React.ReactElement | null => {
     let Wrapper: ExoticComponent<FragmentProps> | ElementTagsProps = React.Fragment;
-    if (props) Wrapper = 'div';
+    if (Object.keys(props).length > 0) Wrapper = 'div';
 
     if (!children) return null;
 

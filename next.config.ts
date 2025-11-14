@@ -3,6 +3,7 @@ import type { NextConfig } from 'next';
 const nextConfig: NextConfig = {
     /* config options here */
     reactCompiler: true,
+    staticPageGenerationTimeout: 1000,
     async rewrites() {
         return [
             {
