@@ -1,10 +1,22 @@
-import React from 'react';
+'use client';
+
+import React, { useEffect, useState } from 'react';
 
 export type CakeProps = {
     color?: 'light' | 'primary';
 };
 
-const Cake = ({ color = 'primary' }: CakeProps): React.ReactElement => {
+const Cake = ({ color = 'primary' }: CakeProps): React.ReactElement | null => {
+    const [isReady, setIsReady] = useState<boolean>(false);
+
+    useEffect(() => {
+        if (typeof window === 'undefined') return;
+
+        setIsReady(true);
+    }, []);
+
+    if (!isReady) return null;
+
     return (
         <svg
             version="1.1"
