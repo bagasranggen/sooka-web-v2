@@ -28,7 +28,7 @@ const HomepageStory = ({
         <Container
             as="section"
             className={className}>
-            <Columns.Row spacing={{ x: 3, y: 5, lg: { x: 6 } }}>
+            <Columns.Row spacing={{ x: 3, y: 0, lg: { x: 6 } }}>
                 <Columns.Column
                     className=""
                     width={{ sm: 6, lg: 7 }}>
@@ -74,7 +74,7 @@ const HomepageStory = ({
 
                     {mediaCarousel && mediaCarousel.length > 0 && (
                         <Carousel.Fade
-                            className="mt-5 sm:!hidden"
+                            className="mt-3 sm:!hidden"
                             items={mediaCarousel.map((item) => ({
                                 children: <Picture items={item} />,
                             }))}
