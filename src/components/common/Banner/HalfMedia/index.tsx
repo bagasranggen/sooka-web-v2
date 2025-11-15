@@ -29,7 +29,7 @@ const HalfMedia = ({ media, form, children }: HalfMediaProps): React.ReactElemen
                 </Columns.Column>
 
                 <Columns.Column
-                    className="md:-ms-6/12 order-first md:order-last !px-0 md:!px-1.5"
+                    className="md:-ms-3/12 lg:-ms-6/12 order-first md:order-last !px-0 md:!px-1.5"
                     width={{ md: 9, lg: 8 }}>
                     <Overlay
                         variant="solid"
