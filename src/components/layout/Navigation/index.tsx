@@ -22,6 +22,7 @@ export type NavigationProps = {
 
 const Navigation = ({ items }: NavigationProps): React.ReactElement => {
     const { show, triggerOpen, triggerClose } = usePortal({});
+    const { isSamePath } = useCheckSamePath();
     const [navRef, { height }] = useMeasure();
     const { y: scrollY } = useWindowScroll();
     const [prevScrollY, setPrevScrollY] = useState<number>(0);
@@ -56,7 +57,10 @@ const Navigation = ({ items }: NavigationProps): React.ReactElement => {
                     <div className="flex items-center justify-between">
                         <Button
                             as="anchor"
-                            href="/">
+                            href="/"
+                            onClick={() => {
+                                if (show) triggerClose();
+                            }}>
                             <Icon.Sooka
                                 id="logoHeade"
                                 color="light"
@@ -111,6 +115,8 @@ const Navigation = ({ items }: NavigationProps): React.ReactElement => {
                                     className="uppercase font-semibold tracking-0.2 transition-colors text-white"
                                     onClick={(e) => {
                                         e.stopPropagation();
+
+                                        if (isSamePath({ href: item?.href })) triggerClose();
                                     }}>
                                     {item.children}
                                 </Button>
