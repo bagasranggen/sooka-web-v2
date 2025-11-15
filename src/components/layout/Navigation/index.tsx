@@ -86,7 +86,10 @@ const Navigation = ({ items }: NavigationProps): React.ReactElement => {
                                 <Button
                                     as="anchor"
                                     href={item.href}
-                                    className="uppercase font-semibold tracking-0.2 transition-colors text-white">
+                                    className="uppercase font-semibold tracking-0.2 transition-colors text-white"
+                                    onClick={(e) => {
+                                        e.stopPropagation();
+                                    }}>
                                     {item.children}
                                 </Button>
                             ),
