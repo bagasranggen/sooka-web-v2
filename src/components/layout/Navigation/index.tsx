@@ -1,8 +1,12 @@
 'use client';
 
-import React, { Suspense } from 'react';
+import React, { Ref, Suspense, useEffect, useState } from 'react';
 
-import { NavigationEvents, usePortal } from '@/libs/hooks';
+import { ArrayString } from '@/libs/@types';
+import { NavigationEvents, useCheckSamePath, usePortal } from '@/libs/hooks';
+import { joinArrayString } from '@/libs/utils';
+
+import { useMeasure, useWindowScroll } from 'react-use';
 
 import Icon from '@/components/common/Icon';
 import List from '@/components/common/List';
@@ -18,6 +22,22 @@ export type NavigationProps = {
 
 const Navigation = ({ items }: NavigationProps): React.ReactElement => {
     const { show, triggerOpen, triggerClose } = usePortal({});
+    const [navRef, { height }] = useMeasure();
+    const { y: scrollY } = useWindowScroll();
+    const [prevScrollY, setPrevScrollY] = useState<number>(0);
+    const [scrollYDirection, setScrollYDirection] = useState<'down' | 'up' | null>(null);
+
+    let navClass: ArrayString = ['bg-sooka-primary h-[7rem] flex items-center text-white'];
+    navClass.push('sticky top-0 z-[1040] transition-transform');
+    if (scrollY > height && scrollYDirection === 'down') navClass.push('-translate-y-full');
+    navClass = joinArrayString(navClass);
+
+    useEffect(() => {
+        setPrevScrollY((prevState) => {
+            setScrollYDirection(prevState > scrollY ? 'up' : 'down');
+            return scrollY;
+        });
+    }, [scrollY]);
 
     return (
         <>
@@ -29,7 +49,9 @@ const Navigation = ({ items }: NavigationProps): React.ReactElement => {
                 />
             </Suspense>
 
-            <nav className="bg-sooka-primary h-[7rem] flex items-center text-white">
+            <nav
+                ref={navRef as Ref<HTMLElement>}
+                className={navClass}>
                 <Container>
                     <div className="flex items-center justify-between">
                         <Button
