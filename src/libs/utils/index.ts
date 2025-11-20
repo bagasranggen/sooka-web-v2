@@ -7,6 +7,7 @@ export * from './checkStringIsNumber';
 export * from './cleanArrayString';
 export * from './convertIntToCurrency';
 export * from './getElementRect';
+export * from './getRandomNumber';
 export * from './getTailwindConfig';
 export * from './joinArrayString';
 export * from './sendWhatsappMessage';
