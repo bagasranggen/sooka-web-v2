@@ -99,10 +99,12 @@ export const ProductDetailData = async ({
     const flavour: Flavour = d?.flavour;
 
     // Content Flavours
-    if (flavour?.custardySpongy && flavour?.freshCreamy && flavour?.tangySweet) {
+    if (flavour?.showFlavour && flavour?.custardySpongy && flavour?.freshCreamy && flavour?.tangySweet) {
         const flavours: [string, number][] = [];
         Object.entries(flavour).forEach(([key, value]) => {
-            if (key !== '__typename') flavours.push([key, parseInt(value.replace('_', ''))]);
+            const excludedKey = ['__typename', 'showFlavour'];
+
+            if (!excludedKey.includes(key)) flavours.push([key, parseInt(value.replace('_', ''))]);
         });
 
         const tmp: RangeProps[] = [];
