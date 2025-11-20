@@ -62,5 +62,7 @@ export const createProductItem = ({ item, hasPrice = true }: CreateProductItemPr
         title: item?.title ?? '',
         price,
         salePrice,
+        // disabled: true,
+        // label: 'Currently Unavailable',
     };
 };
