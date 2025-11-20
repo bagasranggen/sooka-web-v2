@@ -10,7 +10,7 @@ export type CreateMarqueeItemProps = {
 
 export const createMarqueeItem = ({ item, handles }: CreateMarqueeItemProps) => {
     const tmp: BaseProps['items'] = [];
-    const media = checkMediaStatus({ item: item, handles });
+    const { data: media } = checkMediaStatus({ item: item, handles });
 
     if (handles && handles.length > 0) {
         handles.forEach((item, i) => {

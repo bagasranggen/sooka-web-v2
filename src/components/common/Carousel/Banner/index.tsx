@@ -15,7 +15,8 @@ import BannerVariant from '@/components/common/Carousel/Banner/BannerVariant';
 import RichText, { RichTextProps } from '@/components/common/RichText';
 
 export type BannerItemProps = {
-    media: BaseItemProps['src'];
+    media?: BaseItemProps['src'];
+    mediaMobile?: BaseItemProps['src'];
     align?: 'left' | 'right';
     category?: string;
     title: string;
@@ -43,9 +44,15 @@ const Banner = ({ items }: BannerProps): React.ReactElement => {
                         '--bg-image': `url("${item.media}")`,
                     });
                 }
+                if (item?.mediaMobile) {
+                    style = Object.assign(style, {
+                        '--bg-image-mobile': `url("${item.mediaMobile}")`,
+                    });
+                }
 
                 let bgClass: ArrayString = ['bg-cover bg-center'];
-                bgClass.push(`bg-[image:var(--bg-image)]`);
+                bgClass.push(`bg-[image:var(--bg-image-mobile)]`);
+                bgClass.push(`lg:bg-[image:var(--bg-image)]`);
                 bgClass = joinArrayString(bgClass);
 
                 let contentClass: ArrayString = ['items-center h-full'];

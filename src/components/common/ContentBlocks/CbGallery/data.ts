@@ -31,7 +31,7 @@ export const CbGalleryData = (props?: any): Pick<CbGalleryProps, 'items'> => {
             const handles = Object.values(HANDLES);
             const order = i % handles.length;
             const handle = ORDERS?.[order];
-            const media = checkMediaStatus({ item: item, handles });
+            const { data: media } = checkMediaStatus({ item: item, handles });
 
             const tmp = [];
 
