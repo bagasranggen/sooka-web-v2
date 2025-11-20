@@ -22,7 +22,7 @@ const ProductListingIndex = ({ entries }: ProductListingIndexProps): React.React
             {entries?.banner && (
                 <Container
                     as="section"
-                    className="mt-10">
+                    className="mt-6 lg:mt-10">
                     <Columns.Row>
                         <Columns.Column
                             offset={{ md: 1 }}
@@ -55,7 +55,7 @@ const ProductListingIndex = ({ entries }: ProductListingIndexProps): React.React
                     config={{ delay: 0.25 }}>
                     <Container
                         as="section"
-                        className="mt-10 mb-15">
+                        className="mt-6 lg:mt-10 mb-10 lg:mb-15">
                         {entries?.products && entries?.products.length > 0 && (
                             <Card.Thumbnail
                                 spacing={{ x: 3, y: 4 }}

@@ -79,7 +79,7 @@ const Banner = ({ items }: BannerProps): React.ReactElement => {
                                 variant={align === 'right' ? 'gradient-right' : 'gradient-left'}
                                 opacity={overlay ?? 5}>
                                 <div className={bgClass}>
-                                    <Container className="relative z-[2] h-[calc(90vh-7rem)] sm:h-[calc(70vh-7rem)] md:landscape:h-[calc(100vh-7rem)] lg:landscape:h-[calc(100vh-7rem)]">
+                                    <Container className="relative z-[2] min-h-[55rem] h-[calc(90vh-7rem)] sm:h-[calc(70vh-7rem)] md:landscape:h-[calc(100vh-7rem)] lg:landscape:h-[calc(100vh-7rem)]">
                                         <Columns.Row className={contentClass}>
                                             <Columns.Column width={{ md: 7, xl: 5 }}>
                                                 {item.category && (
