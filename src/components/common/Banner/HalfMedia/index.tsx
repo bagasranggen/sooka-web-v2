@@ -46,6 +46,7 @@ const HalfMedia = ({ media, form, children }: HalfMediaProps): React.ReactElemen
                             title={form.title}
                             summaries={form.summaries}
                             disabled={form.disabled}
+                            notes={form.notes}
                             onSubmit={form.onSubmit}
                         />
                     </Columns.Column>

@@ -34,10 +34,11 @@ export type OrderProps = {
     title: string;
     summaries: OrderItemProps[];
     disabled?: boolean;
+    notes?: string;
     onSubmit?: (data: OrderFormFields) => void;
 };
 
-const Order = ({ title, summaries, disabled, onSubmit }: OrderProps): React.ReactElement => {
+const Order = ({ title, summaries, disabled, notes, onSubmit }: OrderProps): React.ReactElement => {
     const { register, handleSubmit, setValue } = useForm<OrderFormFields>();
 
     let isTwoColumn = false;
@@ -127,6 +128,10 @@ const Order = ({ title, summaries, disabled, onSubmit }: OrderProps): React.Reac
                         },
                     ]}
                 />
+            )}
+
+            {disabled && notes && (
+                <p className="mt-6 lg:mt-4 uppercase text-[3rem] text-center tracking-0.4 font-bold">{notes}</p>
             )}
         </form>
     );
