@@ -1,6 +1,11 @@
 import { FLAVOURS } from '@/libs/data';
 import { Flavour, PageDataParamsProps, PageDataProps } from '@/libs/@types';
-import { createMarqueeItem, createPictureImage, createProductDetailPrices } from '@/libs/factory';
+import {
+    createMarqueeItem,
+    createPictureImage,
+    createProductDetailPrices,
+    createProductDetailTag,
+} from '@/libs/factory';
 import { checkMediaStatus } from '@/libs/utils';
 
 import { axiosClient } from '@/libs/fetcher';
@@ -35,7 +40,8 @@ export const ProductDetailData = async ({
         form: {
             title: d?.title,
             summaries: createProductDetailPrices({ prices: d?.prices, addons: d?.addons }),
-            disabled: d?.availability === 'available',
+            disabled: d?.availability === 'unavailable',
+            notes: createProductDetailTag({ item: d }),
         },
     };
 
