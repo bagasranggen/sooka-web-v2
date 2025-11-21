@@ -35,6 +35,7 @@ export const ProductDetailData = async ({
         form: {
             title: d?.title,
             summaries: createProductDetailPrices({ prices: d?.prices, addons: d?.addons }),
+            disabled: d?.availability === 'available',
         },
     };
 

@@ -33,10 +33,11 @@ export type OrderItemProps = {
 export type OrderProps = {
     title: string;
     summaries: OrderItemProps[];
+    disabled?: boolean;
     onSubmit?: (data: OrderFormFields) => void;
 };
 
-const Order = ({ title, summaries, onSubmit }: OrderProps): React.ReactElement => {
+const Order = ({ title, summaries, disabled, onSubmit }: OrderProps): React.ReactElement => {
     const { register, handleSubmit, setValue } = useForm<OrderFormFields>();
 
     let isTwoColumn = false;
@@ -86,6 +87,10 @@ const Order = ({ title, summaries, onSubmit }: OrderProps): React.ReactElement =
                             {isMultiple &&
                                 Array.isArray(items) &&
                                 items.map((itm: OrderItemSummariesProps, idx: number) => {
+                                    if (disabled) {
+                                        return <div key={idx}>{itm.label}</div>;
+                                    }
+
                                     return (
                                         <Input
                                             key={idx}
@@ -107,20 +112,22 @@ const Order = ({ title, summaries, onSubmit }: OrderProps): React.ReactElement =
                 })}
             </Columns.Row>
 
-            <Button.Container
-                className="mt-4 justify-center"
-                items={[
-                    {
-                        children: (
-                            <Button.Arrow
-                                as="button"
-                                type="submit">
-                                Order Now
-                            </Button.Arrow>
-                        ),
-                    },
-                ]}
-            />
+            {!disabled && (
+                <Button.Container
+                    className="mt-4 justify-center"
+                    items={[
+                        {
+                            children: (
+                                <Button.Arrow
+                                    as="button"
+                                    type="submit">
+                                    Order Now
+                                </Button.Arrow>
+                            ),
+                        },
+                    ]}
+                />
+            )}
         </form>
     );
 };
