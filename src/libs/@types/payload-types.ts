@@ -678,6 +678,7 @@ export interface Link {
  */
 export interface Product {
     id: number;
+    _order?: string | null;
     typeHandle?: string | null;
     entryStatus?: ('disabled' | 'live') | null;
     title: string;
@@ -688,6 +689,7 @@ export interface Product {
     thumbnailHover?: (number | null) | MediaProduct;
     marquee?: (number | MediaProduct)[] | null;
     bannerTitle?: string | null;
+    availability: 'available' | 'unavailable';
     description: {
         root: {
             type: string;
@@ -1639,6 +1641,7 @@ export interface ContentBlockRelatedProductsSelect<T extends boolean = true> {
  * via the `definition` "products_select".
  */
 export interface ProductsSelect<T extends boolean = true> {
+    _order?: T;
     typeHandle?: T;
     entryStatus?: T;
     title?: T;
@@ -1649,6 +1652,7 @@ export interface ProductsSelect<T extends boolean = true> {
     thumbnailHover?: T;
     marquee?: T;
     bannerTitle?: T;
+    availability?: T;
     description?: T;
     category?: T;
     flavour?: T | FlavourSelect<T>;
