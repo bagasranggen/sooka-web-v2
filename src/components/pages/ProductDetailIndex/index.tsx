@@ -11,7 +11,7 @@ import Columns from '@/components/common/Columns';
 import Container from '@/components/common/Container';
 import Picture, { BaseProps } from '@/components/common/Picture';
 import ProductDetailInfo, { ProductDetailInfoProps } from '@/components/pages/ProductDetailIndex/ProductDetailInfo';
-import Marquee, { MarqueeProps } from '@/components/common/Marquee';
+import Marquee, { PictureProps } from '@/components/common/Marquee';
 import Animation from '@/components/Animation';
 
 export type ProductDetailIndexProps = {
@@ -21,7 +21,7 @@ export type ProductDetailIndexProps = {
             media: BaseProps['items'];
             contents: ProductDetailInfoProps[];
         };
-        marquee?: MarqueeProps['items'];
+        marquee?: PictureProps['items'];
     };
 };
 
@@ -88,7 +88,7 @@ const ProductDetailIndex = ({ entries }: ProductDetailIndexProps): React.ReactEl
             {entries?.marquee && entries.marquee.length > 0 && (
                 <Animation type="fade-in">
                     <section className="mt-10 md:mt-20 mb-10 md:mb-15">
-                        <Marquee items={entries.marquee} />
+                        <Marquee.Picture items={entries.marquee} />
                     </section>
                 </Animation>
             )}
