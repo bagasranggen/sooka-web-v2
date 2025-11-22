@@ -21,7 +21,7 @@ const Arrow = ({ children, size = 'md', style, ...props }: ArrowProps): React.Re
     const transitionClass = 'md:duration-500';
 
     let btnClass: ArrayString = [
-        'group inline-flex py-0.5 items-center overflow-hidden rounded-full md:transition-colors md:hover:text-white',
+        'group inline-flex pt-0.5 pb-[.75rem] items-center overflow-hidden rounded-full md:transition-colors md:hover:text-white',
     ];
     btnClass.push(transitionClass);
     if (size === 'md') btnClass.push('pl-2 pr-1');
