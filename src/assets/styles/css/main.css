@@ -9,6 +9,7 @@
         font-family: theme('fontFamily.noto-sans-jp');
         font-size: theme('fontSize.base');
         color: theme('colors.black');
+        background: theme('colors.white');
     }
 
     p:not(:last-child) {
