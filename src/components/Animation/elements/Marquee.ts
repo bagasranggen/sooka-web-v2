@@ -13,9 +13,7 @@ export type MarqueeConfigProps = {
 
 export const marquee = async ({
     element,
-    config = {
-        direction: 'left',
-    },
+    config,
 }: Omit<BaseAnimationProps, 'config'> & { config?: MarqueeConfigProps }) => {
     await delay({ ms: 80 });
 
@@ -39,7 +37,7 @@ export const marquee = async ({
         },
     });
 
-    const direction = config?.direction;
+    const direction = config?.direction ?? 'left';
     let xFrom = 0;
     let xTo = 0;
 
