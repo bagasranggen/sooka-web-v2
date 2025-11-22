@@ -1,6 +1,6 @@
-import { Component } from '@/libs/@types';
+import { Component, RefComponent } from '@/libs/@types';
 
-import Base, { BaseProps } from '@/components/common/Button/Base';
+import Base, { BaseProps, BaseRefProps } from '@/components/common/Button/Base';
 import Arrow, { ArrowProps } from '@/components/common/Button/Arrow';
 import Container, { ContainerProps } from '@/components/common/Button/Container';
 
@@ -13,4 +13,4 @@ type ButtonComposition = {
     Container: Component<ContainerProps>;
 };
 
-export default Object.assign<Component<BaseProps>, ButtonComposition>(Base, { Arrow, Container });
+export default Object.assign<RefComponent<BaseProps, BaseRefProps>, ButtonComposition>(Base, { Arrow, Container });

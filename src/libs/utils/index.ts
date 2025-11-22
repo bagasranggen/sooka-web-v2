@@ -6,6 +6,8 @@ export * from './checkMediaStatus';
 export * from './checkStringIsNumber';
 export * from './cleanArrayString';
 export * from './convertIntToCurrency';
+export * from './delay';
+export * from './getElementDimension';
 export * from './getElementRect';
 export * from './getRandomNumber';
 export * from './getTailwindConfig';

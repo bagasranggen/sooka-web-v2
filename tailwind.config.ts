@@ -22,7 +22,7 @@ export default {
             variants: ['*', '*:sm', '*:md', '*:lg', '*:xl', '*:2xl'],
         },
         {
-            pattern: /(mx|mt|mb)-./,
+            pattern: /(mx|mt|mb|px|ps|pe)-./,
             variants: ['xs', 'sm', 'md', 'lg', 'xl', '2xl'],
         },
         {
@@ -104,7 +104,8 @@ export default {
                 '11/12': '91.666667%',
             },
             colors: {
-                black: '#231F20',
+                black: '#252525',
+                white: '#fffafa',
                 'sooka-primary': '#F7613F',
                 'sooka-secondary': '#FF9A00',
             },

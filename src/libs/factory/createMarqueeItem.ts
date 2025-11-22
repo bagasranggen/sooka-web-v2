@@ -3,14 +3,11 @@ import { createPictureImage } from './createPictureImage';
 
 import { BaseProps } from '@/components/common/Picture';
 
-export type CreateMarqueeItemProps = {
-    // item: any;
-    // handles: string[];
-} & Pick<CheckMediaStatusProps, 'item' | 'handles'>;
+export type CreateMarqueeItemProps = Pick<CheckMediaStatusProps, 'item' | 'handles'>;
 
 export const createMarqueeItem = ({ item, handles }: CreateMarqueeItemProps) => {
     const tmp: BaseProps['items'] = [];
-    const { data: media } = checkMediaStatus({ item: item, handles });
+    const { data: media } = checkMediaStatus({ item, handles });
 
     if (handles && handles.length > 0) {
         handles.forEach((item, i) => {

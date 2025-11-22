@@ -1,5 +1,6 @@
 import { Product } from '@/libs/@types';
 import { createPictureImage } from './createPictureImage';
+import { createProductDetailTag } from './productDetail/createProductDetailTag';
 import { convertIntToCurrency } from '../utils/convertIntToCurrency';
 import { checkMediaStatus } from '../utils/checkMediaStatus';
 
@@ -55,14 +56,6 @@ export const createProductItem = ({ item, hasPrice = true }: CreateProductItemPr
         mediaHover.push(createPictureImage({ item: mediaThumbnailHover?.productListingThumbnailMobile }));
     }
 
-    let disabled: ThumbnailItemProps['disabled'] = false;
-    let label: ThumbnailItemProps['label'] = undefined;
-
-    if (item?.availability === 'unavailable') {
-        disabled = true;
-        label = 'Currently Unavailable';
-    }
-
     return {
         cta: { href: item?.url as any },
         media,
@@ -70,7 +63,7 @@ export const createProductItem = ({ item, hasPrice = true }: CreateProductItemPr
         title: item?.title ?? '',
         price,
         salePrice,
-        disabled,
-        label,
+        disabled: item?.availability === 'unavailable',
+        label: createProductDetailTag({ item }),
     };
 };
