@@ -106,7 +106,7 @@ const Navigation = ({ items }: NavigationProps): React.ReactElement => {
                     from="bottom"
                     className="h-full max-h-[calc(100vh-7rem)] bg-sooka-primary">
                     <List
-                        className="mt-3 text-center space-y-2"
+                        className="mt-10 text-center space-y-2"
                         items={items.map((item: NavigationItemProps) => ({
                             children: (
                                 <Button
