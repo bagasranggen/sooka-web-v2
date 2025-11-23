@@ -25,7 +25,7 @@ export const marquee = async ({
 
     const { outerWidth: textOuterWidth } = getElementDimension(items[0]);
 
-    let duration = ((textOuterWidth / 2) * 2 * itemsHalf) / 100;
+    let duration = ((textOuterWidth / 2) * 2 * itemsHalf) / 35;
     if (config?.speed && config.speed > 1) duration = duration / config.speed;
 
     const tl = gsap.timeline({
