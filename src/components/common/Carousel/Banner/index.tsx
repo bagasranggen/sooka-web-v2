@@ -80,26 +80,26 @@ const Banner = ({ items }: BannerProps): React.ReactElement => {
                                 opacity={overlay ?? 5}>
                                 <div className={bgClass}>
                                     <Container className="relative z-[2] min-h-[55rem] h-[calc(90vh-7rem)] sm:h-[calc(70vh-7rem)] md:landscape:h-[calc(100vh-7rem)] lg:landscape:h-[calc(100vh-7rem)]">
-                                        <Columns.Row className={contentClass}>
-                                            <Columns.Column width={{ md: 7, xl: 5 }}>
-                                                {item.category && (
-                                                    <div className="mb-1 flex items-center text-white text-sm lg:text-[1.4rem] tracking-0.2 font-bold uppercase">
-                                                        <span className="w-[8.4rem] h-[.15rem] lg:h-[.3rem] bg-white me-1.5" />
-                                                        {item.category}
-                                                    </div>
-                                                )}
+                                        {/*<Columns.Row className={contentClass}>*/}
+                                        {/*    <Columns.Column width={{ md: 7, xl: 5 }}>*/}
+                                        {/*        {item.category && (*/}
+                                        {/*            <div className="mb-1 flex items-center text-white text-sm lg:text-[1.4rem] tracking-0.2 font-bold uppercase">*/}
+                                        {/*                <span className="w-[8.4rem] h-[.15rem] lg:h-[.3rem] bg-white me-1.5" />*/}
+                                        {/*                {item.category}*/}
+                                        {/*            </div>*/}
+                                        {/*        )}*/}
 
-                                                <h1 className="text-white text-[5rem] md:portrait:text-[6rem] lg:landscape:text-[7rem] leading-none md:landscape:leading-[5.5rem] lg:landscape:leading-[6.5rem] font-anglecia">
-                                                    {item.title}
-                                                </h1>
+                                        {/*        <h1 className="text-white text-[5rem] md:portrait:text-[6rem] lg:landscape:text-[7rem] leading-none md:landscape:leading-[5.5rem] lg:landscape:leading-[6.5rem] font-anglecia">*/}
+                                        {/*            {item.title}*/}
+                                        {/*        </h1>*/}
 
-                                                {item?.description && (
-                                                    <RichText className="mt-2.5 text-white">
-                                                        {item.description}
-                                                    </RichText>
-                                                )}
-                                            </Columns.Column>
-                                        </Columns.Row>
+                                        {/*        {item?.description && (*/}
+                                        {/*            <RichText className="mt-2.5 text-white">*/}
+                                        {/*                {item.description}*/}
+                                        {/*            </RichText>*/}
+                                        {/*        )}*/}
+                                        {/*    </Columns.Column>*/}
+                                        {/*</Columns.Row>*/}
                                     </Container>
                                 </div>
                             </Overlay>
