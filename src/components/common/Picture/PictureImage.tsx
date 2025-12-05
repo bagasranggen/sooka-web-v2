@@ -1,0 +1,47 @@
+import React from 'react';
+import { getImageProps } from 'next/image';
+
+import { ArrayString } from '@/libs/@types';
+import { joinArrayString } from '@/libs/utils';
+
+import { BaseItemProps } from '@/components/common/Picture';
+
+export type PictureImageProps = BaseItemProps;
+
+const PictureImage = ({ className: classNameProps, ...item }: PictureImageProps): React.ReactElement => {
+    // const { className, srcRetina, ...rest } = item;
+
+    let imageClass: ArrayString = [];
+    if (classNameProps) imageClass.push(classNameProps);
+    imageClass = joinArrayString(imageClass);
+
+    const {
+        props: { src, srcSet, width, height, alt, className, loading },
+    } = getImageProps({
+        src: item?.src,
+        className: imageClass,
+        width: item?.width,
+        height: item?.height,
+        loading: item?.loading,
+        alt: item?.alt,
+    });
+
+    const imgProps: React.DetailedHTMLProps<React.ImgHTMLAttributes<HTMLImageElement>, HTMLImageElement> = {
+        src,
+        srcSet,
+        width,
+        height,
+        loading,
+        ...(className ? { className } : {}),
+        // ...(srcRetina ? { srcSet: `${srcRetina} 2x` } : {}),
+    };
+
+    return (
+        <img
+            {...imgProps}
+            alt={alt}
+        />
+    );
+};
+
+export default PictureImage;
