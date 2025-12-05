@@ -17,13 +17,21 @@ export const createHomepageBanner = (item: any): BannerItemProps => {
         handles: ['bannerDesktop', 'bannerTablet', 'bannerMobile'],
     });
 
-    let media = mediaCustom?.bannerDesktop?.src;
-    if (isProduct && mediaProduct?.bannerDesktop?.src) media = mediaProduct.bannerDesktop.src;
+    let media: BannerItemProps['media'] = mediaCustom?.bannerDesktop?.src;
+    if (isProduct && mediaProduct?.bannerDesktop?.src) {
+        media = createBackgroundImage({ item: mediaProduct.bannerDesktop });
+    }
 
-    let mediaMobile = mediaCustom?.bannerMobile?.src;
-    if (mediaCustomHasMobile) mediaMobile = mediaCustom?.mobileAssets?.bannerMobile?.src;
-    if (isProduct && mediaProduct?.bannerMobile?.src) mediaMobile = mediaProduct.bannerMobile.src;
-    if (isProduct && mediaProductHasMobile) mediaMobile = mediaProduct?.mobileAssets?.bannerMobile?.src;
+    let mediaMobile: BannerItemProps['mediaMobile'] = createBackgroundImage({ item: mediaCustom?.bannerMobile });
+    if (mediaCustomHasMobile) {
+        mediaMobile = createBackgroundImage({ item: mediaCustom?.mobileAssets?.bannerMobile });
+    }
+    if (isProduct && mediaProduct?.bannerMobile?.src) {
+        mediaMobile = createBackgroundImage({ item: mediaProduct.bannerMobile });
+    }
+    if (isProduct && mediaProductHasMobile) {
+        mediaMobile = createBackgroundImage({ item: mediaProduct?.mobileAssets?.bannerMobile });
+    }
 
     let title = item?.title;
     if (isProduct && product?.title) title = product?.title;
