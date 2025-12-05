@@ -1,3 +1,5 @@
+'use client';
+
 import React, { forwardRef, Ref } from 'react';
 
 import { ArrayString } from '@/libs/@types';
