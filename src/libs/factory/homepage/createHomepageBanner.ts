@@ -1,5 +1,6 @@
 import { checkMediaStatus } from '../../utils/checkMediaStatus';
 import { createLinkItem } from '../../factory/createLinkItem';
+import { createBackgroundImage } from '../../factory/createBackgroundImage';
 
 import { BannerItemProps } from '@/components/common/Carousel';
 

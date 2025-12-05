@@ -70,11 +70,17 @@ export const ProductDetailData = async ({
             createPictureImage({
                 item: mediaMain.productDetailBanner,
                 media: mediaMain?.productDetailMobile ? 768 : undefined,
+                loading: 'eager',
             })
         );
     }
     if (mediaMain?.productDetailMobile) {
-        banner.media.push(createPictureImage({ item: mediaMain.productDetailMobile }));
+        banner.media.push(
+            createPictureImage({
+                item: mediaMain.productDetailMobile,
+                loading: 'eager',
+            })
+        );
     }
 
     const infos: ProductDetailIndexProps['entries']['infos'] = {
