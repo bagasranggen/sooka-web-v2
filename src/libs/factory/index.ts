@@ -4,6 +4,7 @@ export * from './productDetail';
 
 export * from './createAnimationHandles';
 export * from './createArrayFromNumber';
+export * from './createBackgroundImage';
 export * from './createDynamicElement';
 export * from './createIconItem';
 export * from './createInputHooks';
