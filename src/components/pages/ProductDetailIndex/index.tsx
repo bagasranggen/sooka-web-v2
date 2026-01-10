@@ -1,14 +1,18 @@
+'use client';
+
 import React from 'react';
 
 import { ArrayString } from '@/libs/@types';
-import { joinArrayString } from '@/libs/utils';
+import { joinArrayString, sendWhatsappMessage } from '@/libs/utils';
+import { createMessageText } from '@/libs/factory';
 
 import Banner, { HalfMediaProps } from '@/components/common/Banner';
 import Columns from '@/components/common/Columns';
 import Container from '@/components/common/Container';
 import Picture, { BaseProps } from '@/components/common/Picture';
 import ProductDetailInfo, { ProductDetailInfoProps } from '@/components/pages/ProductDetailIndex/ProductDetailInfo';
-import Marquee, { MarqueeProps } from '@/components/common/Marquee';
+import Marquee, { PictureProps } from '@/components/common/Marquee';
+import Animation from '@/components/Animation';
 
 export type ProductDetailIndexProps = {
     entries: {
@@ -17,7 +21,7 @@ export type ProductDetailIndexProps = {
             media: BaseProps['items'];
             contents: ProductDetailInfoProps[];
         };
-        marquee?: MarqueeProps['items'];
+        marquee?: PictureProps['items'];
     };
 };
 
@@ -34,7 +38,20 @@ const ProductDetailIndex = ({ entries }: ProductDetailIndexProps): React.ReactEl
                     className="md:mt-10">
                     <Banner.HalfMedia
                         media={entries.banner.media}
-                        form={entries.banner.form}>
+                        form={{
+                            ...entries.banner.form,
+                            onSubmit: (data) => {
+                                sendWhatsappMessage(
+                                    createMessageText({
+                                        type: 'regular-cake',
+                                        isEncoded: true,
+                                        dimension: data?.price,
+                                        flavour: data?.title,
+                                        addon: data?.addOns ?? undefined,
+                                    })
+                                );
+                            },
+                        }}>
                         {entries.banner.children}
                     </Banner.HalfMedia>
                 </Container>
@@ -46,10 +63,12 @@ const ProductDetailIndex = ({ entries }: ProductDetailIndexProps): React.ReactEl
                     className={infoClass}>
                     <Columns.Row className="justify-between">
                         <Columns.Column width={{ md: 6 }}>
-                            <Picture
-                                className="sticky top-2 lg:top-5"
-                                items={entries.infos.media}
-                            />
+                            <Animation type="fade-in">
+                                <Picture
+                                    className="sticky top-2 lg:top-5"
+                                    items={entries.infos.media}
+                                />
+                            </Animation>
                         </Columns.Column>
 
                         <Columns.Column width={{ md: 6, lg: 5 }}>
@@ -67,9 +86,11 @@ const ProductDetailIndex = ({ entries }: ProductDetailIndexProps): React.ReactEl
             )}
 
             {entries?.marquee && entries.marquee.length > 0 && (
-                <section className="mt-10 md:mt-20 mb-10 md:mb-15">
-                    <Marquee items={entries.marquee} />
-                </section>
+                <Animation type="fade-in">
+                    <section className="mt-10 md:mt-20 mb-10 md:mb-15">
+                        <Marquee.Picture items={entries.marquee} />
+                    </section>
+                </Animation>
             )}
         </>
     );

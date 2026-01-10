@@ -14,5 +14,9 @@ export const FRAGMENT_HOMEPAGE_STORY = gql`
         }
     }
 
-    ${FRAGMENT_MEDIA({ name: 'story', sizesHandles: ['storyMediaDesktop', 'storyMediaMobile'] })}
+    ${FRAGMENT_MEDIA({
+        name: 'story',
+        on: 'MediaGlobal',
+        sizesHandles: ['storyMediaDesktop', 'storyMediaMobile'],
+    })}
 `;

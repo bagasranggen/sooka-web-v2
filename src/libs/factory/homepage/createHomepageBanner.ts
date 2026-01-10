@@ -1,5 +1,6 @@
 import { checkMediaStatus } from '../../utils/checkMediaStatus';
 import { createLinkItem } from '../../factory/createLinkItem';
+import { createBackgroundImage } from '../../factory/createBackgroundImage';
 
 import { BannerItemProps } from '@/components/common/Carousel';
 
@@ -7,17 +8,30 @@ export const createHomepageBanner = (item: any): BannerItemProps => {
     const isProduct = item?.source === 'products';
     const product = item?.product;
 
-    const mediaProduct = checkMediaStatus({
+    const { data: mediaProduct, hasMobile: mediaProductHasMobile } = checkMediaStatus({
         item: product?.thumbnail,
         handles: ['bannerDesktop', 'bannerTablet', 'bannerMobile'],
     });
-    const mediaCustom = checkMediaStatus({
+    const { data: mediaCustom, hasMobile: mediaCustomHasMobile } = checkMediaStatus({
         item: item?.media,
         handles: ['bannerDesktop', 'bannerTablet', 'bannerMobile'],
     });
 
-    let media = mediaCustom?.bannerDesktop?.src;
-    if (isProduct && mediaProduct?.bannerDesktop?.src) media = mediaProduct.bannerDesktop.src;
+    let media: BannerItemProps['media'] = mediaCustom?.bannerDesktop?.src;
+    if (isProduct && mediaProduct?.bannerDesktop?.src) {
+        media = createBackgroundImage({ item: mediaProduct.bannerDesktop });
+    }
+
+    let mediaMobile: BannerItemProps['mediaMobile'] = createBackgroundImage({ item: mediaCustom?.bannerMobile });
+    if (mediaCustomHasMobile) {
+        mediaMobile = createBackgroundImage({ item: mediaCustom?.mobileAssets?.bannerMobile });
+    }
+    if (isProduct && mediaProduct?.bannerMobile?.src) {
+        mediaMobile = createBackgroundImage({ item: mediaProduct.bannerMobile });
+    }
+    if (isProduct && mediaProductHasMobile) {
+        mediaMobile = createBackgroundImage({ item: mediaProduct?.mobileAssets?.bannerMobile });
+    }
 
     let title = item?.title;
     if (isProduct && product?.title) title = product?.title;
@@ -38,12 +52,21 @@ export const createHomepageBanner = (item: any): BannerItemProps => {
         });
     }
 
+    let overlay: BannerItemProps['overlay'] = 3;
+    if (item?.bannerOverlay) {
+        const oly = item.bannerOverlay.replace('_', '');
+
+        overlay = parseInt(oly) as BannerItemProps['overlay'];
+    }
+
     return {
         media,
+        mediaMobile,
         align: item?.textAlign,
         category: item?.tag?.title,
         title,
         description,
         cta,
+        overlay,
     };
 };

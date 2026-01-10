@@ -34,10 +34,12 @@ const Base = ({
                     className={typeof backdrop === 'object' ? backdrop?.className : undefined}
                 />
             )}
+
             <BaseOffcanvas
                 from={from}
                 isShow={isShow}
                 isTransitioning={isTransitioning}
+                hide={hide}
                 className={className}>
                 {children}
             </BaseOffcanvas>

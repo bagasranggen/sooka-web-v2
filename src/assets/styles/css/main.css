@@ -9,6 +9,7 @@
         font-family: theme('fontFamily.noto-sans-jp');
         font-size: theme('fontSize.base');
         color: theme('colors.black');
+        background: theme('colors.white');
     }
 
     p:not(:last-child) {
@@ -17,4 +18,55 @@
 }
 
 @tailwind components;
+
+@layer components {
+    .cb-text {
+        h2:not(:last-child),
+        h3:not(:last-child) {
+            @apply mb-[1rem];
+        }
+
+        h2 {
+            @apply text-[3.5rem];
+        }
+
+        h3 {
+            @apply text-[3rem];
+        }
+
+        .list-bullet {
+            @apply list-disc ms-2;
+
+            .nestedListItem {
+                .list-bullet {
+                    @apply ms-3 list-[circle];
+                }
+            }
+        }
+    }
+}
+
+@layer components {
+    .icon.icon--cake[style*='--icon-color'] {
+        .st1 {
+            fill: #ffffff;
+        }
+
+        .st0 {
+            fill: var(--icon-color, #f7613f);
+        }
+
+        .st2 {
+            fill: var(--icon-color, #ff9a00);
+        }
+    }
+}
+
+@layer components {
+    [data-animation='fade-in']:not([style]) {
+        opacity: 0;
+        visibility: hidden;
+    }
+}
+
 @tailwind utilities;

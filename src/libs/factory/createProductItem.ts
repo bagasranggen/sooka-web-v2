@@ -1,30 +1,59 @@
 import { Product } from '@/libs/@types';
 import { createPictureImage } from './createPictureImage';
+import { createProductDetailTag } from './productDetail/createProductDetailTag';
 import { convertIntToCurrency } from '../utils/convertIntToCurrency';
 import { checkMediaStatus } from '../utils/checkMediaStatus';
 
-import { BaseItemProps } from '@/components/common/Picture';
+import { ThumbnailItemProps } from '@/components/common/Card';
 
-export const createProductItem = (item: Product) => {
-    // console.log({ item, sizes: item?.thumbnail?.sizes });
+export type CreateProductItemProps = {
+    item: Product;
+    hasPrice?: boolean;
+};
 
-    const price = item?.prices?.[0]?.price;
-    const priceIsSale = !!price?.salePrice;
+export const createProductItem = ({ item, hasPrice = true }: CreateProductItemProps) => {
+    const priceItem = item?.prices?.[0]?.price;
+    const priceIsSale = !!priceItem?.salePrice;
 
-    const mediaThumbnail = checkMediaStatus({ item: item?.thumbnail as any, handles: ['productListingThumbnail'] });
-    const mediaThumbnailHover = checkMediaStatus({
+    let price: ThumbnailItemProps['price'] = undefined;
+    if (hasPrice) price = convertIntToCurrency(priceItem?.normalPrice ?? 0);
+
+    let salePrice: ThumbnailItemProps['salePrice'] = undefined;
+    if (hasPrice && priceIsSale) salePrice = convertIntToCurrency(priceItem?.salePrice ?? 0);
+
+    const { data: mediaThumbnail } = checkMediaStatus({
+        item: item?.thumbnail as any,
+        handles: ['productListingThumbnail', 'productListingThumbnailMobile'],
+    });
+    const { data: mediaThumbnailHover } = checkMediaStatus({
         item: item?.thumbnailHover as any,
-        handles: ['productListingThumbnail'],
+        handles: ['productListingThumbnail', 'productListingThumbnailMobile'],
     });
 
-    const media: BaseItemProps[] = [];
+    const media: ThumbnailItemProps['media'] = [];
     if (mediaThumbnail?.productListingThumbnail) {
-        media.push(createPictureImage({ item: mediaThumbnail?.productListingThumbnail }));
+        media.push(
+            createPictureImage({
+                item: mediaThumbnail?.productListingThumbnail,
+                media: mediaThumbnail?.productListingThumbnailMobile ? 768 : undefined,
+            })
+        );
+    }
+    if (mediaThumbnail?.productListingThumbnailMobile) {
+        media.push(createPictureImage({ item: mediaThumbnail?.productListingThumbnailMobile }));
     }
 
-    const mediaHover: BaseItemProps[] = [];
+    const mediaHover: ThumbnailItemProps['mediaHover'] = [];
     if (mediaThumbnailHover?.productListingThumbnail) {
-        mediaHover.push(createPictureImage({ item: mediaThumbnailHover?.productListingThumbnail }));
+        mediaHover.push(
+            createPictureImage({
+                item: mediaThumbnailHover?.productListingThumbnail,
+                media: mediaThumbnailHover?.productListingThumbnailMobile ? 768 : undefined,
+            })
+        );
+    }
+    if (mediaThumbnailHover?.productListingThumbnailMobile) {
+        mediaHover.push(createPictureImage({ item: mediaThumbnailHover?.productListingThumbnailMobile }));
     }
 
     return {
@@ -32,7 +61,9 @@ export const createProductItem = (item: Product) => {
         media,
         mediaHover,
         title: item?.title ?? '',
-        price: convertIntToCurrency(price?.normalPrice ?? 0),
-        salePrice: priceIsSale ? convertIntToCurrency(price?.salePrice ?? 0) : undefined,
+        price,
+        salePrice,
+        disabled: item?.availability === 'unavailable',
+        label: createProductDetailTag({ item }),
     };
 };

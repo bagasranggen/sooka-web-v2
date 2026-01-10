@@ -1,4 +1,6 @@
-import React from 'react';
+'use client';
+
+import React, { useEffect, useState } from 'react';
 
 import { PropsClassname } from '@/libs/@types';
 
@@ -8,7 +10,9 @@ export type SookaProps = {
     style?: React.CSSProperties;
 } & PropsClassname;
 
-const Sooka = ({ id, className, color, style }: SookaProps): React.ReactElement => {
+const Sooka = ({ id, className, color, style }: SookaProps): React.ReactElement | null => {
+    const [isReady, setIsReady] = useState<boolean>(false);
+
     let svgStyle = {
         enableBackground: 'new 0 0 1080 1080',
         maxWidth: '100%',
@@ -20,6 +24,14 @@ const Sooka = ({ id, className, color, style }: SookaProps): React.ReactElement 
         svgStyle = { ...svgStyle, ...style };
     }
 
+    useEffect(() => {
+        if (typeof window === 'undefined') return;
+
+        setIsReady(true);
+    }, []);
+
+    if (!isReady) return null;
+
     return (
         <>
             <style
@@ -29,7 +41,6 @@ const Sooka = ({ id, className, color, style }: SookaProps): React.ReactElement 
             />
 
             <svg
-                suppressHydrationWarning={true}
                 version="1.1"
                 id={id}
                 xmlns="http://www.w3.org/2000/svg"

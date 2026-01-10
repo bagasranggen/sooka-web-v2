@@ -31,6 +31,7 @@ const CbCallout = ({ className, isNested, title, cta }: CbCalloutProps): React.R
                                     {
                                         children: (
                                             <Button.Arrow
+                                                as="anchor"
                                                 size="lg"
                                                 {...cta}
                                             />

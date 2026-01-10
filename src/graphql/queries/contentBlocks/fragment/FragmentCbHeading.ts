@@ -7,6 +7,7 @@ import { FRAGMENT_CB_COMMON } from '@/graphql/queries/contentBlocks/fragment/Fra
 export const FRAGMENT_CB_HEADING = gql`
     fragment cbHeading on ContentBlockHeading {
         title
+        description
         
         ${`...cbCommon${CONTENT_BLOCK_INTERFACE[CONTENT_BLOCK_TYPE.HEADING]}`}
         ${`...cbSetting${CONTENT_BLOCK_INTERFACE[CONTENT_BLOCK_TYPE.HEADING]}`}

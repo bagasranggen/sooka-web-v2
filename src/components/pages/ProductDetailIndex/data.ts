@@ -1,32 +1,35 @@
-import { PageDataParamsProps, PageDataProps } from '@/libs/@types';
-import { createPictureImage, createProductDetailPrices } from '@/libs/factory';
+import { FLAVOURS } from '@/libs/data';
+import { Flavour, PageDataParamsProps, PageDataProps } from '@/libs/@types';
+import {
+    createMarqueeItem,
+    createPictureImage,
+    createProductDetailPrices,
+    createProductDetailTag,
+} from '@/libs/factory';
 import { checkMediaStatus } from '@/libs/utils';
 
-import { apolloClient } from '@/libs/fetcher';
-import { PRODUCT_DETAIL_QUERY } from '@/graphql';
+import { axiosClient } from '@/libs/fetcher';
 
 import parse from 'html-react-parser';
 
 import { ProductDetailIndexProps } from '@/components/pages/ProductDetailIndex';
 import { ProductDetailInfoProps } from '@/components/pages/ProductDetailIndex/ProductDetailInfo';
-import { BaseProps } from '@/components/common/Picture';
 import { BaseProps as HeadingBaseProps } from '@/components/common/Heading';
+import { RangeProps } from '@/components/common/Range';
 
 export const ProductDetailData = async ({
     type,
     slug,
 }: PageDataParamsProps): Promise<PageDataProps<ProductDetailIndexProps>> => {
-    const { data } = await apolloClient.query({
-        query: PRODUCT_DETAIL_QUERY,
-        variables: {
-            slug,
-        },
-    });
+    const { data } = await axiosClient().get(`/products?slug=${slug}`);
 
     const d = data?.products?.docs?.[0];
 
-    const mediaMain = checkMediaStatus({ item: d?.thumbnail, handles: ['productDetailBanner', 'productDetailMobile'] });
-    const mediaSecondary = checkMediaStatus({
+    const { data: mediaMain } = checkMediaStatus({
+        item: d?.thumbnail,
+        handles: ['productDetailBanner', 'productDetailMobile'],
+    });
+    const { data: mediaSecondary } = checkMediaStatus({
         item: d?.thumbnailHover,
         handles: ['productDetailSticky', 'productDetailMobile'],
     });
@@ -37,6 +40,8 @@ export const ProductDetailData = async ({
         form: {
             title: d?.title,
             summaries: createProductDetailPrices({ prices: d?.prices, addons: d?.addons }),
+            disabled: d?.availability === 'unavailable',
+            notes: createProductDetailTag({ item: d }),
         },
     };
 
@@ -65,11 +70,17 @@ export const ProductDetailData = async ({
             createPictureImage({
                 item: mediaMain.productDetailBanner,
                 media: mediaMain?.productDetailMobile ? 768 : undefined,
+                loading: 'eager',
             })
         );
     }
     if (mediaMain?.productDetailMobile) {
-        banner.media.push(createPictureImage({ item: mediaMain.productDetailMobile }));
+        banner.media.push(
+            createPictureImage({
+                item: mediaMain.productDetailMobile,
+                loading: 'eager',
+            })
+        );
     }
 
     const infos: ProductDetailIndexProps['entries']['infos'] = {
@@ -93,9 +104,37 @@ export const ProductDetailData = async ({
     // Media Content Description
     if (d?.description) {
         infos.contents.push({
-            title: 'Product Description',
+            title: 'Description',
             description: d.description,
         });
+    }
+
+    const flavour: Flavour = d?.flavour;
+
+    // Content Flavours
+    if (flavour?.showFlavour && flavour?.custardySpongy && flavour?.freshCreamy && flavour?.tangySweet) {
+        const flavours: [string, number][] = [];
+        Object.entries(flavour).forEach(([key, value]) => {
+            const excludedKey = ['__typename', 'showFlavour'];
+
+            if (!excludedKey.includes(key)) flavours.push([key, parseInt(value.replace('_', ''))]);
+        });
+
+        const tmp: RangeProps[] = [];
+        if (flavours.length > 0) {
+            flavours.forEach(([key, value]) => {
+                const text = FLAVOURS?.[key];
+
+                if (text) tmp.push({ ...text, value: value as RangeProps['value'] });
+            });
+        }
+
+        if (tmp.length > 0) {
+            infos.contents.push({
+                title: 'Flavours',
+                flavours: tmp,
+            });
+        }
     }
 
     // Content Add-on(s)
@@ -103,9 +142,9 @@ export const ProductDetailData = async ({
         const tmp: ProductDetailInfoProps['addOns'] = [];
 
         d.addons.forEach((item: any) => {
-            const price = item?.prices?.[0];
+            const price = item?.prices?.[0]?.price;
 
-            const mediaItem = checkMediaStatus({ item: item?.thumbnail, handles: ['assets400x400'] });
+            const { data: mediaItem } = checkMediaStatus({ item: item?.thumbnail, handles: ['assets400x400'] });
 
             const media = [];
             if (mediaItem?.assets400x400) {
@@ -120,7 +159,7 @@ export const ProductDetailData = async ({
         });
 
         infos.contents.push({
-            title: 'Product Add-on(s)',
+            title: 'Add-on(s)',
             addOns: tmp,
         });
     }
@@ -130,24 +169,9 @@ export const ProductDetailData = async ({
 
     if (d?.marquee && d.marquee.length > 0) {
         d.marquee.forEach((item: any) => {
-            const tmp: BaseProps['items'] = [];
+            const marqueeItem = createMarqueeItem({ item, handles: ['productMarquee', 'productMarqueeMobile'] });
 
-            const media = checkMediaStatus({ item: item, handles: ['productMarquee', 'productMarqueeMobile'] });
-
-            if (media?.productMarquee) {
-                tmp.push(
-                    createPictureImage({
-                        item: media.productMarquee,
-                        media: media?.productMarqueeMobile ? 992 : undefined,
-                    })
-                );
-            }
-
-            if (media?.productMarqueeMobile) {
-                tmp.push(createPictureImage({ item: media.productMarqueeMobile }));
-            }
-
-            marquee.push(tmp);
+            if (marqueeItem.length > 0) marquee.push(marqueeItem);
         });
     }
 

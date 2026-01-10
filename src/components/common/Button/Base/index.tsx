@@ -1,4 +1,6 @@
-import React from 'react';
+'use client';
+
+import React, { forwardRef, Ref } from 'react';
 
 import { ArrayString } from '@/libs/@types';
 import { joinArrayString } from '@/libs/utils';
@@ -16,7 +18,9 @@ export type BaseButtonProps = {
 
 export type BaseProps = BaseAnchorProps | BaseButtonProps;
 
-const Base = (props: BaseProps): React.ReactElement => {
+export type BaseRefProps = HTMLAnchorElement | HTMLButtonElement | HTMLDivElement;
+
+const Base = forwardRef<BaseRefProps, BaseProps>((props, ref) => {
     switch (props?.as) {
         case 'anchor':
             // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -24,6 +28,7 @@ const Base = (props: BaseProps): React.ReactElement => {
 
             return (
                 <Link
+                    ref={ref as Ref<HTMLAnchorElement>}
                     as={linkAs}
                     {...restAnchor}
                 />
@@ -39,6 +44,7 @@ const Base = (props: BaseProps): React.ReactElement => {
 
             return (
                 <button
+                    ref={ref as Ref<HTMLButtonElement>}
                     className={baseButtonClass}
                     {...restButton}
                 />
@@ -46,8 +52,16 @@ const Base = (props: BaseProps): React.ReactElement => {
 
         default:
             const { className, children } = props;
-            return <div className={className}>{children}</div>;
+            return (
+                <div
+                    ref={ref as Ref<HTMLDivElement>}
+                    className={className}
+                    {...(props as any)}>
+                    {children}
+                </div>
+            );
     }
-};
+});
 
+Base.displayName = 'Base';
 export default Base;

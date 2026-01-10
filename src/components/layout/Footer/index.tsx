@@ -8,7 +8,7 @@ import Container from '@/components/common/Container';
 import FooterSocial, { FooterSocialProps } from '@/components/layout/Footer/FooterSocial';
 
 export type FooterProps = {
-    address?: string;
+    address?: string | null;
     businessHour?: string | null;
     socialMedia?: FooterSocialProps['items'];
 };
@@ -28,7 +28,7 @@ const Footer = ({ address, businessHour, socialMedia }: FooterProps): React.Reac
                         spacing={{ x: 3, y: 2 }}>
                         <Columns.Column
                             width={{ md: 6 }}
-                            className="*:!mb-0 uppercase tracking-0.2 font-semibold text-[1.2rem] text-center lg:text-left">
+                            className="*:!mb-0 uppercase tracking-0.2 font-semibold text-[1.2rem] text-center md:text-left">
                             {address && (
                                 <p className="flex items-center justify-center md:justify-start gap-1">
                                     <CiIcon.CiLocationOn size={14} /> {address}

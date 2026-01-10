@@ -7,6 +7,8 @@ export const FRAGMENT_LINK = gql`
         label
         custom
         mail
+        whatsappNumber
+        whatsappMessage
 
         product {
             url

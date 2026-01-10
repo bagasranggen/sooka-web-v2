@@ -1,5 +1,8 @@
 import React from 'react';
 
+import { ArrayString, PropsClassname } from '@/libs/@types';
+import { joinArrayString } from '@/libs/utils';
+
 import Container from '@/components/common/Container';
 import Tabs, { TabProps } from '@/components/common/Tabs';
 import Heading, { BaseProps } from '@/components/common/Heading';
@@ -13,15 +16,19 @@ export type HomepageHighlightItemProps = {
 
 export type HomepageHighlightProps = {
     items?: HomepageHighlightItemProps[];
-};
+} & PropsClassname;
 
-const HomepageHighlight = ({ items }: HomepageHighlightProps): React.ReactElement | null => {
+const HomepageHighlight = ({ items, className }: HomepageHighlightProps): React.ReactElement | null => {
     if (!items || items.length === 0) return null;
+
+    let tabClass: ArrayString = ['relative z-10'];
+    if (className) tabClass.push(className);
+    tabClass = joinArrayString(tabClass);
 
     return (
         <Container as="section">
             <Tabs
-                className="mt-10 relative z-10"
+                className={tabClass}
                 items={items.map((item, i, arr) => {
                     let number: string | undefined = undefined;
                     if (arr.length > 1) number = `0${i + 1}`;
