@@ -1,6 +1,6 @@
 import type { NextConfig } from 'next';
 
-const REMOTE_HOSTNAMES = process?.env?.NEXT_PUBLIC_IMAGE_REMOTE_HOSTNAME
+const REMOTE_HOSTNAMES = process.env.NEXT_PUBLIC_IMAGE_REMOTE_HOSTNAME
     ? process.env.NEXT_PUBLIC_IMAGE_REMOTE_HOSTNAME.split(',')
     : [];
 

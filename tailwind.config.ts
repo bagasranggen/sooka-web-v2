@@ -1,5 +1,6 @@
 import type { Config } from 'tailwindcss';
-import { createArrayFromNumber } from './src/libs/factory';
+
+const createArrayFromNumber = (number: number) => Array.from(Array(number).keys());
 
 export default {
     content: [
