@@ -9,6 +9,7 @@ export * from './convertIntToCurrency';
 export * from './delay';
 export * from './getElementDimension';
 export * from './getElementRect';
+export * from './getObjectKeyByValue';
 export * from './getRandomNumber';
 export * from './getTailwindConfig';
 export * from './joinArrayString';

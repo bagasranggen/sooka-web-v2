@@ -6,6 +6,7 @@ export * from './createAnimationHandles';
 export * from './createArrayFromNumber';
 export * from './createBackgroundImage';
 export * from './createDynamicElement';
+export * from './createFormInputHandle';
 export * from './createIconItem';
 export * from './createInputHooks';
 export * from './createLinkItem';

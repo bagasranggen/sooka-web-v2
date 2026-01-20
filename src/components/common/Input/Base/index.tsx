@@ -13,11 +13,20 @@ export type BaseInputProps = {
     hook?: BaseInputHookProps & BaseHookOptionProps;
 } & React.InputHTMLAttributes<BaseInputRef>;
 
-export type BaseProps = BaseInputProps;
+export type BaseProps = {
+    error?: React.ReactNode;
+} & BaseInputProps;
 
-const Base = forwardRef<HTMLInputElement, BaseInputProps>((props, ref) => {
+const Base = forwardRef<HTMLInputElement, BaseProps>(({ error, ...props }, ref) => {
+    let input = (
+        <InputText
+            ref={ref}
+            {...props}
+        />
+    );
+
     if (props.type === 'radio') {
-        return (
+        input = (
             <InputRadio
                 ref={ref}
                 {...props}
@@ -26,7 +35,7 @@ const Base = forwardRef<HTMLInputElement, BaseInputProps>((props, ref) => {
     }
 
     if (props.type === 'checkbox') {
-        return (
+        input = (
             <InputCheckbox
                 ref={ref}
                 {...props}
@@ -35,10 +44,10 @@ const Base = forwardRef<HTMLInputElement, BaseInputProps>((props, ref) => {
     }
 
     return (
-        <InputText
-            ref={ref}
-            {...props}
-        />
+        <>
+            {input}
+            {error && <small className="block text-rose-500 font-semibold">{error}</small>}
+        </>
     );
 });
 
