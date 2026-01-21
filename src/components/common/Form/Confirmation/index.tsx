@@ -39,7 +39,7 @@ const Confirmation = ({ onSubmit }: ConfirmationProps): React.ReactElement => {
                 <Columns.Column
                     width={{
                         xs: 2,
-                        lg: 2,
+                        lg: 3,
                     }}>
                     <Input.Label
                         type="date"
