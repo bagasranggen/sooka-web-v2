@@ -7,6 +7,7 @@ export * from './checkStringIsNumber';
 export * from './cleanArrayString';
 export * from './convertIntToCurrency';
 export * from './delay';
+export * from './getCurrentDate';
 export * from './getElementDimension';
 export * from './getElementRect';
 export * from './getObjectKeyByValue';
