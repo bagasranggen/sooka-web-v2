@@ -1,6 +1,6 @@
 'use client';
 
-import React from 'react';
+import React, { useEffect, useMemo } from 'react';
 
 import { ClassnameProps, FormOnSubmitProps } from '@/libs/@types';
 
@@ -26,25 +26,43 @@ export type ConfirmationFormFields = {
 export type ConfirmationProps = {
     onSubmit?: FormOnSubmitProps<ConfirmationFormFields>;
     products?: BaseInputSelectProps['items'];
-    productsVariant?: BaseInputSelectProps['items'];
+    productsVariant?: ({ slug: string } & Pick<BaseInputSelectProps, 'items'>)[];
 } & ClassnameProps;
 
 const Confirmation = ({ className, products, productsVariant, onSubmit }: ConfirmationProps): React.ReactElement => {
     const {
         register,
         getValues,
+        setValue,
         handleSubmit,
         watch,
         formState: { errors },
     } = useForm<ConfirmationFormFields>({ mode: 'onChange' });
 
     const submitHandler = (data: ConfirmationFormFields) => {
-        console.log(data);
-
-        // if (onSubmit) onSubmit(data);
+        if (onSubmit) onSubmit(data);
     };
 
     watch(CONFIRMATION_FORM_INPUT.ORDER_COLLECTION.NAME);
+    watch(CONFIRMATION_FORM_INPUT.ORDER_SELECTION.NAME);
+
+    const selectedProduct = getValues(CONFIRMATION_FORM_INPUT.ORDER_SELECTION.NAME);
+
+    const variants = useMemo(() => {
+        let data: undefined | BaseInputSelectProps['items'] = undefined;
+
+        if (productsVariant && productsVariant.length > 0) {
+            const items = productsVariant.find((item) => item.slug === selectedProduct)?.items;
+
+            if (items) data = items;
+        }
+
+        return data;
+    }, [selectedProduct, productsVariant]);
+
+    useEffect(() => {
+        setValue(CONFIRMATION_FORM_INPUT.ORDER_SELECTION_VARIANT.NAME, '');
+    }, [selectedProduct]);
 
     return (
         <form
@@ -104,32 +122,31 @@ const Confirmation = ({ className, products, productsVariant, onSubmit }: Confir
                 </Columns.Column>
             </Columns.Row>
 
-            {((products && products.length > 0) || (productsVariant && productsVariant.length > 0)) && (
+            {products && products.length > 0 && (
                 <Columns.Row
                     className="mb-3"
                     spacing={{ x: 3, y: 3 }}>
-                    {products && products.length > 0 && (
-                        <Columns.Column
-                            width={{
-                                xs: 8,
-                                lg: 8,
-                            }}>
-                            <Input.Label
-                                type="select"
-                                id={CONFIRMATION_FORM_INPUT.ORDER_SELECTION.NAME}
-                                label={CONFIRMATION_FORM_INPUT.ORDER_SELECTION.LABEL}
-                                items={products}
-                                hook={{
-                                    register,
-                                    name: CONFIRMATION_FORM_INPUT.ORDER_SELECTION.NAME,
-                                    required: true,
-                                }}
-                                error={errors?.[CONFIRMATION_FORM_INPUT.ORDER_SELECTION.NAME]?.message}
-                            />
-                        </Columns.Column>
-                    )}
+                    <Columns.Column
+                        width={{
+                            xs: 8,
+                            lg: selectedProduct ? 8 : 12,
+                        }}>
+                        <Input.Label
+                            type="select"
+                            id={CONFIRMATION_FORM_INPUT.ORDER_SELECTION.NAME}
+                            label={CONFIRMATION_FORM_INPUT.ORDER_SELECTION.LABEL}
+                            items={products}
+                            defaultValue=""
+                            hook={{
+                                register,
+                                name: CONFIRMATION_FORM_INPUT.ORDER_SELECTION.NAME,
+                                required: true,
+                            }}
+                            error={errors?.[CONFIRMATION_FORM_INPUT.ORDER_SELECTION.NAME]?.message}
+                        />
+                    </Columns.Column>
 
-                    {productsVariant && productsVariant.length > 0 && (
+                    {variants && (
                         <Columns.Column
                             width={{
                                 xs: 4,
@@ -139,7 +156,7 @@ const Confirmation = ({ className, products, productsVariant, onSubmit }: Confir
                                 type="select"
                                 id={CONFIRMATION_FORM_INPUT.ORDER_SELECTION_VARIANT.NAME}
                                 label={CONFIRMATION_FORM_INPUT.ORDER_SELECTION_VARIANT.LABEL}
-                                items={productsVariant}
+                                items={variants}
                                 hook={{
                                     register,
                                     name: CONFIRMATION_FORM_INPUT.ORDER_SELECTION_VARIANT.NAME,

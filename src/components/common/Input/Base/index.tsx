@@ -11,7 +11,7 @@ import {
 import InputText from '@/components/common/Input/shared/InputText';
 import InputRadio from '@/components/common/Input/shared/InputRadio';
 import InputCheckbox from '@/components/common/Input/shared/InputCheckbox';
-import InputSelect, { BaseInputSelectProps } from '@/components/common/Input/shared/InputSelect';
+import InputSelect, { BaseInputSelectProps, InputSelectItemProps } from '@/components/common/Input/shared/InputSelect';
 
 export type BaseInputRef = InputRegularRef | InputSelectRef;
 
@@ -75,4 +75,4 @@ const Base = forwardRef<BaseInputRef, BaseProps>(({ error, ...props }, ref) => {
 Base.displayName = 'Base';
 export default Base;
 
-export type { BaseInputSelectProps };
+export type { BaseInputSelectProps, InputSelectItemProps };
