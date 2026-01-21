@@ -2,12 +2,30 @@ import { createFormInputHandle } from '@/libs/factory';
 import { getObjectKeyByValue } from '@/libs/utils';
 
 import type { ConfirmationFormFields } from '@/components/common/Form/Confirmation';
+import { BaseInputSelectProps } from '@/components/common/Input/shared/InputSelect';
 
-export const CONFIRMATION_FORM_KEYS = ['ORDER_DATE', 'ORDER_NAME'] as const;
+export const CONFIRMATION_FORM_KEYS = [
+    'ORDER_DATE',
+    'ORDER_NAME',
+    'ORDER_CONTACT',
+    'ORDER_CONTACT_RECIPIENT',
+    'ORDER_COLLECTION',
+    'ORDER_COLLECTION_TIME',
+    'ORDER_PIN_POINT',
+    'ORDER_SELECTION',
+    'ORDER_SELECTION_VARIANT',
+] as const;
 
 export const CONFIRMATION_FORM_HANDLE: Record<string, keyof ConfirmationFormFields> = {
     ORDER_DATE: 'orderDate',
     ORDER_NAME: 'orderName',
+    ORDER_CONTACT: 'orderContact',
+    ORDER_CONTACT_RECIPIENT: 'orderContactRecipient',
+    ORDER_COLLECTION: 'orderCollection',
+    ORDER_COLLECTION_TIME: 'orderCollectionTime',
+    ORDER_PIN_POINT: 'orderPinPoint',
+    ORDER_SELECTION: 'orderSelection',
+    ORDER_SELECTION_VARIANT: 'orderSelectionVariant',
 } as const;
 
 export const CONFIRMATION_FORM_INPUT: Record<
@@ -15,13 +33,65 @@ export const CONFIRMATION_FORM_INPUT: Record<
     { NAME: keyof ConfirmationFormFields; LABEL: string }
 > = {
     ...createFormInputHandle({
+        key: getObjectKeyByValue({ obj: CONFIRMATION_FORM_HANDLE, value: CONFIRMATION_FORM_HANDLE.ORDER_NAME }),
+        name: CONFIRMATION_FORM_HANDLE.ORDER_NAME,
+        label: 'Name',
+    }),
+    ...createFormInputHandle({
+        key: getObjectKeyByValue({ obj: CONFIRMATION_FORM_HANDLE, value: CONFIRMATION_FORM_HANDLE.ORDER_CONTACT }),
+        name: CONFIRMATION_FORM_HANDLE.ORDER_CONTACT,
+        label: 'Contact',
+    }),
+    ...createFormInputHandle({
+        key: getObjectKeyByValue({
+            obj: CONFIRMATION_FORM_HANDLE,
+            value: CONFIRMATION_FORM_HANDLE.ORDER_CONTACT_RECIPIENT,
+        }),
+        name: CONFIRMATION_FORM_HANDLE.ORDER_CONTACT_RECIPIENT,
+        label: 'Recipient Contact',
+    }),
+    ...createFormInputHandle({
         key: getObjectKeyByValue({ obj: CONFIRMATION_FORM_HANDLE, value: CONFIRMATION_FORM_HANDLE.ORDER_DATE }),
         name: CONFIRMATION_FORM_HANDLE.ORDER_DATE,
         label: 'Order Date',
     }),
     ...createFormInputHandle({
-        key: getObjectKeyByValue({ obj: CONFIRMATION_FORM_HANDLE, value: CONFIRMATION_FORM_HANDLE.ORDER_NAME }),
-        name: CONFIRMATION_FORM_HANDLE.ORDER_NAME,
-        label: 'Name',
+        key: getObjectKeyByValue({ obj: CONFIRMATION_FORM_HANDLE, value: CONFIRMATION_FORM_HANDLE.ORDER_COLLECTION }),
+        name: CONFIRMATION_FORM_HANDLE.ORDER_COLLECTION,
+        label: 'Collection Method',
+    }),
+    ...createFormInputHandle({
+        key: getObjectKeyByValue({ obj: CONFIRMATION_FORM_HANDLE, value: CONFIRMATION_FORM_HANDLE.ORDER_SELECTION }),
+        name: CONFIRMATION_FORM_HANDLE.ORDER_SELECTION,
+        label: 'Select Order',
+    }),
+    ...createFormInputHandle({
+        key: getObjectKeyByValue({
+            obj: CONFIRMATION_FORM_HANDLE,
+            value: CONFIRMATION_FORM_HANDLE.ORDER_SELECTION_VARIANT,
+        }),
+        name: CONFIRMATION_FORM_HANDLE.ORDER_SELECTION_VARIANT,
+        label: 'Select Order Variant',
+    }),
+    ...createFormInputHandle({
+        key: getObjectKeyByValue({
+            obj: CONFIRMATION_FORM_HANDLE,
+            value: CONFIRMATION_FORM_HANDLE.ORDER_COLLECTION_TIME,
+        }),
+        name: CONFIRMATION_FORM_HANDLE.ORDER_COLLECTION_TIME,
+        label: 'Order Time',
+    }),
+    ...createFormInputHandle({
+        key: getObjectKeyByValue({
+            obj: CONFIRMATION_FORM_HANDLE,
+            value: CONFIRMATION_FORM_HANDLE.ORDER_PIN_POINT,
+        }),
+        name: CONFIRMATION_FORM_HANDLE.ORDER_PIN_POINT,
+        label: 'Pin Point Location',
     }),
 } as const;
+
+export const ORDER_COLLECTIONS_OPTIONS: BaseInputSelectProps['items'] = [
+    { value: 'pickUp', children: 'Pick Up' },
+    { value: 'delivery', children: 'Delivery' },
+];
