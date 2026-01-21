@@ -10,13 +10,14 @@ export type LabelProps = {
 } & (Omit<BaseProps, 'id'> & Required<Pick<BaseProps, 'id'>>);
 
 const Label = forwardRef<HTMLInputElement | HTMLSelectElement, LabelProps>(
-    ({ id, label, className, type, error, ...props }, ref) => {
+    ({ id, label, className, type, error, hidden, ...props }, ref) => {
         let inputGroupClass: ArrayString = ['group relative after'];
         inputGroupClass.push("after:content-[''] after:bg-sooka-primary after:transition-width");
         inputGroupClass.push('after:absolute after:left-0 after:bottom-0');
         inputGroupClass.push('after:w-0 after:h-[.2rem]');
         inputGroupClass.push('after:w-0 after:h-[.2rem]');
         inputGroupClass.push('after:hover:w-full after:focus-within:w-full');
+        if (hidden) inputGroupClass.push('hidden');
         inputGroupClass = joinArrayString(inputGroupClass);
 
         let inputClass: ArrayString = ['peer w-full placeholder:opacity-0 bg-transparent focus-visible:outline-none'];
@@ -50,6 +51,7 @@ const Label = forwardRef<HTMLInputElement | HTMLSelectElement, LabelProps>(
                         id={id}
                         className={inputClass}
                         placeholder={label}
+                        hidden={hidden}
                         {...props}
                     />
 
@@ -60,7 +62,7 @@ const Label = forwardRef<HTMLInputElement | HTMLSelectElement, LabelProps>(
                     </label>
                 </div>
 
-                {error && <small className="text-rose-500 font-semibold">{error}</small>}
+                {error && !hidden && <small className="text-rose-500 font-semibold">{error}</small>}
             </>
         );
     }
