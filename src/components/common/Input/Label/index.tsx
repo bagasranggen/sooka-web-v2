@@ -6,33 +6,64 @@ import { joinArrayString } from '@/libs/utils';
 import Base, { BaseProps } from '@/components/common/Input';
 
 export type LabelProps = {
-    label: React.ReactNode;
+    label: string;
 } & (Omit<BaseProps, 'id'> & Required<Pick<BaseProps, 'id'>>);
 
-const Label = forwardRef<HTMLInputElement, LabelProps>(({ id, label, className, ...props }, ref) => {
-    // const textSize =
+const Label = forwardRef<HTMLInputElement | HTMLSelectElement, LabelProps>(
+    ({ id, label, className, type, error, ...props }, ref) => {
+        let inputGroupClass: ArrayString = ['group relative after'];
+        inputGroupClass.push("after:content-[''] after:bg-sooka-primary after:transition-width");
+        inputGroupClass.push('after:absolute after:left-0 after:bottom-0');
+        inputGroupClass.push('after:w-0 after:h-[.2rem]');
+        inputGroupClass.push('after:w-0 after:h-[.2rem]');
+        inputGroupClass.push('after:hover:w-full after:focus-within:w-full');
+        inputGroupClass = joinArrayString(inputGroupClass);
 
-    let inputClass: ArrayString = [];
-    if (className) inputClass.push(className);
-    inputClass = joinArrayString(inputClass);
+        let inputClass: ArrayString = ['peer w-full placeholder:opacity-0 bg-transparent focus-visible:outline-none'];
+        inputClass.push('min-h-[6.7rem]');
+        if (type !== 'select') inputClass.push('pt-2 px-2');
+        if (type === 'select') inputClass.push('pt-2 px-[1.75rem]');
+        inputClass.push('text-[2rem]');
+        inputClass.push('border-b-2 border-b-sooka-primary/10');
+        if (className) inputClass.push(className);
+        inputClass = joinArrayString(inputClass);
 
-    return (
-        <div className="group relative after:content-[''] after:absolute after:left-0 after:bottom-0 after:w-0 after:h-[.2rem] after:bg-sooka-primary after:transition-width after:hover:w-full after:focus-within:w-full">
-            <label
-                htmlFor={id}
-                className="block text-[3rem] absolute px-2 py-1 uppercase tracking-0.5 transition-all">
-                {label}
-            </label>
+        let labelClass: ArrayString = ['block uppercase transition-all origin-top-left'];
+        labelClass.push('text-[2.5rem] whitespace-nowrap');
+        labelClass.push('tracking-[.6rem]');
+        labelClass.push('px-2 py-1');
+        labelClass.push('absolute top-1/2 left-0 -translate-y-1/2');
+        labelClass.push(
+            'group-focus-within:scale-50 group-focus-within:font-semibold group-focus-within:translate-y-[-3rem] group-focus-within:translate-x-[1.2rem]'
+        );
+        labelClass.push(
+            'peer-[:not(:placeholder-shown)]:scale-50 peer-[:not(:placeholder-shown)]:font-semibold peer-[:not(:placeholder-shown)]:translate-y-[-3rem] peer-[:not(:placeholder-shown)]:translate-x-[1.2rem]'
+        );
+        labelClass = joinArrayString(labelClass);
 
-            <Base
-                ref={ref}
-                id={id}
-                // className={inputClass}
-                className="border-b-2 focus-visible:outline-none pt-2 px-2 text-[3rem] w-full"
-                {...props}
-            />
-        </div>
-    );
-});
+        return (
+            <>
+                <div className={inputGroupClass}>
+                    <Base
+                        ref={ref}
+                        type={type}
+                        id={id}
+                        className={inputClass}
+                        placeholder={label}
+                        {...props}
+                    />
+
+                    <label
+                        htmlFor={id}
+                        className={labelClass}>
+                        {label}
+                    </label>
+                </div>
+
+                {error && <small className="text-rose-500 font-semibold">{error}</small>}
+            </>
+        );
+    }
+);
 
 export default Label;
