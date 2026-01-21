@@ -2,14 +2,30 @@ import React from 'react';
 
 import Container from '@/components/common/Container';
 
-import Form from '@/components/common/Form';
+import Form, { ConfirmationProps } from '@/components/common/Form';
+import Heading from '@/components/common/Heading';
 
-export type OrderConfirmationIndexProps = {};
+export type OrderConfirmationIndexProps = {
+    entries: {
+        form: Pick<ConfirmationProps, 'products' | 'productsVariant'>;
+    };
+};
 
-const OrderConfirmationIndex = ({}: OrderConfirmationIndexProps): React.ReactElement => {
+const OrderConfirmationIndex = ({ entries }: OrderConfirmationIndexProps): React.ReactElement => {
     return (
         <Container as="section">
-            <Form.Confirmation />
+            <Heading
+                as="h1"
+                size="section"
+                className="mt-10 text-center">
+                Order Confirmation
+            </Heading>
+
+            <Form.Confirmation
+                className="mt-4 md:mt-7 mb-10"
+                products={entries.form.products}
+                productsVariant={entries.form.productsVariant}
+            />
         </Container>
     );
 };
