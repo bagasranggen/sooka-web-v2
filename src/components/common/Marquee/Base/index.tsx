@@ -2,7 +2,7 @@
 
 import React, { PropsWithChildren, Ref } from 'react';
 
-import { PropsClassname } from '@/libs/@types';
+import { ClassnameProps } from '@/libs/@types';
 import { createArrayFromNumber } from '@/libs/factory';
 
 import { useMeasure, useWindowSize } from 'react-use';
@@ -12,7 +12,7 @@ import { MarqueeConfigProps } from '@/components/Animation/elements/Marquee';
 
 export type BaseProps = {
     config?: MarqueeConfigProps;
-    itemClassName?: PropsClassname['className'];
+    itemClassName?: ClassnameProps['className'];
 } & PropsWithChildren;
 
 const Base = ({ config, itemClassName, children }: BaseProps): React.ReactElement => {

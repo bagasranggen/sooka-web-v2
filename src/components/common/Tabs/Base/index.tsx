@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react';
 
-import { ArrayString, PropsClassname } from '@/libs/@types';
+import { ArrayString, ClassnameProps } from '@/libs/@types';
 import { joinArrayString } from '@/libs/utils';
 
 import Tab, { TabProps } from '@/components/common/Tabs/Tab';
@@ -10,12 +10,12 @@ import Button from '@/components/common/Button';
 
 export type BaseItemProps = {
     title: React.ReactNode;
-    titleClass?: PropsClassname['className'];
+    titleClass?: ClassnameProps['className'];
 } & Pick<TabProps, 'id' | 'children'>;
 
 export type BaseProps = {
     items: BaseItemProps[];
-} & PropsClassname;
+} & ClassnameProps;
 
 const Base = ({ items, className }: BaseProps): React.ReactElement => {
     const [active, setActive] = useState<BaseItemProps['id']>(items[0].id);

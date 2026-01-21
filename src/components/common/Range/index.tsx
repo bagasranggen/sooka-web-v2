@@ -1,13 +1,13 @@
 import React from 'react';
 
-import { ArrayString, CreateArrayWithLengthX, NumericRange, PropsClassname } from '@/libs/@types';
+import { ArrayString, CreateArrayWithLengthX, NumericRange, ClassnameProps } from '@/libs/@types';
 import { joinArrayString } from '@/libs/utils';
 
 export type RangeProps = {
     start: string;
     end: string;
     value?: NumericRange<CreateArrayWithLengthX<0>, 100>;
-} & PropsClassname;
+} & ClassnameProps;
 
 const Range = ({ className, value, start, end }: RangeProps): React.ReactElement | null => {
     if (!start || !value) return null;

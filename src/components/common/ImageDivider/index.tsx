@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { ArrayString, ElementTagsProps, PropsClassname } from '@/libs/@types';
+import { ArrayString, ElementTagsProps, ClassnameProps } from '@/libs/@types';
 import { joinArrayString } from '@/libs/utils';
 
 import Picture, { BaseProps } from '@/components/common/Picture';
@@ -8,7 +8,7 @@ import Picture, { BaseProps } from '@/components/common/Picture';
 export type ImageDividerProps = {
     as?: Extract<ElementTagsProps, 'section' | 'div'>;
     media: BaseProps['items'];
-} & PropsClassname;
+} & ClassnameProps;
 
 const ImageDivider = ({ as: Container = 'section', className, media }: ImageDividerProps): React.ReactElement => {
     let containerClass: ArrayString = [];

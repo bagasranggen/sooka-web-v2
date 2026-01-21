@@ -2,12 +2,12 @@
 
 import React, { PropsWithChildren } from 'react';
 
-import { ArrayString, PortalBaseProps, PortalTransitionProps, PropsClassname } from '@/libs/@types';
+import { ArrayString, PortalBaseProps, PortalTransitionProps, ClassnameProps } from '@/libs/@types';
 import { joinArrayString } from '@/libs/utils';
 
 export type BaseOffcanvasProps = {
     from?: 'left' | 'right' | 'bottom' | 'top';
-} & (PortalTransitionProps & PropsWithChildren & PropsClassname & Pick<PortalBaseProps, 'hide'>);
+} & (PortalTransitionProps & PropsWithChildren & ClassnameProps & Pick<PortalBaseProps, 'hide'>);
 
 const BaseOffcanvas = ({
     from = 'left',

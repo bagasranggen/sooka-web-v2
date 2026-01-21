@@ -2,7 +2,7 @@
 
 import React from 'react';
 
-import { ArrayString, PropsClassname } from '@/libs/@types';
+import { ArrayString, ClassnameProps } from '@/libs/@types';
 import { joinArrayString } from '@/libs/utils';
 
 import { Pagination } from 'swiper/modules';
@@ -15,7 +15,7 @@ export type ImageCollageCarouselItemProps = ImageCollageItemProps;
 
 export type ImageCollageCarouselProps = {
     items: ImageCollageCarouselItemProps[];
-} & PropsClassname;
+} & ClassnameProps;
 
 const ImageCollageCarousel = ({ items, className }: ImageCollageCarouselProps): React.ReactElement | null => {
     if (!items || items.length === 0) return null;

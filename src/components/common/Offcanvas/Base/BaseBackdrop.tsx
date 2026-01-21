@@ -1,9 +1,9 @@
 import React from 'react';
 
-import { ArrayString, PortalTransitionProps, PropsClassname } from '@/libs/@types';
+import { ArrayString, PortalTransitionProps, ClassnameProps } from '@/libs/@types';
 import { joinArrayString } from '@/libs/utils';
 
-export type BaseBackdropProps = PortalTransitionProps & PropsClassname;
+export type BaseBackdropProps = PortalTransitionProps & ClassnameProps;
 
 const BaseBackdrop = ({ className, isShow, isTransitioning }: BaseBackdropProps): React.ReactElement | null => {
     let offcanvasClass: ArrayString = [

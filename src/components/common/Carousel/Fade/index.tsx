@@ -2,7 +2,7 @@
 
 import React, { PropsWithChildren } from 'react';
 
-import { ArrayString, PropsClassname } from '@/libs/@types';
+import { ArrayString, ClassnameProps } from '@/libs/@types';
 import { joinArrayString } from '@/libs/utils';
 
 import 'swiper/css/effect-fade';
@@ -12,7 +12,7 @@ import FadeVariant from '@/components/common/Carousel/Fade/FadeVariant';
 
 export type FadeProps = {
     items: PropsWithChildren[];
-} & PropsClassname;
+} & ClassnameProps;
 
 const Fade = ({ items, className }: FadeProps): React.ReactElement | null => {
     if (!items || items.length === 0) return null;

@@ -5,7 +5,7 @@ import {
     CreateArrayWithLengthX,
     NumericRange,
     Prettify,
-    PropsClassname,
+    ClassnameProps,
     ResponsiveProps,
 } from '@/libs/@types';
 import { getColumnWidth, getRowSpacing, joinArrayString } from '@/libs/utils';
@@ -18,7 +18,7 @@ export type RowProps = {
     columns?: RowColumnsProps | Prettify<Partial<Record<ResponsiveProps, RowColumnsProps>>>;
     spacing?: Prettify<RowSpacingProps> | Prettify<Partial<Record<ResponsiveProps, RowSpacingProps>>>;
     isWrap?: boolean;
-} & (PropsWithChildren & PropsClassname);
+} & (PropsWithChildren & ClassnameProps);
 
 const Row = ({ className, children, spacing = { x: 3 }, columns, isWrap = true }: RowProps): React.ReactElement => {
     let rowClass: ArrayString = ['flex *:flex-grow *:flex-shrink-0 *:basis-[0%] *:max-w-full *:w-full'];

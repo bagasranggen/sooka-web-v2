@@ -1,10 +1,10 @@
 import React from 'react';
-import { ArrayString, PropsClassname } from '@/libs/@types';
+import { ArrayString, ClassnameProps } from '@/libs/@types';
 import { joinArrayString } from '@/libs/utils';
 
 export type CircleArrowProps = {
     direction?: 'left' | 'right';
-} & PropsClassname;
+} & ClassnameProps;
 
 const CircleArrow = ({ direction = 'right', className }: CircleArrowProps): React.ReactElement => {
     let iconClass: ArrayString = [];

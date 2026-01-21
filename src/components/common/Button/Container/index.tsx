@@ -1,11 +1,11 @@
 import React, { Fragment, PropsWithChildren } from 'react';
 
-import { ArrayString, PropsClassname } from '@/libs/@types';
+import { ArrayString, ClassnameProps } from '@/libs/@types';
 import { joinArrayString } from '@/libs/utils';
 
 export type ContainerProps = {
     items: PropsWithChildren[];
-} & PropsClassname;
+} & ClassnameProps;
 
 const Container = ({ items, className }: ContainerProps): React.ReactElement => {
     let containerClass: ArrayString = ['flex flex-wrap'];

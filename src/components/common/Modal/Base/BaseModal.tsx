@@ -1,11 +1,11 @@
 import React, { PropsWithChildren } from 'react';
 
-import { ArrayString, PortalTransitionProps, PropsClassname } from '@/libs/@types';
+import { ArrayString, PortalTransitionProps, ClassnameProps } from '@/libs/@types';
 import { joinArrayString } from '@/libs/utils';
 
 export type BaseModalProps = PortalTransitionProps &
     PropsWithChildren &
-    PropsClassname &
+    ClassnameProps &
     Pick<React.HTMLAttributes<HTMLDivElement>, 'onClick'>;
 
 const BaseModal = ({

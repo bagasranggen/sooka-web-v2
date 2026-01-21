@@ -2,13 +2,13 @@
 
 import React, { useEffect, useState } from 'react';
 
-import { PropsClassname } from '@/libs/@types';
+import { ClassnameProps } from '@/libs/@types';
 
 export type SookaProps = {
     id: string;
     color?: 'primary' | 'light';
     style?: React.CSSProperties;
-} & PropsClassname;
+} & ClassnameProps;
 
 const Sooka = ({ id, className, color, style }: SookaProps): React.ReactElement | null => {
     const [isReady, setIsReady] = useState<boolean>(false);

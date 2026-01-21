@@ -33,7 +33,7 @@ export type Component<Props> = { (props: Props): React.ReactElement | null };
 
 export type RefComponent<Props, Element> = React.ForwardRefExoticComponent<Props & React.RefAttributes<Element>>;
 
-export type PropsClassname = { className?: string };
+export type ClassnameProps = { className?: string };
 
 export type ArrayString = string[] | string;
 

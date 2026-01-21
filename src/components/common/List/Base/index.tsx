@@ -1,14 +1,14 @@
 import React, { PropsWithChildren } from 'react';
 
-import { ArrayString, ElementTagsProps, PropsClassname } from '@/libs/@types';
+import { ArrayString, ElementTagsProps, ClassnameProps } from '@/libs/@types';
 import { joinArrayString } from '@/libs/utils';
 
-export type BaseItemProps = PropsWithChildren & PropsClassname;
+export type BaseItemProps = PropsWithChildren & ClassnameProps;
 
 export type BaseProps = {
     as?: Extract<ElementTagsProps, 'ul' | 'ol'>;
     items: BaseItemProps[];
-} & PropsClassname;
+} & ClassnameProps;
 
 const Base = ({ as: List = 'ul', className, items }: BaseProps): React.ReactElement => {
     if (!items) return <></>;

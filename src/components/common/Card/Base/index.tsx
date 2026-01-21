@@ -1,14 +1,14 @@
 import React, { PropsWithChildren } from 'react';
 
-import { PropsClassname } from '@/libs/@types';
+import { ClassnameProps } from '@/libs/@types';
 
 import Columns, { RowProps, ColumnProps } from '@/components/common/Columns';
 
-export type BaseItemProps = PropsWithChildren & PropsClassname;
+export type BaseItemProps = PropsWithChildren & ClassnameProps;
 
 export type BaseProps = {
     items: BaseItemProps[];
-} & (PropsClassname & Pick<RowProps, 'spacing' | 'columns' | 'isWrap'> & Pick<ColumnProps, 'width' | 'offset'>);
+} & (ClassnameProps & Pick<RowProps, 'spacing' | 'columns' | 'isWrap'> & Pick<ColumnProps, 'width' | 'offset'>);
 
 const Base = ({ items, spacing, columns, isWrap, width, offset, className }: BaseProps): React.ReactElement => {
     if (!items) return <></>;

@@ -1,6 +1,6 @@
 import React, { PropsWithChildren } from 'react';
 
-import { ArrayString, ElementTagsProps, PropsClassname } from '@/libs/@types';
+import { ArrayString, ElementTagsProps, ClassnameProps } from '@/libs/@types';
 import { joinArrayString } from '@/libs/utils';
 
 export type BaseProps = {
@@ -8,7 +8,7 @@ export type BaseProps = {
     family?: 'default' | 'anglecia';
     size?: 'heading' | 'section' | 'callout';
     description?: React.ReactNode;
-} & (PropsWithChildren & PropsClassname);
+} & (PropsWithChildren & ClassnameProps);
 
 const Base = ({
     as: Heading = 'h1',
