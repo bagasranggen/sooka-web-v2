@@ -13,7 +13,9 @@ export const CONFIRMATION_FORM_KEYS = [
     'ORDER_COLLECTION_TIME',
     'ORDER_PIN_POINT',
     'ORDER_SELECTION',
+    'ORDER_SELECTION_TITLE',
     'ORDER_SELECTION_VARIANT',
+    'ORDER_SELECTION_PRICE',
 ] as const;
 
 export const CONFIRMATION_FORM_HANDLE: Record<string, keyof ConfirmationFormFields> = {
@@ -25,7 +27,9 @@ export const CONFIRMATION_FORM_HANDLE: Record<string, keyof ConfirmationFormFiel
     ORDER_COLLECTION_TIME: 'orderCollectionTime',
     ORDER_PIN_POINT: 'orderPinPoint',
     ORDER_SELECTION: 'orderSelection',
+    ORDER_SELECTION_TITLE: 'orderSelectionTitle',
     ORDER_SELECTION_VARIANT: 'orderSelectionVariant',
+    ORDER_SELECTION_PRICE: 'orderSelectionPrice',
 } as const;
 
 export const CONFIRMATION_FORM_INPUT: Record<
@@ -68,10 +72,26 @@ export const CONFIRMATION_FORM_INPUT: Record<
     ...createFormInputHandle({
         key: getObjectKeyByValue({
             obj: CONFIRMATION_FORM_HANDLE,
+            value: CONFIRMATION_FORM_HANDLE.ORDER_SELECTION_TITLE,
+        }),
+        name: CONFIRMATION_FORM_HANDLE.ORDER_SELECTION_TITLE,
+        label: 'Order',
+    }),
+    ...createFormInputHandle({
+        key: getObjectKeyByValue({
+            obj: CONFIRMATION_FORM_HANDLE,
             value: CONFIRMATION_FORM_HANDLE.ORDER_SELECTION_VARIANT,
         }),
         name: CONFIRMATION_FORM_HANDLE.ORDER_SELECTION_VARIANT,
         label: 'Select Order Variant',
+    }),
+    ...createFormInputHandle({
+        key: getObjectKeyByValue({
+            obj: CONFIRMATION_FORM_HANDLE,
+            value: CONFIRMATION_FORM_HANDLE.ORDER_SELECTION_PRICE,
+        }),
+        name: CONFIRMATION_FORM_HANDLE.ORDER_SELECTION_PRICE,
+        label: 'Order Price',
     }),
     ...createFormInputHandle({
         key: getObjectKeyByValue({

@@ -3,6 +3,7 @@
 import React, { useEffect, useMemo } from 'react';
 
 import { ClassnameProps, FormOnSubmitProps } from '@/libs/@types';
+import { getCurrentDate } from '@/libs/utils';
 
 import { useForm } from 'react-hook-form';
 
@@ -17,16 +18,24 @@ export type ConfirmationFormFields = {
     orderContact: string;
     orderContactRecipient: string;
     orderSelection: string;
+    orderSelectionTitle: string;
     orderSelectionVariant: string;
+    orderSelectionPrice: string;
     orderCollection: string;
     orderCollectionTime: string;
     orderPinPoint: string;
 };
 
+export type ProductsVariantItemProps = {
+    slug: string;
+    variants?: BaseInputSelectProps['items'];
+    prices?: BaseInputSelectProps['items'];
+};
+
 export type ConfirmationProps = {
     onSubmit?: FormOnSubmitProps<ConfirmationFormFields>;
     products?: BaseInputSelectProps['items'];
-    productsVariant?: ({ slug: string } & Pick<BaseInputSelectProps, 'items'>)[];
+    productsVariant?: ProductsVariantItemProps[];
 } & ClassnameProps;
 
 const Confirmation = ({ className, products, productsVariant, onSubmit }: ConfirmationProps): React.ReactElement => {
@@ -45,20 +54,49 @@ const Confirmation = ({ className, products, productsVariant, onSubmit }: Confir
 
     watch(CONFIRMATION_FORM_INPUT.ORDER_COLLECTION.NAME);
     watch(CONFIRMATION_FORM_INPUT.ORDER_SELECTION.NAME);
+    watch(CONFIRMATION_FORM_INPUT.ORDER_SELECTION_VARIANT.NAME);
 
     const selectedProduct = getValues(CONFIRMATION_FORM_INPUT.ORDER_SELECTION.NAME);
+    const selectedProductVariant = getValues(CONFIRMATION_FORM_INPUT.ORDER_SELECTION_VARIANT.NAME);
 
-    const variants = useMemo(() => {
+    const orderVariants = useMemo(() => {
         let data: undefined | BaseInputSelectProps['items'] = undefined;
 
         if (productsVariant && productsVariant.length > 0) {
-            const items = productsVariant.find((item) => item.slug === selectedProduct)?.items;
+            const items = productsVariant.find((item) => item.slug === selectedProduct)?.variants;
 
             if (items) data = items;
         }
 
         return data;
     }, [selectedProduct, productsVariant]);
+
+    const orderPrice = useMemo(() => {
+        let data: undefined | string = undefined;
+
+        if (productsVariant && productsVariant.length > 0) {
+            const items = productsVariant.find((item) => item.slug === selectedProduct)?.prices;
+            const price = items?.find((item) => item.value === selectedProductVariant)?.children as string;
+
+            if (price) data = price;
+        }
+
+        if (data) setValue(CONFIRMATION_FORM_INPUT.ORDER_SELECTION_PRICE.NAME, data);
+
+        return data;
+    }, [selectedProduct, selectedProductVariant]);
+
+    const orderTitle = useMemo(() => {
+        let data: undefined | string = undefined;
+
+        if (selectedProduct) data = selectedProduct;
+
+        if (selectedProductVariant) data += ` (${selectedProductVariant})`;
+
+        if (data) setValue(CONFIRMATION_FORM_INPUT.ORDER_SELECTION_TITLE.NAME, data);
+
+        return data;
+    }, [selectedProduct, selectedProductVariant]);
 
     useEffect(() => {
         setValue(CONFIRMATION_FORM_INPUT.ORDER_SELECTION_VARIANT.NAME, '');
@@ -115,7 +153,6 @@ const Confirmation = ({ className, products, productsVariant, onSubmit }: Confir
                         hook={{
                             register,
                             name: CONFIRMATION_FORM_INPUT.ORDER_CONTACT_RECIPIENT.NAME,
-                            // required: true,
                         }}
                         error={errors?.[CONFIRMATION_FORM_INPUT.ORDER_CONTACT_RECIPIENT.NAME]?.message}
                     />
@@ -144,9 +181,23 @@ const Confirmation = ({ className, products, productsVariant, onSubmit }: Confir
                             }}
                             error={errors?.[CONFIRMATION_FORM_INPUT.ORDER_SELECTION.NAME]?.message}
                         />
+
+                        <Input.Label
+                            type="text"
+                            id={CONFIRMATION_FORM_INPUT.ORDER_SELECTION_TITLE.NAME}
+                            label={CONFIRMATION_FORM_INPUT.ORDER_SELECTION_TITLE.LABEL}
+                            value={orderTitle}
+                            hook={{
+                                register,
+                                name: CONFIRMATION_FORM_INPUT.ORDER_SELECTION_TITLE.NAME,
+                            }}
+                            error={errors?.[CONFIRMATION_FORM_INPUT.ORDER_SELECTION_TITLE.NAME]?.message}
+                            disabled
+                            hidden
+                        />
                     </Columns.Column>
 
-                    {variants && (
+                    {orderVariants && (
                         <Columns.Column
                             width={{
                                 xs: 4,
@@ -156,13 +207,27 @@ const Confirmation = ({ className, products, productsVariant, onSubmit }: Confir
                                 type="select"
                                 id={CONFIRMATION_FORM_INPUT.ORDER_SELECTION_VARIANT.NAME}
                                 label={CONFIRMATION_FORM_INPUT.ORDER_SELECTION_VARIANT.LABEL}
-                                items={variants}
+                                items={orderVariants}
                                 hook={{
                                     register,
                                     name: CONFIRMATION_FORM_INPUT.ORDER_SELECTION_VARIANT.NAME,
                                     required: true,
                                 }}
                                 error={errors?.[CONFIRMATION_FORM_INPUT.ORDER_SELECTION_VARIANT.NAME]?.message}
+                            />
+
+                            <Input.Label
+                                type="text"
+                                id={CONFIRMATION_FORM_INPUT.ORDER_SELECTION_PRICE.NAME}
+                                label={CONFIRMATION_FORM_INPUT.ORDER_SELECTION_PRICE.LABEL}
+                                value={orderPrice}
+                                hook={{
+                                    register,
+                                    name: CONFIRMATION_FORM_INPUT.ORDER_SELECTION_PRICE.NAME,
+                                }}
+                                error={errors?.[CONFIRMATION_FORM_INPUT.ORDER_SELECTION_PRICE.NAME]?.message}
+                                disabled
+                                hidden
                             />
                         </Columns.Column>
                     )}
@@ -198,6 +263,7 @@ const Confirmation = ({ className, products, productsVariant, onSubmit }: Confir
                     }}>
                     <Input.Label
                         type="date"
+                        min={getCurrentDate()}
                         id={CONFIRMATION_FORM_INPUT.ORDER_DATE.NAME}
                         label={CONFIRMATION_FORM_INPUT.ORDER_DATE.LABEL}
                         hook={{
@@ -216,6 +282,7 @@ const Confirmation = ({ className, products, productsVariant, onSubmit }: Confir
                     }}>
                     <Input.Label
                         type="time"
+                        step={900}
                         id={CONFIRMATION_FORM_INPUT.ORDER_COLLECTION_TIME.NAME}
                         label={CONFIRMATION_FORM_INPUT.ORDER_COLLECTION_TIME.LABEL}
                         hook={{
