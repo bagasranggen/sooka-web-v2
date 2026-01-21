@@ -1,15 +1,15 @@
 import React, { forwardRef } from 'react';
 
-import { ArrayString } from '@/libs/@types';
+import { ArrayString, BaseRegularInputProps, InputRegularRef } from '@/libs/@types';
 import { joinArrayString } from '@/libs/utils';
 import { createInputHooks } from '@/libs/factory';
 
-import { BaseInputProps, BaseInputRef } from '@/components/common/Input';
+import { BaseInputHookProps } from '@/components/common/Input';
 import Icon from '@/components/common/Icon';
 
-export type InputCheckboxProps = BaseInputProps;
+export type InputCheckboxProps = BaseRegularInputProps & BaseInputHookProps;
 
-const InputCheckbox = forwardRef<BaseInputRef, InputCheckboxProps>(
+const InputCheckbox = forwardRef<InputRegularRef, InputCheckboxProps>(
     ({ id, className, children, hook, checked, ...props }, ref) => {
         let inputClass: ArrayString = ['flex items-center gap-x-0.5 relative cursor-pointer'];
         inputClass.push(
