@@ -1,5 +1,6 @@
 import { PageDataProps } from '@/libs/@types';
 import { axiosClient } from '@/libs/fetcher';
+import { convertIntToCurrency } from '@/libs/utils';
 
 import { OrderConfirmationIndexProps } from '@/components/pages/OrderConfirmationIndex';
 
@@ -18,30 +19,40 @@ export const OrderConfirmationData = async (): Promise<PageDataProps<OrderConfir
 
         products.forEach((item: any) => {
             form.products?.push({
-                value: item.slug,
+                value: item.title,
                 children: item.title,
             });
 
             let tmpVariant: any = {};
 
-            Object.assign(tmpVariant, { slug: item.slug });
+            Object.assign(tmpVariant, { slug: item.title });
 
             const tmpVariantPrice: any[] = [];
+            const tmpVariantVariants: any[] = [];
 
             if (item?.prices && item.prices?.length > 0) {
-                tmpVariantPrice?.push({ value: '', children: '-- Select Order Variant --', disabled: true });
+                tmpVariantVariants?.push({ value: '', children: '-- Select Order Variant --', disabled: true });
 
                 item.prices.forEach(({ price }: any) => {
+                    tmpVariantVariants.push({
+                        value: price?.note,
+                        children: price?.note,
+                    });
+
                     if (price?.normalPrice) {
+                        const orderPrice = price?.salePrice ?? price?.normalPrice ?? 0;
+
                         tmpVariantPrice.push({
-                            value: price?.salePrice ?? price?.normalPrice,
-                            children: price?.note,
+                            value: price?.note,
+                            children: convertIntToCurrency(orderPrice, true),
                         });
                     }
                 });
             }
 
-            if (tmpVariantPrice.length > 1) Object.assign(tmpVariant, { items: tmpVariantPrice });
+            if (tmpVariantVariants.length > 1) Object.assign(tmpVariant, { variants: tmpVariantVariants });
+
+            if (tmpVariantPrice.length > 0) Object.assign(tmpVariant, { prices: tmpVariantPrice });
 
             if (tmpVariant) form.productsVariant?.push(tmpVariant);
         });
