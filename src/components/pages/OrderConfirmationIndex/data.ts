@@ -1,6 +1,5 @@
 import { PageDataProps } from '@/libs/@types';
 import { axiosClient } from '@/libs/fetcher';
-import { convertIntToCurrency } from '@/libs/utils';
 
 import { OrderConfirmationIndexProps } from '@/components/pages/OrderConfirmationIndex';
 
@@ -44,7 +43,7 @@ export const OrderConfirmationData = async (): Promise<PageDataProps<OrderConfir
 
                         tmpVariantPrices.push({
                             value: price?.note,
-                            children: convertIntToCurrency(orderPrice, true),
+                            children: orderPrice,
                         });
                     }
                 });
@@ -61,10 +60,6 @@ export const OrderConfirmationData = async (): Promise<PageDataProps<OrderConfir
                 item.addons.forEach((addon: any) => {
                     const price = addon?.prices?.[0]?.price;
                     const addonIsFree = price?.isFree;
-
-                    // console.log(price);
-                    // console.log(addon);
-                    // console.log({ price, addonIsFree });
 
                     let addonPrice = 0;
                     if (!addonIsFree && price?.normalPrice) addonPrice = price.normalPrice;
