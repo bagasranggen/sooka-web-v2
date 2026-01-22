@@ -147,6 +147,7 @@ const Confirmation = ({ className, products, productsVariant, onSubmit }: Confir
         <form
             className={className}
             onSubmit={handleSubmit(submitHandler)}>
+            {/* ORDER DETAILS */}
             <Columns.Row
                 className="mb-3"
                 spacing={{ x: 3, y: 3 }}>
@@ -356,6 +357,7 @@ const Confirmation = ({ className, products, productsVariant, onSubmit }: Confir
                 </Columns.Column>
             </Columns.Row>
 
+            {/* PIN POINT */}
             {getValues(CONFIRMATION_FORM_INPUT.ORDER_COLLECTION.NAME) === 'delivery' && (
                 <div className="mb-3">
                     <Input.Label
@@ -372,6 +374,7 @@ const Confirmation = ({ className, products, productsVariant, onSubmit }: Confir
                 </div>
             )}
 
+            {/* ORDER NOTES */}
             <div className="mb-3">
                 <Input.Label
                     type="textarea"
