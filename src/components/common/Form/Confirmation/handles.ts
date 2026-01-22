@@ -19,6 +19,7 @@ export const CONFIRMATION_FORM_KEYS = [
     'ORDER_SELECTION_ADDON',
     'ORDER_SELECTION_ADDON_PRICE',
     'ORDER_SELECTION_TOTAL_PRICE',
+    'ORDER_NOTES',
 ] as const;
 
 export const CONFIRMATION_FORM_HANDLE: Record<string, keyof ConfirmationFormFields> = {
@@ -36,6 +37,7 @@ export const CONFIRMATION_FORM_HANDLE: Record<string, keyof ConfirmationFormFiel
     ORDER_SELECTION_ADDON: 'orderSelectionAddon',
     ORDER_SELECTION_ADDON_PRICE: 'orderSelectionAddonPrice',
     ORDER_SELECTION_TOTAL_PRICE: 'orderSelectionTotalPrice',
+    ORDER_NOTES: 'orderNotes',
 } as const;
 
 export const CONFIRMATION_FORM_INPUT: Record<
@@ -138,6 +140,14 @@ export const CONFIRMATION_FORM_INPUT: Record<
         }),
         name: CONFIRMATION_FORM_HANDLE.ORDER_PIN_POINT,
         label: 'Pin Point Location',
+    }),
+    ...createFormInputHandle({
+        key: getObjectKeyByValue({
+            obj: CONFIRMATION_FORM_HANDLE,
+            value: CONFIRMATION_FORM_HANDLE.ORDER_NOTES,
+        }),
+        name: CONFIRMATION_FORM_HANDLE.ORDER_NOTES,
+        label: 'Additional Notes',
     }),
 } as const;
 

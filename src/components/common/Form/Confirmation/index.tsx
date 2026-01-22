@@ -27,6 +27,7 @@ export type ConfirmationFormFields = {
     orderCollection: string;
     orderCollectionTime: string;
     orderPinPoint: string;
+    orderNotes: string;
 };
 
 export type ProductsVariantItemProps = {
@@ -356,22 +357,35 @@ const Confirmation = ({ className, products, productsVariant, onSubmit }: Confir
             </Columns.Row>
 
             {getValues(CONFIRMATION_FORM_INPUT.ORDER_COLLECTION.NAME) === 'delivery' && (
-                <Columns.Row className="mb-3">
-                    <Columns.Column>
-                        <Input.Label
-                            type="text"
-                            id={CONFIRMATION_FORM_INPUT.ORDER_PIN_POINT.NAME}
-                            label={CONFIRMATION_FORM_INPUT.ORDER_PIN_POINT.LABEL}
-                            hook={{
-                                register,
-                                name: CONFIRMATION_FORM_INPUT.ORDER_PIN_POINT.NAME,
-                                required: true,
-                            }}
-                            error={errors?.[CONFIRMATION_FORM_INPUT.ORDER_PIN_POINT.NAME]?.message}
-                        />
-                    </Columns.Column>
-                </Columns.Row>
+                <div className="mb-3">
+                    <Input.Label
+                        type="text"
+                        id={CONFIRMATION_FORM_INPUT.ORDER_PIN_POINT.NAME}
+                        label={CONFIRMATION_FORM_INPUT.ORDER_PIN_POINT.LABEL}
+                        hook={{
+                            register,
+                            name: CONFIRMATION_FORM_INPUT.ORDER_PIN_POINT.NAME,
+                            required: true,
+                        }}
+                        error={errors?.[CONFIRMATION_FORM_INPUT.ORDER_PIN_POINT.NAME]?.message}
+                    />
+                </div>
             )}
+
+            <div className="mb-3">
+                <Input.Label
+                    type="textarea"
+                    rows={5}
+                    id={CONFIRMATION_FORM_INPUT.ORDER_NOTES.NAME}
+                    label={CONFIRMATION_FORM_INPUT.ORDER_NOTES.LABEL}
+                    hook={{
+                        register,
+                        name: CONFIRMATION_FORM_INPUT.ORDER_NOTES.NAME,
+                        required: true,
+                    }}
+                    error={errors?.[CONFIRMATION_FORM_INPUT.ORDER_NOTES.NAME]?.message}
+                />
+            </div>
 
             <Button.Container
                 className="mt-5 justify-end"
