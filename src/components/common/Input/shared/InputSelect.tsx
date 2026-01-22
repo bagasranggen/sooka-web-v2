@@ -1,5 +1,6 @@
 import React, { forwardRef } from 'react';
 
+import { InputSelectRef } from '@/libs/@types';
 import { createInputHooks } from '@/libs/factory';
 
 import { BaseInputHookProps } from '@/components/common/Input';
@@ -8,11 +9,11 @@ export type InputSelectItemProps = React.OptionHTMLAttributes<HTMLOptionElement>
 
 export type BaseInputSelectProps = {
     items?: InputSelectItemProps[];
-} & React.SelectHTMLAttributes<HTMLSelectElement>;
+} & React.SelectHTMLAttributes<InputSelectRef>;
 
 export type InputSelectProps = BaseInputSelectProps & BaseInputHookProps;
 
-const InputSelect = forwardRef<HTMLSelectElement, InputSelectProps>(({ hook, items, ...props }, ref) => {
+const InputSelect = forwardRef<InputSelectRef, InputSelectProps>(({ hook, items, ...props }, ref) => {
     if (!items || items.length === 0) return null;
 
     const inputHook = createInputHooks(hook, props);
