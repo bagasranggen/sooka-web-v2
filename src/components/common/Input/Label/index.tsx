@@ -28,6 +28,7 @@ const Label = forwardRef<HTMLInputElement | HTMLSelectElement, LabelProps>(
         if (type === 'select' && props?.multiple) inputClass.push('mt-3');
         if (type !== 'select') inputClass.push('px-2');
         if (type === 'select') inputClass.push('px-[1.75rem]');
+        if (type === 'textarea') inputClass.push('-mb-0.5');
         inputClass.push('text-[2rem]');
         inputClass.push('border-b-2 border-b-sooka-primary/10');
         if (className) inputClass.push(className);

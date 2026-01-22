@@ -19,3 +19,5 @@ export type BaseRegularInputProps = React.InputHTMLAttributes<HTMLInputElement>;
 export type InputRegularRef = HTMLInputElement;
 
 export type InputSelectRef = HTMLSelectElement;
+
+export type InputTextareaRef = HTMLTextAreaElement;
