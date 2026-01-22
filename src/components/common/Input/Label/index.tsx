@@ -4,6 +4,7 @@ import { ArrayString } from '@/libs/@types';
 import { joinArrayString } from '@/libs/utils';
 
 import Base, { BaseProps } from '@/components/common/Input';
+import LabelText from '@/components/common/Input/Label/LabelText';
 
 export type LabelProps = {
     label: string;
@@ -16,7 +17,6 @@ const Label = forwardRef<HTMLInputElement | HTMLSelectElement, LabelProps>(
         let inputGroupClass: ArrayString = ['group relative after'];
         inputGroupClass.push("after:content-[''] after:bg-sooka-primary after:transition-width");
         inputGroupClass.push('after:absolute after:left-0 after:bottom-0');
-        inputGroupClass.push('after:w-0 after:h-[.2rem]');
         inputGroupClass.push('after:w-0 after:h-[.2rem]');
         inputGroupClass.push('after:hover:w-full after:focus-within:w-full');
         if (hidden) inputGroupClass.push('hidden');
@@ -33,19 +33,8 @@ const Label = forwardRef<HTMLInputElement | HTMLSelectElement, LabelProps>(
         if (className) inputClass.push(className);
         inputClass = joinArrayString(inputClass);
 
-        let labelClass: ArrayString = ['block uppercase transition-all origin-top-left'];
-        labelClass.push('text-[2.5rem] whitespace-nowrap');
-        labelClass.push('tracking-[.6rem]');
-        labelClass.push('px-2 py-1');
-        labelClass.push('absolute left-0 top-0');
-        if (!isFocus) labelClass.push('peer-placeholder-shown:top-1/2 peer-placeholder-shown:-translate-y-1/2');
-        labelClass.push(
-            'group-focus-within:scale-50 group-focus-within:font-semibold group-focus-within:translate-x-[1.2rem]'
-        );
-        labelClass.push(
-            'peer-[:not(:placeholder-shown)]:scale-50 peer-[:not(:placeholder-shown)]:font-semibold peer-[:not(:placeholder-shown)]:translate-x-[1.2rem]'
-        );
-        labelClass = joinArrayString(labelClass);
+        let labelClass = '';
+        if (!isFocus) labelClass = 'peer-placeholder-shown:top-1/2 peer-placeholder-shown:-translate-y-1/2';
 
         return (
             <>
@@ -68,11 +57,11 @@ const Label = forwardRef<HTMLInputElement | HTMLSelectElement, LabelProps>(
                         {...props}
                     />
 
-                    <label
+                    <LabelText
                         htmlFor={id}
                         className={labelClass}>
                         {label}
-                    </label>
+                    </LabelText>
                 </div>
 
                 {error && !hidden && <small className="text-rose-500 font-semibold">{error}</small>}
@@ -82,3 +71,5 @@ const Label = forwardRef<HTMLInputElement | HTMLSelectElement, LabelProps>(
 );
 
 export default Label;
+
+export { LabelText };
