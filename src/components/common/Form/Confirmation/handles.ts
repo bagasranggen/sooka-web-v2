@@ -16,6 +16,8 @@ export const CONFIRMATION_FORM_KEYS = [
     'ORDER_SELECTION_TITLE',
     'ORDER_SELECTION_VARIANT',
     'ORDER_SELECTION_PRICE',
+    'ORDER_SELECTION_ADDON',
+    'ORDER_SELECTION_ADDON_PRICE',
 ] as const;
 
 export const CONFIRMATION_FORM_HANDLE: Record<string, keyof ConfirmationFormFields> = {
@@ -30,6 +32,8 @@ export const CONFIRMATION_FORM_HANDLE: Record<string, keyof ConfirmationFormFiel
     ORDER_SELECTION_TITLE: 'orderSelectionTitle',
     ORDER_SELECTION_VARIANT: 'orderSelectionVariant',
     ORDER_SELECTION_PRICE: 'orderSelectionPrice',
+    ORDER_SELECTION_ADDON: 'orderSelectionAddon',
+    ORDER_SELECTION_ADDON_PRICE: 'orderSelectionAddonPrice',
 } as const;
 
 export const CONFIRMATION_FORM_INPUT: Record<
@@ -92,6 +96,22 @@ export const CONFIRMATION_FORM_INPUT: Record<
         }),
         name: CONFIRMATION_FORM_HANDLE.ORDER_SELECTION_PRICE,
         label: 'Order Price',
+    }),
+    ...createFormInputHandle({
+        key: getObjectKeyByValue({
+            obj: CONFIRMATION_FORM_HANDLE,
+            value: CONFIRMATION_FORM_HANDLE.ORDER_SELECTION_ADDON,
+        }),
+        name: CONFIRMATION_FORM_HANDLE.ORDER_SELECTION_ADDON,
+        label: 'Addon(s)',
+    }),
+    ...createFormInputHandle({
+        key: getObjectKeyByValue({
+            obj: CONFIRMATION_FORM_HANDLE,
+            value: CONFIRMATION_FORM_HANDLE.ORDER_SELECTION_ADDON_PRICE,
+        }),
+        name: CONFIRMATION_FORM_HANDLE.ORDER_SELECTION_ADDON_PRICE,
+        label: 'Addon(s) Price',
     }),
     ...createFormInputHandle({
         key: getObjectKeyByValue({

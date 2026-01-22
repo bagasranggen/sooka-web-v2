@@ -7,7 +7,7 @@ import { getCurrentDate } from '@/libs/utils';
 
 import { useForm } from 'react-hook-form';
 
-import Input, { BaseInputSelectProps } from '@/components/common/Input';
+import Input, { BaseInputSelectProps, LabelText } from '@/components/common/Input';
 import Button from '@/components/common/Button';
 import Columns from '@/components/common/Columns';
 import { CONFIRMATION_FORM_INPUT, ORDER_COLLECTIONS_OPTIONS } from '@/components/common/Form/Confirmation/handles';
@@ -21,6 +21,8 @@ export type ConfirmationFormFields = {
     orderSelectionTitle: string;
     orderSelectionVariant: string;
     orderSelectionPrice: string;
+    orderSelectionAddon: [string];
+    orderSelectionAddonPrice: [string];
     orderCollection: string;
     orderCollectionTime: string;
     orderPinPoint: string;
@@ -28,9 +30,7 @@ export type ConfirmationFormFields = {
 
 export type ProductsVariantItemProps = {
     slug: string;
-    variants?: BaseInputSelectProps['items'];
-    prices?: BaseInputSelectProps['items'];
-};
+} & Partial<Record<'variants' | 'prices' | 'addons' | 'addonsPrice', BaseInputSelectProps['items']>>;
 
 export type ConfirmationProps = {
     onSubmit?: FormOnSubmitProps<ConfirmationFormFields>;
@@ -55,17 +55,18 @@ const Confirmation = ({ className, products, productsVariant, onSubmit }: Confir
     watch(CONFIRMATION_FORM_INPUT.ORDER_COLLECTION.NAME);
     watch(CONFIRMATION_FORM_INPUT.ORDER_SELECTION.NAME);
     watch(CONFIRMATION_FORM_INPUT.ORDER_SELECTION_VARIANT.NAME);
+    watch(CONFIRMATION_FORM_INPUT.ORDER_SELECTION_ADDON.NAME);
 
     const selectedProduct = getValues(CONFIRMATION_FORM_INPUT.ORDER_SELECTION.NAME);
     const selectedProductVariant = getValues(CONFIRMATION_FORM_INPUT.ORDER_SELECTION_VARIANT.NAME);
 
-    const orderVariants = useMemo(() => {
-        let data: undefined | BaseInputSelectProps['items'] = undefined;
+    const orderSelected = useMemo(() => {
+        let data: undefined | ProductsVariantItemProps = undefined;
 
-        if (productsVariant && productsVariant.length > 0) {
-            const items = productsVariant.find((item) => item.slug === selectedProduct)?.variants;
+        if (selectedProduct && productsVariant && productsVariant.length > 0) {
+            const selected = productsVariant.find((item) => item.slug === selectedProduct);
 
-            if (items) data = items;
+            if (selected) data = selected;
         }
 
         return data;
@@ -74,22 +75,22 @@ const Confirmation = ({ className, products, productsVariant, onSubmit }: Confir
     const orderPrice = useMemo(() => {
         let data: undefined | string = undefined;
 
-        if (productsVariant && productsVariant.length > 0) {
-            const items = productsVariant.find((item) => item.slug === selectedProduct)?.prices;
+        if (orderSelected) {
+            const items = orderSelected?.prices;
             const price = items?.find((item) => item.value === selectedProductVariant)?.children as string;
 
             if (price) data = price;
         }
 
-        if (data) setValue(CONFIRMATION_FORM_INPUT.ORDER_SELECTION_PRICE.NAME, data);
+        setValue(CONFIRMATION_FORM_INPUT.ORDER_SELECTION_PRICE.NAME, data ?? '');
 
         return data;
-    }, [selectedProduct, selectedProductVariant]);
+    }, [orderSelected, selectedProductVariant]);
 
     const orderTitle = useMemo(() => {
         let data: undefined | string = undefined;
 
-        if (selectedProduct) data = selectedProduct;
+        if (selectedProduct && !Array.isArray(selectedProduct)) data = selectedProduct;
 
         if (selectedProductVariant) data += ` (${selectedProductVariant})`;
 
@@ -100,6 +101,7 @@ const Confirmation = ({ className, products, productsVariant, onSubmit }: Confir
 
     useEffect(() => {
         setValue(CONFIRMATION_FORM_INPUT.ORDER_SELECTION_VARIANT.NAME, '');
+        setValue(CONFIRMATION_FORM_INPUT.ORDER_SELECTION_ADDON.NAME, '');
     }, [selectedProduct]);
 
     return (
@@ -197,7 +199,7 @@ const Confirmation = ({ className, products, productsVariant, onSubmit }: Confir
                         />
                     </Columns.Column>
 
-                    {orderVariants && (
+                    {orderSelected?.variants && orderSelected.variants.length > 0 && (
                         <Columns.Column
                             width={{
                                 xs: 4,
@@ -207,7 +209,7 @@ const Confirmation = ({ className, products, productsVariant, onSubmit }: Confir
                                 type="select"
                                 id={CONFIRMATION_FORM_INPUT.ORDER_SELECTION_VARIANT.NAME}
                                 label={CONFIRMATION_FORM_INPUT.ORDER_SELECTION_VARIANT.LABEL}
-                                items={orderVariants}
+                                items={orderSelected.variants}
                                 hook={{
                                     register,
                                     name: CONFIRMATION_FORM_INPUT.ORDER_SELECTION_VARIANT.NAME,
@@ -231,6 +233,85 @@ const Confirmation = ({ className, products, productsVariant, onSubmit }: Confir
                             />
                         </Columns.Column>
                     )}
+                </Columns.Row>
+            )}
+
+            {orderSelected?.addons && orderSelected.addons.length > 0 && (
+                <Columns.Row className="mb-3">
+                    <Columns.Column>
+                        <LabelText
+                            standalone
+                            active
+                            htmlFor={CONFIRMATION_FORM_INPUT.ORDER_SELECTION_ADDON.NAME}>
+                            {CONFIRMATION_FORM_INPUT.ORDER_SELECTION_ADDON.LABEL}
+                        </LabelText>
+
+                        <div className="px-2 flex flex-wrap gap-x-2 gap-y-0.5">
+                            {getValues(CONFIRMATION_FORM_INPUT.ORDER_SELECTION_ADDON.NAME)}
+
+                            {orderSelected.addons.map((item, i) => {
+                                const addonPrice = orderSelected?.addonsPrice?.[i];
+
+                                console.log({ addonPrice });
+
+                                return (
+                                    <div key={i}>
+                                        <Input
+                                            type="checkbox"
+                                            id={`${selectedProduct}-${item.value}`}
+                                            value={item.value}
+                                            onClick={() => {
+                                                console.log('click');
+                                            }}
+                                            hook={{
+                                                register,
+                                                name: CONFIRMATION_FORM_INPUT.ORDER_SELECTION_ADDON.NAME,
+                                            }}>
+                                            {item.children}
+                                        </Input>
+
+                                        {/*{addonPrice && (*/}
+                                        {/*    <Input*/}
+                                        {/*        type="checkbox"*/}
+                                        {/*        id={`${selectedProduct}-price-${addonPrice.value}`}*/}
+                                        {/*        value={addonPrice.value}*/}
+                                        {/*        checked={getValues(*/}
+                                        {/*            CONFIRMATION_FORM_INPUT.ORDER_SELECTION_ADDON.NAME*/}
+                                        {/*        ).includes(item.value)}*/}
+                                        {/*        hook={{*/}
+                                        {/*            register,*/}
+                                        {/*            name: CONFIRMATION_FORM_INPUT.ORDER_SELECTION_ADDON_PRICE.NAME,*/}
+                                        {/*        }}>*/}
+                                        {/*        {addonPrice.children}*/}
+                                        {/*    </Input>*/}
+                                        {/*)}*/}
+                                    </div>
+                                );
+                            })}
+                        </div>
+
+                        {/*{orderSelected?.addonsPrice && orderSelected.addonsPrice.length > 0 && (*/}
+                        {/*    <div className="px-2 flex flex-wrap gap-x-2 gap-y-0.5">*/}
+                        {/*        {orderSelected.addonsPrice.map((item, i) => {*/}
+                        {/*            return (*/}
+                        {/*                <div key={i}>*/}
+                        {/*                    <Input*/}
+                        {/*                        type="checkbox"*/}
+                        {/*                        id={`${selectedProduct}-price-${item.value}`}*/}
+                        {/*                        value={item.value}*/}
+                        {/*                        // checked={getValues()}*/}
+                        {/*                        hook={{*/}
+                        {/*                            register,*/}
+                        {/*                            name: CONFIRMATION_FORM_INPUT.ORDER_SELECTION_ADDON_PRICE.NAME,*/}
+                        {/*                        }}>*/}
+                        {/*                        {item.children}*/}
+                        {/*                    </Input>*/}
+                        {/*                </div>*/}
+                        {/*            );*/}
+                        {/*        })}*/}
+                        {/*    </div>*/}
+                        {/*)}*/}
+                    </Columns.Column>
                 </Columns.Row>
             )}
 

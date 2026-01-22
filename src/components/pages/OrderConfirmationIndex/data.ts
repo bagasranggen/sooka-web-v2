@@ -27,7 +27,7 @@ export const OrderConfirmationData = async (): Promise<PageDataProps<OrderConfir
 
             Object.assign(tmpVariant, { slug: item.title });
 
-            const tmpVariantPrice: any[] = [];
+            const tmpVariantPrices: any[] = [];
             const tmpVariantVariants: any[] = [];
 
             if (item?.prices && item.prices?.length > 0) {
@@ -42,7 +42,7 @@ export const OrderConfirmationData = async (): Promise<PageDataProps<OrderConfir
                     if (price?.normalPrice) {
                         const orderPrice = price?.salePrice ?? price?.normalPrice ?? 0;
 
-                        tmpVariantPrice.push({
+                        tmpVariantPrices.push({
                             value: price?.note,
                             children: convertIntToCurrency(orderPrice, true),
                         });
@@ -52,7 +52,39 @@ export const OrderConfirmationData = async (): Promise<PageDataProps<OrderConfir
 
             if (tmpVariantVariants.length > 1) Object.assign(tmpVariant, { variants: tmpVariantVariants });
 
-            if (tmpVariantPrice.length > 0) Object.assign(tmpVariant, { prices: tmpVariantPrice });
+            if (tmpVariantPrices.length > 0) Object.assign(tmpVariant, { prices: tmpVariantPrices });
+
+            const tmpAddons: any[] = [];
+            const tmpAddonsPrices: any[] = [];
+
+            if (item?.addons && item.addons.length > 0) {
+                item.addons.forEach((addon: any) => {
+                    const price = addon?.prices?.[0]?.price;
+                    const addonIsFree = price?.isFree;
+
+                    // console.log(price);
+                    // console.log(addon);
+                    // console.log({ price, addonIsFree });
+
+                    let addonPrice = 0;
+                    if (!addonIsFree && price?.normalPrice) addonPrice = price.normalPrice;
+                    if (!addonIsFree && price?.salePrice) addonPrice = price.salePrice;
+
+                    tmpAddons.push({
+                        value: addon?.title,
+                        children: addon?.title,
+                    });
+
+                    tmpAddonsPrices.push({
+                        value: addonPrice,
+                        children: addonPrice,
+                    });
+                });
+            }
+
+            if (tmpAddons.length > 0) Object.assign(tmpVariant, { addons: tmpAddons });
+
+            if (tmpAddonsPrices.length > 0) Object.assign(tmpVariant, { addonsPrice: tmpAddonsPrices });
 
             if (tmpVariant) form.productsVariant?.push(tmpVariant);
         });
