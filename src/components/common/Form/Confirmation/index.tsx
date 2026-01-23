@@ -62,6 +62,7 @@ const Confirmation = ({ className, products, productsVariant, onSubmit }: Confir
     const selectedProduct = getValues(CONFIRMATION_FORM_INPUT.ORDER_SELECTION.NAME);
     const selectedProductVariant = getValues(CONFIRMATION_FORM_INPUT.ORDER_SELECTION_VARIANT.NAME);
     const selectedAddons = getValues(CONFIRMATION_FORM_INPUT.ORDER_SELECTION_ADDON.NAME);
+    const selectedOrderCollection = getValues(CONFIRMATION_FORM_INPUT.ORDER_COLLECTION.NAME);
 
     const orderSelected = useMemo(() => {
         let data: undefined | ProductsVariantItemProps = undefined;
@@ -142,6 +143,10 @@ const Confirmation = ({ className, products, productsVariant, onSubmit }: Confir
         setValue(CONFIRMATION_FORM_INPUT.ORDER_SELECTION_VARIANT.NAME, '');
         setValue(CONFIRMATION_FORM_INPUT.ORDER_SELECTION_ADDON.NAME, '');
     }, [selectedProduct]);
+
+    useEffect(() => {
+        setValue(CONFIRMATION_FORM_INPUT.ORDER_PIN_POINT.NAME, '');
+    }, [selectedOrderCollection]);
 
     return (
         <form
