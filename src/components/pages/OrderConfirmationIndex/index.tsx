@@ -2,8 +2,9 @@
 
 import React from 'react';
 
-import Container from '@/components/common/Container';
+import { submitOrderForm } from '@/libs/actions';
 
+import Container from '@/components/common/Container';
 import Form, { ConfirmationProps } from '@/components/common/Form';
 import Heading from '@/components/common/Heading';
 
@@ -27,8 +28,10 @@ const OrderConfirmationIndex = ({ entries }: OrderConfirmationIndexProps): React
                 className="mt-4 md:mt-7 mb-10"
                 products={entries.form.products}
                 productsVariant={entries.form.productsVariant}
-                onSubmit={(data) => {
-                    console.log(data);
+                onSubmit={async (data) => {
+                    const res = await submitOrderForm(data);
+
+                    console.log({ res });
                 }}
             />
         </Container>
