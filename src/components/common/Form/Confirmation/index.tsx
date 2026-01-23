@@ -384,7 +384,6 @@ const Confirmation = ({ className, products, productsVariant, onSubmit }: Confir
                     hook={{
                         register,
                         name: CONFIRMATION_FORM_INPUT.ORDER_NOTES.NAME,
-                        required: true,
                     }}
                     error={errors?.[CONFIRMATION_FORM_INPUT.ORDER_NOTES.NAME]?.message}
                 />
