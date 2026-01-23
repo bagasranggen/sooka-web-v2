@@ -349,7 +349,7 @@ const Confirmation = ({ className, products, productsVariant, onSubmit }: Confir
                     }}>
                     <Input.Label
                         type="time"
-                        step={900}
+                        // step={900}
                         id={CONFIRMATION_FORM_INPUT.ORDER_COLLECTION_TIME.NAME}
                         label={CONFIRMATION_FORM_INPUT.ORDER_COLLECTION_TIME.LABEL}
                         hook={{
