@@ -305,6 +305,7 @@ const Confirmation = ({ className, products, productsVariant, onSubmit }: Confir
                 className="mb-3"
                 spacing={{ x: 3, y: 3 }}>
                 <Columns.Column
+                    className="order-1"
                     width={{
                         xs: 6,
                         lg: 6,
@@ -324,6 +325,7 @@ const Confirmation = ({ className, products, productsVariant, onSubmit }: Confir
                 </Columns.Column>
 
                 <Columns.Column
+                    className="order-3 lg:order-2"
                     width={{
                         xs: 3,
                         lg: 3,
@@ -343,6 +345,7 @@ const Confirmation = ({ className, products, productsVariant, onSubmit }: Confir
                 </Columns.Column>
 
                 <Columns.Column
+                    className="order-4 lg:order-3"
                     width={{
                         xs: 3,
                         lg: 3,
@@ -360,24 +363,23 @@ const Confirmation = ({ className, products, productsVariant, onSubmit }: Confir
                         error={errors?.[CONFIRMATION_FORM_INPUT.ORDER_COLLECTION_TIME.NAME]?.message}
                     />
                 </Columns.Column>
-            </Columns.Row>
 
-            {/* PIN POINT */}
-            {getValues(CONFIRMATION_FORM_INPUT.ORDER_COLLECTION.NAME) === 'delivery' && (
-                <div className="mb-3">
-                    <Input.Label
-                        type="text"
-                        id={CONFIRMATION_FORM_INPUT.ORDER_PIN_POINT.NAME}
-                        label={CONFIRMATION_FORM_INPUT.ORDER_PIN_POINT.LABEL}
-                        hook={{
-                            register,
-                            name: CONFIRMATION_FORM_INPUT.ORDER_PIN_POINT.NAME,
-                            required: true,
-                        }}
-                        error={errors?.[CONFIRMATION_FORM_INPUT.ORDER_PIN_POINT.NAME]?.message}
-                    />
-                </div>
-            )}
+                {getValues(CONFIRMATION_FORM_INPUT.ORDER_COLLECTION.NAME) === 'delivery' && (
+                    <Columns.Column className="order-2 lg:order-4">
+                        <Input.Label
+                            type="text"
+                            id={CONFIRMATION_FORM_INPUT.ORDER_PIN_POINT.NAME}
+                            label={CONFIRMATION_FORM_INPUT.ORDER_PIN_POINT.LABEL}
+                            hook={{
+                                register,
+                                name: CONFIRMATION_FORM_INPUT.ORDER_PIN_POINT.NAME,
+                                required: true,
+                            }}
+                            error={errors?.[CONFIRMATION_FORM_INPUT.ORDER_PIN_POINT.NAME]?.message}
+                        />
+                    </Columns.Column>
+                )}
+            </Columns.Row>
 
             {/* ORDER NOTES */}
             <div className="mb-3">
