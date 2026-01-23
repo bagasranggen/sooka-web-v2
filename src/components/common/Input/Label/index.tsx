@@ -67,7 +67,8 @@ const Label = forwardRef<HTMLInputElement | HTMLSelectElement, LabelProps>(
 
                     <LabelText
                         htmlFor={id}
-                        className={labelClass}>
+                        className={labelClass}
+                        required={props?.required || props?.hook?.required}>
                         {label}
                     </LabelText>
                 </div>
