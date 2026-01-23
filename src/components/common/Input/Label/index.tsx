@@ -6,6 +6,8 @@ import { joinArrayString } from '@/libs/utils';
 import Base, { BaseProps } from '@/components/common/Input';
 import LabelText from '@/components/common/Input/Label/LabelText';
 
+const EXCLUDE_SPACING_TYPE = ['select', 'textarea'];
+
 export type LabelProps = {
     label: string;
 } & (Omit<BaseProps, 'id'> & Required<Pick<BaseProps, 'id'>>);
@@ -24,7 +26,10 @@ const Label = forwardRef<HTMLInputElement | HTMLSelectElement, LabelProps>(
 
         let inputClass: ArrayString = ['peer w-full placeholder:opacity-0 bg-transparent focus-visible:outline-none'];
         inputClass.push('min-h-[6.7rem]');
-        if ((type !== 'select' && !props?.multiple) || (type === 'select' && !props?.multiple)) inputClass.push('pt-2');
+        if ((!EXCLUDE_SPACING_TYPE.includes(type) && !props?.multiple) || (type === 'select' && !props?.multiple)) {
+            inputClass.push('pt-2');
+        }
+        if (type === 'textarea') inputClass.push('pt-3');
         if (type === 'select' && props?.multiple) inputClass.push('mt-3');
         if (type !== 'select') inputClass.push('px-2');
         if (type === 'select') inputClass.push('px-[1.75rem]');
@@ -35,7 +40,9 @@ const Label = forwardRef<HTMLInputElement | HTMLSelectElement, LabelProps>(
         inputClass = joinArrayString(inputClass);
 
         let labelClass = '';
-        if (!isFocus) labelClass = 'peer-placeholder-shown:top-1/2 peer-placeholder-shown:-translate-y-1/2';
+        if (!isFocus && type !== 'textarea') {
+            labelClass = 'peer-placeholder-shown:top-1/2 peer-placeholder-shown:-translate-y-1/2';
+        }
 
         return (
             <>
