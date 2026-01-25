@@ -152,6 +152,6 @@ export const CONFIRMATION_FORM_INPUT: Record<
 } as const;
 
 export const ORDER_COLLECTIONS_OPTIONS: BaseInputSelectProps['items'] = [
-    { value: 'pickUp', children: 'Pick Up' },
-    { value: 'delivery', children: 'Delivery' },
+    { value: 'Pick Up', children: 'Pick Up' },
+    { value: 'Delivery', children: 'Delivery' },
 ];
