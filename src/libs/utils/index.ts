@@ -2,6 +2,7 @@ export * from './animation';
 export * from './columns';
 export * from './pages';
 
+export * from './addCurrentTime';
 export * from './checkMediaStatus';
 export * from './checkStringIsNumber';
 export * from './cleanArrayString';
