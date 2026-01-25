@@ -386,7 +386,7 @@ const Confirmation = ({ className, products, productsVariant, onSubmit }: Confir
                     />
                 </Columns.Column>
 
-                {getValues(CONFIRMATION_FORM_INPUT.ORDER_COLLECTION.NAME) === 'delivery' && (
+                {getValues(CONFIRMATION_FORM_INPUT.ORDER_COLLECTION.NAME) === 'Delivery' && (
                     <Columns.Column className="order-2 lg:order-4">
                         <Input.Label
                             type="text"
