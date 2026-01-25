@@ -15,6 +15,7 @@ import { CONFIRMATION_FORM_INPUT, ORDER_COLLECTIONS_OPTIONS } from '@/components
 export type ConfirmationFormFields = {
     orderDate: string;
     orderName: string;
+    orderRecipientName: string;
     orderContact: string;
     orderContactRecipient: string;
     orderSelection: string;
@@ -158,8 +159,8 @@ const Confirmation = ({ className, products, productsVariant, onSubmit }: Confir
                 spacing={{ x: 3, y: 3 }}>
                 <Columns.Column
                     width={{
-                        xs: 4,
-                        xl: 5,
+                        md: 6,
+                        lg: 7,
                     }}>
                     <Input.Label
                         type="text"
@@ -175,8 +176,10 @@ const Confirmation = ({ className, products, productsVariant, onSubmit }: Confir
                 </Columns.Column>
 
                 <Columns.Column
-                    className="!basis-auto"
-                    width={{ lg: 'auto' }}>
+                    width={{
+                        md: 6,
+                        lg: 5,
+                    }}>
                     <Input.Label
                         type="tel"
                         id={CONFIRMATION_FORM_INPUT.ORDER_CONTACT.NAME}
@@ -191,8 +194,27 @@ const Confirmation = ({ className, products, productsVariant, onSubmit }: Confir
                 </Columns.Column>
 
                 <Columns.Column
-                    className="!basis-auto"
-                    width={{ lg: 'auto' }}>
+                    width={{
+                        md: 6,
+                        lg: 7,
+                    }}>
+                    <Input.Label
+                        type="text"
+                        id={CONFIRMATION_FORM_INPUT.ORDER_RECIPIENT_NAME.NAME}
+                        label={CONFIRMATION_FORM_INPUT.ORDER_RECIPIENT_NAME.LABEL}
+                        hook={{
+                            register,
+                            name: CONFIRMATION_FORM_INPUT.ORDER_RECIPIENT_NAME.NAME,
+                        }}
+                        error={errors?.[CONFIRMATION_FORM_INPUT.ORDER_RECIPIENT_NAME.NAME]?.message}
+                    />
+                </Columns.Column>
+
+                <Columns.Column
+                    width={{
+                        md: 6,
+                        lg: 5,
+                    }}>
                     <Input.Label
                         type="tel"
                         id={CONFIRMATION_FORM_INPUT.ORDER_CONTACT_RECIPIENT.NAME}

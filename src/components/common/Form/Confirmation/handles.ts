@@ -7,6 +7,7 @@ import { BaseInputSelectProps } from '@/components/common/Input/shared/InputSele
 export const CONFIRMATION_FORM_KEYS = [
     'ORDER_DATE',
     'ORDER_NAME',
+    'ORDER_RECIPIENT_NAME',
     'ORDER_CONTACT',
     'ORDER_CONTACT_RECIPIENT',
     'ORDER_COLLECTION',
@@ -25,6 +26,7 @@ export const CONFIRMATION_FORM_KEYS = [
 export const CONFIRMATION_FORM_HANDLE: Record<string, keyof ConfirmationFormFields> = {
     ORDER_DATE: 'orderDate',
     ORDER_NAME: 'orderName',
+    ORDER_RECIPIENT_NAME: 'orderRecipientName',
     ORDER_CONTACT: 'orderContact',
     ORDER_CONTACT_RECIPIENT: 'orderContactRecipient',
     ORDER_COLLECTION: 'orderCollection',
@@ -48,6 +50,14 @@ export const CONFIRMATION_FORM_INPUT: Record<
         key: getObjectKeyByValue({ obj: CONFIRMATION_FORM_HANDLE, value: CONFIRMATION_FORM_HANDLE.ORDER_NAME }),
         name: CONFIRMATION_FORM_HANDLE.ORDER_NAME,
         label: 'Name',
+    }),
+    ...createFormInputHandle({
+        key: getObjectKeyByValue({
+            obj: CONFIRMATION_FORM_HANDLE,
+            value: CONFIRMATION_FORM_HANDLE.ORDER_RECIPIENT_NAME,
+        }),
+        name: CONFIRMATION_FORM_HANDLE.ORDER_RECIPIENT_NAME,
+        label: 'Recipient Name',
     }),
     ...createFormInputHandle({
         key: getObjectKeyByValue({ obj: CONFIRMATION_FORM_HANDLE, value: CONFIRMATION_FORM_HANDLE.ORDER_CONTACT }),
