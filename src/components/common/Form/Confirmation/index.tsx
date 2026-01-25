@@ -39,9 +39,17 @@ export type ConfirmationProps = {
     onSubmit?: FormOnSubmitProps<ConfirmationFormFields>;
     products?: BaseInputSelectProps['items'];
     productsVariant?: ProductsVariantItemProps[];
-} & ClassnameProps;
+} & (ClassnameProps & Partial<Record<'isProcessing' | 'isCompleted' | 'isError', boolean>>);
 
-const Confirmation = ({ className, products, productsVariant, onSubmit }: ConfirmationProps): React.ReactElement => {
+const Confirmation = ({
+    className,
+    products,
+    productsVariant,
+    onSubmit,
+    isCompleted,
+    isProcessing,
+    isError,
+}: ConfirmationProps): React.ReactElement => {
     const {
         register,
         getValues,
@@ -49,6 +57,7 @@ const Confirmation = ({ className, products, productsVariant, onSubmit }: Confir
         handleSubmit,
         watch,
         formState: { errors },
+        reset,
     } = useForm<ConfirmationFormFields>({ mode: 'onChange' });
 
     const submitHandler = (data: ConfirmationFormFields) => {
@@ -148,6 +157,13 @@ const Confirmation = ({ className, products, productsVariant, onSubmit }: Confir
     useEffect(() => {
         setValue(CONFIRMATION_FORM_INPUT.ORDER_PIN_POINT.NAME, '');
     }, [selectedOrderCollection]);
+
+    useEffect(() => {
+        if (!isCompleted) return;
+        if (isError) return;
+
+        reset();
+    }, [isCompleted, isError]);
 
     return (
         <form
@@ -426,8 +442,9 @@ const Confirmation = ({ className, products, productsVariant, onSubmit }: Confir
                             <Button.Arrow
                                 as="button"
                                 type="submit"
-                                size="lg">
-                                Submit
+                                size="lg"
+                                disabled={isProcessing}>
+                                {isProcessing ? 'Processing' : 'Submit'}
                             </Button.Arrow>
                         ),
                     },

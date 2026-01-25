@@ -1,6 +1,6 @@
 'use client';
 
-import React from 'react';
+import React, { useState } from 'react';
 
 import { submitOrderForm } from '@/libs/actions';
 
@@ -15,6 +15,10 @@ export type OrderConfirmationIndexProps = {
 };
 
 const OrderConfirmationIndex = ({ entries }: OrderConfirmationIndexProps): React.ReactElement => {
+    const [formIsProcessing, setFormIsProcessing] = useState<boolean>(false);
+    const [formIsCompleted, setFormIsCompleted] = useState<boolean>(false);
+    const [formIsError, setFormIsError] = useState<boolean>(false);
+
     return (
         <Container as="section">
             <Heading
@@ -28,10 +32,20 @@ const OrderConfirmationIndex = ({ entries }: OrderConfirmationIndexProps): React
                 className="mt-4 md:mt-7 mb-10"
                 products={entries.form.products}
                 productsVariant={entries.form.productsVariant}
+                isProcessing={formIsProcessing}
+                isCompleted={formIsCompleted}
+                isError={formIsError}
                 onSubmit={async (data) => {
-                    const res = await submitOrderForm(data);
+                    setFormIsProcessing(true);
 
-                    console.log({ res });
+                    await submitOrderForm(data)
+                        .then((res) => {
+                            if (res?.status === 'success') setFormIsCompleted(true);
+                            if (res?.status === 'error') setFormIsError(true);
+                        })
+                        .finally(() => {
+                            setFormIsProcessing(false);
+                        });
                 }}
             />
         </Container>
