@@ -25,7 +25,7 @@ const Range = ({ className, value, start, end }: RangeProps): React.ReactElement
     rangeBarClass.push('relative h-1 grow max-w-[60%]');
     rangeBarClass.push("before:content-[''] before:absolute before:h-full before:w-full before:bg-sooka-primary/15");
     rangeBarClass.push(
-        "after:content-[''] after:absolute after:h-full after:w-[var(--range-active-width)] after:bg-sooka-primary"
+        "after:content-[''] after:absolute after:h-full after:w-(--range-active-width) after:bg-sooka-primary"
     );
     rangeBarClass = joinArrayString(rangeBarClass);
 
@@ -37,7 +37,7 @@ const Range = ({ className, value, start, end }: RangeProps): React.ReactElement
         <div
             style={style}
             className={rangeClass}>
-            <p className={joinArrayString([...baseRangeTextClass, '!mb-0'])}>{start}</p>
+            <p className={joinArrayString([...baseRangeTextClass, 'mb-0!'])}>{start}</p>
             <div className={rangeBarClass} />
             <p className={joinArrayString([...baseRangeTextClass, 'text-end'])}>{end}</p>
         </div>

@@ -31,7 +31,7 @@ const Base = ({ config, itemClassName, children }: BaseProps): React.ReactElemen
                 type="marquee"
                 config={config}>
                 <div
-                    className="flex flex-nowrap *:flex-shrink-0 *:basis-auto"
+                    className="flex flex-nowrap *:shrink-0 *:basis-auto"
                     data-animation-marquee="wrapper">
                     <div
                         ref={itemRef as Ref<HTMLDivElement>}

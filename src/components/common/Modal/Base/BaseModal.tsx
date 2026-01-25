@@ -15,7 +15,7 @@ const BaseModal = ({
     className,
     children,
 }: BaseModalProps): React.ReactElement | null => {
-    let modalClass: ArrayString = ['fixed transition-opacity duration-300 w-full h-full top-0 left-0 z-[1025]'];
+    let modalClass: ArrayString = ['fixed transition-opacity duration-300 w-full h-full top-0 left-0 z-1025'];
     if (isTransitioning) modalClass.push('opacity-0');
     if (!isTransitioning) modalClass.push('opacity-100');
     modalClass = joinArrayString(modalClass);

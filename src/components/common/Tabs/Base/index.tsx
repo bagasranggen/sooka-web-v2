@@ -32,7 +32,7 @@ const Base = ({ items, className }: BaseProps): React.ReactElement => {
         <>
             <ul {...(listClass ? { className: listClass } : {})}>
                 {items.map((item: BaseItemProps, i: number) => {
-                    let itemClass: ArrayString = ['[&:not(:first-child)]:ms-3'];
+                    let itemClass: ArrayString = ['not-first:ms-3'];
                     if (item.id === active) itemClass.push('active');
                     if (item.titleClass) itemClass.push(item.titleClass);
                     itemClass = joinArrayString(itemClass);

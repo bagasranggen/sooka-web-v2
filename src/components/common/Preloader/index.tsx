@@ -10,7 +10,7 @@ export type PreloaderProps = PropsWithChildren<{}>;
 
 const Preloader = ({ children }: PreloaderProps): React.ReactElement => {
     let preloaderClass: ArrayString = ['bg-sooka-primary'];
-    preloaderClass.push('fixed top-0 left-0 w-full h-full z-[1040]');
+    preloaderClass.push('fixed top-0 left-0 w-full h-full z-1040');
     preloaderClass.push('flex items-center justify-center');
     preloaderClass.push('transition-transform duration-500');
     preloaderClass = joinArrayString(preloaderClass);

@@ -7,7 +7,7 @@ export type BaseBackdropProps = PortalTransitionProps & PropsClassname;
 
 const BaseBackdrop = ({ className, isShow, isTransitioning }: BaseBackdropProps): React.ReactElement | null => {
     let offcanvasClass: ArrayString = [
-        'fixed transition-opacity duration-300 w-full h-full top-0 left-0 bg-black z-[1020] cursor-pointer',
+        'fixed transition-opacity duration-300 w-full h-full top-0 left-0 bg-black z-1020 cursor-pointer',
     ];
     if (isTransitioning) offcanvasClass.push('opacity-0');
     if (!isTransitioning) offcanvasClass.push('opacity-40');

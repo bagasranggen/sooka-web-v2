@@ -44,7 +44,7 @@ const ImageCollage = ({ items }: ImageCollageProps): React.ReactElement | null =
                                 return (
                                     <Picture
                                         key={idx}
-                                        className="block [&:not(:first-child)]:mt-2"
+                                        className="block not-first:mt-2"
                                         items={itm}
                                     />
                                 );
@@ -55,7 +55,7 @@ const ImageCollage = ({ items }: ImageCollageProps): React.ReactElement | null =
             </Columns.Row>
 
             <ImageCollageCarousel
-                className="md:!hidden"
+                className="md:hidden!"
                 items={items}
             />
         </>

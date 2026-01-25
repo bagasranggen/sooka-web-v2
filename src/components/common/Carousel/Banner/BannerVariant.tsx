@@ -29,9 +29,9 @@ const renderBannerBullet: PaginationOptions['renderBullet'] = (index, className)
 const BannerPagination = (): React.ReactElement => {
     let paginationClass: ArrayString = [ELEMENT];
     paginationClass.push('xl:flex xl:flex-col');
-    paginationClass.push('*:[&:not(:first-child)]:ms-0.5 *:ms-0');
+    paginationClass.push('not-first:*:ms-0.5 *:ms-0');
     paginationClass.push(
-        'absolute z-[2] bottom-1.5 xl:bottom-1/2 right-1/2 xl:right-3 translate-x-1/2 xl:translate-x-0 xl:translate-y-1/2'
+        'absolute z-2 bottom-1.5 xl:bottom-1/2 right-1/2 xl:right-3 translate-x-1/2 xl:translate-x-0 xl:translate-y-1/2'
     );
     paginationClass = joinArrayString(paginationClass);
 

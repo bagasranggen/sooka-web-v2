@@ -1,4 +1,81 @@
-@tailwind base;
+@import 'tailwindcss';
+
+@config '../../../../tailwind.config.ts';
+
+/*
+  The default border color has changed to `currentcolor` in Tailwind CSS v4,
+  so we've added these compatibility styles to make sure everything still
+  looks the same as it did with Tailwind CSS v3.
+
+  If we ever want to remove these styles, we need to add an explicit border
+  color utility to any element that depends on these defaults.
+*/
+@layer base {
+  *,
+  ::after,
+  ::before,
+  ::backdrop,
+  ::file-selector-button {
+    border-color: var(--color-gray-200, currentcolor);
+  }
+}
+
+@utility cb-text {
+  h2:not(:last-child),
+  h3:not(:last-child) {
+    @apply mb-[1rem];
+  }
+
+  h2 {
+    @apply text-[3.5rem];
+  }
+
+  h3 {
+    @apply text-[3rem];
+  }
+
+  .list-bullet {
+    @apply list-disc ms-2;
+
+    .nestedListItem {
+      .list-bullet {
+        @apply ms-3 list-[circle];
+      }
+    }
+  }
+}
+
+@utility icon {
+  &.icon--cake[style*='--icon-color'] {
+    .st1 {
+      fill: #ffffff;
+    }
+
+    .st0 {
+      fill: var(--icon-color, #f7613f);
+    }
+
+    .st2 {
+      fill: var(--icon-color, #ff9a00);
+    }
+  }
+}
+
+@utility icon--cake {
+  &.icon[style*='--icon-color'] {
+    .st1 {
+      fill: #ffffff;
+    }
+
+    .st0 {
+      fill: var(--icon-color, #f7613f);
+    }
+
+    .st2 {
+      fill: var(--icon-color, #ff9a00);
+    }
+  }
+}
 
 @layer base {
     html {
@@ -6,59 +83,14 @@
     }
 
     body {
-        font-family: theme('fontFamily.noto-sans-jp');
-        font-size: theme('fontSize.base');
-        color: theme('colors.black');
-        background: theme('colors.white');
+        font-family: var(--font-noto-sans-jp);
+        font-size: var(--text-base);
+        color: var(--color-black);
+        background: var(--color-white);
     }
 
     p:not(:last-child) {
-        margin-bottom: theme('spacing[2.5]');
-    }
-}
-
-@tailwind components;
-
-@layer components {
-    .cb-text {
-        h2:not(:last-child),
-        h3:not(:last-child) {
-            @apply mb-[1rem];
-        }
-
-        h2 {
-            @apply text-[3.5rem];
-        }
-
-        h3 {
-            @apply text-[3rem];
-        }
-
-        .list-bullet {
-            @apply list-disc ms-2;
-
-            .nestedListItem {
-                .list-bullet {
-                    @apply ms-3 list-[circle];
-                }
-            }
-        }
-    }
-}
-
-@layer components {
-    .icon.icon--cake[style*='--icon-color'] {
-        .st1 {
-            fill: #ffffff;
-        }
-
-        .st0 {
-            fill: var(--icon-color, #f7613f);
-        }
-
-        .st2 {
-            fill: var(--icon-color, #ff9a00);
-        }
+        margin-bottom: var(--spacing-2_5);
     }
 }
 
@@ -68,5 +100,3 @@
         visibility: hidden;
     }
 }
-
-@tailwind utilities;

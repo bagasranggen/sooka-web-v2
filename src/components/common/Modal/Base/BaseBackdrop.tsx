@@ -7,7 +7,7 @@ export type BaseBackdropProps = PortalTransitionProps;
 
 const BaseBackdrop = ({ isShow, isTransitioning }: BaseBackdropProps): React.ReactElement | null => {
     let modalClass: ArrayString = [
-        'fixed transition-opacity duration-300 w-full h-full top-0 left-0 bg-black z-[1020] cursor-pointer',
+        'fixed transition-opacity duration-300 w-full h-full top-0 left-0 bg-black z-1020 cursor-pointer',
     ];
     if (isTransitioning) modalClass.push('opacity-0');
     if (!isTransitioning) modalClass.push('opacity-40');

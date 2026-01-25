@@ -29,7 +29,7 @@ const Navigation = ({ items }: NavigationProps): React.ReactElement => {
     const [scrollYDirection, setScrollYDirection] = useState<'down' | 'up' | null>(null);
 
     let navClass: ArrayString = ['bg-sooka-primary h-[7rem] flex items-center text-white'];
-    navClass.push('sticky top-0 z-[1040] transition-transform');
+    navClass.push('sticky top-0 z-1040 transition-transform');
     if (scrollY > height && scrollYDirection === 'down') navClass.push('-translate-y-full');
     navClass = joinArrayString(navClass);
 

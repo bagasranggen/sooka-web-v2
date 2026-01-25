@@ -57,7 +57,7 @@ const HomepageStory = ({
 
                     {mediaCarousel && mediaCarousel.length > 0 && (
                         <Carousel.Fade
-                            className="!hidden landscape:!block md:landscape:!hidden md:!hidden"
+                            className="hidden! landscape:block! md:landscape:hidden! md:hidden!"
                             items={mediaCarousel.map((item) => ({
                                 children: <Picture items={item} />,
                             }))}
@@ -74,7 +74,7 @@ const HomepageStory = ({
 
                     {mediaCarousel && mediaCarousel.length > 0 && (
                         <Carousel.Fade
-                            className="mt-3 sm:!hidden"
+                            className="mt-3 sm:hidden!"
                             items={mediaCarousel.map((item) => ({
                                 children: <Picture items={item} />,
                             }))}

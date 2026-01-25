@@ -36,7 +36,7 @@ const Arrow = ({ children, size = 'md', style, ...props }: ArrowProps): React.Re
         'after:content-[""] after:bg-sooka-secondary after:w-full after:aspect-square after:absolute after:rounded-full after:z-[-1] after:top-1/2 after:left-1/2 after:-translate-x-1/2 after:-translate-y-1/2 after:pointer-events-none'
     );
     iconClass.push(
-        'after:transition-transform md:after:duration-500 md:group-hover:after:scale-[var(--btn-arrow-scale)]'
+        'after:transition-transform md:after:duration-500 md:group-hover:after:scale-(--btn-arrow-scale)'
     );
     iconClass = joinArrayString(iconClass);
 

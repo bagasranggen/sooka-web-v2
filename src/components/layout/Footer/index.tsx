@@ -20,7 +20,7 @@ const Footer = ({ address, businessHour, socialMedia }: FooterProps): React.Reac
                 <Icon.Sooka
                     id="footerLogo"
                     color="light"
-                    className="mx-auto w-[20rem] lg:w-[30rem]"
+                    className="mx-auto w-xs lg:w-[30rem]"
                 />
                 <div className="mt-5">
                     <Columns.Row
@@ -28,7 +28,7 @@ const Footer = ({ address, businessHour, socialMedia }: FooterProps): React.Reac
                         spacing={{ x: 3, y: 2 }}>
                         <Columns.Column
                             width={{ md: 6 }}
-                            className="*:!mb-0 uppercase tracking-0.2 font-semibold text-[1.2rem] text-center md:text-left">
+                            className="*:mb-0! uppercase tracking-0.2 font-semibold text-[1.2rem] text-center md:text-left">
                             {address && (
                                 <p className="flex items-center justify-center md:justify-start gap-1">
                                     <CiIcon.CiLocationOn size={14} /> {address}
@@ -39,7 +39,7 @@ const Footer = ({ address, businessHour, socialMedia }: FooterProps): React.Reac
                         </Columns.Column>
                         <Columns.Column
                             width={{ md: 6 }}
-                            className="*:!mb-0 uppercase tracking-0.2 font-semibold text-[1.2rem] text-center lg:text-right">
+                            className="*:mb-0! uppercase tracking-0.2 font-semibold text-[1.2rem] text-center lg:text-right">
                             <FooterSocial items={socialMedia} />
                         </Columns.Column>
                     </Columns.Row>
