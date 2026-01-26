@@ -59,7 +59,7 @@ const ProductListingIndex = ({ entries }: ProductListingIndexProps): React.React
                         {entries?.products && entries?.products.length > 0 && (
                             <Card.Thumbnail
                                 row={{ gutterY: 4 }}
-                                column={{ xs: 1, sm: 2, md: 3, lg: 4 }}
+                                column={{ sm: 6, md: 4, xl: 3 }}
                                 items={entries.products}
                             />
                         )}
