@@ -28,7 +28,7 @@ const HomepageStory = ({
         <Container
             as="section"
             className={className}>
-            <Columns gutterX={{ xs: 3, lg: 6 }}>
+            <Columns gutterX={{ xl: 6 }}>
                 <Columns.Column
                     className=""
                     xs={6}
