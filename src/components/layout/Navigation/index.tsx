@@ -2,7 +2,7 @@
 
 import React, { Ref, Suspense, useEffect, useState } from 'react';
 
-import { ArrayString } from '@/libs/@types';
+import { ArrayStringProps } from '@/libs/@types';
 import { NavigationEvents, useCheckSamePath, usePortal } from '@/libs/hooks';
 import { joinArrayString } from '@/libs/utils';
 
@@ -28,7 +28,7 @@ const Navigation = ({ items }: NavigationProps): React.ReactElement => {
     const [prevScrollY, setPrevScrollY] = useState<number>(0);
     const [scrollYDirection, setScrollYDirection] = useState<'down' | 'up' | null>(null);
 
-    let navClass: ArrayString = ['bg-sooka-primary h-[7rem] flex items-center text-white'];
+    let navClass: ArrayStringProps = ['bg-sooka-primary h-[7rem] flex items-center text-white'];
     navClass.push('sticky top-0 z-1040 transition-transform');
     if (scrollY > height && scrollYDirection === 'down') navClass.push('-translate-y-full');
     navClass = joinArrayString(navClass);

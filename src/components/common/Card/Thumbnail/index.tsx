@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { ArrayString } from '@/libs/@types';
+import { ArrayStringProps } from '@/libs/@types';
 import { joinArrayString } from '@/libs/utils';
 
 import Base, { BaseProps as CardBaseProps } from '@/components/common/Card/Base';

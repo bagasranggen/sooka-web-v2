@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { ArrayString, CreateArrayWithLengthX, NumericRange } from '@/libs/@types';
+import { ArrayStringProps, CreateArrayWithLengthX, NumericRange } from '@/libs/@types';
 import { joinArrayString } from '@/libs/utils';
 
 export type OverlayProps = {
@@ -11,7 +11,7 @@ export type OverlayProps = {
 };
 
 const Overlay = ({ variant, opacity, children }: OverlayProps) => {
-    let overlayClass: ArrayString = [
+    let overlayClass: ArrayStringProps = [
         'relative after:content-[""] after:absolute after:top-0 after:left-0 after:w-full after:h-full',
     ];
     if (variant !== 'solid') overlayClass.push('after:from-black');
@@ -23,7 +23,7 @@ const Overlay = ({ variant, opacity, children }: OverlayProps) => {
 
     const props: any = children.props;
 
-    let childClass: ArrayString = [overlayClass];
+    let childClass: ArrayStringProps = [overlayClass];
     // if (props?.className) childClass.push(props.className);
     if (props?.className) childClass.push(props.className);
     childClass = joinArrayString(childClass);

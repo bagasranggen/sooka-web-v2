@@ -2,7 +2,7 @@
 
 import React from 'react';
 
-import { ArrayString } from '@/libs/@types';
+import { ArrayStringProps } from '@/libs/@types';
 import { joinArrayString } from '@/libs/utils';
 
 import Base from '@/components/common/Carousel';
@@ -46,12 +46,12 @@ const Banner = ({ items }: BannerProps): React.ReactElement => {
                     style = Object.assign(style, { '--bg-image-mobile': item.mediaMobile });
                 }
 
-                let bgClass: ArrayString = ['bg-cover bg-center'];
+                let bgClass: ArrayStringProps = ['bg-cover bg-center'];
                 bgClass.push(`bg-(image:--bg-image-mobile)`);
                 bgClass.push(`lg:bg-(image:--bg-image)`);
                 bgClass = joinArrayString(bgClass);
 
-                let contentClass: ArrayString = ['items-center h-full'];
+                let contentClass: ArrayStringProps = ['items-center h-full'];
                 if (align === 'right') contentClass.push('justify-end');
                 contentClass = joinArrayString(contentClass);
 

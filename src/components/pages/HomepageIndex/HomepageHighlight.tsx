@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { ArrayString, PropsClassname } from '@/libs/@types';
+import { ArrayStringProps, ClassnameProps } from '@/libs/@types';
 import { joinArrayString } from '@/libs/utils';
 
 import Container from '@/components/common/Container';
@@ -16,12 +16,12 @@ export type HomepageHighlightItemProps = {
 
 export type HomepageHighlightProps = {
     items?: HomepageHighlightItemProps[];
-} & PropsClassname;
+} & ClassnameProps;
 
 const HomepageHighlight = ({ items, className }: HomepageHighlightProps): React.ReactElement | null => {
     if (!items || items.length === 0) return null;
 
-    let tabClass: ArrayString = ['relative z-10'];
+    let tabClass: ArrayStringProps = ['relative z-10'];
     if (className) tabClass.push(className);
     tabClass = joinArrayString(tabClass);
 

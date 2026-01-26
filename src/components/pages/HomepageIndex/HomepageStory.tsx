@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { PropsClassname } from '@/libs/@types';
+import { ClassnameProps } from '@/libs/@types';
 
 import Columns from '@/components/common/Columns';
 import Heading from '@/components/common/Heading';
@@ -15,7 +15,7 @@ export type HomepageStoryProps = {
     mediaSecondary?: BaseProps['items'];
     mediaCarousel?: BaseProps['items'][];
     description?: RichTextProps['children'];
-} & PropsClassname;
+} & ClassnameProps;
 
 const HomepageStory = ({
     mediaMain,

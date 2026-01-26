@@ -1,6 +1,6 @@
 import React, { forwardRef } from 'react';
 
-import { ArrayString } from '@/libs/@types';
+import { ArrayStringProps } from '@/libs/@types';
 import { joinArrayString } from '@/libs/utils';
 import { createInputHooks } from '@/libs/factory';
 
@@ -10,7 +10,7 @@ export type InputRadioProps = BaseInputProps;
 
 const InputRadio = forwardRef<BaseInputRef, InputRadioProps>(
     ({ id, className, children, hook, checked, ...props }, ref) => {
-        let inputClass: ArrayString = ['flex items-center gap-x-0.5 relative cursor-pointer'];
+        let inputClass: ArrayStringProps = ['flex items-center gap-x-0.5 relative cursor-pointer'];
         inputClass.push(
             'before:content-[""] before:inline-block before:shrink-0 before:w-[1.4rem] before:h-[1.4rem] before:border before:border-black before:rounded-full'
         );

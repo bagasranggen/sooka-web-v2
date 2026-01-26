@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { ArrayString } from '@/libs/@types';
+import { ArrayStringProps } from '@/libs/@types';
 import { joinArrayString } from '@/libs/utils';
 
 import { ContentBlocksItemProps } from '@/components/common/ContentBlocks';
@@ -12,7 +12,7 @@ export type CbWrapperProps = {
 } & Pick<ContentBlocksItemProps, 'className'>;
 
 const CbWrapper = ({ children, ref, className }: CbWrapperProps): React.ReactElement => {
-    let wrapperClass: ArrayString = [];
+    let wrapperClass: ArrayStringProps = [];
     if (
         children?.props &&
         typeof children?.props === 'object' &&

@@ -1,6 +1,6 @@
 import React, { Fragment } from 'react';
 
-import { PropsClassname } from '@/libs/@types';
+import { ClassnameProps } from '@/libs/@types';
 import { createDynamicElement } from '@/libs/factory';
 
 import { CONTENT_BLOCK_HANDLES } from '@/components/common/ContentBlocks/handlesIndex';
@@ -10,7 +10,7 @@ export type ContentBlocksItemProps = {
     blockType: string;
     marginTop?: string;
     marginBottom?: string;
-} & PropsClassname;
+} & ClassnameProps;
 
 export type ContentBlocksProps = {
     items: ContentBlocksItemProps[];

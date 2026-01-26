@@ -2,7 +2,7 @@
 
 import React from 'react';
 
-import { ArrayString } from '@/libs/@types';
+import { ArrayStringProps } from '@/libs/@types';
 import { joinArrayString } from '@/libs/utils';
 
 import { PaginationOptions } from 'swiper/types';
@@ -13,7 +13,7 @@ import { BaseVariantProps } from '@/components/common/Carousel';
 const ELEMENT = 'swiper-banner-pagination';
 
 const renderBannerBullet: PaginationOptions['renderBullet'] = (index, className) => {
-    let bulletClass: ArrayString = ['text-white font-semibold cursor-pointer'];
+    let bulletClass: ArrayStringProps = ['text-white font-semibold cursor-pointer'];
     bulletClass.push('transition-opacity'); // Transition
     bulletClass.push(
         'w-1 xl:w-auto h-1 xl:h-auto rounded-full xl:rounded-0 bg-white xl:bg-inherit inline-block xl:inline'
@@ -27,7 +27,7 @@ const renderBannerBullet: PaginationOptions['renderBullet'] = (index, className)
 };
 
 const BannerPagination = (): React.ReactElement => {
-    let paginationClass: ArrayString = [ELEMENT];
+    let paginationClass: ArrayStringProps = [ELEMENT];
     paginationClass.push('xl:flex xl:flex-col');
     paginationClass.push('not-first:*:ms-0.5 *:ms-0');
     paginationClass.push(

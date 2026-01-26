@@ -2,7 +2,7 @@
 
 import React from 'react';
 
-import { ArrayString } from '@/libs/@types';
+import { ArrayStringProps } from '@/libs/@types';
 import { joinArrayString, sendWhatsappMessage } from '@/libs/utils';
 import { createMessageText } from '@/libs/factory';
 
@@ -26,7 +26,7 @@ export type ProductDetailIndexProps = {
 };
 
 const ProductDetailIndex = ({ entries }: ProductDetailIndexProps): React.ReactElement => {
-    let infoClass: ArrayString = ['mt-10'];
+    let infoClass: ArrayStringProps = ['mt-10'];
     if (!entries?.marquee || entries.marquee.length === 0) infoClass.push('mb-10 md:mb-15');
     infoClass = joinArrayString(infoClass);
 

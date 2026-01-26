@@ -1,12 +1,12 @@
 import React from 'react';
 
-import { ArrayString, PortalTransitionProps } from '@/libs/@types';
+import { ArrayStringProps, PortalTransitionProps } from '@/libs/@types';
 import { joinArrayString } from '@/libs/utils';
 
 export type BaseBackdropProps = PortalTransitionProps;
 
 const BaseBackdrop = ({ isShow, isTransitioning }: BaseBackdropProps): React.ReactElement | null => {
-    let modalClass: ArrayString = [
+    let modalClass: ArrayStringProps = [
         'fixed transition-opacity duration-300 w-full h-full top-0 left-0 bg-black z-1020 cursor-pointer',
     ];
     if (isTransitioning) modalClass.push('opacity-0');
