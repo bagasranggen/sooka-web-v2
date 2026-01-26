@@ -2,7 +2,7 @@
 
 import React, { Ref } from 'react';
 
-import { ArrayString } from '@/libs/@types';
+import { ArrayStringProps } from '@/libs/@types';
 import { joinArrayString } from '@/libs/utils';
 
 import { useMeasure } from 'react-use';
@@ -20,7 +20,7 @@ const Arrow = ({ children, size = 'md', style, ...props }: ArrowProps): React.Re
 
     const transitionClass = 'md:duration-500';
 
-    let btnClass: ArrayString = [
+    let btnClass: ArrayStringProps = [
         'group inline-flex pt-0.5 pb-[.75rem] items-center overflow-hidden rounded-full md:transition-colors md:hover:text-white',
     ];
     btnClass.push(transitionClass);
@@ -28,23 +28,21 @@ const Arrow = ({ children, size = 'md', style, ...props }: ArrowProps): React.Re
     if (size === 'lg') btnClass.push('pl-2.5 pr-1.5');
     btnClass = joinArrayString(btnClass);
 
-    let iconClass: ArrayString = [
+    let iconClass: ArrayStringProps = [
         'absolute top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2 md:-rotate-45 md:group-hover:rotate-0 transition-transform',
     ];
     iconClass.push(transitionClass);
     iconClass.push(
         'after:content-[""] after:bg-sooka-secondary after:w-full after:aspect-square after:absolute after:rounded-full after:z-[-1] after:top-1/2 after:left-1/2 after:-translate-x-1/2 after:-translate-y-1/2 after:pointer-events-none'
     );
-    iconClass.push(
-        'after:transition-transform md:after:duration-500 md:group-hover:after:scale-[var(--btn-arrow-scale)]'
-    );
+    iconClass.push('after:transition-transform md:after:duration-500 md:group-hover:after:scale-(--btn-arrow-scale)');
     iconClass = joinArrayString(iconClass);
 
-    let textClass: ArrayString = ['z-10'];
+    let textClass: ArrayStringProps = ['z-10'];
     if (size === 'lg') textClass.push('text-md md:text-[3rem]');
     textClass = joinArrayString(textClass);
 
-    let circleClass: ArrayString = ['bg-sooka-secondary relative aspect-square rounded-full'];
+    let circleClass: ArrayStringProps = ['bg-sooka-secondary relative aspect-square rounded-full'];
     if (size === 'md') circleClass.push('ms-0.5 w-[1.8rem]');
     if (size === 'lg') circleClass.push('ms-1 w-[2.6rem]');
     circleClass = joinArrayString(circleClass);

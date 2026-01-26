@@ -1,6 +1,6 @@
 import React, { PropsWithChildren } from 'react';
 
-import { ArrayString } from '@/libs/@types';
+import { ArrayStringProps } from '@/libs/@types';
 import { joinArrayString } from '@/libs/utils';
 
 import Icon from '@/components/common/Icon';
@@ -9,8 +9,8 @@ import Animation from '@/components/Animation';
 export type PreloaderProps = PropsWithChildren<{}>;
 
 const Preloader = ({ children }: PreloaderProps): React.ReactElement => {
-    let preloaderClass: ArrayString = ['bg-sooka-primary'];
-    preloaderClass.push('fixed top-0 left-0 w-full h-full z-[1040]');
+    let preloaderClass: ArrayStringProps = ['bg-sooka-primary'];
+    preloaderClass.push('fixed top-0 left-0 w-full h-full z-1040');
     preloaderClass.push('flex items-center justify-center');
     preloaderClass.push('transition-transform duration-500');
     preloaderClass = joinArrayString(preloaderClass);

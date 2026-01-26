@@ -62,9 +62,9 @@ const Order = ({ title, summaries, disabled, notes, onSubmit }: OrderProps): Rea
 
     return (
         <form onSubmit={handleSubmit(submitHandler)}>
-            <Columns.Row
+            <Columns
                 className="justify-center"
-                spacing={{ x: 3, y: 3 }}>
+                gutterY={3}>
                 {summaries.map((item: OrderItemProps, i: number) => {
                     const isMultiple = !!(item.items.length > 1 || item.allowMultiple);
                     const items = isMultiple ? item.items : item.items[0];
@@ -72,11 +72,8 @@ const Order = ({ title, summaries, disabled, notes, onSubmit }: OrderProps): Rea
                     return (
                         <Columns.Column
                             key={i}
-                            width={{
-                                xs: 12,
-                                md: isTwoColumn ? 5 : 4,
-                                lg: isTwoColumn ? 5 : 4,
-                            }}>
+                            md={isTwoColumn ? 5 : 4}
+                            lg={isTwoColumn ? 5 : 4}>
                             <Heading
                                 as="h4"
                                 className="md:mb-1 text-md md:text-[2.4rem] lg:text-[3.7rem]">
@@ -111,7 +108,7 @@ const Order = ({ title, summaries, disabled, notes, onSubmit }: OrderProps): Rea
                         </Columns.Column>
                     );
                 })}
-            </Columns.Row>
+            </Columns>
 
             {!disabled && (
                 <Button.Container

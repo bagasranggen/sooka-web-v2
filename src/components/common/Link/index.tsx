@@ -1,13 +1,13 @@
 import React, { forwardRef } from 'react';
 import { default as NextLink, LinkProps as NextLinkProps } from 'next/link';
 
-import { ArrayString } from '@/libs/@types';
+import { ArrayStringProps } from '@/libs/@types';
 import { joinArrayString } from '@/libs/utils';
 
 export type LinkProps = Omit<React.AnchorHTMLAttributes<HTMLAnchorElement>, keyof NextLinkProps> & NextLinkProps;
 
 const Link = forwardRef<HTMLAnchorElement, LinkProps>(({ className, href, ...rest }, ref) => {
-    let linkClass: ArrayString = ['cursor-pointer focus-visible:outline-0'];
+    let linkClass: ArrayStringProps = ['cursor-pointer focus-visible:outline-0'];
     if (className) linkClass.push(className);
     linkClass = joinArrayString(linkClass);
 

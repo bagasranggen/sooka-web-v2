@@ -1,4 +1,4 @@
-import { ArrayString, Product } from '@/libs/@types';
+import { ArrayStringProps, Product } from '@/libs/@types';
 
 import { convertIntToCurrency } from '../../utils/convertIntToCurrency';
 import { joinArrayString } from '../../utils/joinArrayString';
@@ -87,7 +87,7 @@ export const createProductDetailPrices = (props?: { prices?: Product['prices']; 
             const priceItem = price?.price;
             const priceIsFree = priceItem?.isFree;
 
-            let label: ArrayString = [];
+            let label: ArrayStringProps = [];
             if (item?.title) label.push(item.title);
             if (priceIsFree) label.push('(Free)');
             if (!priceIsFree) label.push(`(${convertIntToCurrency(priceItem?.normalPrice ?? 0, true)})`);

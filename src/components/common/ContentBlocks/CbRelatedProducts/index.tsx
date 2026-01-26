@@ -22,24 +22,24 @@ const CbRelatedProducts = ({
     return (
         <CbWrapper className={className}>
             <CbContainer isNested={isNested}>
-                <Columns.Row>
+                <Columns>
                     <Columns.Column
-                        offset={{ md: 1 }}
-                        width={{ md: 7 }}>
+                        md={7}
+                        offset={{ md: 1 }}>
                         <Heading
                             as="h2"
                             size="section">
                             {title}
                         </Heading>
                     </Columns.Column>
-                </Columns.Row>
+                </Columns>
 
                 {products && products.length > 0 && (
                     <div className="mt-5">
                         <Card.Thumbnail
                             className="justify-center"
-                            spacing={{ x: 2, y: 4 }}
-                            columns={{ xs: 1, sm: 2, md: 5 }}
+                            row={{ gutterX: 2, gutterY: 4 }}
+                            column={{ xs: 1, sm: 2, md: 5 }}
                             items={products}
                         />
                     </div>

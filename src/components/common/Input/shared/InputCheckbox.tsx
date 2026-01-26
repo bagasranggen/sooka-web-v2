@@ -1,6 +1,6 @@
 import React, { forwardRef } from 'react';
 
-import { ArrayString } from '@/libs/@types';
+import { ArrayStringProps } from '@/libs/@types';
 import { joinArrayString } from '@/libs/utils';
 import { createInputHooks } from '@/libs/factory';
 
@@ -11,9 +11,9 @@ export type InputCheckboxProps = BaseInputProps;
 
 const InputCheckbox = forwardRef<BaseInputRef, InputCheckboxProps>(
     ({ id, className, children, hook, checked, ...props }, ref) => {
-        let inputClass: ArrayString = ['flex items-center gap-x-0.5 relative cursor-pointer'];
+        let inputClass: ArrayStringProps = ['flex items-center gap-x-0.5 relative cursor-pointer'];
         inputClass.push(
-            'before:content-[""] before:inline-block before:flex-shrink-0 before:w-[1.4rem] before:h-[1.4rem] before:border before:border-black before:rounded-[.3rem]'
+            'before:content-[""] before:inline-block before:shrink-0 before:w-[1.4rem] before:h-[1.4rem] before:border before:border-black before:rounded-[.3rem]'
         );
         inputClass.push('before:transition-colors before:duration-200');
         inputClass.push('peer-checked:before:bg-black');
