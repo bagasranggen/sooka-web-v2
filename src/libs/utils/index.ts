@@ -10,6 +10,5 @@ export * from './delay';
 export * from './getElementDimension';
 export * from './getElementRect';
 export * from './getRandomNumber';
-export * from './getTailwindConfig';
 export * from './joinArrayString';
 export * from './sendWhatsappMessage';
