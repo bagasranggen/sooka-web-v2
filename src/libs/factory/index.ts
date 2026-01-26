@@ -7,6 +7,7 @@ export * from './createArrayFromNumber';
 export * from './createBackgroundImage';
 export * from './createBreakpointClass';
 export * from './createDynamicElement';
+export * from './createFormInputHandle';
 export * from './createIconItem';
 export * from './createInputHooks';
 export * from './createLinkItem';

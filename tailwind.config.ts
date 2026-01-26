@@ -16,11 +16,11 @@ export default {
         },
         {
             pattern: /w-[1-9]\/100/,
-            variants: ['*', '*:sm', '*:md', '*:lg', '*:xl', '*:2xl'],
+            variants: ['*', 'sm', 'md', 'lg', 'xl', '2xl'],
         },
         {
             pattern: /w-auto/,
-            variants: ['*', '*:sm', '*:md', '*:lg', '*:xl', '*:2xl'],
+            variants: ['*', 'sm', 'md', 'lg', 'xl', '2xl'],
         },
         {
             pattern: /(mx|mt|mb|px|ps|pe)-./,
@@ -36,7 +36,7 @@ export default {
         },
         {
             pattern: /(px|pt)-./,
-            variants: ['*', '*:xs', '*:sm', '*:md', '*:md', '*:lg', '*:xl', '*:2xl'],
+            variants: ['*', 'xs', 'sm', 'md', 'lg', 'xl', '2xl'],
         },
     ],
     theme: {

@@ -1,13 +1,15 @@
 import React, { forwardRef } from 'react';
 
-import { BaseRegularInputProps, InputRegularRef } from '@/libs/@types';
-import { createInputHooks } from '@/libs/factory';
+import { InputTextareaRef } from '@/libs/@types';
 
 import { BaseInputHookProps } from '@/components/common/Input';
+import { createInputHooks } from '@/libs/factory';
 
-export type InputTextProps = BaseRegularInputProps & BaseInputHookProps;
+export type BaseInputTextareaProps = {} & React.TextareaHTMLAttributes<InputTextareaRef>;
 
-const InputText = forwardRef<InputRegularRef, InputTextProps>(({ hook, value, ...props }, ref) => {
+export type InputTextareaProps = BaseInputHookProps & BaseInputTextareaProps;
+
+const InputTextarea = forwardRef<InputTextareaRef, InputTextareaProps>(({ hook, ...props }, ref) => {
     const inputHook = createInputHooks(hook, props);
 
     let inputRef = { ref: ref };
@@ -22,14 +24,12 @@ const InputText = forwardRef<InputRegularRef, InputTextProps>(({ hook, value, ..
     }
 
     return (
-        <input
+        <textarea
             {...props}
             {...inputHook}
             {...inputRef}
-            {...(hook ? { defaultValue: value } : { value: value })}
         />
     );
 });
 
-InputText.displayName = 'InputText';
-export default InputText;
+export default InputTextarea;

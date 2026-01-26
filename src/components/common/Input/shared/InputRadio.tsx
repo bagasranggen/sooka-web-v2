@@ -1,14 +1,14 @@
 import React, { forwardRef } from 'react';
 
-import { ArrayStringProps } from '@/libs/@types';
+import { ArrayStringProps, BaseRegularInputProps, InputRegularRef  } from '@/libs/@types';
 import { joinArrayString } from '@/libs/utils';
 import { createInputHooks } from '@/libs/factory';
 
-import { BaseInputProps, BaseInputRef } from '@/components/common/Input';
+import { BaseInputHookProps } from '@/components/common/Input';
 
-export type InputRadioProps = BaseInputProps;
+export type InputRadioProps = BaseRegularInputProps & BaseInputHookProps;
 
-const InputRadio = forwardRef<BaseInputRef, InputRadioProps>(
+const InputRadio = forwardRef<InputRegularRef, InputRadioProps>(
     ({ id, className, children, hook, checked, ...props }, ref) => {
         let inputClass: ArrayStringProps = ['flex items-center gap-x-0.5 relative cursor-pointer'];
         inputClass.push(
