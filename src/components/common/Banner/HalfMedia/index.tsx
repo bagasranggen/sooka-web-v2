@@ -30,7 +30,8 @@ const HalfMedia = ({ media, form, children }: HalfMediaProps): React.ReactElemen
                 </Columns.Column>
 
                 <Columns.Column
-                    className="md:-ms-3/12 lg:-ms-6/12 order-first md:order-last px-0! md:px-1.5!"
+                    className="order-first md:order-last px-0! md:px-1.5!"
+                    offset={{ md: -3, lg: -6 }}
                     md={9}
                     lg={8}>
                     <Overlay

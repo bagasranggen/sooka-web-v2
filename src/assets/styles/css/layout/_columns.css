@@ -1,6 +1,7 @@
 @source inline("{sm:,md:,lg:,xl:,2xl:,}column-{1,{2..12..1},12}");
 @source inline("{sm:,md:,lg:,xl:,2xl:,}column-auto");
 @source inline("{sm:,md:,lg:,xl:,2xl:,}column-offset-{1,{2..10..1},12}");
+@source inline("{sm:,md:,lg:,xl:,2xl:,}-column-offset-{1,{2..10..1},12}");
 @source inline("{sm:,md:,lg:,xl:,2xl:,}{gutter-,gutter-x-,gutter-y-}{0,{2..10..1},10}");
 
 /* column width */
@@ -30,6 +31,10 @@
 
 @utility column-offset-* {
     margin-left: --value(--column-width-*);
+}
+
+@utility -column-offset-* {
+    margin-left: calc(--value(--column-width-*) * -1);
 }
 
 @utility gutter-y-* {

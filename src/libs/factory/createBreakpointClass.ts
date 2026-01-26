@@ -21,7 +21,7 @@ export const createBreakpointClass = ({ breakpoint, className, value }: CreateBr
     let breakpointClass: ArrayStringProps = [];
     if (breakpointHandle) breakpointClass.push(`${breakpointHandle}:`);
     breakpointClass.push(className);
-    breakpointClass.push(`-${value}`);
+    breakpointClass.push(`-${typeof value === 'string' ? value : Math.abs(value)}`);
 
     return joinArrayString(breakpointClass, '');
 };

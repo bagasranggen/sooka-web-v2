@@ -4,12 +4,25 @@ import { ArrayStringProps, BreakpointsProps, CreateArrayWithLengthX, NumericRang
 import { joinArrayString } from '@/libs/utils';
 import { createBreakpointClass } from '@/libs/factory';
 
+export type ColumnOffsetProps =
+    | NumericRange<CreateArrayWithLengthX<1>, 12>
+    | -12
+    | -11
+    | -10
+    | -9
+    | -8
+    | -7
+    | -6
+    | -5
+    | -4
+    | -3
+    | -2
+    | -1;
+
 export type ColumnItemProps = NumericRange<CreateArrayWithLengthX<1>, 12> | 'auto';
 
 export type ColumnProps = {
-    offset?:
-        | Partial<Record<BreakpointsProps, NumericRange<CreateArrayWithLengthX<1>, 12>>>
-        | NumericRange<CreateArrayWithLengthX<1>, 12>;
+    offset?: Partial<Record<BreakpointsProps, ColumnOffsetProps>> | ColumnOffsetProps;
 } & (Partial<Record<BreakpointsProps, ColumnItemProps>> & React.HTMLAttributes<HTMLElement> & PropsWithChildren);
 
 const Column = ({
@@ -47,7 +60,14 @@ const Column = ({
 
     if (offset) {
         if (typeof offset === 'number') {
-            columnClass.push(createBreakpointClass({ className: utilityColumnOffsetClassName, value: offset }));
+            const isPositive = offset >= 0;
+
+            columnClass.push(
+                createBreakpointClass({
+                    className: isPositive ? utilityColumnOffsetClassName : `-${utilityColumnOffsetClassName}`,
+                    value: offset,
+                })
+            );
         }
 
         if (typeof offset === 'object') {
@@ -56,10 +76,14 @@ const Column = ({
             if (offsetArr && offsetArr.length > 0) {
                 offsetArr.forEach(([key, value]) => {
                     if (value && typeof columnClass !== 'string') {
+                        const isPositive = value >= 0;
+
                         columnClass.push(
                             createBreakpointClass({
                                 breakpoint: key as BreakpointsProps,
-                                className: utilityColumnOffsetClassName,
+                                className: isPositive
+                                    ? utilityColumnOffsetClassName
+                                    : `-${utilityColumnOffsetClassName}`,
                                 value,
                             })
                         );
