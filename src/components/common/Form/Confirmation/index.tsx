@@ -170,14 +170,10 @@ const Confirmation = ({
             className={className}
             onSubmit={handleSubmit(submitHandler)}>
             {/* ORDER DETAILS */}
-            <Columns.Row
+            <Columns
                 className="mb-3"
-                spacing={{ x: 3, y: 3 }}>
-                <Columns.Column
-                    width={{
-                        md: 6,
-                        lg: 7,
-                    }}>
+                gutter={3}>
+                <Columns.Column lg={6}>
                     <Input.Label
                         type="text"
                         id={CONFIRMATION_FORM_INPUT.ORDER_NAME.NAME}
@@ -191,11 +187,7 @@ const Confirmation = ({
                     />
                 </Columns.Column>
 
-                <Columns.Column
-                    width={{
-                        md: 6,
-                        lg: 5,
-                    }}>
+                <Columns.Column lg={6}>
                     <Input.Label
                         type="tel"
                         id={CONFIRMATION_FORM_INPUT.ORDER_CONTACT.NAME}
@@ -209,11 +201,7 @@ const Confirmation = ({
                     />
                 </Columns.Column>
 
-                <Columns.Column
-                    width={{
-                        md: 6,
-                        lg: 7,
-                    }}>
+                <Columns.Column lg={6}>
                     <Input.Label
                         type="text"
                         id={CONFIRMATION_FORM_INPUT.ORDER_RECIPIENT_NAME.NAME}
@@ -226,11 +214,7 @@ const Confirmation = ({
                     />
                 </Columns.Column>
 
-                <Columns.Column
-                    width={{
-                        md: 6,
-                        lg: 5,
-                    }}>
+                <Columns.Column lg={6}>
                     <Input.Label
                         type="tel"
                         id={CONFIRMATION_FORM_INPUT.ORDER_CONTACT_RECIPIENT.NAME}
@@ -242,18 +226,14 @@ const Confirmation = ({
                         error={errors?.[CONFIRMATION_FORM_INPUT.ORDER_CONTACT_RECIPIENT.NAME]?.message}
                     />
                 </Columns.Column>
-            </Columns.Row>
+            </Columns>
 
             {/* ORDER PRODUCTS & VARIANTS */}
             {products && products.length > 0 && (
-                <Columns.Row
+                <Columns
                     className="mb-3"
-                    spacing={{ x: 3, y: 3 }}>
-                    <Columns.Column
-                        width={{
-                            xs: 8,
-                            lg: selectedProduct ? 8 : 12,
-                        }}>
+                    gutter={3}>
+                    <Columns.Column lg={selectedProduct ? 8 : 12}>
                         <Input.Label
                             type="select"
                             id={CONFIRMATION_FORM_INPUT.ORDER_SELECTION.NAME}
@@ -284,11 +264,7 @@ const Confirmation = ({
                     </Columns.Column>
 
                     {orderSelected?.variants && orderSelected.variants.length > 0 && (
-                        <Columns.Column
-                            width={{
-                                xs: 4,
-                                lg: 4,
-                            }}>
+                        <Columns.Column lg={4}>
                             <Input.Label
                                 type="select"
                                 id={CONFIRMATION_FORM_INPUT.ORDER_SELECTION_VARIANT.NAME}
@@ -303,12 +279,12 @@ const Confirmation = ({
                             />
                         </Columns.Column>
                     )}
-                </Columns.Row>
+                </Columns>
             )}
 
             {/* ADDONS */}
             {orderSelected?.addons && orderSelected.addons.length > 0 && (
-                <Columns.Row className="mb-3">
+                <Columns className="mb-3">
                     <Columns.Column>
                         <LabelText
                             standalone
@@ -335,19 +311,16 @@ const Confirmation = ({
                             })}
                         </div>
                     </Columns.Column>
-                </Columns.Row>
+                </Columns>
             )}
 
             {/* COLLECTION METHOD, DATE & TIME */}
-            <Columns.Row
+            <Columns
                 className="mb-3"
-                spacing={{ x: 3, y: 3 }}>
+                gutter={3}>
                 <Columns.Column
                     className="order-1"
-                    width={{
-                        xs: 6,
-                        lg: 6,
-                    }}>
+                    xs={6}>
                     <Input.Label
                         type="select"
                         id={CONFIRMATION_FORM_INPUT.ORDER_COLLECTION.NAME}
@@ -364,10 +337,7 @@ const Confirmation = ({
 
                 <Columns.Column
                     className="order-3 lg:order-2"
-                    width={{
-                        xs: 3,
-                        lg: 3,
-                    }}>
+                    xs={3}>
                     <Input.Label
                         type="date"
                         min={getCurrentDate()}
@@ -384,10 +354,7 @@ const Confirmation = ({
 
                 <Columns.Column
                     className="order-4 lg:order-3"
-                    width={{
-                        xs: 3,
-                        lg: 3,
-                    }}>
+                    xs={3}>
                     <Input.Label
                         type="time"
                         // step={900}
@@ -417,7 +384,7 @@ const Confirmation = ({
                         />
                     </Columns.Column>
                 )}
-            </Columns.Row>
+            </Columns>
 
             {/* ORDER NOTES */}
             <div className="mb-3">
