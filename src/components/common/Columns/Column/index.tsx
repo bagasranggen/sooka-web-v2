@@ -1,23 +1,84 @@
 import React, { PropsWithChildren } from 'react';
 
-import { ArrayString, CreateArrayWithLengthX, NumericRange, PropsClassname, ResponsiveProps } from '@/libs/@types';
-import { getColumnWidth, joinArrayString } from '@/libs/utils';
+import { ArrayStringProps, BreakpointsProps, CreateArrayWithLengthX, NumericRange } from '@/libs/@types';
+import { joinArrayString } from '@/libs/utils';
+import { createBreakpointClass } from '@/libs/factory';
 
-export type ColumnWidthProps = NumericRange<CreateArrayWithLengthX<0>, 12> | 'auto';
+export type ColumnItemProps = NumericRange<CreateArrayWithLengthX<1>, 12> | 'auto';
 
 export type ColumnProps = {
-    width?: ColumnWidthProps | Partial<Record<ResponsiveProps, ColumnWidthProps>>;
-    offset?: ColumnWidthProps | Partial<Record<ResponsiveProps, ColumnWidthProps>>;
-} & (PropsWithChildren & PropsClassname);
+    offset?:
+        | Partial<Record<BreakpointsProps, NumericRange<CreateArrayWithLengthX<1>, 12>>>
+        | NumericRange<CreateArrayWithLengthX<1>, 12>;
+} & (Partial<Record<BreakpointsProps, ColumnItemProps>> & React.HTMLAttributes<HTMLElement> & PropsWithChildren);
 
-const Column = ({ children, className, width = 12, offset }: ColumnProps): React.ReactElement => {
-    let columnClass: ArrayString = [];
-    columnClass.push(...getColumnWidth({ width }));
-    columnClass.push(...getColumnWidth({ width: offset, className: 'ms' }));
+const Column = ({
+    className,
+    children,
+    offset,
+    xs,
+    sm,
+    md,
+    lg,
+    xl,
+    xxl,
+    ...props
+}: ColumnProps): React.ReactElement => {
+    const sizesArr = Object.entries({ xs, sm, md, lg, xl, xxl }).filter(([key, value]) => !!value);
+    const utilityColumnClassName = 'column';
+    const utilityColumnOffsetClassName = 'column-offset';
+
+    let columnClass: ArrayStringProps = [];
+
+    if (sizesArr.length === 0) columnClass.push(utilityColumnClassName);
+    if (sizesArr.length > 0) {
+        sizesArr.forEach(([key, value]) => {
+            if (value && typeof columnClass !== 'string') {
+                columnClass.push(
+                    createBreakpointClass({
+                        breakpoint: key as BreakpointsProps,
+                        className: utilityColumnClassName,
+                        value,
+                    })
+                );
+            }
+        });
+    }
+
+    if (offset) {
+        if (typeof offset === 'number') {
+            columnClass.push(createBreakpointClass({ className: utilityColumnOffsetClassName, value: offset }));
+        }
+
+        if (typeof offset === 'object') {
+            const offsetArr = Object.entries(offset);
+
+            if (offsetArr && offsetArr.length > 0) {
+                offsetArr.forEach(([key, value]) => {
+                    if (value && typeof columnClass !== 'string') {
+                        columnClass.push(
+                            createBreakpointClass({
+                                breakpoint: key as BreakpointsProps,
+                                className: utilityColumnOffsetClassName,
+                                value,
+                            })
+                        );
+                    }
+                });
+            }
+        }
+    }
+
     if (className) columnClass.push(className);
     columnClass = joinArrayString(columnClass);
 
-    return <div className={columnClass}>{children}</div>;
+    return (
+        <div
+            {...(columnClass ? { className: columnClass } : {})}
+            {...props}>
+            {children}
+        </div>
+    );
 };
 
 export default Column;

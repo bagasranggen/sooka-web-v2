@@ -15,8 +15,8 @@ const CbCallout = ({ className, isNested, title, cta }: CbCalloutProps): React.R
     return (
         <CbWrapper className={className}>
             <CbContainer isNested={isNested}>
-                <Columns.Row className="justify-center">
-                    <Columns.Column width={{ md: 8 }}>
+                <Columns className="justify-center">
+                    <Columns.Column md={8}>
                         <Heading
                             as="h4"
                             size="callout"
@@ -41,7 +41,7 @@ const CbCallout = ({ className, isNested, title, cta }: CbCalloutProps): React.R
                             />
                         )}
                     </Columns.Column>
-                </Columns.Row>
+                </Columns>
             </CbContainer>
         </CbWrapper>
     );

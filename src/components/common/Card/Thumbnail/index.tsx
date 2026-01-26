@@ -22,21 +22,27 @@ export type ThumbnailProps = {
     items: ThumbnailItemProps[];
 } & Omit<CardBaseProps, 'items'>;
 
-const Thumbnail = ({ items, width = 3, ...props }: ThumbnailProps): React.ReactElement => {
+const Thumbnail = ({
+    items,
+    row = { gutterY: 4 },
+    column = { xs: 3 },
+    ...props
+}: ThumbnailProps): React.ReactElement => {
     return (
         <Base
             {...props}
-            width={width}
+            row={row}
+            column={column}
             items={items.map(
                 ({ cta, media, mediaHover, title, price, salePrice, label, disabled }: ThumbnailItemProps) => {
                     const hasPrice = !!price;
 
-                    let titleClass: ArrayString = ['mt-1 md:transition-colors md:group-hover:text-sooka-primary'];
+                    let titleClass: ArrayStringProps = ['mt-1 md:transition-colors md:group-hover:text-sooka-primary'];
                     if (hasPrice) titleClass.push('text-[1.4rem]');
                     if (!hasPrice) titleClass.push('uppercase font-semibold tracking-0.2');
                     titleClass = joinArrayString(titleClass);
 
-                    let labelClass: ArrayString = [];
+                    let labelClass: ArrayStringProps = [];
                     labelClass.push('absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-50');
                     labelClass.push('bg-sooka-primary saturate-[.75] text-white text-center');
                     labelClass.push('px-1 py-1');
@@ -44,11 +50,11 @@ const Thumbnail = ({ items, width = 3, ...props }: ThumbnailProps): React.ReactE
                     labelClass.push('flex justify-center items-center');
                     labelClass = joinArrayString(labelClass);
 
-                    let mainMediaClass: ArrayString = [];
+                    let mainMediaClass: ArrayStringProps = [];
                     if (disabled) mainMediaClass.push('contrast-50');
                     mainMediaClass = joinArrayString(mainMediaClass);
 
-                    let hoverMediaClass: ArrayString = ['absolute top-0 opacity-0 md:transition-opacity'];
+                    let hoverMediaClass: ArrayStringProps = ['absolute top-0 opacity-0 md:transition-opacity'];
                     hoverMediaClass.push('md:group-hover:opacity-100');
                     if (disabled) hoverMediaClass.push('contrast-50');
                     hoverMediaClass = joinArrayString(hoverMediaClass);

@@ -28,20 +28,23 @@ const HomepageStory = ({
         <Container
             as="section"
             className={className}>
-            <Columns.Row spacing={{ x: 3, y: 0, lg: { x: 6 } }}>
+            <Columns gutterX={{ xs: 3, lg: 6 }}>
                 <Columns.Column
                     className=""
-                    width={{ sm: 6, lg: 7 }}>
-                    <Columns.Row className="relative justify-end md:justify-start hidden md:flex">
+                    xs={6}
+                    lg={7}>
+                    <Columns className="relative justify-end md:justify-start hidden md:flex">
                         <Columns.Column
                             className="md:mt-8 absolute md:relative left-0 md:left-[unset]"
-                            width={{ xs: 9, md: 8 }}>
+                            xs={9}
+                            md={8}>
                             {mediaMain && <Picture items={mediaMain} />}
                         </Columns.Column>
 
                         <Columns.Column
                             className="mt-8 md:mt-0 md:absolute md:right-0 md:top-0 z-10"
-                            width={{ xs: 9, md: 8 }}>
+                            xs={9}
+                            md={8}>
                             {mediaSecondary && (
                                 <Animation
                                     type="slide-y"
@@ -53,7 +56,7 @@ const HomepageStory = ({
                                 </Animation>
                             )}
                         </Columns.Column>
-                    </Columns.Row>
+                    </Columns>
 
                     {mediaCarousel && mediaCarousel.length > 0 && (
                         <Carousel.Fade
@@ -65,7 +68,9 @@ const HomepageStory = ({
                     )}
                 </Columns.Column>
 
-                <Columns.Column width={{ sm: 6, lg: 5 }}>
+                <Columns.Column
+                    xs={6}
+                    lg={5}>
                     <Heading
                         as="h2"
                         size="section">
@@ -83,7 +88,7 @@ const HomepageStory = ({
 
                     {description && <RichText className="mt-3 sm:mt-5">{description}</RichText>}
                 </Columns.Column>
-            </Columns.Row>
+            </Columns>
         </Container>
     );
 };

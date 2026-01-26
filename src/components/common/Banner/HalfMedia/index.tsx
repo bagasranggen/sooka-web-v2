@@ -14,12 +14,13 @@ export type HalfMediaProps = {
 const HalfMedia = ({ media, form, children }: HalfMediaProps): React.ReactElement => {
     return (
         <>
-            <Columns.Row
+            <Columns
                 className="items-center"
-                spacing={{ x: 3, y: 3 }}>
+                gutterY={3}>
                 <Columns.Column
                     className="z-10 order-last md:order-first"
-                    width={{ md: 6, lg: 10 }}>
+                    md={6}
+                    lg={10}>
                     <Heading
                         as="h1"
                         size="heading"
@@ -30,18 +31,19 @@ const HalfMedia = ({ media, form, children }: HalfMediaProps): React.ReactElemen
 
                 <Columns.Column
                     className="md:-ms-3/12 lg:-ms-6/12 order-first md:order-last px-0! md:px-1.5!"
-                    width={{ md: 9, lg: 8 }}>
+                    md={9}
+                    lg={8}>
                     <Overlay
                         variant="solid"
                         opacity={1}>
                         <Picture items={media} />
                     </Overlay>
                 </Columns.Column>
-            </Columns.Row>
+            </Columns>
 
             <div className="mt-4">
-                <Columns.Row className="lg:justify-end">
-                    <Columns.Column width={{ md: 12, lg: 8 }}>
+                <Columns className="lg:justify-end">
+                    <Columns.Column lg={8}>
                         <Form.Order
                             title={form.title}
                             summaries={form.summaries}
@@ -50,7 +52,7 @@ const HalfMedia = ({ media, form, children }: HalfMediaProps): React.ReactElemen
                             onSubmit={form.onSubmit}
                         />
                     </Columns.Column>
-                </Columns.Row>
+                </Columns>
             </div>
         </>
     );

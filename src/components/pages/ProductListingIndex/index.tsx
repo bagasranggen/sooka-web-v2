@@ -23,10 +23,10 @@ const ProductListingIndex = ({ entries }: ProductListingIndexProps): React.React
                 <Container
                     as="section"
                     className="mt-6 lg:mt-10">
-                    <Columns.Row>
+                    <Columns>
                         <Columns.Column
                             offset={{ md: 1 }}
-                            width={{ md: 7 }}>
+                            md={7}>
                             {entries?.banner?.children && (
                                 <Animation type="fade-in">
                                     <Heading
@@ -45,7 +45,7 @@ const ProductListingIndex = ({ entries }: ProductListingIndexProps): React.React
                                 </Animation>
                             )}
                         </Columns.Column>
-                    </Columns.Row>
+                    </Columns>
                 </Container>
             )}
 
@@ -58,8 +58,8 @@ const ProductListingIndex = ({ entries }: ProductListingIndexProps): React.React
                         className="mt-6 lg:mt-10 mb-10 lg:mb-15">
                         {entries?.products && entries?.products.length > 0 && (
                             <Card.Thumbnail
-                                spacing={{ x: 3, y: 4 }}
-                                columns={{ xs: 1, sm: 2, md: 3, lg: 4 }}
+                                row={{ gutterY: 4 }}
+                                column={{ xs: 1, sm: 2, md: 3, lg: 4 }}
                                 items={entries.products}
                             />
                         )}

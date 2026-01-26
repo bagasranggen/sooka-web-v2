@@ -53,12 +53,10 @@ const HomepageIndex = ({ entries }: HomepageIndexProps): React.ReactElement => {
                     <Container
                         as="section"
                         className="mt-8 lg:mt-20 last:mb-10 lg:last:mb-20">
-                        <Columns.Row className="justify-center">
+                        <Columns className="justify-center">
                             <Columns.Column
-                                width={{
-                                    md: 10,
-                                    lg: 9,
-                                }}>
+                                md={8}
+                                lg={9}>
                                 <Heading
                                     as="h2"
                                     size="section"
@@ -70,7 +68,7 @@ const HomepageIndex = ({ entries }: HomepageIndexProps): React.ReactElement => {
                                     <Carousel.Testimonial items={entries.testimonials} />
                                 </div>
                             </Columns.Column>
-                        </Columns.Row>
+                        </Columns>
                     </Container>
                 </Animation>
             )}
@@ -89,8 +87,8 @@ const HomepageIndex = ({ entries }: HomepageIndexProps): React.ReactElement => {
                     <Container
                         as="section"
                         className="mt-8 lg:mt-20 last:mb-10 lg:last:mb-20">
-                        <Columns.Row className="justify-center">
-                            <Columns.Column width={{ lg: 8 }}>
+                        <Columns className="justify-center">
+                            <Columns.Column lg={8}>
                                 <Heading
                                     as="h2"
                                     size="section"
@@ -106,7 +104,7 @@ const HomepageIndex = ({ entries }: HomepageIndexProps): React.ReactElement => {
                                     items={entries.orders.steps}
                                 />
                             </Columns.Column>
-                        </Columns.Row>
+                        </Columns>
                     </Container>
                 </Animation>
             )}

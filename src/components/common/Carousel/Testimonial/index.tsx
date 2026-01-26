@@ -35,8 +35,8 @@ const Testimonial = ({ items }: TestimonialProps): React.ReactElement => {
                 return {
                     children: (
                         <>
-                            <Columns.Row>
-                                <Columns.Column width={{ lg: 8 }}>
+                            <Columns>
+                                <Columns.Column lg={8}>
                                     <div className="relative">
                                         <Icon.Quote
                                             size="md"
@@ -51,7 +51,7 @@ const Testimonial = ({ items }: TestimonialProps): React.ReactElement => {
                                         </div>
                                     </div>
                                 </Columns.Column>
-                            </Columns.Row>
+                            </Columns>
                         </>
                     ),
                 };

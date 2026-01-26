@@ -61,8 +61,8 @@ const ProductDetailIndex = ({ entries }: ProductDetailIndexProps): React.ReactEl
                 <Container
                     as="section"
                     className={infoClass}>
-                    <Columns.Row className="justify-between">
-                        <Columns.Column width={{ md: 6 }}>
+                    <Columns className="justify-between">
+                        <Columns.Column md={6}>
                             <Animation type="fade-in">
                                 <Picture
                                     className="sticky top-2 lg:top-5"
@@ -71,7 +71,9 @@ const ProductDetailIndex = ({ entries }: ProductDetailIndexProps): React.ReactEl
                             </Animation>
                         </Columns.Column>
 
-                        <Columns.Column width={{ md: 6, lg: 5 }}>
+                        <Columns.Column
+                            md={6}
+                            lg={5}>
                             {entries.infos.contents.map((item: ProductDetailInfoProps, i: number) => {
                                 return (
                                     <ProductDetailInfo
@@ -81,7 +83,7 @@ const ProductDetailIndex = ({ entries }: ProductDetailIndexProps): React.ReactEl
                                 );
                             })}
                         </Columns.Column>
-                    </Columns.Row>
+                    </Columns>
                 </Container>
             )}
 
