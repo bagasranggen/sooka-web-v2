@@ -1,5 +1,5 @@
 import React from 'react';
-import { ArrayString, ClassnameProps } from '@/libs/@types';
+import { ArrayStringProps, ClassnameProps } from '@/libs/@types';
 import { joinArrayString } from '@/libs/utils';
 
 export type CircleArrowProps = {
@@ -7,7 +7,7 @@ export type CircleArrowProps = {
 } & ClassnameProps;
 
 const CircleArrow = ({ direction = 'right', className }: CircleArrowProps): React.ReactElement => {
-    let iconClass: ArrayString = [];
+    let iconClass: ArrayStringProps = [];
     if (className) iconClass.push(className);
     iconClass = joinArrayString(iconClass);
 

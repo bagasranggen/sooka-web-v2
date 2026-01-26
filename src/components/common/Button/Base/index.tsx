@@ -2,7 +2,7 @@
 
 import React, { forwardRef, Ref } from 'react';
 
-import { ArrayString } from '@/libs/@types';
+import { ArrayStringProps } from '@/libs/@types';
 import { joinArrayString } from '@/libs/utils';
 
 import Link, { LinkProps } from '@/components/common/Link';
@@ -38,7 +38,7 @@ const Base = forwardRef<BaseRefProps, BaseProps>((props, ref) => {
             // eslint-disable-next-line @typescript-eslint/no-unused-vars
             const { as: btnAs, className: btnClassName, ...restButton } = props;
 
-            let baseButtonClass: ArrayString = ['cursor-pointer focus-visible:outline-0'];
+            let baseButtonClass: ArrayStringProps = ['cursor-pointer focus-visible:outline-0'];
             if (btnClassName) baseButtonClass.push(btnClassName);
             baseButtonClass = joinArrayString(baseButtonClass);
 

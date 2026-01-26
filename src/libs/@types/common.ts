@@ -35,8 +35,10 @@ export type RefComponent<Props, Element> = React.ForwardRefExoticComponent<Props
 
 export type ClassnameProps = { className?: string };
 
-export type ArrayString = string[] | string;
+export type ArrayStringProps = string[] | string;
 
 export type ElementTagsProps = keyof JSX.IntrinsicElements;
 
 export type ResponsiveProps = 'xs' | 'sm' | 'md' | 'lg' | 'xl' | '2xl';
+
+export type BreakpointsProps = 'xs' | 'sm' | 'md' | 'lg' | 'xl' | 'xxl';

@@ -1,7 +1,7 @@
 import React from 'react';
 import { getImageProps } from 'next/image';
 
-import { ArrayString } from '@/libs/@types';
+import { ArrayStringProps } from '@/libs/@types';
 import { joinArrayString } from '@/libs/utils';
 
 import { BaseItemProps } from '@/components/common/Picture';
@@ -11,7 +11,7 @@ export type PictureImageProps = BaseItemProps;
 const PictureImage = ({ className: classNameProps, ...item }: PictureImageProps): React.ReactElement => {
     // const { className, srcRetina, ...rest } = item;
 
-    let imageClass: ArrayString = [];
+    let imageClass: ArrayStringProps = [];
     if (classNameProps) imageClass.push(classNameProps);
     imageClass = joinArrayString(imageClass);
 

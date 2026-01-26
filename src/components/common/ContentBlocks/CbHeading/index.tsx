@@ -15,24 +15,23 @@ const CbHeading = ({ title, description, className, isNested }: CbHeadingProps):
     return (
         <CbWrapper className={className}>
             <CbContainer isNested={isNested}>
-                <Columns.Row className="justify-center">
-                    <Columns.Column width={{ md: 8 }}>
+                <Columns className="justify-center">
+                    <Columns.Column md={8}>
                         <Heading
                             as="h1"
                             size="heading"
                             className="text-center">
-                            {/*Custom <span className="text-sooka-primary">Cakes</span>*/}
                             {title}
                         </Heading>
                     </Columns.Column>
-                </Columns.Row>
+                </Columns>
 
                 {description && (
-                    <Columns.Row className="mt-3 justify-center text-center">
-                        <Columns.Column width={{ md: 9 }}>
+                    <Columns className="mt-3 justify-center text-center">
+                        <Columns.Column md={9}>
                             <RichText className="tes">{description}</RichText>
                         </Columns.Column>
-                    </Columns.Row>
+                    </Columns>
                 )}
             </CbContainer>
         </CbWrapper>

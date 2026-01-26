@@ -2,7 +2,7 @@
 
 import React, { PropsWithChildren } from 'react';
 
-import { ArrayString, PortalBaseProps, PortalTransitionProps, ClassnameProps } from '@/libs/@types';
+import { ArrayStringProps, PortalBaseProps, PortalTransitionProps, ClassnameProps } from '@/libs/@types';
 import { joinArrayString } from '@/libs/utils';
 
 export type BaseOffcanvasProps = {
@@ -17,7 +17,7 @@ const BaseOffcanvas = ({
     hide,
     children,
 }: BaseOffcanvasProps): React.ReactElement | null => {
-    let offcanvasClass: ArrayString = ['fixed transition-transform duration-300 z-[1025]'];
+    let offcanvasClass: ArrayStringProps = ['fixed transition-transform duration-300 z-1025'];
     if (from === 'top' || from === 'bottom') offcanvasClass.push('w-full left-0');
     if (from === 'left' || from === 'right') offcanvasClass.push('h-full top-0');
 

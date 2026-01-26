@@ -1,37 +1,36 @@
 import React, { PropsWithChildren } from 'react';
 
-import { ClassnameProps } from '@/libs/@types';
+import { BreakpointsProps, ClassnameProps } from '@/libs/@types';
 
-import Columns, { RowProps, ColumnProps } from '@/components/common/Columns';
+import Columns, { BaseProps as RowProps, ColumnProps } from '@/components/common/Columns';
 
 export type BaseItemProps = PropsWithChildren & ClassnameProps;
 
 export type BaseProps = {
     items: BaseItemProps[];
-} & (ClassnameProps & Pick<RowProps, 'spacing' | 'columns' | 'isWrap'> & Pick<ColumnProps, 'width' | 'offset'>);
+    column?: Pick<ColumnProps, BreakpointsProps | 'offset'>;
+    row?: Pick<RowProps, 'gutter' | 'gutterX' | 'gutterY'>;
+} & ClassnameProps;
 
-const Base = ({ items, spacing, columns, isWrap, width, offset, className }: BaseProps): React.ReactElement => {
+const Base = ({ items, row, column, className }: BaseProps): React.ReactElement => {
     if (!items) return <></>;
     if (items.length === 0) return <></>;
 
     return (
-        <Columns.Row
-            spacing={spacing}
-            columns={columns}
-            isWrap={isWrap}
+        <Columns
+            {...row}
             className={className}>
             {items.map((item: BaseItemProps, i: number) => {
                 return (
                     <Columns.Column
                         key={i}
-                        width={width}
-                        offset={offset}
+                        {...column}
                         className={item.className}>
                         {item.children}
                     </Columns.Column>
                 );
             })}
-        </Columns.Row>
+        </Columns>
     );
 };
 

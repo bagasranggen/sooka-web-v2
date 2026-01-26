@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { ArrayString, ElementTagsProps, ClassnameProps } from '@/libs/@types';
+import { ArrayStringProps, ElementTagsProps, ClassnameProps } from '@/libs/@types';
 import { joinArrayString } from '@/libs/utils';
 
 import Picture, { BaseProps } from '@/components/common/Picture';
@@ -11,7 +11,7 @@ export type ImageDividerProps = {
 } & ClassnameProps;
 
 const ImageDivider = ({ as: Container = 'section', className, media }: ImageDividerProps): React.ReactElement => {
-    let containerClass: ArrayString = [];
+    let containerClass: ArrayStringProps = [];
     if (className) containerClass.push(className);
     containerClass = joinArrayString(containerClass);
 

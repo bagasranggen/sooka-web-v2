@@ -2,7 +2,7 @@
 
 import React from 'react';
 
-import { ArrayString, ClassnameProps } from '@/libs/@types';
+import { ArrayStringProps, ClassnameProps } from '@/libs/@types';
 import { joinArrayString } from '@/libs/utils';
 
 import { Pagination } from 'swiper/modules';
@@ -20,7 +20,7 @@ export type ImageCollageCarouselProps = {
 const ImageCollageCarousel = ({ items, className }: ImageCollageCarouselProps): React.ReactElement | null => {
     if (!items || items.length === 0) return null;
 
-    let carouselClass: ArrayString = ['[&>.swiper-pagination]:relative [&>.swiper-pagination]:mt-1'];
+    let carouselClass: ArrayStringProps = ['[&>.swiper-pagination]:relative [&>.swiper-pagination]:mt-1'];
     if (className) carouselClass.push(className);
     carouselClass = joinArrayString(carouselClass);
 

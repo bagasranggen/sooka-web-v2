@@ -1,7 +1,7 @@
 import React, { forwardRef } from 'react';
 import { ImageProps } from 'next/image';
 
-import { ArrayString } from '@/libs/@types';
+import { ArrayStringProps } from '@/libs/@types';
 import { joinArrayString } from '@/libs/utils';
 
 import PictureSource from '@/components/common/Picture/PictureSource';
@@ -21,7 +21,7 @@ export type BaseProps = {
 };
 
 const Base = forwardRef<HTMLPictureElement, BaseProps>(({ className, items, style, events, ...props }, ref) => {
-    let pictureClass: ArrayString = [];
+    let pictureClass: ArrayStringProps = [];
     if (className) pictureClass.push(className);
     pictureClass = joinArrayString(pictureClass);
 
