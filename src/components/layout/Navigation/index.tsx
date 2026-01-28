@@ -3,18 +3,23 @@
 import React, { Ref, Suspense, useEffect, useState } from 'react';
 
 import { ArrayStringProps } from '@/libs/@types';
-import { NavigationEvents, useCheckSamePath, usePortal } from '@/libs/hooks';
+import { NavigationEvents, usePortal } from '@/libs/hooks';
 import { joinArrayString } from '@/libs/utils';
 
 import { useMeasure, useWindowScroll } from 'react-use';
 
 import Icon from '@/components/common/Icon';
-import List from '@/components/common/List';
 import Button, { BaseAnchorProps } from '@/components/common/Button';
 import Offcanvas from '@/components/common/Offcanvas';
 import Container from '@/components/common/Container';
+import NavigationMenu from '@/components/layout/Navigation/NavigationMenu';
+import NavigationMenuMobile from '@/components/layout/Navigation/NavigationMenuMobile';
 
-export type NavigationItemProps = Pick<BaseAnchorProps, 'href' | 'children' | 'target'>;
+export type NavigationItemNestedProps = Pick<NavigationItemProps, 'href' | 'children' | 'target'>;
+
+export type NavigationItemProps = {
+    child?: NavigationItemNestedProps[];
+} & Pick<BaseAnchorProps, 'href' | 'children' | 'target'>;
 
 export type NavigationProps = {
     items: NavigationItemProps[];
@@ -22,7 +27,6 @@ export type NavigationProps = {
 
 const Navigation = ({ items }: NavigationProps): React.ReactElement => {
     const { show, triggerOpen, triggerClose } = usePortal({});
-    const { isSamePath } = useCheckSamePath();
     const [navRef, { height }] = useMeasure();
     const { y: scrollY } = useWindowScroll();
     const [prevScrollY, setPrevScrollY] = useState<number>(0);
@@ -73,57 +77,30 @@ const Navigation = ({ items }: NavigationProps): React.ReactElement => {
                             type="button"
                             className="block md:hidden"
                             onClick={() => {
-                                if (!show) {
-                                    triggerOpen();
-                                }
+                                if (!show) triggerOpen();
 
-                                if (show) {
-                                    triggerClose();
-                                }
+                                if (show) triggerClose();
                             }}>
                             <Icon.Toggle active={show} />
                         </Button>
 
-                        <List
-                            className="hidden md:flex space-x-3"
-                            items={items.map((item: NavigationItemProps) => ({
-                                children: (
-                                    <Button
-                                        as="anchor"
-                                        {...item}
-                                        className="uppercase text-[1.4rem] tracking-0.2 transition-colors hover:text-black"
-                                    />
-                                ),
-                            }))}
-                        />
+                        <NavigationMenu items={items} />
                     </div>
                 </Container>
 
-                <Offcanvas
-                    show={show}
-                    hide={triggerClose}
-                    backdrop={false}
-                    from="bottom"
-                    className="h-full max-h-[calc(100vh-7rem)] bg-sooka-primary">
-                    <List
-                        className="mt-10 text-center space-y-2"
-                        items={items.map((item: NavigationItemProps) => ({
-                            children: (
-                                <Button
-                                    as="anchor"
-                                    href={item.href}
-                                    className="uppercase font-semibold tracking-0.2 transition-colors text-white"
-                                    onClick={(e) => {
-                                        e.stopPropagation();
-
-                                        if (isSamePath({ href: item?.href })) triggerClose();
-                                    }}>
-                                    {item.children}
-                                </Button>
-                            ),
-                        }))}
-                    />
-                </Offcanvas>
+                {items && items.length > 0 && (
+                    <Offcanvas
+                        show={show}
+                        hide={triggerClose}
+                        backdrop={false}
+                        from="bottom"
+                        className="h-full max-h-[calc(100vh-7rem)] bg-sooka-primary">
+                        <NavigationMenuMobile
+                            items={items}
+                            onSamePath={triggerClose}
+                        />
+                    </Offcanvas>
+                )}
             </nav>
         </>
     );

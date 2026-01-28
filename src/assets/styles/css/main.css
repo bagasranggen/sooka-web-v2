@@ -3,6 +3,7 @@
 @import './reset/reset.css';
 @import './theme/theme.css';
 @import './layout/layout.css';
+@import './animation/animation.css';
 @import './component/component.css';
 @import 'tw-animate-css';
 
@@ -82,13 +83,6 @@
         .st2 {
             fill: var(--icon-color, #ff9a00);
         }
-    }
-}
-
-@layer components {
-    [data-animation='fade-in']:not([style]) {
-        opacity: 0;
-        visibility: hidden;
     }
 }
 
@@ -207,11 +201,3 @@
     --sidebar-border: oklch(1 0 0 / 10%);
     --sidebar-ring: oklch(0.556 0 0);
 }
-
-/*---break---*/
-
-/*@layer base {*/
-/*    * {*/
-/*        @apply border-border outline-ring/50;*/
-/*    }*/
-/*}*/
