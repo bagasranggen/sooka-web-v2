@@ -39,7 +39,7 @@ const NavigationDropdown = ({
     triggerBtnClass.push('flex items-center');
     triggerBtnClass = joinArrayString(triggerBtnClass);
 
-    let linkBtnClass: ArrayStringProps = [];
+    let linkBtnClass: ArrayStringProps = ['block not-first:mt-1'];
     if (className) linkBtnClass.push(className);
     linkBtnClass.push('text-white');
     linkBtnClass = joinArrayString(linkBtnClass);
