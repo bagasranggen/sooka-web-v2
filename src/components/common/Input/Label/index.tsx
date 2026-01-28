@@ -1,6 +1,6 @@
 import React, { forwardRef, useState } from 'react';
 
-import { ArrayString } from '@/libs/@types';
+import { ArrayStringProps } from '@/libs/@types';
 import { joinArrayString } from '@/libs/utils';
 
 import Base, { BaseProps } from '@/components/common/Input';
@@ -16,7 +16,7 @@ const Label = forwardRef<HTMLInputElement | HTMLSelectElement, LabelProps>(
     ({ id, label, className, type, error, hidden, onFocus, onBlurCapture, ...props }, ref) => {
         const [isFocus, setIsFocus] = useState<boolean>(false);
 
-        let inputGroupClass: ArrayString = ['group relative after'];
+        let inputGroupClass: ArrayStringProps = ['group relative after'];
         inputGroupClass.push("after:content-[''] after:bg-sooka-primary after:transition-width");
         inputGroupClass.push('after:absolute after:left-0 after:bottom-0');
         inputGroupClass.push('after:w-0 after:h-[.2rem]');
@@ -24,7 +24,9 @@ const Label = forwardRef<HTMLInputElement | HTMLSelectElement, LabelProps>(
         if (hidden) inputGroupClass.push('hidden');
         inputGroupClass = joinArrayString(inputGroupClass);
 
-        let inputClass: ArrayString = ['peer w-full placeholder:opacity-0 bg-transparent focus-visible:outline-none'];
+        let inputClass: ArrayStringProps = [
+            'peer w-full placeholder:opacity-0 bg-transparent focus-visible:outline-none',
+        ];
         inputClass.push('min-h-[6.7rem]');
         if ((!EXCLUDE_SPACING_TYPE.includes(type) && !props?.multiple) || (type === 'select' && !props?.multiple)) {
             inputClass.push('pt-2');
@@ -68,7 +70,7 @@ const Label = forwardRef<HTMLInputElement | HTMLSelectElement, LabelProps>(
                     <LabelText
                         htmlFor={id}
                         className={labelClass}
-                        required={props?.required || props?.hook?.required}>
+                        required={props?.required || (props?.hook?.required as boolean)}>
                         {label}
                     </LabelText>
                 </div>
