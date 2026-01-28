@@ -6,6 +6,7 @@ export * from './addCurrentTime';
 export * from './checkMediaStatus';
 export * from './checkStringIsNumber';
 export * from './cleanArrayString';
+export * from './cn';
 export * from './convertIntToCurrency';
 export * from './delay';
 export * from './getCurrentDate';
