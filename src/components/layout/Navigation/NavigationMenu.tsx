@@ -1,5 +1,8 @@
 import React from 'react';
 
+import { ArrayStringProps, ClassnameProps } from '@/libs/@types';
+import { joinArrayString } from '@/libs/utils';
+
 import Button from '@/components/common/Button';
 import List from '@/components/common/List';
 import { NavigationItemProps } from '@/components/layout/Navigation';
@@ -8,14 +11,20 @@ import NavigationDropdown, { NavigationDropdownProps } from '@/components/layout
 export type NavigationMenuProps = {
     items?: NavigationItemProps[];
     dropdown?: Pick<NavigationDropdownProps, 'trigger' | 'active'>;
-};
+} & ClassnameProps;
 
-const NavigationMenu = ({ items, dropdown }: NavigationMenuProps): React.ReactElement | null => {
+const NavigationMenu = ({ items, className, dropdown }: NavigationMenuProps): React.ReactElement | null => {
     if (!items || items.length === 0) return null;
+
+    let listClass: ArrayStringProps = ['space-x-3'];
+    if (className) listClass.push(className);
+    listClass = joinArrayString(listClass);
+
+    const btnClass = 'uppercase text-[1.4rem] tracking-0.2 transition-colors hover:text-black';
 
     return (
         <List
-            className="hidden md:flex space-x-3"
+            className={listClass}
             items={items.map((item: NavigationItemProps) => {
                 const isNested = item?.child && item.child.length > 0;
 
@@ -23,14 +32,14 @@ const NavigationMenu = ({ items, dropdown }: NavigationMenuProps): React.ReactEl
                     <Button
                         as="anchor"
                         {...item}
-                        className="uppercase text-[1.4rem] tracking-0.2 transition-colors hover:text-black"
+                        className={btnClass}
                     />
                 );
 
                 if (isNested) {
                     children = (
                         <NavigationDropdown
-                            className="uppercase text-[1.4rem] tracking-0.2 transition-colors hover:text-black"
+                            className={btnClass}
                             items={item.child}
                             active={dropdown?.active}
                             trigger={dropdown?.trigger}>

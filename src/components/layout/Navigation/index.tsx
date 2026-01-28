@@ -76,7 +76,7 @@ const Navigation = ({ items }: NavigationProps): React.ReactElement => {
                         <Button
                             as="button"
                             type="button"
-                            className="block md:hidden"
+                            className="block lg:hidden"
                             onClick={() => {
                                 if (!show) triggerOpen();
 
@@ -86,6 +86,7 @@ const Navigation = ({ items }: NavigationProps): React.ReactElement => {
                         </Button>
 
                         <NavigationMenu
+                            className="hidden lg:flex"
                             items={items}
                             dropdown={{
                                 active: activeDropdown,
