@@ -64,6 +64,20 @@ export default async function RootLayout({ children }: Readonly<PropsWithChildre
             },
         ],
     });
+    navigation.push({
+        children: 'Hampers 2',
+        href: '#',
+        child: [
+            {
+                href: '/cakes',
+                children: 'Hampers CNY 2026',
+            },
+            {
+                href: '/cookies',
+                children: 'Hampers Eid Fitr 2026',
+            },
+        ],
+    });
 
     const socialMedia: FooterSocialProps['items'] = [];
     if (footerNavigation?.socialMedia && footerNavigation.socialMedia.length > 0) {
