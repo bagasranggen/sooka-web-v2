@@ -31,6 +31,7 @@ const Navigation = ({ items }: NavigationProps): React.ReactElement => {
     const { y: scrollY } = useWindowScroll();
     const [prevScrollY, setPrevScrollY] = useState<number>(0);
     const [scrollYDirection, setScrollYDirection] = useState<'down' | 'up' | null>(null);
+    const [activeDropdown, setActiveDropdown] = useState<BaseAnchorProps['children']>();
 
     let navClass: ArrayStringProps = ['bg-sooka-primary h-[7rem] flex items-center text-white'];
     navClass.push('sticky top-0 z-1040 transition-transform');
@@ -84,7 +85,17 @@ const Navigation = ({ items }: NavigationProps): React.ReactElement => {
                             <Icon.Toggle active={show} />
                         </Button>
 
-                        <NavigationMenu items={items} />
+                        <NavigationMenu
+                            items={items}
+                            dropdown={{
+                                active: activeDropdown,
+                                trigger: {
+                                    onClick: (e, children) => {
+                                        setActiveDropdown(children);
+                                    },
+                                },
+                            }}
+                        />
                     </div>
                 </Container>
 

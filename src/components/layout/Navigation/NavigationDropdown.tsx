@@ -20,15 +20,18 @@ export type NavigationDropdownItemProps = NavigationItemNestedProps;
 
 export type NavigationDropdownProps = {
     items?: NavigationDropdownItemProps[];
-    active?: boolean;
-    trigger?: DropdownMenuTriggerProps;
-} & (Pick<BaseProps, 'children'> & Pick<DropdownMenuTriggerProps, 'onMouseEnter'> & ClassnameProps);
+    active?: BaseProps['children'];
+    trigger?: {
+        onClick?: (e: React.MouseEvent<HTMLButtonElement, React.MouseEvent>, children: BaseProps['children']) => void;
+    } & Omit<DropdownMenuTriggerProps, 'onClick'>;
+} & (Pick<BaseProps, 'children'> & ClassnameProps);
 
 const NavigationDropdown = ({
     className,
     items,
     children,
     trigger,
+    active,
 }: NavigationDropdownProps): React.ReactElement | null => {
     const [isOpen, setIsOpen] = useState<boolean>(false);
 
@@ -47,13 +50,15 @@ const NavigationDropdown = ({
     return (
         <DropdownMenu
             modal={false}
-            // open={isOpen}
-        >
+            open={isOpen && active === children}>
             <DropdownMenuTrigger
                 asChild
                 className="group"
-                // onClick={() => setIsOpen(true)}
-                {...trigger}>
+                onClick={(e: any) => {
+                    setIsOpen(true);
+
+                    if (trigger?.onClick) trigger.onClick(e, children);
+                }}>
                 <Button
                     as="button"
                     className={triggerBtnClass}>
@@ -64,14 +69,15 @@ const NavigationDropdown = ({
 
             <DropdownMenuContent
                 align="end"
-                className="bg-sooka-secondary">
+                className="bg-sooka-secondary"
+                onInteractOutside={() => setIsOpen(false)}>
                 {items.map((item, i) => {
                     return (
                         <Button
                             key={i}
                             as="anchor"
                             className={linkBtnClass}
-                            // onClick={() => setIsOpen(false)}
+                            onClick={() => setIsOpen(false)}
                             {...item}
                         />
                     );

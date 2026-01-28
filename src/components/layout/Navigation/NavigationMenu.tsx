@@ -3,11 +3,14 @@ import React from 'react';
 import Button from '@/components/common/Button';
 import List from '@/components/common/List';
 import { NavigationItemProps } from '@/components/layout/Navigation';
-import NavigationDropdown from '@/components/layout/Navigation/NavigationDropdown';
+import NavigationDropdown, { NavigationDropdownProps } from '@/components/layout/Navigation/NavigationDropdown';
 
-export type NavigationMenuProps = { items?: NavigationItemProps[] };
+export type NavigationMenuProps = {
+    items?: NavigationItemProps[];
+    dropdown?: Pick<NavigationDropdownProps, 'trigger' | 'active'>;
+};
 
-const NavigationMenu = ({ items }: NavigationMenuProps): React.ReactElement | null => {
+const NavigationMenu = ({ items, dropdown }: NavigationMenuProps): React.ReactElement | null => {
     if (!items || items.length === 0) return null;
 
     return (
@@ -28,7 +31,9 @@ const NavigationMenu = ({ items }: NavigationMenuProps): React.ReactElement | nu
                     children = (
                         <NavigationDropdown
                             className="uppercase text-[1.4rem] tracking-0.2 transition-colors hover:text-black"
-                            items={item.child}>
+                            items={item.child}
+                            active={dropdown?.active}
+                            trigger={dropdown?.trigger}>
                             {item.children}
                         </NavigationDropdown>
                     );
