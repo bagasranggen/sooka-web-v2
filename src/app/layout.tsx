@@ -39,45 +39,32 @@ export default async function RootLayout({ children }: Readonly<PropsWithChildre
         headerNavigation.navigations.forEach((item) => {
             const { linkIsValid, link } = createLinkItem(item?.link);
 
+            const child: NavigationItemProps['child'] = [];
+
+            if (item?.children && item.children.length > 0) {
+                item.children.forEach((itm) => {
+                    const { linkIsValid, link } = createLinkItem(itm?.link);
+
+                    if (linkIsValid && item?.entryStatus === 'live') {
+                        child.push({
+                            href: link?.href,
+                            target: link?.target,
+                            children: link?.label,
+                        });
+                    }
+                });
+            }
+
             if (linkIsValid && item?.entryStatus === 'live') {
                 navigation.push({
                     href: link?.href,
                     target: link?.target,
                     children: link?.label,
+                    child,
                 });
             }
         });
     }
-
-    /* TODO: Replace with real data */
-    navigation.push({
-        children: 'Hampers',
-        href: '#',
-        child: [
-            {
-                href: '/cakes',
-                children: 'Hampers CNY 2026',
-            },
-            {
-                href: '/cookies',
-                children: 'Hampers Eid Fitr 2026',
-            },
-        ],
-    });
-    navigation.push({
-        children: 'Hampers 2',
-        href: '#',
-        child: [
-            {
-                href: '/cakes',
-                children: 'Hampers CNY 2026',
-            },
-            {
-                href: '/cookies',
-                children: 'Hampers Eid Fitr 2026',
-            },
-        ],
-    });
 
     const socialMedia: FooterSocialProps['items'] = [];
     if (footerNavigation?.socialMedia && footerNavigation.socialMedia.length > 0) {
