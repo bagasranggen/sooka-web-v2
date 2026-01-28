@@ -8,6 +8,7 @@
     "build": "next build",
     "build-staging": "NODE_ENV=test next build",
     "start": "next start -p 80",
+    "start-staging": "NODE_ENV=test next start -p 80",
     "lint": "next lint"
   },
   "dependencies": {
