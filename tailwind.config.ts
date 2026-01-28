@@ -1,6 +1,6 @@
 import type { Config } from 'tailwindcss';
 
-const createArrayFromNumber = (number: number) => Array.from(Array(number).keys());
+// const createArrayFromNumber = (number: number) => Array.from(Array(number).keys());
 
 export default {
     content: [
@@ -8,85 +8,85 @@ export default {
         './src/components/**/*.{js,ts,jsx,tsx,mdx}',
         './src/app/**/*.{js,ts,jsx,tsx,mdx}',
     ],
-    safelist: [
-        ...createArrayFromNumber(6).map((item: number) => `after:opacity-${item * 10}`),
-        {
-            pattern: /w-([1-9]|1[0-2])\/12/,
-            variants: ['xs', 'sm', 'md', 'lg', 'xl', '2xl'],
-        },
-        {
-            pattern: /w-[1-9]\/100/,
-            variants: ['*', 'sm', 'md', 'lg', 'xl', '2xl'],
-        },
-        {
-            pattern: /w-auto/,
-            variants: ['*', 'sm', 'md', 'lg', 'xl', '2xl'],
-        },
-        {
-            pattern: /(mx|mt|mb|px|ps|pe)-./,
-            variants: ['xs', 'sm', 'md', 'lg', 'xl', '2xl'],
-        },
-        {
-            pattern: /(!|)(flex-grow|flex-shrink|basis)-(0|auto)/,
-            variants: ['xs', 'sm', 'md', 'lg', 'xl', '2xl'],
-        },
-        {
-            pattern: /ms-([1-9]|1[0-2])/,
-            variants: ['xs', 'sm', 'md', 'lg', 'xl', '2xl'],
-        },
-        {
-            pattern: /(px|pt)-./,
-            variants: ['*', 'xs', 'sm', 'md', 'lg', 'xl', '2xl'],
-        },
-    ],
-    theme: {
-        screens: {
-            xs: '0',
-            sm: '576px',
-            md: '768px',
-            lg: '992px',
-            xl: '1200px',
-            '2xl': '1400px',
-        },
-        container: {
-            center: true,
-            screens: {
-                sm: '540px',
-                md: '720px',
-                lg: '960px',
-                xl: '1140px',
-                '2xl': '1340px',
-            },
-            padding: '1.5rem',
-        },
-        spacing: Object.assign(
-            {},
-            ...createArrayFromNumber(21).map((item: number) => ({
-                [item - 0.5]: `${item - 0.5}rem`,
-                [item]: `${item}rem`,
-            }))
-        ),
-        fontSize: {
-            sm: '1rem',
-            base: '1.6rem',
-            md: '2rem',
-        },
-        extend: {
-            letterSpacing: Object.assign(
-                {},
-                ...createArrayFromNumber(5).map((item: number) => {
-                    const ls = (item + 1) / 10;
-
-                    return {
-                        [ls]: `${ls}rem`,
-                    };
-                })
-            ),
-            fontFamily: {
-                anglecia: ['var(--font-anglecia)'],
-                'noto-sans-jp': ['Noto Sans JP', 'sans-serif'],
-            },
-        },
-    },
+    // safelist: [
+    //     ...createArrayFromNumber(6).map((item: number) => `after:opacity-${item * 10}`),
+    //     {
+    //         pattern: /w-([1-9]|1[0-2])\/12/,
+    //         variants: ['xs', 'sm', 'md', 'lg', 'xl', '2xl'],
+    //     },
+    //     {
+    //         pattern: /w-[1-9]\/100/,
+    //         variants: ['*', 'sm', 'md', 'lg', 'xl', '2xl'],
+    //     },
+    //     {
+    //         pattern: /w-auto/,
+    //         variants: ['*', 'sm', 'md', 'lg', 'xl', '2xl'],
+    //     },
+    //     {
+    //         pattern: /(mx|mt|mb|px|ps|pe)-./,
+    //         variants: ['xs', 'sm', 'md', 'lg', 'xl', '2xl'],
+    //     },
+    //     {
+    //         pattern: /(!|)(flex-grow|flex-shrink|basis)-(0|auto)/,
+    //         variants: ['xs', 'sm', 'md', 'lg', 'xl', '2xl'],
+    //     },
+    //     {
+    //         pattern: /ms-([1-9]|1[0-2])/,
+    //         variants: ['xs', 'sm', 'md', 'lg', 'xl', '2xl'],
+    //     },
+    //     {
+    //         pattern: /(px|pt)-./,
+    //         variants: ['*', 'xs', 'sm', 'md', 'lg', 'xl', '2xl'],
+    //     },
+    // ],
+    // theme: {
+    //     screens: {
+    //         xs: '0',
+    //         sm: '576px',
+    //         md: '768px',
+    //         lg: '992px',
+    //         xl: '1200px',
+    //         '2xl': '1400px',
+    //     },
+    //     container: {
+    //         center: true,
+    //         screens: {
+    //             sm: '540px',
+    //             md: '720px',
+    //             lg: '960px',
+    //             xl: '1140px',
+    //             '2xl': '1340px',
+    //         },
+    //         padding: '1.5rem',
+    //     },
+    //     spacing: Object.assign(
+    //         {},
+    //         ...createArrayFromNumber(21).map((item: number) => ({
+    //             [item - 0.5]: `${item - 0.5}rem`,
+    //             [item]: `${item}rem`,
+    //         }))
+    //     ),
+    //     fontSize: {
+    //         sm: '1rem',
+    //         base: '1.6rem',
+    //         md: '2rem',
+    //     },
+    //     extend: {
+    //         letterSpacing: Object.assign(
+    //             {},
+    //             ...createArrayFromNumber(5).map((item: number) => {
+    //                 const ls = (item + 1) / 10;
+    //
+    //                 return {
+    //                     [ls]: `${ls}rem`,
+    //                 };
+    //             })
+    //         ),
+    //         fontFamily: {
+    //             anglecia: ['var(--font-anglecia)'],
+    //             'noto-sans-jp': ['Noto Sans JP', 'sans-serif'],
+    //         },
+    //     },
+    // },
     plugins: [],
 } satisfies Config;

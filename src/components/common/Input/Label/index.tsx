@@ -3,7 +3,7 @@ import React, { forwardRef, useState } from 'react';
 import { ArrayStringProps } from '@/libs/@types';
 import { joinArrayString } from '@/libs/utils';
 
-import Base, { BaseProps } from '@/components/common/Input';
+import Base, { BaseInputRef, BaseProps } from '@/components/common/Input';
 import LabelText from '@/components/common/Input/Label/LabelText';
 
 const EXCLUDE_SPACING_TYPE = ['select', 'textarea'];
@@ -12,7 +12,7 @@ export type LabelProps = {
     label: string;
 } & (Omit<BaseProps, 'id'> & Required<Pick<BaseProps, 'id'>>);
 
-const Label = forwardRef<HTMLInputElement | HTMLSelectElement, LabelProps>(
+const Label = forwardRef<BaseInputRef, LabelProps>(
     ({ id, label, className, type, error, hidden, onFocus, onBlurCapture, ...props }, ref) => {
         const [isFocus, setIsFocus] = useState<boolean>(false);
 
