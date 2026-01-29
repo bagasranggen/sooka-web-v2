@@ -79,7 +79,7 @@ const HomepageStory = ({
 
                     {mediaCarousel && mediaCarousel.length > 0 && (
                         <Carousel.Fade
-                            className="mt-3 sm:hidden!"
+                            className="mt-3 md:hidden!"
                             items={mediaCarousel.map((item) => ({
                                 children: <Picture items={item} />,
                             }))}
