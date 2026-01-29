@@ -16,7 +16,7 @@ export type ProductDetailInfoProps = {
 const ProductDetailInfo = ({ title, description, addOns, flavours }: ProductDetailInfoProps): React.ReactElement => {
     return (
         <Animation type="fade-in">
-            <div className="first:mt-6 md:first:mt-2 mt-6">
+            <div className="first:mt-4 md:first:mt-2 mt-4">
                 <Heading className="text-[3.5rem] lg:text-[3.7rem]">{title}</Heading>
 
                 {description && <RichText className="mt-1">{description}</RichText>}
