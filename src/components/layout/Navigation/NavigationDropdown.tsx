@@ -56,7 +56,7 @@ const NavigationDropdown = ({
                 asChild
                 className="group"
                 onClick={(e: any) => {
-                    setIsOpen(true);
+                    setIsOpen((prevState) => !prevState);
 
                     if (trigger?.onClick) trigger.onClick(e, children);
                 }}>
@@ -71,7 +71,11 @@ const NavigationDropdown = ({
             <DropdownMenuContent
                 align="end"
                 className="bg-sooka-secondary"
-                onInteractOutside={() => setIsOpen(false)}>
+                onInteractOutside={() => {
+                    setTimeout(() => {
+                        if (isOpen) setIsOpen(false);
+                    }, 150);
+                }}>
                 {items.map((item, i) => {
                     return (
                         <Button
