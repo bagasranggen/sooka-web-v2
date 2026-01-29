@@ -26,7 +26,7 @@ export type ProductDetailIndexProps = {
 };
 
 const ProductDetailIndex = ({ entries }: ProductDetailIndexProps): React.ReactElement => {
-    let infoClass: ArrayStringProps = ['mt-10'];
+    let infoClass: ArrayStringProps = ['mt-5 md:mt-10'];
     if (!entries?.marquee || entries.marquee.length === 0) infoClass.push('mb-10 md:mb-15');
     infoClass = joinArrayString(infoClass);
 
@@ -89,7 +89,7 @@ const ProductDetailIndex = ({ entries }: ProductDetailIndexProps): React.ReactEl
 
             {entries?.marquee && entries.marquee.length > 0 && (
                 <Animation type="fade-in">
-                    <section className="mt-10 md:mt-20 mb-10 md:mb-15">
+                    <section className="mt-8 md:mt-20 mb-10 md:mb-15">
                         <Marquee.Picture items={entries.marquee} />
                     </section>
                 </Animation>

@@ -30,10 +30,10 @@ const HomepageStory = ({
             className={className}>
             <Columns gutterX={{ xl: 6 }}>
                 <Columns.Column
-                    className=""
-                    xs={6}
+                    className="hidden md:block"
+                    md={6}
                     lg={7}>
-                    <Columns className="relative justify-end md:justify-start hidden md:flex">
+                    <Columns className="relative justify-end md:justify-start">
                         <Columns.Column
                             className="md:mt-8 absolute md:relative left-0 md:left-[unset]"
                             xs={9}
@@ -69,7 +69,7 @@ const HomepageStory = ({
                 </Columns.Column>
 
                 <Columns.Column
-                    xs={6}
+                    md={6}
                     lg={5}>
                     <Heading
                         as="h2"
