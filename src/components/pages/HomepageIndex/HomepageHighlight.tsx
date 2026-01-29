@@ -46,8 +46,8 @@ const HomepageHighlight = ({ items, className }: HomepageHighlightProps): React.
                         children: (
                             <Card.Thumbnail
                                 className="justify-center"
-                                spacing={{ x: 3, y: 4 }}
-                                columns={{ xs: 1, sm: 2, md: 4 }}
+                                row={{ gutterY: 4 }}
+                                column={{ sm: 6, md: 3 }}
                                 items={item.items}
                             />
                         ),

@@ -1,6 +1,6 @@
 import React, { PropsWithChildren } from 'react';
 
-import { ArrayString } from '@/libs/@types';
+import { ArrayStringProps } from '@/libs/@types';
 import { joinArrayString } from '@/libs/utils';
 
 export type LabelTextProps = {
@@ -17,7 +17,7 @@ const LabelText = ({
     standalone,
     required,
 }: LabelTextProps): React.ReactElement => {
-    let labelClass: ArrayString = ['block uppercase transition-all origin-top-left'];
+    let labelClass: ArrayStringProps = ['block uppercase transition-all origin-top-left'];
     labelClass.push('text-[2.5rem] whitespace-nowrap');
     labelClass.push('tracking-[.6rem]');
     labelClass.push('px-2 py-1');
