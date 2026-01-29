@@ -1,8 +1,8 @@
 import React from 'react';
 
-import { PropsClassname } from '@/libs/@types';
+import { ClassnameProps } from '@/libs/@types';
 
-export type CheckProps = {} & PropsClassname;
+export type CheckProps = {} & ClassnameProps;
 
 const Check = ({ className }: CheckProps): React.ReactElement => {
     return (

@@ -1,4 +1,4 @@
-import { BareMediaProps, ObjectProps, PropsClassname } from '@/libs/@types';
+import { BareMediaProps, ObjectProps, ClassnameProps } from '@/libs/@types';
 
 import { BaseItemProps } from '@/components/common/Picture';
 
@@ -13,7 +13,7 @@ const INITIAL_STATE: BaseItemProps = {
 export type CreatePictureImageProps = {
     item: BareMediaProps;
     attribute?: ObjectProps<string>;
-} & (Pick<BaseItemProps, 'media' | 'sizes' | 'loading'> & PropsClassname);
+} & (Pick<BaseItemProps, 'media' | 'sizes' | 'loading'> & ClassnameProps);
 
 export const createPictureImage = ({ item, media, sizes, className, attribute, loading }: CreatePictureImageProps) => {
     let pictureImage = INITIAL_STATE;

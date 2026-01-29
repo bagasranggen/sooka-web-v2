@@ -1,0 +1,31 @@
+@layer component {
+    .icon {
+        &.icon--cake {
+            --icon-color: var(--color-light);
+
+            &.icon--primary {
+                --icon-color: var(--color-sooka-primary);
+            }
+
+            &.icon--secondary {
+                --icon-color: var(--color-sooka-secondary);
+            }
+
+            .st2 {
+                fill: var(--icon-color);
+            }
+        }
+
+        &.icon--sooka {
+            --icon-color: var(--color-light);
+
+            &.icon--primary {
+                --icon-color: var(--color-sooka-primary);
+            }
+
+            .st0 {
+                fill: var(--icon-color);
+            }
+        }
+    }
+}

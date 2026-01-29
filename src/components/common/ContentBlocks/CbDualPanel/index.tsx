@@ -1,5 +1,7 @@
 import React from 'react';
 
+import { BreakpointsProps } from '@/libs/@types';
+
 import CbWrapper, { CbWrapperProps } from '@/components/common/ContentBlocks/CbWrapper';
 import CbContainer, { CbContainerProps } from '@/components/common/ContentBlocks/CbContainer';
 import Columns, { ColumnProps } from '@/components/common/Columns';
@@ -9,7 +11,8 @@ import CbDualPanelContent, {
 
 export type CbDualPanelItemProps = {
     columnClassName: ColumnProps['className'];
-} & (Pick<ColumnProps, 'width'> & CbDualPanelContentProps);
+    column?: Pick<ColumnProps, BreakpointsProps>;
+} & CbDualPanelContentProps;
 
 export type CbDualPanelProps = {
     items: CbDualPanelItemProps[];
@@ -21,15 +24,15 @@ const CbDualPanel = ({ className, isNested, items }: CbDualPanelProps): React.Re
     return (
         <CbWrapper className={className}>
             <CbContainer isNested={isNested}>
-                <Columns.Row
+                <Columns
                     className="items-center"
-                    spacing={{ x: 3, y: 2 }}>
-                    {items.map(({ width, type, columnClassName, ...item }, i) => {
+                    gutterY={2}>
+                    {items.map(({ type, columnClassName, column, ...item }, i) => {
                         return (
                             <Columns.Column
                                 key={i}
-                                width={width}
-                                className={columnClassName}>
+                                className={columnClassName}
+                                {...column}>
                                 <CbDualPanelContent
                                     type={type}
                                     {...item}
@@ -37,7 +40,7 @@ const CbDualPanel = ({ className, isNested, items }: CbDualPanelProps): React.Re
                             </Columns.Column>
                         );
                     })}
-                </Columns.Row>
+                </Columns>
             </CbContainer>
         </CbWrapper>
     );

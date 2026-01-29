@@ -2,7 +2,7 @@
 
 import React from 'react';
 
-import { ArrayString } from '@/libs/@types';
+import { ArrayStringProps } from '@/libs/@types';
 import { joinArrayString } from '@/libs/utils';
 
 import Base from '@/components/common/Carousel';
@@ -46,12 +46,12 @@ const Banner = ({ items }: BannerProps): React.ReactElement => {
                     style = Object.assign(style, { '--bg-image-mobile': item.mediaMobile });
                 }
 
-                let bgClass: ArrayString = ['bg-cover bg-center'];
-                bgClass.push(`bg-[image:var(--bg-image-mobile)]`);
-                bgClass.push(`lg:bg-[image:var(--bg-image)]`);
+                let bgClass: ArrayStringProps = ['bg-cover bg-center'];
+                bgClass.push(`bg-(image:--bg-image-mobile)`);
+                bgClass.push(`lg:bg-(image:--bg-image)`);
                 bgClass = joinArrayString(bgClass);
 
-                let contentClass: ArrayString = ['items-center h-full'];
+                let contentClass: ArrayStringProps = ['items-center h-full'];
                 if (align === 'right') contentClass.push('justify-end');
                 contentClass = joinArrayString(contentClass);
 
@@ -75,7 +75,7 @@ const Banner = ({ items }: BannerProps): React.ReactElement => {
                                 variant={align === 'right' ? 'gradient-right' : 'gradient-left'}
                                 opacity={overlay ?? 5}>
                                 <div className={bgClass}>
-                                    <Container className="relative z-[2] min-h-[55rem] h-[calc(90vh-7rem)] sm:h-[calc(70vh-7rem)] md:landscape:h-[calc(100vh-7rem)] lg:landscape:h-[calc(100vh-7rem)]">
+                                    <Container className="relative z-2 min-h-[55rem] h-[calc(90vh-7rem)] sm:h-[calc(70vh-7rem)] md:landscape:h-[calc(100vh-7rem)] lg:landscape:h-[calc(100vh-7rem)]">
                                         {/*<Columns.Row className={contentClass}>*/}
                                         {/*    <Columns.Column width={{ md: 7, xl: 5 }}>*/}
                                         {/*        {item.category && (*/}
