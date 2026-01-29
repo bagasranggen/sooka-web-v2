@@ -39,7 +39,7 @@ export const CbDualPanelData = (props?: any): Pick<CbDualPanelProps, 'items'> =>
 
             let tmp: any = undefined;
 
-            if (columWidth?.[i]) tmp = Object.assign(tmp ?? {}, { width: columWidth[i] });
+            if (columWidth?.[i]) tmp = Object.assign(tmp ?? {}, { column: columWidth[i] });
             if (type) tmp = Object.assign(tmp ?? {}, { type });
 
             if (type === 'text' && item?.description) {
