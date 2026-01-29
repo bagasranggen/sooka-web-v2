@@ -1,6 +1,5 @@
 import { BaseAnimationProps } from '@/libs/@types';
-import { getAnimationElement, getElementRect } from '@/libs/utils';
-import { createArrayFromNumber } from '@/libs/factory';
+import { delay, getAnimationElement, getElementDimension } from '@/libs/utils';
 
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
@@ -9,25 +8,25 @@ gsap.registerPlugin(ScrollTrigger);
 
 export type MarqueeConfigProps = {
     speed?: number;
+    direction?: 'left' | 'right';
 };
 
-export const marquee = ({ element, config }: Omit<BaseAnimationProps, 'config'> & { config?: MarqueeConfigProps }) => {
+export const marquee = async ({
+    element,
+    config,
+}: Omit<BaseAnimationProps, 'config'> & { config?: MarqueeConfigProps }) => {
+    await delay({ ms: 80 });
+
     const el = getAnimationElement(element);
-    const item = el.querySelector('[data-animation-marquee="item"]');
-    const itemRect = getElementRect(item);
-    const itemWidth = itemRect.width;
-    const repeat = Math.ceil(window.innerWidth / itemWidth) + 1;
-    const speed = config?.speed ?? 1;
-    const loopDuration = (itemWidth / 60) * speed;
+    const items = el.querySelectorAll('[data-animation-marquee="item"]');
+    const itemsHalf = items ? Math.ceil(items.length / 2) : 0;
 
-    // Cloned items to fill screen width
-    createArrayFromNumber(repeat).forEach(() => {
-        const clone = item.cloneNode(true);
-        el.appendChild(clone);
-    });
+    if (items.length <= 1 || !el) return;
 
-    // Set negative position fo make infinite feel
-    gsap.set(el, { x: -itemWidth });
+    const { outerWidth: textOuterWidth } = getElementDimension(items[0]);
+
+    let duration = ((textOuterWidth / 2) * 2 * itemsHalf) / 35;
+    if (config?.speed && config.speed > 1) duration = duration / config.speed;
 
     const tl = gsap.timeline({
         repeat: -1,
@@ -38,8 +37,25 @@ export const marquee = ({ element, config }: Omit<BaseAnimationProps, 'config'> 
         },
     });
 
-    tl.to(el, loopDuration, {
-        x: -itemWidth * 2,
+    const direction = config?.direction ?? 'left';
+    let xFrom = 0;
+    let xTo = 0;
+
+    if (direction === 'left') {
+        xTo = textOuterWidth * itemsHalf * -1;
+    }
+
+    if (direction === 'right') {
+        xFrom = textOuterWidth * itemsHalf * -1;
+    }
+
+    if (xFrom !== 0) {
+        tl.set(el, { x: textOuterWidth * itemsHalf * -1 });
+    }
+
+    tl.to(el, {
+        duration,
+        x: xTo,
         ease: 'none',
     });
 

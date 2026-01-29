@@ -1,3 +1,4 @@
+import { BreakpointsProps } from '@/libs/@types';
 import { checkMediaStatus } from '../../../../libs/utils/checkMediaStatus';
 import { joinArrayString } from '../../../../libs/utils/joinArrayString';
 import { createPictureImage } from '../../../../libs/factory/createPictureImage';
@@ -5,7 +6,7 @@ import { createPictureImage } from '../../../../libs/factory/createPictureImage'
 import { CbDualPanelProps } from '@/components/common/ContentBlocks/CbDualPanel';
 import { ColumnProps } from '@/components/common/Columns';
 
-const COLUMN_WIDTH_HANDLES: Record<string, ColumnProps['width'][]> = {
+const COLUMN_WIDTH_HANDLES: Record<string, Pick<ColumnProps, BreakpointsProps>[]> = {
     '2_3': [{ lg: 4 }, { lg: 8 }],
     '3_2': [{ lg: 7 }, { lg: 5 }],
     '1_1': [{ md: 6 }, { md: 6 }],
@@ -38,7 +39,7 @@ export const CbDualPanelData = (props?: any): Pick<CbDualPanelProps, 'items'> =>
 
             let tmp: any = undefined;
 
-            if (columWidth?.[i]) tmp = Object.assign(tmp ?? {}, { width: columWidth[i] });
+            if (columWidth?.[i]) tmp = Object.assign(tmp ?? {}, { column: columWidth[i] });
             if (type) tmp = Object.assign(tmp ?? {}, { type });
 
             if (type === 'text' && item?.description) {
@@ -50,7 +51,7 @@ export const CbDualPanelData = (props?: any): Pick<CbDualPanelProps, 'items'> =>
             }
 
             if (type === 'media' && item?.media) {
-                const media = checkMediaStatus({
+                const { data: media } = checkMediaStatus({
                     item: item?.media,
                     handles: ['media950x594', 'media950x975', 'mediaSquare', 'media4x3'],
                 });

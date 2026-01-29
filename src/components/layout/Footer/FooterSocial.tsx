@@ -32,6 +32,7 @@ const FooterSocial = ({ items }: FooterSocialProps): React.ReactElement | null =
                 return (
                     <Link
                         key={i}
+                        className="not-first:ms-0.5"
                         {...item.cta}>
                         {Icon && <Icon size={30} />}
                     </Link>

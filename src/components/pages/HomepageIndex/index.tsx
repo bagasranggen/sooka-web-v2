@@ -33,7 +33,7 @@ const HomepageIndex = ({ entries }: HomepageIndexProps): React.ReactElement => {
             {entries?.highlights && entries.highlights.length > 0 && (
                 <Animation type="fade-in">
                     <HomepageHighlight
-                        className="mt-10 last:mb-10 last:md:mb-20"
+                        className="mt-8 lg:mt-10 last:mb-10 lg:last:mb-20"
                         items={entries.highlights}
                     />
                 </Animation>
@@ -42,7 +42,7 @@ const HomepageIndex = ({ entries }: HomepageIndexProps): React.ReactElement => {
             {entries?.story?.description && (
                 <Animation type="fade-in">
                     <HomepageStory
-                        className="mt-10 md:mt-20 last:mb-10 last:md:mb-20"
+                        className="mt-8 lg:mt-20 last:mb-10 lg:last:mb-20"
                         {...entries?.story}
                     />
                 </Animation>
@@ -52,13 +52,11 @@ const HomepageIndex = ({ entries }: HomepageIndexProps): React.ReactElement => {
                 <Animation type="fade-in">
                     <Container
                         as="section"
-                        className="mt-10 md:mt-20 last:mb-10 last:md:mb-20">
-                        <Columns.Row className="justify-center">
+                        className="mt-8 lg:mt-20 last:mb-10 lg:last:mb-20">
+                        <Columns className="justify-center">
                             <Columns.Column
-                                width={{
-                                    md: 10,
-                                    lg: 9,
-                                }}>
+                                md={8}
+                                lg={9}>
                                 <Heading
                                     as="h2"
                                     size="section"
@@ -70,7 +68,7 @@ const HomepageIndex = ({ entries }: HomepageIndexProps): React.ReactElement => {
                                     <Carousel.Testimonial items={entries.testimonials} />
                                 </div>
                             </Columns.Column>
-                        </Columns.Row>
+                        </Columns>
                     </Container>
                 </Animation>
             )}
@@ -78,7 +76,7 @@ const HomepageIndex = ({ entries }: HomepageIndexProps): React.ReactElement => {
             {entries?.imageDivider && entries.imageDivider.length > 0 && (
                 <Animation type="fade-in">
                     <ImageDivider
-                        className="mt-10 md:mt-20 last:mb-10 last:md:mb-20"
+                        className="mt-8 lg:mt-20 last:mb-10 lg:last:mb-20"
                         media={entries.imageDivider}
                     />
                 </Animation>
@@ -88,9 +86,9 @@ const HomepageIndex = ({ entries }: HomepageIndexProps): React.ReactElement => {
                 <Animation type="fade-in">
                     <Container
                         as="section"
-                        className="mt-10 md:mt-20 last:mb-10 last:md:mb-20">
-                        <Columns.Row className="justify-center">
-                            <Columns.Column width={{ lg: 8 }}>
+                        className="mt-8 lg:mt-20 last:mb-10 lg:last:mb-20">
+                        <Columns className="justify-center">
+                            <Columns.Column lg={8}>
                                 <Heading
                                     as="h2"
                                     size="section"
@@ -106,7 +104,7 @@ const HomepageIndex = ({ entries }: HomepageIndexProps): React.ReactElement => {
                                     items={entries.orders.steps}
                                 />
                             </Columns.Column>
-                        </Columns.Row>
+                        </Columns>
                     </Container>
                 </Animation>
             )}

@@ -1,5 +1,8 @@
 export const sendWhatsappMessage = (message: string) => {
-    if (typeof window === 'undefined') return;
+    const number = process.env.NEXT_PUBLIC_CONTACT_PERSON;
 
-    window.open(`https://wa.me/6285740030907?text=${message}`);
+    if (typeof window === 'undefined') return;
+    if (!number) return;
+
+    window.open(`https://wa.me/${number}?text=${message}`);
 };

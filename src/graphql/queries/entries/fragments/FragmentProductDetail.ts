@@ -19,6 +19,7 @@ export const FRAGMENT_PRODUCT_DETAIL = gql`
         }
 
         flavour {
+            showFlavour
             freshCreamy
             custardySpongy
             tangySweet
