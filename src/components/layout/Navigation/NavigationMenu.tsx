@@ -20,7 +20,7 @@ const NavigationMenu = ({ items, className, dropdown }: NavigationMenuProps): Re
     if (className) listClass.push(className);
     listClass = joinArrayString(listClass);
 
-    const btnClass = 'uppercase text-[1.4rem] tracking-0.2 transition-colors hover:text-black';
+    const btnClass = 'uppercase text-[1.4rem] tracking-0.2 transition-colors hover:text-dark';
 
     return (
         <List

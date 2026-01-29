@@ -40,6 +40,7 @@ const NavigationDropdown = ({
     let triggerBtnClass: ArrayStringProps = [];
     if (className) triggerBtnClass.push(className);
     triggerBtnClass.push('flex items-center');
+    triggerBtnClass.push('data-[state=open]:text-dark');
     triggerBtnClass = joinArrayString(triggerBtnClass);
 
     let linkBtnClass: ArrayStringProps = ['block not-first:mt-1'];
