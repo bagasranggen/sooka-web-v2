@@ -3,7 +3,7 @@
 import React, { Ref, Suspense, useEffect, useState } from 'react';
 
 import { ArrayStringProps } from '@/libs/@types';
-import { NavigationEvents, ScreenResizeEvents, usePortal } from '@/libs/hooks';
+import { NavigationEvents, SCREEN_HANDLES, ScreenResizeEvents, usePortal } from '@/libs/hooks';
 import { joinArrayString } from '@/libs/utils';
 
 import { useMeasure, useWindowScroll } from 'react-use';
@@ -57,6 +57,10 @@ const Navigation = ({ items }: NavigationProps): React.ReactElement => {
                 <ScreenResizeEvents
                     endHandler={(size) => {
                         if (activeDropdown) setActiveDropdown(undefined);
+
+                        if (show && size && ![SCREEN_HANDLES.XS, SCREEN_HANDLES.SM, SCREEN_HANDLES.MD].includes(size)) {
+                            triggerClose();
+                        }
                     }}
                 />
             </Suspense>
