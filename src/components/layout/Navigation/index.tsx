@@ -73,7 +73,7 @@ const Navigation = ({ items }: NavigationProps): React.ReactElement => {
                                 if (show) triggerClose();
                             }}>
                             <Icon.Sooka
-                                id="logoHeade"
+                                id="logoHeader"
                                 color="light"
                                 className="h-[4.5rem]"
                             />
