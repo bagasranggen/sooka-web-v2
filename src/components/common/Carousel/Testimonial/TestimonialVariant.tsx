@@ -32,7 +32,7 @@ const TestimonialVariant: BaseVariantProps = {
         },
         pagination: {
             clickable: true,
-            bulletActiveClass: 'swiper-pagination-bullet-active !bg-sooka-primary',
+            bulletActiveClass: 'swiper-pagination-bullet-active bg-sooka-primary!',
         },
     },
     element: <TestimonialNavigation />,

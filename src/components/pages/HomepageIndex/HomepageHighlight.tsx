@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { ArrayString, PropsClassname } from '@/libs/@types';
+import { ArrayStringProps, ClassnameProps } from '@/libs/@types';
 import { joinArrayString } from '@/libs/utils';
 
 import Container from '@/components/common/Container';
@@ -16,12 +16,12 @@ export type HomepageHighlightItemProps = {
 
 export type HomepageHighlightProps = {
     items?: HomepageHighlightItemProps[];
-} & PropsClassname;
+} & ClassnameProps;
 
 const HomepageHighlight = ({ items, className }: HomepageHighlightProps): React.ReactElement | null => {
     if (!items || items.length === 0) return null;
 
-    let tabClass: ArrayString = ['relative z-10'];
+    let tabClass: ArrayStringProps = ['relative z-10'];
     if (className) tabClass.push(className);
     tabClass = joinArrayString(tabClass);
 
@@ -46,8 +46,8 @@ const HomepageHighlight = ({ items, className }: HomepageHighlightProps): React.
                         children: (
                             <Card.Thumbnail
                                 className="justify-center"
-                                spacing={{ x: 3, y: 4 }}
-                                columns={{ xs: 1, sm: 2, md: 4 }}
+                                row={{ gutterY: 4 }}
+                                column={{ sm: 6, md: 3 }}
                                 items={item.items}
                             />
                         ),

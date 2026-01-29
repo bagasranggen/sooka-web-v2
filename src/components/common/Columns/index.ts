@@ -1,14 +1,13 @@
 import { Component } from '@/libs/@types';
 
-import Row, { RowProps } from '@/components/common/Columns/Row';
+import Base, { BaseProps } from '@/components/common/Columns/Base';
 import Column, { ColumnProps } from '@/components/common/Columns/Column';
 
-export type * from '@/components/common/Columns/Row';
+export type * from '@/components/common/Columns/Base';
 export type * from '@/components/common/Columns/Column';
 
-type ColumnsComposition = {
-    Row: Component<RowProps>;
+export type ColumnsComposition = {
     Column: Component<ColumnProps>;
 };
 
-export default Object.assign<{}, ColumnsComposition>({}, { Row, Column });
+export default Object.assign<Component<BaseProps>, ColumnsComposition>(Base, { Column });

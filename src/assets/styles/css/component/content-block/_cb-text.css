@@ -1,0 +1,26 @@
+@layer components {
+    .cb-text {
+        h2:not(:last-child),
+        h3:not(:last-child) {
+            @apply mb-1;
+        }
+
+        h2 {
+            @apply text-[3.5rem];
+        }
+
+        h3 {
+            @apply text-[3rem];
+        }
+
+        .list-bullet {
+            @apply list-disc ms-2;
+
+            .nestedListItem {
+                .list-bullet {
+                    @apply ms-3 list-[circle];
+                }
+            }
+        }
+    }
+}

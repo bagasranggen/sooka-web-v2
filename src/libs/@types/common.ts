@@ -33,10 +33,12 @@ export type Component<Props> = { (props: Props): React.ReactElement | null };
 
 export type RefComponent<Props, Element> = React.ForwardRefExoticComponent<Props & React.RefAttributes<Element>>;
 
-export type PropsClassname = { className?: string };
+export type ClassnameProps = { className?: string };
 
-export type ArrayString = string[] | string;
+export type ArrayStringProps = string[] | string;
 
 export type ElementTagsProps = keyof JSX.IntrinsicElements;
 
-export type ResponsiveProps = 'xs' | 'sm' | 'md' | 'lg' | 'xl' | '2xl';
+export type ResponsiveProps = 'xs' | 'sm' | 'md' | 'lg' | 'xl' | '2xl' | '3xl';
+
+export type BreakpointsProps = 'xs' | 'sm' | 'md' | 'lg' | 'xl' | 'xxl' | 'xxxl';

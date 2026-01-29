@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react';
 
-import { ArrayString, PropsClassname } from '@/libs/@types';
+import { ArrayStringProps, ClassnameProps } from '@/libs/@types';
 import { joinArrayString } from '@/libs/utils';
 
 import Tab, { TabProps } from '@/components/common/Tabs/Tab';
@@ -10,18 +10,18 @@ import Button from '@/components/common/Button';
 
 export type BaseItemProps = {
     title: React.ReactNode;
-    titleClass?: PropsClassname['className'];
+    titleClass?: ClassnameProps['className'];
 } & Pick<TabProps, 'id' | 'children'>;
 
 export type BaseProps = {
     items: BaseItemProps[];
-} & PropsClassname;
+} & ClassnameProps;
 
 const Base = ({ items, className }: BaseProps): React.ReactElement => {
     const [active, setActive] = useState<BaseItemProps['id']>(items[0].id);
     const [tabFade, setTabFade] = useState<boolean>(false);
 
-    let listClass: ArrayString = ['flex mb-3'];
+    let listClass: ArrayStringProps = ['flex mb-3'];
     listClass.push('justify-start md:justify-center');
     listClass.push('whitespace-nowrap md:whitespace-normal');
     listClass.push('overflow-x-auto');
@@ -32,7 +32,7 @@ const Base = ({ items, className }: BaseProps): React.ReactElement => {
         <>
             <ul {...(listClass ? { className: listClass } : {})}>
                 {items.map((item: BaseItemProps, i: number) => {
-                    let itemClass: ArrayString = ['[&:not(:first-child)]:ms-3'];
+                    let itemClass: ArrayStringProps = ['not-first:ms-3'];
                     if (item.id === active) itemClass.push('active');
                     if (item.titleClass) itemClass.push(item.titleClass);
                     itemClass = joinArrayString(itemClass);
