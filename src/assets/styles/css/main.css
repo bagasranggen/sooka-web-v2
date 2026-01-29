@@ -29,63 +29,6 @@
     }
 }
 
-@utility cb-text {
-    h2:not(:last-child),
-    h3:not(:last-child) {
-        @apply mb-1;
-    }
-
-    h2 {
-        @apply text-[3.5rem];
-    }
-
-    h3 {
-        @apply text-[3rem];
-    }
-
-    .list-bullet {
-        @apply list-disc ms-2;
-
-        .nestedListItem {
-            .list-bullet {
-                @apply ms-3 list-[circle];
-            }
-        }
-    }
-}
-
-@utility icon {
-    &.icon--cake[style*='--icon-color'] {
-        .st1 {
-            fill: #ffffff;
-        }
-
-        .st0 {
-            fill: var(--icon-color, #f7613f);
-        }
-
-        .st2 {
-            fill: var(--icon-color, #ff9a00);
-        }
-    }
-}
-
-@utility icon--cake {
-    &.icon[style*='--icon-color'] {
-        .st1 {
-            fill: #ffffff;
-        }
-
-        .st0 {
-            fill: var(--icon-color, #f7613f);
-        }
-
-        .st2 {
-            fill: var(--icon-color, #ff9a00);
-        }
-    }
-}
-
 /*---break---*/
 
 @theme inline {
@@ -168,7 +111,7 @@
 
 /*---break---*/
 
-.dark {
+[data-theme='dark'] {
     --background: oklch(0.145 0 0);
     --foreground: oklch(0.985 0 0);
     --card: oklch(0.205 0 0);
