@@ -1,12 +1,13 @@
 import React, { forwardRef } from 'react';
 
+import { BaseRegularInputProps, InputRegularRef } from '@/libs/@types';
 import { createInputHooks } from '@/libs/factory';
 
-import { BaseInputProps, BaseInputRef } from '@/components/common/Input';
+import { BaseInputHookProps } from '@/components/common/Input';
 
-export type InputTextProps = BaseInputProps;
+export type InputTextProps = BaseRegularInputProps & BaseInputHookProps;
 
-const InputText = forwardRef<BaseInputRef, InputTextProps>(({ hook, value, ...props }, ref) => {
+const InputText = forwardRef<InputRegularRef, InputTextProps>(({ hook, value, ...props }, ref) => {
     const inputHook = createInputHooks(hook, props);
 
     let inputRef = { ref: ref };

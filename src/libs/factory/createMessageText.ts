@@ -1,4 +1,4 @@
-import { ArrayString, TypesProps } from '@/libs/@types';
+import { ArrayStringProps, TypesProps } from '@/libs/@types';
 import { joinArrayString } from '../../libs/utils/joinArrayString';
 
 export type RegularCakeMessageProps = {
@@ -8,7 +8,7 @@ export type RegularCakeMessageProps = {
 };
 
 export const regularCakeMessage = ({ dimension, flavour, addon }: RegularCakeMessageProps) => {
-    let addons: ArrayString = [];
+    let addons: ArrayStringProps = [];
     if (addon && addon.length > 0) addons.push(...addon);
     addons = joinArrayString(addons, ', ');
 

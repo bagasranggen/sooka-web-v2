@@ -2,7 +2,7 @@
 
 import React, { PropsWithChildren } from 'react';
 
-import { PortalBaseProps, PortalEventsProps, PropsClassname } from '@/libs/@types';
+import { PortalBaseProps, PortalEventsProps, ClassnameProps } from '@/libs/@types';
 import { usePortal } from '@/libs/hooks';
 
 import BaseModal from '@/components/common/Modal/Base/BaseModal';
@@ -11,8 +11,8 @@ import Portal from '@/components/common/Portal';
 import Button from '@/components/common/Button';
 
 export type BaseProps = {
-    closeButton?: boolean | (PropsClassname & PropsWithChildren);
-} & (PortalBaseProps & PortalEventsProps & PropsClassname & PropsWithChildren);
+    closeButton?: boolean | (ClassnameProps & PropsWithChildren);
+} & (PortalBaseProps & PortalEventsProps & ClassnameProps & PropsWithChildren);
 
 const Base = ({
     className,

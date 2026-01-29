@@ -2,7 +2,7 @@
 
 import React from 'react';
 
-import { ArrayString } from '@/libs/@types';
+import { ArrayStringProps } from '@/libs/@types';
 import { joinArrayString, sendWhatsappMessage } from '@/libs/utils';
 import { createMessageText } from '@/libs/factory';
 
@@ -26,7 +26,7 @@ export type ProductDetailIndexProps = {
 };
 
 const ProductDetailIndex = ({ entries }: ProductDetailIndexProps): React.ReactElement => {
-    let infoClass: ArrayString = ['mt-10'];
+    let infoClass: ArrayStringProps = ['mt-5 md:mt-10'];
     if (!entries?.marquee || entries.marquee.length === 0) infoClass.push('mb-10 md:mb-15');
     infoClass = joinArrayString(infoClass);
 
@@ -61,8 +61,8 @@ const ProductDetailIndex = ({ entries }: ProductDetailIndexProps): React.ReactEl
                 <Container
                     as="section"
                     className={infoClass}>
-                    <Columns.Row className="justify-between">
-                        <Columns.Column width={{ md: 6 }}>
+                    <Columns className="justify-between">
+                        <Columns.Column md={6}>
                             <Animation type="fade-in">
                                 <Picture
                                     className="sticky top-2 lg:top-5"
@@ -71,7 +71,9 @@ const ProductDetailIndex = ({ entries }: ProductDetailIndexProps): React.ReactEl
                             </Animation>
                         </Columns.Column>
 
-                        <Columns.Column width={{ md: 6, lg: 5 }}>
+                        <Columns.Column
+                            md={6}
+                            lg={5}>
                             {entries.infos.contents.map((item: ProductDetailInfoProps, i: number) => {
                                 return (
                                     <ProductDetailInfo
@@ -81,13 +83,13 @@ const ProductDetailIndex = ({ entries }: ProductDetailIndexProps): React.ReactEl
                                 );
                             })}
                         </Columns.Column>
-                    </Columns.Row>
+                    </Columns>
                 </Container>
             )}
 
             {entries?.marquee && entries.marquee.length > 0 && (
                 <Animation type="fade-in">
-                    <section className="mt-10 md:mt-20 mb-10 md:mb-15">
+                    <section className="mt-8 md:mt-20 mb-10 md:mb-15">
                         <Marquee.Picture items={entries.marquee} />
                     </section>
                 </Animation>

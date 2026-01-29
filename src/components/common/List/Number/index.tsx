@@ -28,17 +28,17 @@ const Number = ({ items, ...props }: NumberProps): React.ReactElement => {
                 const order = i % 3;
 
                 return {
-                    className: 'mt-4 md:[&:not(:first-child)]:mt-8',
+                    className: 'mt-4 md:not-first:mt-8',
                     children: (
-                        <Columns.Row>
+                        <Columns>
                             <Columns.Column
                                 offset={ORDER[order]}
-                                width={{ md: 8 }}>
+                                md={8}>
                                 <Heading.Number number={`0${i + 1}`}>{item.title}</Heading.Number>
 
                                 <RichText className="mt-1.5">{item.description}</RichText>
                             </Columns.Column>
-                        </Columns.Row>
+                        </Columns>
                     ),
                 };
             })}
