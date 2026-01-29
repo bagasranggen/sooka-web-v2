@@ -17,6 +17,8 @@ const NavigationMenuMobile = ({ items, onSamePath }: NavigationMenuMobileProps):
 
     if (!items || items.length === 0) return null;
 
+    const btnClass = 'uppercase font-semibold tracking-0.2 text-light';
+
     return (
         <List
             className="mt-10 text-center space-y-2"
@@ -27,7 +29,7 @@ const NavigationMenuMobile = ({ items, onSamePath }: NavigationMenuMobileProps):
                     <Button
                         as="anchor"
                         href={item.href}
-                        className="uppercase font-semibold tracking-0.2 transition-colors text-white"
+                        className={btnClass}
                         onClick={(e) => {
                             e.stopPropagation();
 
@@ -40,7 +42,7 @@ const NavigationMenuMobile = ({ items, onSamePath }: NavigationMenuMobileProps):
                 if (isNested) {
                     children = (
                         <NavigationCollapsible
-                            className="uppercase font-semibold tracking-0.2 text-white"
+                            className={btnClass}
                             items={item.child}
                             button={{
                                 onClick: (e, href) => {

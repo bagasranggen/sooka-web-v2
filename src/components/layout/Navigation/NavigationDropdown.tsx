@@ -45,7 +45,7 @@ const NavigationDropdown = ({
 
     let linkBtnClass: ArrayStringProps = ['block not-first:mt-1'];
     if (className) linkBtnClass.push(className);
-    linkBtnClass.push('text-white');
+    linkBtnClass.push('text-light');
     linkBtnClass = joinArrayString(linkBtnClass);
 
     return (
