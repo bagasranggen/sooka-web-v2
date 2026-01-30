@@ -24,7 +24,7 @@ const HalfMedia = ({ media, form, children }: HalfMediaProps): React.ReactElemen
                     <Heading
                         as="h1"
                         size="heading"
-                        className="md:[&>span:nth-child(3)]:ms-2/12 md:[&>span:nth-child(5)]:ms-4/12">
+                        className="md:[&>span:nth-child(3)]:column-offset-2 md:[&>span:nth-child(5)]:column-offset-4">
                         {children}
                     </Heading>
                 </Columns.Column>
