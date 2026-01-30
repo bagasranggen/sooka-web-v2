@@ -4,7 +4,7 @@ import { ResponsiveProps } from '@/libs/@types';
 
 import { useWindowSize } from 'react-use';
 
-const SCREEN_HANDLES: Record<'XS' | 'SM' | 'MD' | 'LG' | 'XL' | 'XXL' | 'XXXL', ResponsiveProps> = {
+export const SCREEN_HANDLES: Record<'XS' | 'SM' | 'MD' | 'LG' | 'XL' | 'XXL' | 'XXXL', ResponsiveProps> = {
     XS: 'xs',
     SM: 'sm',
     MD: 'md',
