@@ -4,29 +4,20 @@ import { joinArrayString } from '../../libs/utils/joinArrayString';
 export type RegularCakeMessageProps = {
     dimension: string;
     flavour: string;
-    addon?: string[];
+    addon?: string[] | string;
 };
 
 export const regularCakeMessage = ({ dimension, flavour, addon }: RegularCakeMessageProps) => {
     let addons: ArrayStringProps = [];
-    if (addon && addon.length > 0) addons.push(...addon);
+    if (addon && Array.isArray(addon) && addon.length > 0) addons.push(...addon);
+    if (addon && !Array.isArray(addon)) addons.push(addon);
     addons = joinArrayString(addons, ', ');
 
-    return `*ORDER FORM*
+    let message = `Halo Sooka!
+Saya ingin order *${flavour}*, size *${dimension}*`;
+    if (addons) message += ` dengan tambahan *${addons}*`;
 
-Name :
-WhatsApp No. : 
-
-*Order Regular Cake*
-Size : ${dimension}
-Cake Flavor : ${flavour}
-Addon(s) : ${addons}
-Date :
-Pick-up or Delivery : 
-Delivery / Pick-up Time : 
-Location :
-
-Note : (tulisan / ucapan diatas cake)`;
+    return message;
 };
 
 export type CreateMessageTextProps = {
