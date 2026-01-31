@@ -1,9 +1,10 @@
 import { Product } from '@/libs/@types';
 import { createPictureImage } from './createPictureImage';
+import { createProductDetailTag } from './productDetail/createProductDetailTag';
 import { convertIntToCurrency } from '../utils/convertIntToCurrency';
 import { checkMediaStatus } from '../utils/checkMediaStatus';
 
-import { BaseItemProps } from '@/components/common/Picture';
+import { ThumbnailItemProps } from '@/components/common/Card';
 
 export type CreateProductItemProps = {
     item: Product;
@@ -14,10 +15,10 @@ export const createProductItem = ({ item, hasPrice = true }: CreateProductItemPr
     const priceItem = item?.prices?.[0]?.price;
     const priceIsSale = !!priceItem?.salePrice;
 
-    let price = undefined;
+    let price: ThumbnailItemProps['price'] = undefined;
     if (hasPrice) price = convertIntToCurrency(priceItem?.normalPrice ?? 0);
 
-    let salePrice = undefined;
+    let salePrice: ThumbnailItemProps['salePrice'] = undefined;
     if (hasPrice && priceIsSale) salePrice = convertIntToCurrency(priceItem?.salePrice ?? 0);
 
     const { data: mediaThumbnail } = checkMediaStatus({
@@ -29,7 +30,7 @@ export const createProductItem = ({ item, hasPrice = true }: CreateProductItemPr
         handles: ['productListingThumbnail', 'productListingThumbnailMobile'],
     });
 
-    const media: BaseItemProps[] = [];
+    const media: ThumbnailItemProps['media'] = [];
     if (mediaThumbnail?.productListingThumbnail) {
         media.push(
             createPictureImage({
@@ -42,7 +43,7 @@ export const createProductItem = ({ item, hasPrice = true }: CreateProductItemPr
         media.push(createPictureImage({ item: mediaThumbnail?.productListingThumbnailMobile }));
     }
 
-    const mediaHover: BaseItemProps[] = [];
+    const mediaHover: ThumbnailItemProps['mediaHover'] = [];
     if (mediaThumbnailHover?.productListingThumbnail) {
         mediaHover.push(
             createPictureImage({
@@ -62,5 +63,7 @@ export const createProductItem = ({ item, hasPrice = true }: CreateProductItemPr
         title: item?.title ?? '',
         price,
         salePrice,
+        disabled: item?.availability === 'unavailable',
+        label: createProductDetailTag({ item }),
     };
 };

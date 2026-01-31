@@ -74,7 +74,7 @@ export const HomepageData = async (): Promise<PageDataProps<HomepageIndexProps>>
         tmpMediaMainCarousel.push(
             createPictureImage({
                 item: mediaMain?.storyMediaDesktop as any,
-                media: mediaMain?.storyMediaDesktop ? 576 : undefined,
+                media: mediaMain?.storyMediaDesktop ? 768 : undefined,
             })
         );
     }
@@ -96,7 +96,7 @@ export const HomepageData = async (): Promise<PageDataProps<HomepageIndexProps>>
         tmpMediaSecondaryCarousel.push(
             createPictureImage({
                 item: mediaSecondary?.storyMediaDesktop as any,
-                media: mediaSecondary?.storyMediaDesktop ? 576 : undefined,
+                media: mediaSecondary?.storyMediaDesktop ? 768 : undefined,
             })
         );
     }

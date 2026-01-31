@@ -1,13 +1,13 @@
 import React from 'react';
-import { ArrayString, PropsClassname } from '@/libs/@types';
+import { ArrayStringProps, ClassnameProps } from '@/libs/@types';
 import { joinArrayString } from '@/libs/utils';
 
 export type QuoteProps = {
     size?: 'md' | 'lg';
-} & PropsClassname;
+} & ClassnameProps;
 
 const Quote = ({ size, className }: QuoteProps): React.ReactElement => {
-    let iconClass: ArrayString = [];
+    let iconClass: ArrayStringProps = [];
     if (className) iconClass.push(className);
     iconClass = joinArrayString(iconClass);
 

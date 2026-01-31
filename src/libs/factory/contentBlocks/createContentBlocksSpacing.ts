@@ -1,4 +1,4 @@
-import { ArrayString } from '@/libs/@types';
+import { ArrayStringProps } from '@/libs/@types';
 import { joinArrayString } from '../../utils/joinArrayString';
 import { checkStringIsNumber } from '../../utils/checkStringIsNumber';
 
@@ -6,7 +6,7 @@ import { ContentBlocksItemProps } from '@/components/common/ContentBlocks';
 
 export const createContentBlocksSpacing = (props: Pick<ContentBlocksItemProps, 'marginTop' | 'marginBottom'>) => {
     const spacingLimit = 5;
-    let className: ArrayString = [];
+    let className: ArrayStringProps = [];
 
     const spacingProcessing = (str: string, handle: string, limit: number) => {
         const tmp: string[] = [];

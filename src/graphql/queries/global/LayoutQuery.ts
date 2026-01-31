@@ -12,6 +12,12 @@ export const LAYOUT_QUERY = gql`
                 link {
                     ...link
                 }
+
+                children {
+                    link {
+                        ...link
+                    }
+                }
             }
         }
 

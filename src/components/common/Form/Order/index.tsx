@@ -33,10 +33,12 @@ export type OrderItemProps = {
 export type OrderProps = {
     title: string;
     summaries: OrderItemProps[];
+    disabled?: boolean;
+    notes?: string;
     onSubmit?: (data: OrderFormFields) => void;
 };
 
-const Order = ({ title, summaries, onSubmit }: OrderProps): React.ReactElement => {
+const Order = ({ title, summaries, disabled, notes, onSubmit }: OrderProps): React.ReactElement => {
     const { register, handleSubmit, setValue } = useForm<OrderFormFields>();
 
     let isTwoColumn = false;
@@ -60,9 +62,9 @@ const Order = ({ title, summaries, onSubmit }: OrderProps): React.ReactElement =
 
     return (
         <form onSubmit={handleSubmit(submitHandler)}>
-            <Columns.Row
+            <Columns
                 className="justify-center"
-                spacing={{ x: 3, y: 3 }}>
+                gutterY={3}>
                 {summaries.map((item: OrderItemProps, i: number) => {
                     const isMultiple = !!(item.items.length > 1 || item.allowMultiple);
                     const items = isMultiple ? item.items : item.items[0];
@@ -70,11 +72,8 @@ const Order = ({ title, summaries, onSubmit }: OrderProps): React.ReactElement =
                     return (
                         <Columns.Column
                             key={i}
-                            width={{
-                                xs: 12,
-                                md: isTwoColumn ? 5 : 4,
-                                lg: isTwoColumn ? 5 : 4,
-                            }}>
+                            md={isTwoColumn ? 5 : 4}
+                            lg={isTwoColumn ? 5 : 4}>
                             <Heading
                                 as="h4"
                                 className="md:mb-1 text-md md:text-[2.4rem] lg:text-[3.7rem]">
@@ -86,6 +85,10 @@ const Order = ({ title, summaries, onSubmit }: OrderProps): React.ReactElement =
                             {isMultiple &&
                                 Array.isArray(items) &&
                                 items.map((itm: OrderItemSummariesProps, idx: number) => {
+                                    if (disabled) {
+                                        return <div key={idx}>{itm.label}</div>;
+                                    }
+
                                     return (
                                         <Input
                                             key={idx}
@@ -105,22 +108,28 @@ const Order = ({ title, summaries, onSubmit }: OrderProps): React.ReactElement =
                         </Columns.Column>
                     );
                 })}
-            </Columns.Row>
+            </Columns>
 
-            <Button.Container
-                className="mt-4 justify-center"
-                items={[
-                    {
-                        children: (
-                            <Button.Arrow
-                                as="button"
-                                type="submit">
-                                Order Now
-                            </Button.Arrow>
-                        ),
-                    },
-                ]}
-            />
+            {!disabled && (
+                <Button.Container
+                    className="mt-4 justify-center"
+                    items={[
+                        {
+                            children: (
+                                <Button.Arrow
+                                    as="button"
+                                    type="submit">
+                                    Order Now
+                                </Button.Arrow>
+                            ),
+                        },
+                    ]}
+                />
+            )}
+
+            {disabled && notes && (
+                <p className="mt-6 lg:mt-4 uppercase text-[3rem] text-center tracking-0.4 font-bold">{notes}</p>
+            )}
         </form>
     );
 };

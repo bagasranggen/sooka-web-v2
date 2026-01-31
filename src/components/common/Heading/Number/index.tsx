@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { ArrayString } from '@/libs/@types';
+import { ArrayStringProps } from '@/libs/@types';
 import { joinArrayString } from '@/libs/utils';
 
 import Base, { BaseProps } from '@/components/common/Heading';
@@ -11,7 +11,7 @@ export type NumberProps = {
 } & Pick<BaseProps, 'className' | 'as' | 'children'>;
 
 const Number = ({ as = 'h2', className, number, size = 'md', children }: NumberProps): React.ReactElement => {
-    let headingClass: ArrayString = ['font-anglecia flex items-end'];
+    let headingClass: ArrayStringProps = ['font-anglecia flex items-end'];
     if (size === 'md') headingClass.push('text-[3rem] md:text-[4.5rem] leading-[3.25rem] md:leading-[4rem]');
     if (className) headingClass.push(className);
     headingClass = joinArrayString(headingClass);

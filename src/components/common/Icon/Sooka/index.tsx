@@ -2,27 +2,22 @@
 
 import React, { useEffect, useState } from 'react';
 
-import { PropsClassname } from '@/libs/@types';
+import { ArrayStringProps, ClassnameProps } from '@/libs/@types';
+import { joinArrayString } from '@/libs/utils';
 
 export type SookaProps = {
     id: string;
     color?: 'primary' | 'light';
-    style?: React.CSSProperties;
-} & PropsClassname;
+} & ClassnameProps;
 
-const Sooka = ({ id, className, color, style }: SookaProps): React.ReactElement | null => {
+const Sooka = ({ id, className, color }: SookaProps): React.ReactElement | null => {
     const [isReady, setIsReady] = useState<boolean>(false);
 
-    let svgStyle = {
-        enableBackground: 'new 0 0 1080 1080',
-        maxWidth: '100%',
-    } as React.CSSProperties;
-    if (color === 'light') {
-        svgStyle = { ...svgStyle, '--icon-color': '#FFFFFF' } as React.CSSProperties;
-    }
-    if (style) {
-        svgStyle = { ...svgStyle, ...style };
-    }
+    let iconClass: ArrayStringProps = ['icon icon--sooka'];
+    if (color === 'primary') iconClass.push('icon--primary');
+    if (color === 'light') iconClass.push('icon--light');
+    if (className) iconClass.push(className);
+    iconClass = joinArrayString(iconClass);
 
     useEffect(() => {
         if (typeof window === 'undefined') return;
@@ -34,12 +29,6 @@ const Sooka = ({ id, className, color, style }: SookaProps): React.ReactElement 
 
     return (
         <>
-            <style
-                dangerouslySetInnerHTML={{
-                    __html: `#${id} .st0{fill:var(--icon-color, #F7613F);} .st1{fill:#FFFFFF;} .st2{fill:#FF9A00;}`,
-                }}
-            />
-
             <svg
                 version="1.1"
                 id={id}
@@ -47,8 +36,13 @@ const Sooka = ({ id, className, color, style }: SookaProps): React.ReactElement 
                 xmlnsXlink="http://www.w3.org/1999/xlink"
                 x="0px"
                 y="0px"
-                style={svgStyle}
-                className={className}
+                style={
+                    {
+                        enableBackground: 'new 0 0 1080 1080',
+                        maxWidth: '100%',
+                    } as React.CSSProperties
+                }
+                className={iconClass}
                 xmlSpace="preserve"
                 viewBox="185.93 430.8 719.05 290.16">
                 <path

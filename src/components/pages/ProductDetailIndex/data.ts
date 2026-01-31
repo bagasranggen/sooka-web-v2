@@ -1,6 +1,11 @@
 import { FLAVOURS } from '@/libs/data';
 import { Flavour, PageDataParamsProps, PageDataProps } from '@/libs/@types';
-import { createMarqueeItem, createPictureImage, createProductDetailPrices } from '@/libs/factory';
+import {
+    createMarqueeItem,
+    createPictureImage,
+    createProductDetailPrices,
+    createProductDetailTag,
+} from '@/libs/factory';
 import { checkMediaStatus } from '@/libs/utils';
 
 import { axiosClient } from '@/libs/fetcher';
@@ -35,6 +40,8 @@ export const ProductDetailData = async ({
         form: {
             title: d?.title,
             summaries: createProductDetailPrices({ prices: d?.prices, addons: d?.addons }),
+            disabled: d?.availability === 'unavailable',
+            notes: createProductDetailTag({ item: d }),
         },
     };
 
@@ -63,11 +70,17 @@ export const ProductDetailData = async ({
             createPictureImage({
                 item: mediaMain.productDetailBanner,
                 media: mediaMain?.productDetailMobile ? 768 : undefined,
+                loading: 'eager',
             })
         );
     }
     if (mediaMain?.productDetailMobile) {
-        banner.media.push(createPictureImage({ item: mediaMain.productDetailMobile }));
+        banner.media.push(
+            createPictureImage({
+                item: mediaMain.productDetailMobile,
+                loading: 'eager',
+            })
+        );
     }
 
     const infos: ProductDetailIndexProps['entries']['infos'] = {
@@ -99,10 +112,12 @@ export const ProductDetailData = async ({
     const flavour: Flavour = d?.flavour;
 
     // Content Flavours
-    if (flavour?.custardySpongy && flavour?.freshCreamy && flavour?.tangySweet) {
+    if (flavour?.showFlavour && flavour?.custardySpongy && flavour?.freshCreamy && flavour?.tangySweet) {
         const flavours: [string, number][] = [];
         Object.entries(flavour).forEach(([key, value]) => {
-            if (key !== '__typename') flavours.push([key, parseInt(value.replace('_', ''))]);
+            const excludedKey = ['__typename', 'showFlavour'];
+
+            if (!excludedKey.includes(key)) flavours.push([key, parseInt(value.replace('_', ''))]);
         });
 
         const tmp: RangeProps[] = [];

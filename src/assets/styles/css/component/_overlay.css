@@ -1,0 +1,44 @@
+@source inline("{sm:,md:,lg:,xl:,2xl:,}overlay--{10,{20..60..10},60}");
+
+@theme {
+    --overlay-opacity-0: 0;
+    --overlay-opacity-10: 0.1;
+    --overlay-opacity-20: 0.2;
+    --overlay-opacity-30: 0.3;
+    --overlay-opacity-40: 0.4;
+    --overlay-opacity-50: 0.5;
+    --overlay-opacity-60: 0.6;
+}
+
+@utility overlay--* {
+    --overlay-opacity: --value(--overlay-opacity-*);
+}
+
+@layer components {
+    .overlay {
+        @apply relative;
+        @apply after:content-[""] after:w-full after:h-full;
+        @apply after:absolute after:top-0 after:left-0;
+
+        &:after {
+            opacity: var(--overlay-opacity, --value(--overlay-opacity-6));
+        }
+
+        &:not([class*='overlay--gradient']) {
+            @apply after:bg-dark;
+        }
+
+        &.overlay--gradient-left,
+        &.overlay--gradient-right {
+            @apply after:from-dark;
+        }
+
+        &.overlay--gradient-left {
+            @apply after:bg-gradient-to-r;
+        }
+
+        &.overlay--gradient-right {
+            @apply after:bg-gradient-to-l;
+        }
+    }
+}

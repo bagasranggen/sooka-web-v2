@@ -1,0 +1,5 @@
+@theme {
+    --spacing: 1rem;
+    --spacing-auto: auto;
+    /*--spacing-header: --value(var(--header-height, 0));*/
+}
