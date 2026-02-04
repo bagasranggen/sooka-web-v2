@@ -34,6 +34,8 @@ export const ProductDetailData = async ({
         handles: ['productDetailSticky', 'productDetailMobile'],
     });
 
+    const notes = createProductDetailTag({ item: d });
+
     const banner: ProductDetailIndexProps['entries']['banner'] = {
         media: [],
         children: '',
@@ -41,7 +43,7 @@ export const ProductDetailData = async ({
             title: d?.title,
             summaries: createProductDetailPrices({ prices: d?.prices, addons: d?.addons }),
             disabled: d?.availability === 'unavailable',
-            notes: createProductDetailTag({ item: d }) as string,
+            notes: typeof notes === 'string' ? notes : undefined,
         },
     };
 
