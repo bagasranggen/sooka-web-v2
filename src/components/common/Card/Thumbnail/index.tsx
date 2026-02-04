@@ -7,6 +7,11 @@ import Base, { BaseProps as CardBaseProps } from '@/components/common/Card/Base'
 import Button, { BaseAnchorProps } from '@/components/common/Button';
 import Picture, { BaseProps } from '@/components/common/Picture';
 
+export type ThumbnailLabelWithPositionProps = {
+    children: string;
+    position?: 'center' | 'top-right';
+};
+
 export type ThumbnailItemProps = {
     cta: Omit<BaseAnchorProps, 'as'>;
     media: BaseProps['items'];
@@ -15,7 +20,7 @@ export type ThumbnailItemProps = {
     price?: string;
     salePrice?: string;
     disabled?: boolean;
-    label?: string;
+    label?: string | ThumbnailLabelWithPositionProps;
 };
 
 export type ThumbnailProps = {
@@ -43,18 +48,31 @@ const Thumbnail = ({
                     titleClass = joinArrayString(titleClass);
 
                     let labelClass: ArrayStringProps = [];
-                    labelClass.push('absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-50');
+                    labelClass.push('absolute z-50');
+                    if (
+                        (label && typeof label === 'string') ||
+                        (typeof label === 'object' && label.position !== 'top-right')
+                    ) {
+                        labelClass.push('top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2');
+                    }
+                    if (label && typeof label === 'object' && label.position === 'top-right') {
+                        labelClass.push('top-1 right-1');
+                    }
                     labelClass.push('bg-sooka-primary saturate-[.75] text-white text-center');
                     labelClass.push('px-1 py-1');
                     labelClass.push('uppercase text-sm font-bold tracking-0.2');
                     labelClass.push('flex justify-center items-center');
                     labelClass = joinArrayString(labelClass);
 
+                    let labelText: undefined | string = undefined;
+                    if (label && typeof label === 'string') labelText = label;
+                    if (label && typeof label === 'object' && label?.children) labelText = label.children;
+
                     let mainMediaClass: ArrayStringProps = [];
                     if (disabled) mainMediaClass.push('contrast-50');
                     mainMediaClass = joinArrayString(mainMediaClass);
 
-                    let hoverMediaClass: ArrayStringProps = ['absolute top-0 opacity-0 md:transition-opacity'];
+                    let hoverMediaClass: ArrayStringProps = ['absolute top-0 opacity-0 md:transition-opacity w-full'];
                     hoverMediaClass.push('md:group-hover:opacity-100');
                     if (disabled) hoverMediaClass.push('contrast-50');
                     hoverMediaClass = joinArrayString(hoverMediaClass);
@@ -85,7 +103,7 @@ const Thumbnail = ({
                                 className="group"
                                 {...cta}>
                                 <div className="relative">
-                                    {label && <div className={labelClass}>{label}</div>}
+                                    {labelText && <div className={labelClass}>{labelText}</div>}
 
                                     <Picture
                                         className={mainMediaClass}
