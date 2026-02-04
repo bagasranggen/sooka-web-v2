@@ -1,8 +1,9 @@
 import { Product } from '@/libs/@types';
-import { ThumbnailItemProps } from '@/components/common/Card';
+import parse from 'html-react-parser';
+import { ThumbnailItemProps, ThumbnailLabelWithPositionProps } from '@/components/common/Card';
 
 export type CreateProductDetailTagProps = {
-    item: Pick<Product, 'availability' | 'unavailableLabel' | 'unavailableCustomLabel'>;
+    item: Pick<Product, 'availability' | 'unavailableLabel' | 'unavailableCustomLabel' | 'badge'>;
 };
 
 export const createProductDetailTag = ({ item }: CreateProductDetailTagProps) => {
@@ -18,11 +19,23 @@ export const createProductDetailTag = ({ item }: CreateProductDetailTagProps) =>
         }
     }
 
-    if (!isUnavailable) {
-        data = {
-            children: 'test',
-            // position: 'top-right',
-        };
+    if (!isUnavailable && item?.badge) {
+        let children: any = undefined;
+
+        if (typeof item.badge === 'object') {
+            let tmpChildren: any = item.badge.title;
+
+            if (item?.badge?.badgeTitle) {
+                tmpChildren = parse(item.badge.badgeTitle.replace(/\n/g, '<br />'));
+            }
+
+            children = tmpChildren;
+        }
+
+        data = Object.assign(data ?? {}, {
+            children,
+            position: 'top-right',
+        } as ThumbnailLabelWithPositionProps);
     }
 
     return data;

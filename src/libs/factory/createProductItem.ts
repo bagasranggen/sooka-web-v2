@@ -9,9 +9,10 @@ import { ThumbnailItemProps } from '@/components/common/Card';
 export type CreateProductItemProps = {
     item: Product;
     hasPrice?: boolean;
+    hasBadge?: boolean;
 };
 
-export const createProductItem = ({ item, hasPrice = true }: CreateProductItemProps) => {
+export const createProductItem = ({ item, hasPrice = true, hasBadge = false }: CreateProductItemProps) => {
     const priceItem = item?.prices?.[0]?.price;
     const priceIsSale = !!priceItem?.salePrice;
 
@@ -40,7 +41,7 @@ export const createProductItem = ({ item, hasPrice = true }: CreateProductItemPr
         );
     }
     if (mediaThumbnail?.productListingThumbnailMobile) {
-        media.push(createPictureImage({ item: mediaThumbnail?.productListingThumbnailMobile }));
+        media.push(createPictureImage({ item: mediaThumbnail?.productListingThumbnailMobile, className: 'w-full' }));
     }
 
     const mediaHover: ThumbnailItemProps['mediaHover'] = [];
@@ -53,8 +54,16 @@ export const createProductItem = ({ item, hasPrice = true }: CreateProductItemPr
         );
     }
     if (mediaThumbnailHover?.productListingThumbnailMobile) {
-        mediaHover.push(createPictureImage({ item: mediaThumbnailHover?.productListingThumbnailMobile }));
+        mediaHover.push(
+            createPictureImage({ item: mediaThumbnailHover?.productListingThumbnailMobile, className: 'w-full' })
+        );
     }
+
+    let label = undefined;
+    if (hasBadge) label = createProductDetailTag({ item });
+
+    let disabled = false;
+    if (label) disabled = item?.availability === 'unavailable';
 
     return {
         cta: { href: item?.url as any },
@@ -63,7 +72,7 @@ export const createProductItem = ({ item, hasPrice = true }: CreateProductItemPr
         title: item?.title ?? '',
         price,
         salePrice,
-        disabled: item?.availability === 'unavailable',
-        label: createProductDetailTag({ item }),
+        disabled,
+        label,
     };
 };

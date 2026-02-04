@@ -20,7 +20,6 @@ export type ThumbnailItemProps = {
     price?: string;
     salePrice?: string;
     disabled?: boolean;
-    // label?: string;
     label?: string | ThumbnailLabelWithPositionProps;
 };
 
@@ -73,7 +72,7 @@ const Thumbnail = ({
                     if (disabled) mainMediaClass.push('contrast-50');
                     mainMediaClass = joinArrayString(mainMediaClass);
 
-                    let hoverMediaClass: ArrayStringProps = ['absolute top-0 opacity-0 md:transition-opacity'];
+                    let hoverMediaClass: ArrayStringProps = ['absolute top-0 opacity-0 md:transition-opacity w-full'];
                     hoverMediaClass.push('md:group-hover:opacity-100');
                     if (disabled) hoverMediaClass.push('contrast-50');
                     hoverMediaClass = joinArrayString(hoverMediaClass);
