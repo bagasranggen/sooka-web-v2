@@ -23,12 +23,12 @@ export const getColumnWidth = ({
 
     if (typeof width === 'number') {
         tmp.push(`${direct}${dir}${className}-${width}/${division}`);
-        if (width > 0) tmp.push('!flex-grow-0 !flex-shrink-0 !basis-auto');
+        if (width > 0) tmp.push('grow-0! shrink-0! basis-auto!');
     }
 
     if (typeof width === 'string' && width === 'auto') {
         tmp.push(`${direct}${dir}${className}-${width}`);
-        tmp.push('!flex-grow-0 !flex-shrink-0 !basis-auto');
+        tmp.push('grow-0! shrink-0! basis-auto!');
     }
 
     if (typeof width === 'object') {
@@ -37,7 +37,7 @@ export const getColumnWidth = ({
 
             if (typeof value === 'number') {
                 tmp.push(`${direct}${bp}${className}-${value}/${division}`);
-                if (value > 0) tmp.push('!flex-grow-0 !flex-shrink-0 !basis-auto');
+                if (value > 0) tmp.push('grow-0! shrink-0! basis-auto!');
             }
 
             if (typeof value === 'string' && value === 'auto') {

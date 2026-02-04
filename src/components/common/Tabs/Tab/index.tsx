@@ -1,6 +1,6 @@
 import React, { PropsWithChildren } from 'react';
 
-import { ArrayString } from '@/libs/@types';
+import { ArrayStringProps } from '@/libs/@types';
 import { joinArrayString } from '@/libs/utils';
 
 export type TabProps = {
@@ -10,7 +10,7 @@ export type TabProps = {
 } & PropsWithChildren;
 
 const Tab = ({ id, active, tabFade, children }: TabProps): React.ReactElement => {
-    let tabClass: ArrayString = ['[&:not(.active)]:hidden'];
+    let tabClass: ArrayStringProps = ['[&:not(.active)]:hidden'];
     if (id === active) tabClass.push('active');
     if (tabFade) tabClass.push('opacity-0');
     if (id === active && !tabFade) tabClass.push('transition-opacity duration-300 opacity-100');

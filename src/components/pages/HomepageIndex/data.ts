@@ -2,8 +2,7 @@ import { PageDataProps, Homepage } from '@/libs/@types';
 import { createHomepageBanner, createPictureImage, createProductItem } from '@/libs/factory';
 import { checkMediaStatus } from '@/libs/utils';
 
-import { apolloClient } from '@/libs/fetcher';
-import { HOMEPAGE_QUERY } from '@/graphql';
+import { axiosClient } from '@/libs/fetcher';
 
 import parse from 'html-react-parser';
 
@@ -11,9 +10,7 @@ import { HomepageIndexProps } from '@/components/pages/HomepageIndex';
 import { HomepageHighlightItemProps } from '@/components/pages/HomepageIndex/HomepageHighlight';
 
 export const HomepageData = async (): Promise<PageDataProps<HomepageIndexProps>> => {
-    const { data } = await apolloClient.query({
-        query: HOMEPAGE_QUERY,
-    });
+    const { data } = await axiosClient().get('/homepage');
 
     const d: Homepage = data.entry;
 
@@ -52,43 +49,62 @@ export const HomepageData = async (): Promise<PageDataProps<HomepageIndexProps>>
     const story: HomepageIndexProps['entries']['story'] = {
         mediaMain: [],
         mediaSecondary: [],
+        mediaCarousel: [],
         description: (d?.storyDescription as any) ?? undefined,
     };
 
-    const mediaMain = checkMediaStatus({
+    const { data: mediaMain } = checkMediaStatus({
         item: d?.storyMediaMain as any,
         handles: ['storyMediaDesktop', 'storyMediaMobile'],
     });
-    const mediaSecondary = checkMediaStatus({
+    const { data: mediaSecondary } = checkMediaStatus({
         item: d?.storyMediaSecondary as any,
         handles: ['storyMediaDesktop', 'storyMediaMobile'],
     });
 
     // Story Main Media
+    const tmpMediaMainCarousel = [];
     if (mediaMain && mediaMain?.storyMediaDesktop) {
         story?.mediaMain?.push(
             createPictureImage({
                 item: mediaMain?.storyMediaDesktop as any,
-                media: mediaMain?.storyMediaDesktop ? 992 : undefined,
+                media: mediaMain?.storyMediaDesktop ? 768 : undefined,
+            })
+        );
+        tmpMediaMainCarousel.push(
+            createPictureImage({
+                item: mediaMain?.storyMediaDesktop as any,
+                media: mediaMain?.storyMediaDesktop ? 768 : undefined,
             })
         );
     }
     if (mediaMain && mediaMain?.storyMediaMobile) {
         story?.mediaMain?.push(createPictureImage({ item: mediaMain.storyMediaMobile }));
+        tmpMediaMainCarousel?.push(createPictureImage({ item: mediaMain.storyMediaMobile }));
     }
+    if (tmpMediaMainCarousel.length > 0) story?.mediaCarousel?.push(tmpMediaMainCarousel);
 
     // Story Secondary Media
+    const tmpMediaSecondaryCarousel = [];
     if (mediaSecondary && mediaSecondary?.storyMediaDesktop) {
         story?.mediaSecondary?.push(
             createPictureImage({
                 item: mediaSecondary?.storyMediaDesktop as any,
-                media: mediaSecondary?.storyMediaDesktop ? 992 : undefined,
+                media: mediaSecondary?.storyMediaDesktop ? 768 : undefined,
+            })
+        );
+        tmpMediaSecondaryCarousel.push(
+            createPictureImage({
+                item: mediaSecondary?.storyMediaDesktop as any,
+                media: mediaSecondary?.storyMediaDesktop ? 768 : undefined,
             })
         );
     }
     if (mediaSecondary && mediaSecondary?.storyMediaMobile) {
         story?.mediaSecondary?.push(createPictureImage({ item: mediaSecondary.storyMediaMobile }));
+        tmpMediaSecondaryCarousel?.push(createPictureImage({ item: mediaSecondary.storyMediaMobile }));
     }
+    if (tmpMediaSecondaryCarousel.length > 0) story?.mediaCarousel?.push(tmpMediaSecondaryCarousel);
 
     // Testimonials
     const testimonials: HomepageIndexProps['entries']['testimonials'] = [];
@@ -108,7 +124,7 @@ export const HomepageData = async (): Promise<PageDataProps<HomepageIndexProps>>
     // Image Divider
     const imageDivider: HomepageIndexProps['entries']['imageDivider'] = [];
 
-    const mediaDivider = checkMediaStatus({
+    const { data: mediaDivider } = checkMediaStatus({
         item: d?.imageDividerMedia as any,
         handles: ['bannerDesktop', 'mediaDividerTablet', 'mediaDividerMobile'],
     });

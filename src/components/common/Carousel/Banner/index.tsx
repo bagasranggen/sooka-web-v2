@@ -2,7 +2,7 @@
 
 import React from 'react';
 
-import { ArrayString } from '@/libs/@types';
+import { ArrayStringProps } from '@/libs/@types';
 import { joinArrayString } from '@/libs/utils';
 
 import Base from '@/components/common/Carousel';
@@ -15,7 +15,8 @@ import BannerVariant from '@/components/common/Carousel/Banner/BannerVariant';
 import RichText, { RichTextProps } from '@/components/common/RichText';
 
 export type BannerItemProps = {
-    media: BaseItemProps['src'];
+    media?: BaseItemProps['src'];
+    mediaMobile?: BaseItemProps['src'];
     align?: 'left' | 'right';
     category?: string;
     title: string;
@@ -39,16 +40,18 @@ const Banner = ({ items }: BannerProps): React.ReactElement => {
                 let style = {} as React.CSSProperties;
 
                 if (item?.media) {
-                    style = Object.assign(style, {
-                        '--bg-image': `url("${item.media}")`,
-                    });
+                    style = Object.assign(style, { '--bg-image': item.media });
+                }
+                if (item?.mediaMobile) {
+                    style = Object.assign(style, { '--bg-image-mobile': item.mediaMobile });
                 }
 
-                let bgClass: ArrayString = ['bg-cover bg-center'];
-                bgClass.push(`bg-[image:var(--bg-image)]`);
+                let bgClass: ArrayStringProps = ['bg-cover bg-center'];
+                bgClass.push(`bg-(image:--bg-image-mobile)`);
+                bgClass.push(`lg:bg-(image:--bg-image)`);
                 bgClass = joinArrayString(bgClass);
 
-                let contentClass: ArrayString = ['items-center h-full'];
+                let contentClass: ArrayStringProps = ['items-center h-full'];
                 if (align === 'right') contentClass.push('justify-end');
                 contentClass = joinArrayString(contentClass);
 
@@ -68,34 +71,34 @@ const Banner = ({ items }: BannerProps): React.ReactElement => {
                         <Wrapper
                             {...wrapperProps}
                             style={style}>
-                            <Overlay
-                                variant={align === 'right' ? 'gradient-right' : 'gradient-left'}
-                                opacity={overlay ?? 5}>
-                                <div className={bgClass}>
-                                    <Container className="relative z-[2] h-[calc(90vh-7rem)] sm:h-[calc(70vh-7rem)] md:landscape:h-[calc(100vh-7rem)] lg:landscape:h-[calc(100vh-7rem)]">
-                                        <Columns.Row className={contentClass}>
-                                            <Columns.Column width={{ md: 7, xl: 5 }}>
-                                                {item.category && (
-                                                    <div className="mb-1 flex items-center text-white text-sm lg:text-[1.4rem] tracking-0.2 font-bold uppercase">
-                                                        <span className="w-[8.4rem] h-[.15rem] lg:h-[.3rem] bg-white me-1.5" />
-                                                        {item.category}
-                                                    </div>
-                                                )}
+                            {/*<Overlay*/}
+                            {/*    variant={align === 'right' ? 'gradient-right' : 'gradient-left'}*/}
+                            {/*    opacity={overlay ?? 5}>*/}
+                            <div className={bgClass}>
+                                <Container className="relative z-2 min-h-[55rem] h-[calc(90vh-7rem)] sm:h-[calc(70vh-7rem)] md:landscape:h-[calc(100vh-7rem)] lg:landscape:h-[calc(100vh-7rem)]">
+                                    {/*<Columns.Row className={contentClass}>*/}
+                                    {/*    <Columns.Column width={{ md: 7, xl: 5 }}>*/}
+                                    {/*        {item.category && (*/}
+                                    {/*            <div className="mb-1 flex items-center text-white text-sm lg:text-[1.4rem] tracking-0.2 font-bold uppercase">*/}
+                                    {/*                <span className="w-[8.4rem] h-[.15rem] lg:h-[.3rem] bg-white me-1.5" />*/}
+                                    {/*                {item.category}*/}
+                                    {/*            </div>*/}
+                                    {/*        )}*/}
 
-                                                <h1 className="text-white text-[5rem] md:portrait:text-[6rem] lg:landscape:text-[7rem] leading-none md:landscape:leading-[5.5rem] lg:landscape:leading-[6.5rem] font-anglecia">
-                                                    {item.title}
-                                                </h1>
+                                    {/*        <h1 className="text-white text-[5rem] md:portrait:text-[6rem] lg:landscape:text-[7rem] leading-none md:landscape:leading-[5.5rem] lg:landscape:leading-[6.5rem] font-anglecia">*/}
+                                    {/*            {item.title}*/}
+                                    {/*        </h1>*/}
 
-                                                {item?.description && (
-                                                    <RichText className="mt-2.5 text-white">
-                                                        {item.description}
-                                                    </RichText>
-                                                )}
-                                            </Columns.Column>
-                                        </Columns.Row>
-                                    </Container>
-                                </div>
-                            </Overlay>
+                                    {/*        {item?.description && (*/}
+                                    {/*            <RichText className="mt-2.5 text-white">*/}
+                                    {/*                {item.description}*/}
+                                    {/*            </RichText>*/}
+                                    {/*        )}*/}
+                                    {/*    </Columns.Column>*/}
+                                    {/*</Columns.Row>*/}
+                                </Container>
+                            </div>
+                            {/*</Overlay>*/}
                         </Wrapper>
                     ),
                 };

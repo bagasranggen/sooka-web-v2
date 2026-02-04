@@ -2,16 +2,12 @@ import { PageDataParamsProps, PageDataProps } from '@/libs/@types';
 
 import { createContentBlocks } from '@/libs/factory';
 
-import { apolloClient } from '@/libs/fetcher';
-import { PAGE_QUERY } from '@/graphql';
+import { axiosClient } from '@/libs/fetcher';
 
 import { CustomPageIndexProps } from '@/components/pages/CustomPageIndex/index';
 
 export const CustomPageData = async ({ uri }: PageDataParamsProps): Promise<PageDataProps<CustomPageIndexProps>> => {
-    const { data } = await apolloClient.query({
-        query: PAGE_QUERY,
-        variables: { uri },
-    });
+    const { data } = await axiosClient().get(`/content-blocks?uri=${uri}`);
 
     const d = data?.entries?.docs?.[0];
 

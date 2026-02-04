@@ -1,6 +1,6 @@
 import React, { PropsWithChildren } from 'react';
 
-import { ArrayString, ElementTagsProps, PropsClassname } from '@/libs/@types';
+import { ArrayStringProps, ElementTagsProps, ClassnameProps } from '@/libs/@types';
 import { joinArrayString } from '@/libs/utils';
 
 export type BaseProps = {
@@ -8,7 +8,7 @@ export type BaseProps = {
     family?: 'default' | 'anglecia';
     size?: 'heading' | 'section' | 'callout';
     description?: React.ReactNode;
-} & (PropsWithChildren & PropsClassname);
+} & (PropsWithChildren & ClassnameProps);
 
 const Base = ({
     as: Heading = 'h1',
@@ -18,15 +18,15 @@ const Base = ({
     description,
     children,
 }: BaseProps): React.ReactElement => {
-    let wrapperClass: ArrayString = [];
+    let wrapperClass: ArrayStringProps = [];
     if (description && className) wrapperClass.push(className);
     wrapperClass = joinArrayString(wrapperClass);
 
-    let headingClass: ArrayString = [];
+    let headingClass: ArrayStringProps = [];
     if (family === 'anglecia') headingClass.push(`font-anglecia`);
-    if (size === 'heading') headingClass.push('text-[5rem] lg:text-[10rem] leading-[5rem] lg:leading-[10rem]');
-    if (size === 'section') headingClass.push('text-[5rem] lg:text-[8.5rem] leading-[5rem] lg:leading-[9rem]');
-    if (size === 'callout') headingClass.push('text-[3rem] md:text-[5rem] leading-[4rem] md:leading-[6rem]');
+    if (size === 'heading') headingClass.push('text-[4rem] lg:text-[10rem] leading-[5rem] lg:leading-[10rem]');
+    if (size === 'section') headingClass.push('text-[4rem] lg:text-[8.5rem] leading-[5rem] lg:leading-[9rem]');
+    if (size === 'callout') headingClass.push('text-[4rem] md:text-[5rem] leading-[5rem] md:leading-[6rem]');
     if (!description && className) headingClass.push(className);
     headingClass = joinArrayString(headingClass);
 

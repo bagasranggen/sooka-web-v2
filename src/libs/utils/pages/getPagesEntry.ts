@@ -1,7 +1,4 @@
-import { apolloClient } from '@/libs/fetcher';
-import { ENTRY_CHECK_QUERY } from '@/graphql';
-
-import { PAGES_HANDLES } from '@/components/pages/handles';
+import { axiosClient } from '@/libs/fetcher';
 
 export type GetPagesEntryTypes = {
     uri?: string;
@@ -13,21 +10,15 @@ export const getPagesEntry = async ({ uri, uriArr }: GetPagesEntryTypes) => {
     if (uriArr && uriArr.length > 0) slug = uriArr[uriArr.length - 1];
 
     let typeHandle: string | undefined = undefined;
-    if (uri === '__home__') typeHandle = PAGES_HANDLES.HOMEPAGE;
 
     try {
         if (!uri) return;
 
-        const { data } = await apolloClient.query({
-            query: ENTRY_CHECK_QUERY,
-            variables: { uri },
-        });
+        const { data } = await axiosClient().get(`/pages?uri=${uri}`);
 
-        if (data) {
-            Object.values(data).forEach((item: any) => {
-                if (!typeHandle && item?.docs?.[0]?.typeHandle) typeHandle = item.docs[0].typeHandle;
-            });
-        }
+        const d = data?.pages?.docs?.[0];
+
+        if (d?.typeHandle) typeHandle = d?.typeHandle;
 
         if (!typeHandle) typeHandle = 'not-found';
     } catch {}

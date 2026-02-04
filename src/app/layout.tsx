@@ -8,8 +8,7 @@ import '@/assets/styles/css/main.css';
 
 import { createIconItem, createLinkItem } from '@/libs/factory';
 
-import { apolloClient } from '@/libs/fetcher';
-import { LAYOUT_QUERY } from '@/graphql';
+import { axiosClient } from '@/libs/fetcher';
 
 import { Navigation as NavigationProps, Footer as FooterProps } from '@/libs/@types';
 import ContextProvider from '@/store/context';
@@ -30,9 +29,7 @@ export const metadata: Metadata = {
 };
 
 export default async function RootLayout({ children }: Readonly<PropsWithChildren>) {
-    const { data } = await apolloClient.query({
-        query: LAYOUT_QUERY,
-    });
+    const { data } = await axiosClient().get('/layout');
 
     const headerNavigation: NavigationProps = data?.headerNavigation;
     const footerNavigation: FooterProps = data?.footerNavigation;
@@ -42,11 +39,28 @@ export default async function RootLayout({ children }: Readonly<PropsWithChildre
         headerNavigation.navigations.forEach((item) => {
             const { linkIsValid, link } = createLinkItem(item?.link);
 
+            const child: NavigationItemProps['child'] = [];
+
+            if (item?.children && item.children.length > 0) {
+                item.children.forEach((itm) => {
+                    const { linkIsValid, link } = createLinkItem(itm?.link);
+
+                    if (linkIsValid && item?.entryStatus === 'live') {
+                        child.push({
+                            href: link?.href,
+                            target: link?.target,
+                            children: link?.label,
+                        });
+                    }
+                });
+            }
+
             if (linkIsValid && item?.entryStatus === 'live') {
                 navigation.push({
                     href: link?.href,
                     target: link?.target,
                     children: link?.label,
+                    child,
                 });
             }
         });

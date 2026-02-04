@@ -29,9 +29,9 @@ const ImageCollage = ({ items }: ImageCollageProps): React.ReactElement | null =
 
     return (
         <>
-            <Columns.Row
+            <Columns
                 className="hidden md:flex"
-                spacing={{ x: 2, y: 2 }}>
+                gutter={2}>
                 {collage.map((item: ImageCollageProps['items'], i: number) => {
                     const order = i % 3;
 
@@ -39,12 +39,12 @@ const ImageCollage = ({ items }: ImageCollageProps): React.ReactElement | null =
                         <Columns.Column
                             key={i}
                             className={COLLAGE_SPACE[order]}
-                            width={{ md: 4 }}>
+                            md={4}>
                             {item.map((itm: ImageCollageItemProps, idx: number) => {
                                 return (
                                     <Picture
                                         key={idx}
-                                        className="block [&:not(:first-child)]:mt-2"
+                                        className="block not-first:mt-2"
                                         items={itm}
                                     />
                                 );
@@ -52,10 +52,10 @@ const ImageCollage = ({ items }: ImageCollageProps): React.ReactElement | null =
                         </Columns.Column>
                     );
                 })}
-            </Columns.Row>
+            </Columns>
 
             <ImageCollageCarousel
-                className="md:!hidden"
+                className="md:hidden!"
                 items={items}
             />
         </>

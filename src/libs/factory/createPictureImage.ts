@@ -1,11 +1,6 @@
-import { BareMediaProps, ObjectProps, PropsClassname } from '@/libs/@types';
+import { BareMediaProps, ObjectProps, ClassnameProps } from '@/libs/@types';
 
 import { BaseItemProps } from '@/components/common/Picture';
-
-export type PictureItemProps = {
-    filename?: string;
-    mimeType?: 'image/jpeg' | 'image/png' | 'image/webp' | string;
-} & BaseItemProps;
 
 const INITIAL_STATE: BaseItemProps = {
     src: '',
@@ -15,12 +10,12 @@ const INITIAL_STATE: BaseItemProps = {
     alt: '',
 };
 
-export const createPictureImage = ({
-    item,
-    media,
-    className,
-    attribute,
-}: { item: BareMediaProps; media?: BaseItemProps['media']; attribute?: ObjectProps<string> } & PropsClassname) => {
+export type CreatePictureImageProps = {
+    item: BareMediaProps;
+    attribute?: ObjectProps<string>;
+} & (Pick<BaseItemProps, 'media' | 'sizes' | 'loading'> & ClassnameProps);
+
+export const createPictureImage = ({ item, media, sizes, className, attribute, loading }: CreatePictureImageProps) => {
     let pictureImage = INITIAL_STATE;
 
     if (item) {
@@ -35,27 +30,29 @@ export const createPictureImage = ({
             alt: alt ?? filename,
             // ...(restImage?.mimeType !== 'image/jpeg' ? { type: restImage.mimeType } : {}),
         };
-
-        // console.log({ src, width });
-        // console.log({ pictureImage });
     }
 
     if (media) {
-        pictureImage = { ...pictureImage, media };
+        pictureImage = Object.assign(pictureImage, { media });
     }
 
     if (className) {
         let pictureClass = className;
         if (pictureImage.className) pictureClass = `${pictureImage.className} ${className}`;
 
-        pictureImage = {
-            ...pictureImage,
-            className: pictureClass,
-        };
+        pictureImage = Object.assign(pictureImage, { className: pictureClass });
     }
 
     if (attribute) {
-        pictureImage = { ...pictureImage, ...attribute };
+        pictureImage = Object.assign(pictureImage, attribute);
+    }
+
+    if (sizes) {
+        pictureImage = Object.assign(pictureImage, { sizes });
+    }
+
+    if (loading) {
+        pictureImage = Object.assign(pictureImage, { loading });
     }
 
     // console.log({ pictureImage });

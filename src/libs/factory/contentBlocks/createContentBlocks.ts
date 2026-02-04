@@ -1,4 +1,4 @@
-import { ArrayString } from '@/libs/@types';
+import { ArrayStringProps } from '@/libs/@types';
 import { joinArrayString } from '../../utils/joinArrayString';
 import { createContentBlocksSpacing } from './createContentBlocksSpacing';
 
@@ -13,7 +13,7 @@ export const createContentBlocks = (props: { items: any }) => {
 
             const spacing = createContentBlocksSpacing(cbSpacing);
 
-            let className: ArrayString = [];
+            let className: ArrayStringProps = [];
             if (spacing) className.push(spacing);
             className = joinArrayString(className);
 

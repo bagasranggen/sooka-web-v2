@@ -1,20 +1,23 @@
+'use client';
+
 import React, { PropsWithChildren } from 'react';
 
-import { ArrayString, PortalTransitionProps, PropsClassname } from '@/libs/@types';
+import { ArrayStringProps, PortalBaseProps, PortalTransitionProps, ClassnameProps } from '@/libs/@types';
 import { joinArrayString } from '@/libs/utils';
 
 export type BaseOffcanvasProps = {
     from?: 'left' | 'right' | 'bottom' | 'top';
-} & (PortalTransitionProps & PropsWithChildren & PropsClassname);
+} & (PortalTransitionProps & PropsWithChildren & ClassnameProps & Pick<PortalBaseProps, 'hide'>);
 
 const BaseOffcanvas = ({
     from = 'left',
     isTransitioning,
     isShow,
     className,
+    hide,
     children,
 }: BaseOffcanvasProps): React.ReactElement | null => {
-    let offcanvasClass: ArrayString = ['fixed transition-transform duration-300 z-[1025]'];
+    let offcanvasClass: ArrayStringProps = ['fixed transition-transform duration-300 z-1025'];
     if (from === 'top' || from === 'bottom') offcanvasClass.push('w-full left-0');
     if (from === 'left' || from === 'right') offcanvasClass.push('h-full top-0');
 
@@ -33,7 +36,13 @@ const BaseOffcanvas = ({
 
     if (!isShow) return null;
 
-    return <div className={offcanvasClass}>{children}</div>;
+    return (
+        <div
+            className={offcanvasClass}
+            onClick={hide}>
+            {children}
+        </div>
+    );
 };
 
 export default BaseOffcanvas;
