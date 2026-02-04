@@ -41,7 +41,7 @@ export const ProductDetailData = async ({
             title: d?.title,
             summaries: createProductDetailPrices({ prices: d?.prices, addons: d?.addons }),
             disabled: d?.availability === 'unavailable',
-            notes: createProductDetailTag({ item: d }),
+            notes: createProductDetailTag({ item: d }) as string,
         },
     };
 
