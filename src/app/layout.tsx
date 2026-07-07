@@ -29,7 +29,15 @@ export const metadata: Metadata = {
 };
 
 export default async function RootLayout({ children }: Readonly<PropsWithChildren>) {
-    const { data } = await axiosClient().get('/layout');
+    let data = undefined;
+
+    try {
+        const res = await axiosClient().get('/layout');
+
+        if (res?.data) data = res.data;
+    } catch (e) {
+        console.log(e);
+    }
 
     const headerNavigation: NavigationProps = data?.headerNavigation;
     const footerNavigation: FooterProps = data?.footerNavigation;

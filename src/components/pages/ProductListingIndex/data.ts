@@ -3,21 +3,28 @@ import { notFound } from 'next/navigation';
 import { PageDataParamsProps, PageDataProps } from '@/libs/@types';
 import { createProductItem } from '@/libs/factory';
 
-import { axiosClient } from '@/libs/fetcher';
+import { apolloClient } from '@/libs/fetcher';
+import { PRODUCT_LISTING_INDEX_QUERY, PRODUCT_LISTING_QUERY } from '@/graphql';
 
 import { ProductListingIndexProps } from '@/components/pages/ProductListingIndex';
 
 export const ProductListingData = async ({
+    uri,
     type,
-    slug,
 }: PageDataParamsProps): Promise<PageDataProps<ProductListingIndexProps>> => {
-    const { data: categoriesData } = await axiosClient().get(`/categories?slug=${slug}`);
+    const { data: categoriesData } = await apolloClient.query({
+        query: PRODUCT_LISTING_INDEX_QUERY,
+        variables: { uri },
+    });
 
-    const category = categoriesData?.categories?.docs?.[0];
-
-    const { data: productsData } = await axiosClient().get(`/products?category=${category?.id}`);
+    const category = categoriesData?.entries?.docs?.[0];
 
     if (!category) return notFound();
+
+    const { data: productsData } = await apolloClient.query({
+        query: PRODUCT_LISTING_QUERY,
+        variables: { category: category?.id },
+    });
 
     const banner: ProductListingIndexProps['entries']['banner'] = {
         children: category?.title ?? '',

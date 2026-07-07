@@ -14,5 +14,6 @@ export * from './getElementDimension';
 export * from './getElementRect';
 export * from './getObjectKeyByValue';
 export * from './getRandomNumber';
+export * from './getS3SignedUrl';
 export * from './joinArrayString';
 export * from './sendWhatsappMessage';

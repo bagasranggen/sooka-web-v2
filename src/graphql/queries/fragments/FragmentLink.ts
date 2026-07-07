@@ -15,11 +15,6 @@ export const FRAGMENT_LINK = gql`
             title
         }
 
-        category {
-            url
-            title
-        }
-
         page {
             url
             title

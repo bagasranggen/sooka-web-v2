@@ -6,7 +6,7 @@ import { FRAGMENT_CB_COMMON } from '@/graphql/queries/contentBlocks/fragment/Fra
 import { FRAGMENT_MEDIA } from '@/graphql/queries/fragments/FragmentMedia';
 
 export const FRAGMENT_CB_MARQUEE = gql`
-    fragment cbMarquee on ContentBlockMarquee {
+    fragment cbMarquee on CbMarquee {
         media {
             ...cbMarqueeMedia
         }

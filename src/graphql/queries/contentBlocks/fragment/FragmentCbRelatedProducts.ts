@@ -8,7 +8,7 @@ import { FRAGMENT_CB_COMMON } from '@/graphql/queries/contentBlocks/fragment/Fra
 import { FRAGMENT_CB_SETTINGS } from '@/graphql/queries/contentBlocks/fragment/FragmentCbSettings';
 
 export const FRAGMENT_CB_RELATED_PRODUCTS = gql`
-    fragment cbRelatedProducts on ContentBlockRelatedProducts {
+    fragment cbRelatedProducts on CbRelatedProducts {
         title
 
         products {

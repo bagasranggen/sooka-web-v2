@@ -1,0 +1,27 @@
+import { PageDataParamsProps, PageDataProps } from '@/libs/@types';
+
+import { createContentBlocks } from '@/libs/factory';
+
+import { apolloClient, axiosClient } from '@/libs/fetcher';
+
+import { StaticPageIndexProps } from './index';
+import { PAGE_QUERY } from '@/graphql';
+
+export const StaticPageData = async ({ uri }: PageDataParamsProps): Promise<PageDataProps<StaticPageIndexProps>> => {
+    // const { data } = await axiosClient().get(`/content-blocks?uri=${uri}`);
+    const { data } = await apolloClient.query({
+        query: PAGE_QUERY,
+        variables: { uri },
+    });
+
+    console.log('run');
+    console.log({ data });
+
+    const d = data?.entries?.docs?.[0];
+
+    return {
+        entries: {
+            contentBlocks: createContentBlocks({ items: d?.contentBlocks?.blocks ?? [] }),
+        },
+    };
+};

@@ -8,7 +8,8 @@ import {
 } from '@/libs/factory';
 import { checkMediaStatus } from '@/libs/utils';
 
-import { axiosClient } from '@/libs/fetcher';
+import { apolloClient } from '@/libs/fetcher';
+import { PRODUCT_DETAIL_QUERY } from '@/graphql';
 
 import parse from 'html-react-parser';
 
@@ -19,9 +20,12 @@ import { RangeProps } from '@/components/common/Range';
 
 export const ProductDetailData = async ({
     type,
-    slug,
+    uri,
 }: PageDataParamsProps): Promise<PageDataProps<ProductDetailIndexProps>> => {
-    const { data } = await axiosClient().get(`/products?slug=${slug}`);
+    const { data } = await apolloClient.query({
+        query: PRODUCT_DETAIL_QUERY,
+        variables: { uri },
+    });
 
     const d = data?.products?.docs?.[0];
 

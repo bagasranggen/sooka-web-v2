@@ -6,6 +6,5 @@ export const FRAGMENT_CATEGORY = gql`
         title
         slug
         description
-        uri
     }
 `;

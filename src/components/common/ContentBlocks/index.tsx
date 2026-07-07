@@ -17,7 +17,7 @@ export type ContentBlocksProps = {
 } & Pick<CbContainerProps, 'isNested'>;
 
 const ContentBlocks = ({ items }: ContentBlocksProps): React.ReactElement | null => {
-    if (items.length === 0) return null;
+    if (!items || items.length === 0) return null;
 
     return (
         <>
