@@ -2,8 +2,11 @@ import type { Meta, StoryObj } from '@storybook/nextjs-vite';
 
 import { fn } from 'storybook/test';
 
-import Thumbnail from './index';
 import { CARD_THUMBNAIL_WITH_PRICE } from '@/libs/mock';
+
+import Thumbnail from './index';
+import ThumbnailItem from './ThumbnailItem';
+import ThumbnailOrder from './ThumbnailOrder';
 
 // More on how to set up stories at: https://storybook.js.org/docs/writing-stories#default-export
 const meta = {
@@ -31,4 +34,18 @@ export const Default: Story = {
     args: {
         items: CARD_THUMBNAIL_WITH_PRICE,
     },
+};
+
+export const Individual: StoryObj<typeof ThumbnailItem> = {
+    args: {
+        ...CARD_THUMBNAIL_WITH_PRICE[0],
+    },
+    parameters: {
+        layout: 'centered',
+    },
+    render: (arg) => <ThumbnailItem {...arg} />,
+};
+
+export const OrderPopup: StoryObj<typeof ThumbnailOrder> = {
+    render: (arg) => <ThumbnailOrder {...arg} />,
 };
