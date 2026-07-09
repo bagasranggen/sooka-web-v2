@@ -36,7 +36,7 @@ type Story = StoryObj<typeof meta>;
 export const Default: Story = {
     args: {
         side: 'bottom',
-        // showCloseButton: false,
+        showCloseButton: false,
         children: `Lorem ipsum dolor sit amet, consectetur adipisicing elit. Corporis ex incidunt laborum. Beatae, consequatur cum cupiditate distinctio, doloremque eius inventore iste modi nobis, pariatur quam reiciendis sunt? Esse, et, sit?`,
     },
 };
