@@ -21,6 +21,8 @@ export type BaseProps = PropsWithChildren<
 const Base = ({ className, gutter, gutterX, gutterY, children, ...props }: BaseProps): React.ReactElement => {
     const guttersArr = Object.entries({ gutter, gutterX, gutterY });
 
+    console.log({ guttersArr });
+
     let rowClass: ArrayStringProps = ['row'];
 
     if (guttersArr.length > 0) {
@@ -30,7 +32,8 @@ const Base = ({ className, gutter, gutterX, gutterY, children, ...props }: BaseP
                 handleClassName = GUTTER_HANDLE[type as keyof typeof GUTTER_HANDLE] as string;
             }
 
-            if (typeValue && typeof typeValue !== 'object') {
+            if ((typeof typeValue === 'number' && typeValue === 0) || (typeValue && typeof typeValue !== 'object')) {
+                console.log({ type: typeof typeValue, typeValue });
                 if (typeof rowClass !== 'string') {
                     rowClass.push(
                         createBreakpointClass({

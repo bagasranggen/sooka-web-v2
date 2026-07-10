@@ -4,14 +4,18 @@ import { fn } from 'storybook/test';
 
 import { CARD_THUMBNAIL_WITH_PRICE } from '@/libs/mock';
 
+import Container from '@/components/common/Container';
+
 import Thumbnail from './index';
 import ThumbnailItem from './ThumbnailItem';
 import ThumbnailOrder from './ThumbnailOrder';
+import ThumbnailOrderModal from './ThumbnailOrderModal';
+import ThumbnailOrderSheet from './ThumbnailOrderSheet';
 
 // More on how to set up stories at: https://storybook.js.org/docs/writing-stories#default-export
 const meta = {
     title: 'Common/Card/Thumbnail',
-    component: Thumbnail,
+    // component: Thumbnail,
     parameters: {
         // Optional parameter to center the component in the Canvas. More info: https://storybook.js.org/docs/configure/story-layout
         layout: 'fullscreen',
@@ -28,24 +32,49 @@ const meta = {
 
 export default meta;
 type Story = StoryObj<typeof meta>;
+type ThumbnailStory = StoryObj<typeof Thumbnail>;
 
 // More on writing stories with args: https://storybook.js.org/docs/writing-stories/args
-export const Default: Story = {
+export const Default: ThumbnailStory = {
     args: {
         items: CARD_THUMBNAIL_WITH_PRICE,
     },
+    render: (arg) => (
+        <Container>
+            <Thumbnail {...arg} />
+        </Container>
+    ),
 };
 
-export const Individual: StoryObj<typeof ThumbnailItem> = {
+export const Individual: ThumbnailStory = {
     args: {
-        ...CARD_THUMBNAIL_WITH_PRICE[0],
+        items: [CARD_THUMBNAIL_WITH_PRICE[0]],
     },
-    parameters: {
-        layout: 'centered',
-    },
-    render: (arg) => <ThumbnailItem {...arg} />,
+    // parameters: {
+    //     layout: 'centered',
+    // },
+    // render: (arg) => <ThumbnailItem {...arg} />,
+    render: (arg) => (
+        <Container>
+            <Thumbnail {...arg} />
+        </Container>
+    ),
 };
 
 export const OrderPopup: StoryObj<typeof ThumbnailOrder> = {
     render: (arg) => <ThumbnailOrder {...arg} />,
+};
+
+export const OrderPopupModal: StoryObj<typeof ThumbnailOrderModal> = {
+    args: {
+        open: true,
+    },
+    render: (arg) => <ThumbnailOrderModal {...arg} />,
+};
+
+export const OrderPopupSheet: StoryObj<typeof ThumbnailOrderSheet> = {
+    args: {
+        open: true,
+    },
+    render: (arg) => <ThumbnailOrderSheet {...arg} />,
 };
