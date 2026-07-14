@@ -7,14 +7,14 @@ import { joinArrayString } from '@/libs/utils';
 
 import 'swiper/css/effect-fade';
 
-import Carousel from '@/components/common/Carousel';
-import FadeVariant from '@/components/common/Carousel/Fade/FadeVariant';
+import Base from '@/components/common/Carousel/Base';
+import FadeVariant, { FadeVariantProps } from '@/components/common/Carousel/Fade/FadeVariant';
 
 export type FadeProps = {
     items: PropsWithChildren[];
-} & ClassnameProps;
+} & (ClassnameProps & FadeVariantProps);
 
-const Fade = ({ items, className }: FadeProps): React.ReactElement | null => {
+const Fade = ({ items, className, options }: FadeProps): React.ReactElement | null => {
     if (!items || items.length === 0) return null;
 
     let carouselClass: ArrayStringProps = ['[&>.swiper-pagination]:relative [&>.swiper-pagination]:mt-1'];
@@ -22,7 +22,7 @@ const Fade = ({ items, className }: FadeProps): React.ReactElement | null => {
     carouselClass = joinArrayString(carouselClass);
 
     return (
-        <Carousel
+        <Base
             autoplay
             className={carouselClass}
             style={{ '--swiper-pagination-color': '#F7613F' } as React.CSSProperties}
@@ -31,7 +31,10 @@ const Fade = ({ items, className }: FadeProps): React.ReactElement | null => {
                     children: item.children,
                 };
             })}
-            modulesVariant={FadeVariant}
+            modulesVariant={FadeVariant({
+                length: items.length,
+                options,
+            })}
         />
     );
 };

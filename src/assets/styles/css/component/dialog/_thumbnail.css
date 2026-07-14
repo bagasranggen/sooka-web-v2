@@ -1,0 +1,13 @@
+@layer components {
+    .dialog.dialog--thumbnail {
+        @apply p-0! md:max-h-[calc(100vh-10rem)] overflow-y-auto;
+
+        .swiper {
+            .swiper-slide {
+                img {
+                    @apply h-full object-cover;
+                }
+            }
+        }
+    }
+}

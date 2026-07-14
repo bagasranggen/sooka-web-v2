@@ -14,3 +14,47 @@ export const CAROUSEL_BANNER: BannerItemProps[] = createArrayFromNumber(4).map((
         description: undefined,
     };
 });
+
+export const FADE_BANNER_MEDIA_SINGLE = [
+    [
+        createPicsumImage({
+            width: 1000,
+            height: 800,
+            media: 992,
+        }),
+        createPicsumImage({
+            width: 800,
+            height: 400,
+            media: 992,
+        }),
+    ],
+];
+
+export const FADE_BANNER_MEDIA = [
+    [
+        createPicsumImage({
+            width: 1000,
+            height: 800,
+            media: 992,
+        }),
+        createPicsumImage({
+            width: 800,
+            height: 400,
+            media: 992,
+        }),
+    ],
+    [
+        createPicsumImage({
+            id: 200,
+            width: 1000,
+            height: 800,
+            media: 992,
+        }),
+        createPicsumImage({
+            id: 200,
+            width: 800,
+            height: 400,
+            media: 992,
+        }),
+    ],
+];

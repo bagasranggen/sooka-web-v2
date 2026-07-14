@@ -2,12 +2,18 @@ import type { Meta, StoryObj } from '@storybook/nextjs-vite';
 
 import { fn } from 'storybook/test';
 
-import { CARD_THUMBNAIL_WITH_PRICE, FORM_PURCHASE_ADDONS, FORM_PURCHASE_VARIANTS } from '@/libs/mock';
+import {
+    CARD_THUMBNAIL_WITH_PRICE,
+    FADE_BANNER_MEDIA,
+    FORM_PURCHASE_ADDONS,
+    FORM_PURCHASE_VARIANTS,
+} from '@/libs/mock';
+
+import parse from 'html-react-parser';
 
 import Container from '@/components/common/Container';
 
 import Thumbnail from './index';
-import ThumbnailItem from './ThumbnailItem';
 import ThumbnailOrder from './ThumbnailOrder';
 import ThumbnailOrderModal from './ThumbnailOrderModal';
 import ThumbnailOrderSheet from './ThumbnailOrderSheet';
@@ -68,6 +74,12 @@ export const OrderPopup: StoryObj<typeof ThumbnailOrder> = {
 export const OrderPopupModal: StoryObj<typeof ThumbnailOrderModal> = {
     args: {
         open: true,
+        media: FADE_BANNER_MEDIA,
+        title: 'Lorem ipsum dolor sit amet.',
+        description: parse(
+            `<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Doloremque excepturi nulla perferendis sapiente voluptatibus? Animi, cum ducimus, ipsam iure libero minus perspiciatis quam qui, quis quisquam quo repellat sed tenetur!</p>`
+        ),
+        // media: FADE_BANNER_MEDIA_SINGLE,
         form: {
             variants: FORM_PURCHASE_VARIANTS,
             addOns: FORM_PURCHASE_ADDONS,

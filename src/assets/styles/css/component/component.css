@@ -1,4 +1,6 @@
 @import './content-block/content-block.css';
+@import './dialog/dialog.css';
 @import './input/input.css';
+
 @import './_icon.css';
 @import './_overlay.css';
