@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/nextjs-vite';
 
 import { fn } from 'storybook/test';
 
-import { CARD_THUMBNAIL_WITH_PRICE } from '@/libs/mock';
+import { CARD_THUMBNAIL_WITH_PRICE, FORM_PURCHASE_ADDONS, FORM_PURCHASE_VARIANTS } from '@/libs/mock';
 
 import Container from '@/components/common/Container';
 
@@ -68,6 +68,10 @@ export const OrderPopup: StoryObj<typeof ThumbnailOrder> = {
 export const OrderPopupModal: StoryObj<typeof ThumbnailOrderModal> = {
     args: {
         open: true,
+        form: {
+            variants: FORM_PURCHASE_VARIANTS,
+            addOns: FORM_PURCHASE_ADDONS,
+        },
     },
     render: (arg) => <ThumbnailOrderModal {...arg} />,
 };

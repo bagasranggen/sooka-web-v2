@@ -1,4 +1,5 @@
 import { OrderProps } from '@/components/common/Form';
+import { PurchaseProps } from '@/components/common/Form/Purchase';
 
 export const FORM_ORDER: OrderProps['summaries'] = [
     {
@@ -46,5 +47,46 @@ export const FORM_ORDER: OrderProps['summaries'] = [
                 label: 'Toppers (Rp5.000)',
             },
         ],
+    },
+];
+
+export const FORM_PURCHASE_VARIANTS: PurchaseProps['variants'] = [
+    {
+        id: 'tes',
+        type: 'radio',
+        value: '120000',
+        // checked: true,
+        label: 'Round - 15cm',
+        price: 'Rp120.000',
+        required: true,
+    },
+    {
+        id: 'tes2',
+        type: 'radio',
+        value: '140000',
+        checked: true,
+        label: 'Square - 16cmx16cm',
+        price: 'Rp140.000',
+        required: true,
+    },
+];
+
+export const FORM_PURCHASE_ADDONS: PurchaseProps['addOns'] = [
+    {
+        id: 'tes_checkbox_1',
+        type: 'checkbox',
+        value: '3000',
+        // required: true,
+        label: 'Extra Candle',
+        description: 'lorem ipsum dolor sit amet, consectetur adipisicing elit.',
+        price: 'Rp3.000',
+    },
+    {
+        id: 'tes_checkbox_2',
+        type: 'checkbox',
+        value: '5000',
+        // required: true,
+        label: 'Test',
+        price: 'Rp5.000',
     },
 ];

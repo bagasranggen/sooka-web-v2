@@ -1,15 +1,16 @@
 import React, { forwardRef } from 'react';
 
-import { ArrayStringProps, BaseRegularInputProps, InputRegularRef  } from '@/libs/@types';
+import { ArrayStringProps, BaseRegularInputProps, InputRegularRef } from '@/libs/@types';
 import { joinArrayString } from '@/libs/utils';
 import { createInputHooks } from '@/libs/factory';
 
 import { BaseInputHookProps } from '@/components/common/Input';
+import DynamicWrapper from '@/components/common/DynamicWrapper';
 
 export type InputRadioProps = BaseRegularInputProps & BaseInputHookProps;
 
 const InputRadio = forwardRef<InputRegularRef, InputRadioProps>(
-    ({ id, className, children, hook, checked, ...props }, ref) => {
+    ({ id, className, children, hook, checked, hidden, ...props }, ref) => {
         let inputClass: ArrayStringProps = ['flex items-center gap-x-0.5 relative cursor-pointer'];
         inputClass.push(
             'before:content-[""] before:inline-block before:shrink-0 before:w-[1.4rem] before:h-[1.4rem] before:border before:border-black before:rounded-full'
@@ -36,7 +37,7 @@ const InputRadio = forwardRef<InputRegularRef, InputRadioProps>(
         }
 
         return (
-            <div>
+            <DynamicWrapper as={!hidden ? 'div' : undefined}>
                 <input
                     {...props}
                     {...inputHook}
@@ -45,14 +46,16 @@ const InputRadio = forwardRef<InputRegularRef, InputRadioProps>(
                     id={id}
                     type="radio"
                     className="peer"
-                    hidden
+                    hidden={hidden}
                 />
-                <label
-                    htmlFor={id}
-                    className={inputClass}>
-                    {children}
-                </label>
-            </div>
+                {!hidden && (
+                    <label
+                        htmlFor={id}
+                        className={inputClass}>
+                        {children}
+                    </label>
+                )}
+            </DynamicWrapper>
         );
     }
 );

@@ -6,11 +6,12 @@ import { createInputHooks } from '@/libs/factory';
 
 import { BaseInputHookProps } from '@/components/common/Input';
 import Icon from '@/components/common/Icon';
+import DynamicWrapper from '@/components/common/DynamicWrapper';
 
 export type InputCheckboxProps = BaseRegularInputProps & BaseInputHookProps;
 
 const InputCheckbox = forwardRef<InputRegularRef, InputCheckboxProps>(
-    ({ id, className, children, hook, checked, ...props }, ref) => {
+    ({ id, className, children, hook, checked, hidden, ...props }, ref) => {
         let inputClass: ArrayStringProps = ['flex items-center gap-x-0.5 relative cursor-pointer'];
         inputClass.push(
             'before:content-[""] before:inline-block before:shrink-0 before:w-[1.4rem] before:h-[1.4rem] before:border before:border-black before:rounded-[.3rem]'
@@ -34,7 +35,7 @@ const InputCheckbox = forwardRef<InputRegularRef, InputCheckboxProps>(
         }
 
         return (
-            <div>
+            <DynamicWrapper as={!hidden ? 'div' : undefined}>
                 <input
                     {...props}
                     {...inputHook}
@@ -43,15 +44,17 @@ const InputCheckbox = forwardRef<InputRegularRef, InputCheckboxProps>(
                     id={id}
                     type="checkbox"
                     className="peer"
-                    hidden
+                    hidden={hidden}
                 />
-                <label
-                    htmlFor={id}
-                    className={inputClass}>
-                    {children}
-                    <Icon.Check className="absolute top-1/2 -translate-y-1/2 left-[.25rem]" />
-                </label>
-            </div>
+                {!hidden && (
+                    <label
+                        htmlFor={id}
+                        className={inputClass}>
+                        {children}
+                        <Icon.Check className="absolute top-1/2 -translate-y-1/2 left-0.25" />
+                    </label>
+                )}
+            </DynamicWrapper>
         );
     }
 );

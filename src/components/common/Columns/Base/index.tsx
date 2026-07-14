@@ -21,8 +21,6 @@ export type BaseProps = PropsWithChildren<
 const Base = ({ className, gutter, gutterX, gutterY, children, ...props }: BaseProps): React.ReactElement => {
     const guttersArr = Object.entries({ gutter, gutterX, gutterY });
 
-    console.log({ guttersArr });
-
     let rowClass: ArrayStringProps = ['row'];
 
     if (guttersArr.length > 0) {

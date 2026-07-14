@@ -3,7 +3,7 @@ import React, { forwardRef, useState } from 'react';
 import { ArrayStringProps } from '@/libs/@types';
 import { joinArrayString } from '@/libs/utils';
 
-import Base, { BaseInputRef, BaseProps } from '@/components/common/Input';
+import Base, { BaseInputRef, BaseProps } from '@/components/common/Input/Base';
 import LabelText from '@/components/common/Input/Label/LabelText';
 
 const EXCLUDE_SPACING_TYPE = ['select', 'textarea'];

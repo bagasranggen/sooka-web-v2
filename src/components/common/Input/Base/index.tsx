@@ -14,6 +14,7 @@ import InputRadio from '@/components/common/Input/shared/InputRadio';
 import InputCheckbox from '@/components/common/Input/shared/InputCheckbox';
 import InputSelect, { BaseInputSelectProps, InputSelectItemProps } from '@/components/common/Input/shared/InputSelect';
 import InputTextarea, { BaseInputTextareaProps } from '@/components/common/Input/shared/InputTextarea';
+import BaseError from '@/components/common/Input/Base/BaseError';
 
 export type BaseInputRef = InputRegularRef | InputSelectRef | InputTextareaRef;
 
@@ -80,7 +81,8 @@ const Base = forwardRef<BaseInputRef, BaseProps>(({ error, ...props }, ref) => {
     return (
         <>
             {input}
-            {error && <small className="block text-rose-500 font-semibold">{error}</small>}
+            {/*{error && <small className="block text-rose-500 font-semibold">{error}</small>}*/}
+            <BaseError>{error}</BaseError>
         </>
     );
 });
@@ -88,4 +90,5 @@ const Base = forwardRef<BaseInputRef, BaseProps>(({ error, ...props }, ref) => {
 Base.displayName = 'Base';
 export default Base;
 
+export { BaseError };
 export type { BaseInputSelectProps, InputSelectItemProps };
