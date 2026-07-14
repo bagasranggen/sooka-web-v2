@@ -91,6 +91,11 @@ export const OrderPopupModal: StoryObj<typeof ThumbnailOrderModal> = {
 export const OrderPopupSheet: StoryObj<typeof ThumbnailOrderSheet> = {
     args: {
         open: true,
+        media: FADE_BANNER_MEDIA,
+        form: {
+            variants: FORM_PURCHASE_VARIANTS,
+            addOns: FORM_PURCHASE_ADDONS,
+        },
     },
     render: (arg) => <ThumbnailOrderSheet {...arg} />,
 };

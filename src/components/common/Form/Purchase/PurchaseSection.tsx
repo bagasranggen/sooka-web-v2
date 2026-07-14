@@ -93,7 +93,9 @@ const PurchaseSection = ({
                                             name: name,
                                             required: item?.required,
                                         }}>
-                                        <Columns className="justify-between items-center">
+                                        <Columns
+                                            gutterY={1}
+                                            className="justify-between items-center">
                                             <Columns.Column className={columnContentClass}>
                                                 {item?.media && (
                                                     <Picture
@@ -134,7 +136,7 @@ const PurchaseSection = ({
                                                 </DynamicWrapper>
                                             </Columns.Column>
 
-                                            <Columns.Column md="auto">
+                                            <Columns.Column sm="auto">
                                                 {item?.price && (
                                                     <p className="uppercase tracking-0.1 font-bold text-[1.4rem]">
                                                         {item.price}

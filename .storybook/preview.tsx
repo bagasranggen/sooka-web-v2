@@ -1,5 +1,7 @@
 import type { Preview } from '@storybook/nextjs-vite';
 
+import { INITIAL_VIEWPORTS } from 'storybook/viewport';
+
 // import '@fontsource/noto-sans-jp';
 // import '@fontsource/noto-sans-jp/600.css';
 import '../src/assets/styles/css/main.css';
@@ -19,7 +21,13 @@ const preview: Preview = {
             // 'off' - skip a11y checks entirely
             test: 'todo',
         },
+        // viewport: {
+        //     options: INITIAL_VIEWPORTS,
+        // },
     },
+    // initialGlobals: {
+    // viewport: { value: 'ipad', isRotated: false },
+    // },
 };
 
 export default preview;
