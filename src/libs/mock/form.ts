@@ -1,3 +1,5 @@
+import { createPicsumImage } from '@/libs/factory/createPicsumImage';
+
 import { OrderProps } from '@/components/common/Form';
 import { PurchaseProps } from '@/components/common/Form/Purchase';
 
@@ -73,16 +75,22 @@ export const FORM_PURCHASE_VARIANTS: PurchaseProps['variants'] = [
 
 export const FORM_PURCHASE_ADDONS: PurchaseProps['addOns'] = [
     {
-        id: 'tes_checkbox_1',
+        id: 'extraCandle',
+        media: [createPicsumImage({ width: 200, height: 200 })],
         type: 'checkbox',
         value: '3000',
+        // checked: true,
         // required: true,
         label: 'Extra Candle',
         description: 'lorem ipsum dolor sit amet, consectetur adipisicing elit.',
         price: 'Rp3.000',
+        input: {
+            placeholder: 'Let us know your preferred candle color',
+        },
     },
     {
-        id: 'tes_checkbox_2',
+        id: 'test',
+        media: [createPicsumImage({ id: 200, width: 200, height: 200 })],
         type: 'checkbox',
         value: '5000',
         // required: true,

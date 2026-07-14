@@ -10,9 +10,5 @@
             @apply peer-checked:bg-sooka-primary peer-checked:text-light;
             @apply md:peer-checked:hover:bg-sooka-primary/80;
         }
-
-        .input__description {
-            @apply text-[1.4rem];
-        }
     }
 }

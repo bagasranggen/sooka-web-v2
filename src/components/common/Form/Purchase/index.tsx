@@ -1,5 +1,6 @@
 import React, { useEffect, useMemo } from 'react';
 
+import { ClassnameProps } from '@/libs/@types';
 import { checkStringIsNumber, convertIntToCurrency } from '@/libs/utils';
 
 import { useForm } from 'react-hook-form';
@@ -8,10 +9,10 @@ import Columns from '@/components/common/Columns';
 import Button from '@/components/common/Button';
 import Input from '@/components/common/Input';
 import PurchaseSection, { PurchaseSectionProps } from '@/components/common/Form/Purchase/PurchaseSection';
-import { ClassnameProps } from '@/libs/@types';
 
 export const PURCHASE_FORM_HANDLE = {
     VARIANT: 'variant',
+    VARIANT_LABEL: 'variantLabel',
     ADDONS: 'addOns',
     NOTE: 'note',
     TOTAL_PRICE: 'totalPrice',
@@ -22,7 +23,7 @@ export type PurchaseFormFields = {
     [PURCHASE_FORM_HANDLE.ADDONS]?: string[];
     [PURCHASE_FORM_HANDLE.NOTE]?: string;
     [PURCHASE_FORM_HANDLE.TOTAL_PRICE]?: string;
-};
+} & Record<string, string>;
 
 export type PurchaseProps = {
     variants?: PurchaseSectionProps['items'];
@@ -75,13 +76,23 @@ const Purchase = ({ className, variants, addOns, onSubmit }: PurchaseProps): Rea
                 if (onSubmit) onSubmit(data);
             })}>
             {variants && variants.length > 0 && (
-                <PurchaseSection
-                    label="Available in"
-                    register={register}
-                    name={PURCHASE_FORM_HANDLE.VARIANT}
-                    error={errors?.variant?.message}
-                    items={variants}
-                />
+                <>
+                    <PurchaseSection
+                        label="Available in"
+                        register={register}
+                        name={PURCHASE_FORM_HANDLE.VARIANT}
+                        error={errors?.variant?.message}
+                        items={variants}
+                    />
+
+                    <Input
+                        type="text"
+                        hook={{
+                            register,
+                            name: PURCHASE_FORM_HANDLE.VARIANT_LABEL,
+                        }}
+                    />
+                </>
             )}
 
             {addOns && addOns.length > 0 && (
@@ -89,6 +100,7 @@ const Purchase = ({ className, variants, addOns, onSubmit }: PurchaseProps): Rea
                     className={variants && variants.length > 0 ? 'mt-3' : ''}
                     label="Add on(s)"
                     register={register}
+                    getValues={getValues}
                     name={PURCHASE_FORM_HANDLE.ADDONS}
                     error={errors?.addOns?.message}
                     items={addOns}

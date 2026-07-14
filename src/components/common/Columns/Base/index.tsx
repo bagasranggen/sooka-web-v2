@@ -31,7 +31,6 @@ const Base = ({ className, gutter, gutterX, gutterY, children, ...props }: BaseP
             }
 
             if ((typeof typeValue === 'number' && typeValue === 0) || (typeValue && typeof typeValue !== 'object')) {
-                console.log({ type: typeof typeValue, typeValue });
                 if (typeof rowClass !== 'string') {
                     rowClass.push(
                         createBreakpointClass({
