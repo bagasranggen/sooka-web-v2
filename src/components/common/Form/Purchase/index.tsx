@@ -124,9 +124,11 @@ const Purchase = ({ className, variants, addOns, onSubmit }: PurchaseProps): Rea
             </PurchaseSection>
 
             <div className="mt-3">
-                <Columns>
+                <Columns className="items-center">
                     <Columns.Column>
-                        <p>RP{total > 0 ? convertIntToCurrency(total) : 0}</p>
+                        <p className="font-bold uppercase tracking-0.1 text-md mb-0">
+                            Rp{total > 0 ? convertIntToCurrency(total) : 0}
+                        </p>
                         <Input
                             type="text"
                             disabled
@@ -139,7 +141,7 @@ const Purchase = ({ className, variants, addOns, onSubmit }: PurchaseProps): Rea
                         />
                     </Columns.Column>
 
-                    <Columns.Column md="auto">
+                    <Columns.Column xs="auto">
                         <Button.Arrow
                             as="button"
                             type="submit">

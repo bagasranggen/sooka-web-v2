@@ -100,13 +100,13 @@ const PurchaseSection = ({
                                                 {item?.media && (
                                                     <Picture
                                                         items={item.media}
-                                                        className="w-8 min-w-8"
+                                                        className="mt-0.5 md:mt-0 w-8 min-w-8"
                                                     />
                                                 )}
 
                                                 <DynamicWrapper
                                                     as={hasMedia ? 'div' : undefined}
-                                                    className="grow">
+                                                    className="grow mt-0.5 md:mt-0">
                                                     {item?.label && <p className={titleClass}>{item.label}</p>}
 
                                                     {item?.description && (
@@ -138,7 +138,7 @@ const PurchaseSection = ({
 
                                             <Columns.Column sm="auto">
                                                 {item?.price && (
-                                                    <p className="uppercase tracking-0.1 font-bold text-[1.4rem]">
+                                                    <p className="uppercase tracking-0.1 font-bold md:text-[1.4rem] leading-1.5">
                                                         {item.price}
                                                     </p>
                                                 )}

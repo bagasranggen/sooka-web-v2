@@ -92,6 +92,10 @@ export const OrderPopupSheet: StoryObj<typeof ThumbnailOrderSheet> = {
     args: {
         open: true,
         media: FADE_BANNER_MEDIA,
+        title: 'Lorem ipsum dolor sit amet.',
+        description: parse(
+            `<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Doloremque excepturi nulla perferendis sapiente voluptatibus? Animi, cum ducimus, ipsam iure libero minus perspiciatis quam qui, quis quisquam quo repellat sed tenetur!</p>`
+        ),
         form: {
             variants: FORM_PURCHASE_VARIANTS,
             addOns: FORM_PURCHASE_ADDONS,

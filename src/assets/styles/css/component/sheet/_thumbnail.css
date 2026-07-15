@@ -1,0 +1,13 @@
+@layer components {
+    .sheet.sheet--thumbnail {
+        @apply p-0! border-t-0! max-h-[80dvh] overflow-y-auto;
+
+        .swiper {
+            .swiper-slide {
+                img {
+                    @apply md:h-full md:object-cover;
+                }
+            }
+        }
+    }
+}
