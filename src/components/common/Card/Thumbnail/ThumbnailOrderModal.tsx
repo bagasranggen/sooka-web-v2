@@ -32,7 +32,7 @@ const ThumbnailOrderModal = ({
                         {media && media.length > 0 && (
                             <div className="sticky top-0">
                                 <Carousel.Fade
-                                    className="lg:h-[calc(100vh-10rem)] "
+                                    className="dialog__carousel"
                                     options={{
                                         loop: true,
                                         breakpoints: {
