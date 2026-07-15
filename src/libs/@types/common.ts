@@ -39,6 +39,8 @@ export type ArrayStringProps = string[] | string;
 
 export type ElementTagsProps = keyof JSX.IntrinsicElements;
 
+export type FragmentTagsProps = ExoticComponent<FragmentProps>;
+
 export type ResponsiveProps = 'xs' | 'sm' | 'md' | 'lg' | 'xl' | '2xl' | '3xl';
 
 export type BreakpointsProps = 'xs' | 'sm' | 'md' | 'lg' | 'xl' | 'xxl' | 'xxxl';
