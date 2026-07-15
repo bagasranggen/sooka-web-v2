@@ -5,6 +5,7 @@ import { joinArrayString } from '@/libs/utils';
 
 import Button, { BaseAnchorProps } from '@/components/common/Button';
 import Picture, { BaseProps } from '@/components/common/Picture';
+import { ThumbnailProps } from '@/components/common/Card';
 
 export type ThumbnailLabelWithPositionProps = {
     children: string;
@@ -12,7 +13,7 @@ export type ThumbnailLabelWithPositionProps = {
 };
 
 export type ThumbnailItemProps = {
-    cta: Omit<BaseAnchorProps, 'as'>;
+    cta: Omit<BaseAnchorProps, 'as' | 'onClick'>;
     media: BaseProps['items'];
     mediaHover: BaseProps['items'];
     title: string;
@@ -20,6 +21,8 @@ export type ThumbnailItemProps = {
     salePrice?: string;
     disabled?: boolean;
     label?: string | ThumbnailLabelWithPositionProps;
+    popup?: Omit<NonNullable<ThumbnailProps['popup']>['content'], 'open'>;
+    onClick?: (props: Omit<NonNullable<ThumbnailProps['popup']>['content'], 'open'>) => void;
 };
 
 const ThumbnailItem = ({
@@ -31,6 +34,8 @@ const ThumbnailItem = ({
     salePrice,
     label,
     disabled,
+    popup,
+    onClick,
 }: ThumbnailItemProps): React.ReactElement => {
     const hasPrice = !!price;
 
@@ -71,7 +76,7 @@ const ThumbnailItem = ({
         priceBlock = (
             <div className="flex align-baseline mt-1 gap-x-[.2rem]">
                 <span className="text-sm">RP</span>
-                <span className="text-[3rem] leading-[2.5rem] font-semibold">{salePrice ?? price}</span>
+                <span className="text-[3rem] leading-2.5 font-semibold">{salePrice ?? price}</span>
             </div>
         );
     }
@@ -89,6 +94,11 @@ const ThumbnailItem = ({
         <Button
             as="anchor"
             className="group"
+            onClick={(e) => {
+                e.preventDefault();
+
+                if (popup && onClick) onClick(popup);
+            }}
             {...cta}>
             <div className="relative">
                 {labelText && <div className={labelClass}>{labelText}</div>}

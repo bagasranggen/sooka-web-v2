@@ -24,8 +24,7 @@ export const FADE_BANNER_MEDIA_SINGLE = [
         }),
         createPicsumImage({
             width: 800,
-            height: 400,
-            media: 992,
+            height: 500,
         }),
     ],
 ];
@@ -39,8 +38,7 @@ export const FADE_BANNER_MEDIA = [
         }),
         createPicsumImage({
             width: 800,
-            height: 400,
-            media: 992,
+            height: 500,
         }),
     ],
     [
@@ -53,8 +51,7 @@ export const FADE_BANNER_MEDIA = [
         createPicsumImage({
             id: 200,
             width: 800,
-            height: 400,
-            media: 992,
+            height: 500,
         }),
     ],
 ];

@@ -136,7 +136,7 @@ const PurchaseSection = ({
                                                 </DynamicWrapper>
                                             </Columns.Column>
 
-                                            <Columns.Column sm="auto">
+                                            <Columns.Column md="auto">
                                                 {item?.price && (
                                                     <p className="uppercase tracking-0.1 font-bold md:text-[1.4rem] leading-1.5">
                                                         {item.price}

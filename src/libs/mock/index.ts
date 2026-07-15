@@ -4,6 +4,7 @@ export * from './collage';
 export * from './form';
 export * from './list';
 export * from './marquee';
+export * from './modal';
 export * from './navigation';
 export * from './productDetail';
 export * from './productListing';

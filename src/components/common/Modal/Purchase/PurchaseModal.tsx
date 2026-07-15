@@ -8,22 +8,25 @@ import Columns from '@/components/common/Columns';
 import Form, { PurchaseProps } from '@/components/common/Form';
 import Carousel from '@/components/common/Carousel';
 
-export type ThumbnailOrderModalProps = {
+export type PurchaseModalProps = {
     form?: PurchaseProps;
     media?: BaseProps['items'][];
     title?: BaseHeadingProps['children'];
     description?: React.ReactNode;
-} & Pick<React.ComponentPropsWithoutRef<typeof Dialog>, 'open'>;
+} & Pick<React.ComponentPropsWithoutRef<typeof Dialog>, 'open' | 'onOpenChange'>;
 
-const ThumbnailOrderModal = ({
+const PurchaseModal = ({
     open,
+    onOpenChange,
     form,
     media,
     title,
     description,
-}: ThumbnailOrderModalProps): React.ReactElement => {
+}: PurchaseModalProps): React.ReactElement => {
     return (
-        <Dialog open={open}>
+        <Dialog
+            open={open}
+            onOpenChange={onOpenChange}>
             <DialogContent
                 showCloseButton={false}
                 className="dialog dialog--thumbnail">
@@ -78,4 +81,4 @@ const ThumbnailOrderModal = ({
     );
 };
 
-export default ThumbnailOrderModal;
+export default PurchaseModal;

@@ -8,32 +8,35 @@ import Carousel from '@/components/common/Carousel';
 import Form, { PurchaseProps } from '@/components/common/Form';
 import Columns from '@/components/common/Columns';
 
-export type ThumbnailOrderSheetProps = {
+export type PurchaseSheetProps = {
     media?: BaseProps['items'][];
     form?: PurchaseProps;
     title?: BaseHeadingProps['children'];
     description?: React.ReactNode;
-} & Pick<React.ComponentPropsWithoutRef<typeof Sheet>, 'open'>;
+} & Pick<React.ComponentPropsWithoutRef<typeof Sheet>, 'open' | 'onOpenChange'>;
 
-const ThumbnailOrderSheet = ({
+const PurchaseSheet = ({
     open,
+    onOpenChange,
     form,
     media,
     title,
     description,
-}: ThumbnailOrderSheetProps): React.ReactElement => {
+}: PurchaseSheetProps): React.ReactElement => {
     return (
-        <Sheet open={open}>
+        <Sheet
+            open={open}
+            onOpenChange={onOpenChange}>
             <SheetContent
                 side="bottom"
                 showCloseButton={false}
                 className="sheet sheet--thumbnail">
                 <Columns gutterX={0}>
-                    <Columns.Column md={6}>
+                    <Columns.Column sm={6}>
                         {media && media.length > 0 && (
-                            <div className="md:sticky md:top-0">
+                            <div className="sm:sticky sm:top-0">
                                 <Carousel.Fade
-                                    className="md:h-[80dvh]"
+                                    className="sheet__carousel"
                                     options={{
                                         loop: true,
                                         breakpoints: {
@@ -53,8 +56,8 @@ const ThumbnailOrderSheet = ({
                         )}
                     </Columns.Column>
 
-                    <Columns.Column md={6}>
-                        <div className="py-2 px-1 md:px-2">
+                    <Columns.Column sm={6}>
+                        <div className="py-2 px-1 sm:px-2">
                             {title && (
                                 <Heading
                                     as="h2"
@@ -79,4 +82,4 @@ const ThumbnailOrderSheet = ({
     );
 };
 
-export default ThumbnailOrderSheet;
+export default PurchaseSheet;
