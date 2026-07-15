@@ -89,6 +89,11 @@ export const OrderPopupModal: StoryObj<typeof ThumbnailOrderModal> = {
 };
 
 export const OrderPopupSheet: StoryObj<typeof ThumbnailOrderSheet> = {
+    globals: {
+        viewport: {
+            value: 'iphone14promax',
+        },
+    },
     args: {
         open: true,
         media: FADE_BANNER_MEDIA,

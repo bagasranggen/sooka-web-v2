@@ -6,6 +6,42 @@ import { INITIAL_VIEWPORTS } from 'storybook/viewport';
 // import '@fontsource/noto-sans-jp/600.css';
 import '../src/assets/styles/css/main.css';
 
+type ViewportProps = Record<
+    string,
+    {
+        name: string;
+        styles: Record<'width' | 'height', string>;
+        type: 'desktop' | 'mobile';
+    }
+>;
+
+const desktopViewPorts: ViewportProps = {
+    '1360x768': {
+        name: '1360x768',
+        styles: {
+            width: '1360px',
+            height: '768px',
+        },
+        type: 'desktop',
+    },
+    '1440x768': {
+        name: '1440x768',
+        styles: {
+            width: '1440px',
+            height: '768px',
+        },
+        type: 'desktop',
+    },
+    '1920x1080': {
+        name: '1920x1080',
+        styles: {
+            width: '1920px',
+            height: '1080px',
+        },
+        type: 'desktop',
+    },
+};
+
 const preview: Preview = {
     parameters: {
         controls: {
@@ -21,13 +57,16 @@ const preview: Preview = {
             // 'off' - skip a11y checks entirely
             test: 'todo',
         },
-        // viewport: {
-        //     options: INITIAL_VIEWPORTS,
-        // },
+        viewport: {
+            options: {
+                iphonese2: INITIAL_VIEWPORTS.iphonese2,
+                iphone14promax: INITIAL_VIEWPORTS.iphone14promax,
+                ipad: INITIAL_VIEWPORTS.ipad,
+                ipad12p: INITIAL_VIEWPORTS.ipad12p,
+                ...desktopViewPorts,
+            },
+        },
     },
-    // initialGlobals: {
-    // viewport: { value: 'ipad', isRotated: false },
-    // },
 };
 
 export default preview;
