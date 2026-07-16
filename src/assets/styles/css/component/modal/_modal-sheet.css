@@ -1,0 +1,23 @@
+@layer components {
+    .modal.modal--modal-sheet {
+    }
+
+    .modal.modal--modal-sheet.modal--purchase {
+        @apply p-0! border-0! overflow-y-auto;
+        @apply md:h-[calc(100vh-10rem)] max-h-[80dvh] md:max-h-80;
+
+        .modal__sticky {
+            @apply sm:sticky sm:top-0;
+        }
+
+        .modal__carousel {
+            @apply sm:h-[80dvh] md:h-[calc(100vh-10rem)] md:max-h-80;
+
+            .swiper-slide {
+                img {
+                    @apply sm:h-full sm:object-cover;
+                }
+            }
+        }
+    }
+}

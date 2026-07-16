@@ -1,7 +1,6 @@
 @import './content-block/content-block.css';
-@import './dialog/dialog.css';
 @import './input/input.css';
-@import './sheet/sheet.css';
+@import './modal/modal.css';
 
 @import './_icon.css';
 @import './_overlay.css';

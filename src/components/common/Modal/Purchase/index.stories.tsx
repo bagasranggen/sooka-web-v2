@@ -5,8 +5,6 @@ import { fn } from 'storybook/test';
 import { MODAL_PURCHASE } from '@/libs/mock';
 
 import Purchase from './index';
-import PurchaseModal from './PurchaseModal';
-import PurchaseSheet from './PurchaseSheet';
 
 // More on how to set up stories at: https://storybook.js.org/docs/writing-stories#default-export
 const meta = {
@@ -36,25 +34,4 @@ export const Default: Story = {
         open: true,
         ...MODAL_PURCHASE,
     },
-};
-
-export const Modal: StoryObj<typeof PurchaseModal> = {
-    args: {
-        open: true,
-        ...MODAL_PURCHASE,
-    },
-    render: (arg) => <PurchaseModal {...arg} />,
-};
-
-export const Sheet: StoryObj<typeof PurchaseSheet> = {
-    globals: {
-        viewport: {
-            value: 'iphone14promax',
-        },
-    },
-    args: {
-        open: true,
-        ...MODAL_PURCHASE,
-    },
-    render: (arg) => <PurchaseSheet {...arg} />,
 };

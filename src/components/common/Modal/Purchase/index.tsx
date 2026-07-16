@@ -1,29 +1,87 @@
-'use client';
-
 import React from 'react';
 
-import { useDebounceWindowSize, useIsTouch } from '@/libs/hooks';
+import Columns from '@/components/common/Columns';
+import Carousel from '@/components/common/Carousel';
+import Picture, { BaseProps } from '@/components/common/Picture';
+import Heading, { BaseProps as BaseHeadingProps } from '@/components/common/Heading';
+import Form, { PurchaseProps as FormPurchaseProps } from '@/components/common/Form';
+import ModalSheet, { ModalSheetProps } from '@/components/common/Modal/ModalSheet';
 
-import PurchaseModal, { PurchaseModalProps } from '@/components/common/Modal/Purchase/PurchaseModal';
-import PurchaseSheet from '@/components/common/Modal/Purchase/PurchaseSheet';
+export type PurchaseProps = {
+    form?: FormPurchaseProps;
+    media?: BaseProps['items'][];
+    title?: BaseHeadingProps['children'];
+    description?: React.ReactNode;
+} & Pick<ModalSheetProps, 'open' | 'onOpenChange'>;
 
-export type PurchaseProps = PurchaseModalProps;
+const Purchase = ({
+    open,
+    onOpenChange,
+    media,
+    title,
+    description,
+    form,
+}: PurchaseProps): React.ReactElement | null => {
+    return (
+        <ModalSheet
+            open={open}
+            onOpenChange={onOpenChange}
+            modal={{
+                showCloseButton: false,
+            }}
+            sheet={{
+                showCloseButton: false,
+                side: 'bottom',
+            }}
+            className="modal--purchase">
+            <Columns gutterX={0}>
+                <Columns.Column sm={6}>
+                    {media && media.length > 0 && (
+                        <div className="modal__sticky">
+                            <Carousel.Fade
+                                className="modal__carousel"
+                                options={{
+                                    loop: true,
+                                    breakpoints: {
+                                        768: {
+                                            slidesPerView: 1,
+                                            spaceBetween: 0,
+                                        },
+                                    },
+                                }}
+                                items={media.map((item) => {
+                                    return {
+                                        children: <Picture items={item} />,
+                                    };
+                                })}
+                            />
+                        </div>
+                    )}
+                </Columns.Column>
 
-const Purchase = (props: PurchaseProps): React.ReactElement | null => {
-    const isTouch = useIsTouch();
-    const { width } = useDebounceWindowSize();
+                <Columns.Column sm={6}>
+                    <div className="py-2 px-2 md:px-4">
+                        {title && (
+                            <Heading
+                                as="h2"
+                                className="leading-3.5 text-[3rem] md:leading-4.5 md:text-[4rem] font-medium">
+                                {title}
+                            </Heading>
+                        )}
 
-    let isMobile = false;
-    if (isTouch && width < 1200) isMobile = true;
-    if (!isTouch && width < 992) isMobile = true;
+                        <div className="mt-2">
+                            {description}
 
-    if (width === 0) return null;
-
-    if (isMobile) {
-        return <PurchaseSheet {...props} />;
-    }
-
-    return <PurchaseModal {...props} />;
+                            <Form.Purchase
+                                className="mt-3"
+                                {...form}
+                            />
+                        </div>
+                    </div>
+                </Columns.Column>
+            </Columns>
+        </ModalSheet>
+    );
 };
 
 export default Purchase;

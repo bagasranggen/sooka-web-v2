@@ -67,7 +67,7 @@ export const FORM_PURCHASE_VARIANTS: PurchaseProps['variants'] = [
         type: 'radio',
         value: '140000',
         checked: true,
-        label: 'Square - 16cmx16cm',
+        label: 'Square - 16cm x 16cm',
         price: 'Rp140.000',
         required: true,
     },

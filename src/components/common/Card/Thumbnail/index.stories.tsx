@@ -42,7 +42,7 @@ export const Default: ThumbnailStory = {
         const [popupContent, setPopupContent] = useState<NonNullable<ThumbnailProps['popup']>['content']>(undefined);
 
         return (
-            <Container>
+            <Container className="my-5">
                 <Thumbnail
                     {...arg}
                     onClick={(data) => {
@@ -66,7 +66,7 @@ export const Individual: ThumbnailStory = {
         items: [CARD_THUMBNAIL_WITH_PRICE[0]],
     },
     render: (arg) => (
-        <Container>
+        <Container className="my-5">
             <Thumbnail {...arg} />
         </Container>
     ),

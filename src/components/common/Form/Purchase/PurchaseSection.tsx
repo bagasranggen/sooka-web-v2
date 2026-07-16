@@ -110,7 +110,7 @@ const PurchaseSection = ({
                                                     {item?.label && <p className={titleClass}>{item.label}</p>}
 
                                                     {item?.description && (
-                                                        <p className="text-[1.4rem] leading-1.5 mb-0">
+                                                        <p className="text-[1.4rem] leading-1.5 mb-0 mt-0.5">
                                                             {item.description}
                                                         </p>
                                                     )}
@@ -138,7 +138,7 @@ const PurchaseSection = ({
 
                                             <Columns.Column md="auto">
                                                 {item?.price && (
-                                                    <p className="uppercase tracking-0.1 font-bold md:text-[1.4rem] leading-1.5">
+                                                    <p className="uppercase tracking-0.1 font-bold text-[1.8rem] md:text-[1.4rem] leading-1.5">
                                                         {item.price}
                                                     </p>
                                                 )}

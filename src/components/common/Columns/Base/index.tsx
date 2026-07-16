@@ -18,7 +18,7 @@ export type BaseProps = PropsWithChildren<
         React.HTMLAttributes<HTMLElement>
 >;
 
-const Base = ({ className, gutter, gutterX, gutterY, children, ...props }: BaseProps): React.ReactElement => {
+const Base = ({ className, gutter, gutterX = 3, gutterY, children, ...props }: BaseProps): React.ReactElement => {
     const guttersArr = Object.entries({ gutter, gutterX, gutterY });
 
     let rowClass: ArrayStringProps = ['row'];

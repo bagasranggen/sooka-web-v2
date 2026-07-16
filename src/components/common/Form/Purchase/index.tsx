@@ -69,6 +69,15 @@ const Purchase = ({ className, variants, addOns, onSubmit }: PurchaseProps): Rea
         setValue(PURCHASE_FORM_HANDLE.TOTAL_PRICE, total.toString());
     }, [total]);
 
+    useEffect(() => {
+        if (!variants || variants.length === 0) return;
+        if (!variantPrice) return;
+
+        const selected = variants.find((item) => item.value === variantPrice);
+
+        if (selected?.label) setValue(PURCHASE_FORM_HANDLE.VARIANT_LABEL, selected.label);
+    }, [variants, variantPrice]);
+
     return (
         <form
             className={className}
@@ -91,6 +100,7 @@ const Purchase = ({ className, variants, addOns, onSubmit }: PurchaseProps): Rea
                             register,
                             name: PURCHASE_FORM_HANDLE.VARIANT_LABEL,
                         }}
+                        hidden
                     />
                 </>
             )}
