@@ -1,6 +1,10 @@
 import { createPicsumImage } from '@/libs/factory/createPicsumImage';
+import { createArrayFromNumber } from '@/libs/factory/createArrayFromNumber';
+import { convertIntToCurrency } from '@/libs/utils/convertIntToCurrency';
 
-import { OrderProps } from '@/components/common/Form';
+import parse from 'html-react-parser';
+
+import { CartProps, OrderProps } from '@/components/common/Form';
 import { PurchaseProps } from '@/components/common/Form/Purchase';
 
 export const FORM_ORDER: OrderProps['summaries'] = [
@@ -98,3 +102,32 @@ export const FORM_PURCHASE_ADDONS: PurchaseProps['addOns'] = [
         price: 'Rp5.000',
     },
 ];
+
+export const FORM_CART: CartProps['items'] = createArrayFromNumber(4).map((_, i) => {
+    const isOdd = i % 2 === 0;
+
+    let addOns = ['Extra Candle: Red'];
+    if (!isOdd) {
+        addOns.push('Topper: Lorem ipsum dolor sit amet.');
+    }
+
+    let note = undefined;
+    if (isOdd) {
+        note = parse(
+            `<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad animi dolore neque non nostrum perspiciatis suscipit, totam. Aliquam, itaque veritatis.</p>`
+        );
+    }
+
+    let maxQty = 6;
+    if (!isOdd) maxQty = 1;
+
+    return {
+        cartItemId: `strawberry-shortcake-${i}${new Date().getTime()}`,
+        title: 'Strawberry Shortcake',
+        variant: 'Round - 16cm x 16cm',
+        price: convertIntToCurrency(250000, true),
+        addOns,
+        note,
+        maxQty,
+    };
+});
