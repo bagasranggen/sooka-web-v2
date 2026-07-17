@@ -5,19 +5,18 @@ import { BaseHookOptionProps, BaseInputHookProps } from '@/libs/@types';
 export const createInputHooks = (
     hook?: BaseInputHookProps & BaseHookOptionProps,
     input?:
-        | Pick<React.InputHTMLAttributes<HTMLInputElement>, 'onChange' | 'onClick'>
+        | Pick<React.InputHTMLAttributes<HTMLInputElement>, 'onChange' | 'onClick' | 'max'>
         | Pick<React.TextareaHTMLAttributes<HTMLTextAreaElement>, 'onChange'>
         | Pick<React.SelectHTMLAttributes<HTMLSelectElement>, 'onChange'>
 ) => {
-    let hookOptions = {};
-    if (hook?.required) {
-        let required = 'This field is required';
-        if (typeof hook.required === 'string') required = hook.required;
+    const { register, name, ...restHook } = hook ?? {};
 
-        hookOptions = { ...hookOptions, required };
+    let hookOptions = {};
+    if (restHook) hookOptions = Object.assign(hookOptions, restHook);
+    if (input?.onChange) hookOptions = Object.assign(hookOptions, { onChange: input.onChange });
+    if (input && 'max' in input && input?.max) {
+        hookOptions = Object.assign(hookOptions, { max: { value: input.max, message: 'Maximum of value' } });
     }
-    if (hook?.pattern) hookOptions = { ...hookOptions, pattern: hook.pattern };
-    if (input?.onChange) hookOptions = { ...hookOptions, onChange: input.onChange };
 
     return hook ? hook?.register(hook.name, hookOptions) : undefined;
 };
