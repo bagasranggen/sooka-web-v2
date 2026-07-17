@@ -1,10 +1,13 @@
 @layer components {
-    .modal.modal--modal-sheet {
+    .modal.modal--modal-sheet.modal--purchase,
+    .modal.modal--modal-sheet.modal--cart {
+        @apply border-0!;
+        @apply md:h-[calc(100vh-10rem)] max-h-[80dvh] md:max-h-80;
+        @apply overflow-y-auto;
     }
 
     .modal.modal--modal-sheet.modal--purchase {
-        @apply p-0! border-0! overflow-y-auto;
-        @apply md:h-[calc(100vh-10rem)] max-h-[80dvh] md:max-h-80;
+        @apply p-0!;
 
         .modal__sticky {
             @apply sm:sticky sm:top-0;
@@ -18,6 +21,15 @@
                     @apply sm:h-full sm:object-cover;
                 }
             }
+        }
+    }
+
+    .modal.modal--modal-sheet.modal--cart {
+        .modal__sticky {
+            @apply lg:sticky lg:-top-(--spacing-y);
+            @apply max-lg:fixed max-lg:bottom-0 max-lg:w-full max-lg:left-0;
+            @apply max-lg:px-1.5 max-lg:py-1.5;
+            @apply max-lg:bg-white;
         }
     }
 }
