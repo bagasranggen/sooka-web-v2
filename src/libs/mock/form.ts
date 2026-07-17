@@ -106,6 +106,9 @@ export const FORM_PURCHASE_ADDONS: PurchaseProps['addOns'] = [
 export const FORM_CART: CartProps['items'] = createArrayFromNumber(4).map((_, i) => {
     const isOdd = i % 2 === 0;
 
+    let title = 'Strawberry Shortcake';
+    if (isOdd) title = 'Matilda Chocolate Cake';
+
     let addOns = ['Extra Candle: Red'];
     if (!isOdd) {
         addOns.push('Topper: Lorem ipsum dolor sit amet.');
@@ -122,8 +125,9 @@ export const FORM_CART: CartProps['items'] = createArrayFromNumber(4).map((_, i)
     if (!isOdd) maxQty = 1;
 
     return {
-        cartItemId: `strawberry-shortcake-${i}${new Date().getTime()}`,
-        title: 'Strawberry Shortcake',
+        cartItemId: `${i}${new Date().getTime()}`,
+        title,
+        media: [createPicsumImage({ id: 200 + i, width: 500, height: 500 })],
         variant: 'Round - 16cm x 16cm',
         price: convertIntToCurrency(250000, true),
         addOns,

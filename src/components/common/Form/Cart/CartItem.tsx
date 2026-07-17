@@ -3,7 +3,6 @@
 import React, { useState } from 'react';
 
 import { ClassnameProps } from '@/libs/@types';
-import { createPicsumImage } from '@/libs/factory';
 
 import { useForm } from 'react-hook-form';
 import { useDebounce } from 'react-use';
@@ -11,7 +10,7 @@ import { Trash } from 'lucide-react';
 
 import Heading, { BaseProps } from '@/components/common/Heading';
 import Columns from '@/components/common/Columns';
-import Picture from '@/components/common/Picture';
+import Picture, { BaseProps as BasePictureProps } from '@/components/common/Picture';
 import List from '@/components/common/List';
 import Button from '@/components/common/Button';
 import Quantity from '@/components/common/Quantity';
@@ -21,6 +20,7 @@ export type CartItemFormFields = Record<string, number>;
 export type CartItemProps = {
     cartItemId: string;
     title?: BaseProps['children'];
+    media?: BasePictureProps['items'];
     variant?: React.ReactNode;
     price?: React.ReactNode;
     addOns?: string[];
@@ -33,6 +33,7 @@ const CartItem = ({
     className,
     cartItemId,
     title,
+    media,
     variant,
     price,
     addOns,
@@ -93,7 +94,7 @@ const CartItem = ({
                 <Columns.Column
                     xs={6}
                     md={3}>
-                    <Picture items={[createPicsumImage({ width: 500, height: 500 })]} />
+                    {media && <Picture items={media} />}
                 </Columns.Column>
 
                 <Columns.Column md={9}>
