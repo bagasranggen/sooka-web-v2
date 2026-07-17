@@ -1,0 +1,44 @@
+@layer components {
+    .quantity {
+        @apply flex;
+
+        .quantity__btn,
+        .quantity__text {
+            @apply shrink-0;
+        }
+
+        .quantity__btn {
+            @apply basis-2.5;
+            @apply flex justify-center items-center;
+            @apply text-light;
+            @apply bg-sooka-primary;
+            @apply border-sooka-primary;
+            @apply first:border-t first:border-b first:border-l;
+            @apply last:border-t last:border-b last:border-r;
+            @apply md:transition-colors;
+            @apply md:hover:bg-sooka-primary/60;
+            @apply md:hover:border-sooka-primary/10;
+            @apply disabled:pointer-events-none;
+            @apply disabled:bg-sooka-primary/40;
+            @apply disabled:border-sooka-primary/10;
+        }
+
+        .quantity__text {
+            @apply text-center;
+            @apply basis-3;
+            @apply border-b;
+            @apply border-t;
+
+            input {
+                @apply max-w-4.5;
+                @apply focus-within:outline-none;
+                @apply px-1;
+                @apply text-center;
+
+                &[type='number'] {
+                    @apply [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none;
+                }
+            }
+        }
+    }
+}
