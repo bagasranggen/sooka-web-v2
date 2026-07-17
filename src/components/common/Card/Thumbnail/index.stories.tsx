@@ -1,14 +1,12 @@
-import { useState } from 'react';
-
 import type { Meta, StoryObj } from '@storybook/nextjs-vite';
 
 import { fn } from 'storybook/test';
 
 import { CARD_THUMBNAIL_WITH_PRICE } from '@/libs/mock';
+import { useOrderStateContext } from '@/store/context';
 
 import Container from '@/components/common/Container';
-
-import Thumbnail, { ThumbnailProps } from './index';
+import Thumbnail from './index';
 
 // More on how to set up stories at: https://storybook.js.org/docs/writing-stories#default-export
 const meta = {
@@ -38,8 +36,7 @@ export const Default: ThumbnailStory = {
         items: CARD_THUMBNAIL_WITH_PRICE,
     },
     render: (arg) => {
-        const [popupIsOpen, setPopupIsOpen] = useState<NonNullable<ThumbnailProps['popup']>['open']>(false);
-        const [popupContent, setPopupContent] = useState<NonNullable<ThumbnailProps['popup']>['content']>(undefined);
+        const { popupIsOpen, setPopupIsOpen, popupContent, setPopupContent } = useOrderStateContext();
 
         return (
             <Container className="my-5">
@@ -47,8 +44,7 @@ export const Default: ThumbnailStory = {
                     {...arg}
                     onClick={(data) => {
                         setPopupIsOpen(true);
-                        setPopupContent(data);
-                        // setPopupIsOpen({ open: true });
+                        if (setPopupContent) setPopupContent(data);
                     }}
                     popup={{
                         open: popupIsOpen,
@@ -65,9 +61,24 @@ export const Individual: ThumbnailStory = {
     args: {
         items: [CARD_THUMBNAIL_WITH_PRICE[0]],
     },
-    render: (arg) => (
-        <Container className="my-5">
-            <Thumbnail {...arg} />
-        </Container>
-    ),
+    render: (arg) => {
+        const { popupIsOpen, setPopupIsOpen, popupContent, setPopupContent } = useOrderStateContext();
+
+        return (
+            <Container className="my-5">
+                <Thumbnail
+                    {...arg}
+                    onClick={(data) => {
+                        setPopupIsOpen(true);
+                        if (setPopupContent) setPopupContent(data);
+                    }}
+                    popup={{
+                        open: popupIsOpen,
+                        onOpenChange: (open) => setPopupIsOpen(open),
+                        content: popupContent,
+                    }}
+                />
+            </Container>
+        );
+    },
 };
