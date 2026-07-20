@@ -7,9 +7,9 @@ import CartItem, { CartItemProps, CartItemFormFields } from '@/components/common
 
 export type CartProps = {
     items?: Omit<CartItemProps, 'className' | 'onSubmit' | 'onRemove'>[];
-} & Pick<CartItemProps, 'onSubmit' | 'onRemove'>;
+} & Pick<CartItemProps, 'onSubmit' | 'onRemove' | 'className'>;
 
-const Cart = ({ items, onSubmit, onRemove }: CartProps): React.ReactElement | null => {
+const Cart = ({ className, items, onSubmit, onRemove }: CartProps): React.ReactElement | null => {
     if (!items || items.length === 0) return null;
 
     return (
@@ -18,6 +18,7 @@ const Cart = ({ items, onSubmit, onRemove }: CartProps): React.ReactElement | nu
                 let wrapperClass: ArrayStringProps = [];
                 if (i !== 0) wrapperClass.push('mt-3 pt-3 border-t');
                 // if (i === array.length - 1) formClass.push('pb-3 border-b');
+                if (className) wrapperClass.push(className);
                 wrapperClass = joinArrayString(wrapperClass);
 
                 return (

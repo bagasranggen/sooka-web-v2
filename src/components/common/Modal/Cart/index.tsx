@@ -29,35 +29,23 @@ const Cart = ({ open, onOpenChange, items, onSubmit, onRemove, price }: CartProp
                 showCloseButton: false,
                 side: 'bottom',
             }}>
-            <Columns gutterY={3}>
-                <Columns.Column
-                    style={{ '--sticky-height': `${height}px` } as React.CSSProperties}
-                    className="max-lg:pb-[calc(var(--sticky-height))]"
-                    md={12}
-                    lg={8}
-                    // xl={10}
-                >
-                    <Form.Cart
-                        items={items}
-                        onSubmit={onSubmit}
-                        onRemove={onRemove}
-                    />
-                </Columns.Column>
+            <div
+                style={{ '--sticky-height': `${height}px` } as React.CSSProperties}
+                className="modal__wrapper container-fluid -mx-1.5 mb-[calc(var(--sticky-height)+3rem)]">
+                <Form.Cart
+                    items={items}
+                    onSubmit={onSubmit}
+                    onRemove={onRemove}
+                />
 
-                <Columns.Column
-                    md={12}
-                    lg={4}
-                    // xl={2}
-                >
-                    <div
-                        ref={ref as Ref<HTMLDivElement>}
-                        className="modal__sticky">
+                <div
+                    ref={ref as Ref<HTMLDivElement>}
+                    className="modal__sticky">
+                    <div className="container-fluid -mx-1">
                         <Columns
                             className="max-lg:items-center"
                             gutterY={{ xs: 0, md: 3 }}>
-                            <Columns.Column
-                                xs={8}
-                                lg={12}>
+                            <Columns.Column xs={8}>
                                 <Heading
                                     as="h2"
                                     className="text-[3rem] leading-3.5">
@@ -68,14 +56,13 @@ const Cart = ({ open, onOpenChange, items, onSubmit, onRemove, price }: CartProp
 
                             <Columns.Column
                                 xs={4}
-                                lg={12}
                                 className="text-end lg:text-center">
                                 <Button.Arrow as="button">ORDER</Button.Arrow>
                             </Columns.Column>
                         </Columns>
                     </div>
-                </Columns.Column>
-            </Columns>
+                </div>
+            </div>
         </ModalSheet>
     );
 };

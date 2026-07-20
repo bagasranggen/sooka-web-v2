@@ -2,6 +2,10 @@
     .modal.modal--modal-sheet.modal--purchase,
     .modal.modal--modal-sheet.modal--cart {
         @apply border-0!;
+    }
+
+    .modal.modal--modal-sheet.modal--purchase,
+    .modal.modal--modal-sheet.modal--cart .modal__wrapper {
         @apply md:h-[calc(100vh-10rem)] max-h-[80dvh] md:max-h-80;
         @apply overflow-y-auto;
     }
@@ -26,10 +30,9 @@
 
     .modal.modal--modal-sheet.modal--cart {
         .modal__sticky {
-            @apply lg:sticky lg:-top-(--spacing-y);
-            @apply max-lg:fixed max-lg:bottom-0 max-lg:w-full max-lg:left-0;
-            @apply max-lg:px-1.5 max-lg:py-1.5;
-            @apply max-lg:bg-white;
+            @apply fixed bottom-0 w-full left-0;
+            @apply p-2;
+            @apply bg-white;
         }
     }
 }

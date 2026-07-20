@@ -94,7 +94,7 @@ export const CartStateContextProvider = ({ children }: PropsWithChildren) => {
 
                 data.push({
                     cartItemId: item.cartItemId.toString(),
-                    media: [createPicsumImage({ id: 200 + i, width: 500, height: 500 })],
+                    media: [createPicsumImage({ id: 220 + i, width: 500, height: 500 })],
                     title: item.title,
                     variant: variantLabel,
                     addOns,
