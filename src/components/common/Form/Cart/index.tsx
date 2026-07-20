@@ -3,13 +3,13 @@ import React from 'react';
 import { ArrayStringProps } from '@/libs/@types';
 import { joinArrayString } from '@/libs/utils';
 
-import CartItem, { CartItemProps } from '@/components/common/Form/Cart/CartItem';
+import CartItem, { CartItemProps, CartItemFormFields } from '@/components/common/Form/Cart/CartItem';
 
 export type CartProps = {
-    items?: Omit<CartItemProps, 'className' | 'onSubmit'>[];
-} & Pick<CartItemProps, 'onSubmit'>;
+    items?: Omit<CartItemProps, 'className' | 'onSubmit' | 'onRemove'>[];
+} & Pick<CartItemProps, 'onSubmit' | 'onRemove'>;
 
-const Cart = ({ items, onSubmit }: CartProps): React.ReactElement | null => {
+const Cart = ({ items, onSubmit, onRemove }: CartProps): React.ReactElement | null => {
     if (!items || items.length === 0) return null;
 
     return (
@@ -22,9 +22,10 @@ const Cart = ({ items, onSubmit }: CartProps): React.ReactElement | null => {
 
                 return (
                     <CartItem
-                        key={i}
+                        key={item.cartItemId}
                         className={wrapperClass}
                         onSubmit={onSubmit}
+                        onRemove={onRemove}
                         {...item}
                     />
                 );
@@ -34,3 +35,5 @@ const Cart = ({ items, onSubmit }: CartProps): React.ReactElement | null => {
 };
 
 export default Cart;
+
+export type { CartItemFormFields };

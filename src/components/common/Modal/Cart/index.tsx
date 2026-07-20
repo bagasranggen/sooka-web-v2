@@ -10,9 +10,11 @@ import Heading from '@/components/common/Heading';
 import Button from '@/components/common/Button';
 import ModalSheet, { ModalSheetProps } from '@/components/common/Modal/ModalSheet';
 
-export type CartProps = {} & Pick<ModalSheetProps, 'open' | 'onOpenChange'> & Pick<FormCartProps, 'items' | 'onSubmit'>;
+export type CartProps = {
+    price?: React.ReactNode;
+} & (Pick<ModalSheetProps, 'open' | 'onOpenChange'> & Pick<FormCartProps, 'items' | 'onSubmit' | 'onRemove'>);
 
-const Cart = ({ open, onOpenChange, items, onSubmit }: CartProps): React.ReactElement => {
+const Cart = ({ open, onOpenChange, items, onSubmit, onRemove, price }: CartProps): React.ReactElement => {
     const [ref, { height }] = useMeasure();
 
     return (
@@ -32,18 +34,21 @@ const Cart = ({ open, onOpenChange, items, onSubmit }: CartProps): React.ReactEl
                     style={{ '--sticky-height': `${height}px` } as React.CSSProperties}
                     className="max-lg:pb-[calc(var(--sticky-height))]"
                     md={12}
-                    lg={9}
-                    xl={10}>
+                    lg={8}
+                    // xl={10}
+                >
                     <Form.Cart
                         items={items}
                         onSubmit={onSubmit}
+                        onRemove={onRemove}
                     />
                 </Columns.Column>
 
                 <Columns.Column
                     md={12}
-                    lg={3}
-                    xl={2}>
+                    lg={4}
+                    // xl={2}
+                >
                     <div
                         ref={ref as Ref<HTMLDivElement>}
                         className="modal__sticky">
@@ -58,7 +63,7 @@ const Cart = ({ open, onOpenChange, items, onSubmit }: CartProps): React.ReactEl
                                     className="text-[3rem] leading-3.5">
                                     Total
                                 </Heading>
-                                <p className="text-md uppercase tracking-0.1 font-bold">Rp1.200.000</p>
+                                {price && <p className="text-md uppercase tracking-0.1 font-bold">{price}</p>}
                             </Columns.Column>
 
                             <Columns.Column

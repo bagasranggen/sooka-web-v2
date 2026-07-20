@@ -15,18 +15,29 @@ import List from '@/components/common/List';
 import Button from '@/components/common/Button';
 import Quantity from '@/components/common/Quantity';
 
-export type CartItemFormFields = Record<string, number>;
+export const CART_ITEM_FORM_HANDLE = {
+    CART_ITEM_ID: 'cartItemId',
+    QUANTITY: 'qty',
+} as const;
+
+export type CartItemFormFields = {
+    [CART_ITEM_FORM_HANDLE.CART_ITEM_ID]: string;
+    [CART_ITEM_FORM_HANDLE.QUANTITY]: number;
+};
 
 export type CartItemProps = {
     cartItemId: string;
     title?: BaseProps['children'];
     media?: BasePictureProps['items'];
     variant?: React.ReactNode;
-    price?: React.ReactNode;
+    price?: number;
+    priceCurrency?: React.ReactNode;
     addOns?: string[];
     note?: React.ReactNode;
+    qty: number;
     maxQty?: number;
     onSubmit?: (data: CartItemFormFields) => void;
+    onRemove?: (data: CartItemFormFields) => void;
 } & ClassnameProps;
 
 const CartItem = ({
@@ -35,27 +46,25 @@ const CartItem = ({
     title,
     media,
     variant,
-    price,
+    priceCurrency,
     addOns,
     note,
+    qty,
     maxQty,
     onSubmit,
+    onRemove,
 }: CartItemProps): React.ReactElement => {
-    const {
-        register,
-        handleSubmit,
-        setValue,
-        getValues,
-        formState: { errors },
-        watch,
-    } = useForm<CartItemFormFields>();
+    const { register, handleSubmit, setValue, getValues } = useForm<CartItemFormFields>({
+        defaultValues: {
+            cartItemId,
+            qty,
+        },
+    });
     const [data, setData] = useState<CartItemFormFields>();
-
-    watch(cartItemId);
-    const quantity = getValues(cartItemId);
+    const minQty = 1;
 
     type UpdateQuantityHandlerProps = {
-        cartId: string;
+        cartId: CartItemProps['cartItemId'];
         type: 'increment' | 'decrement';
     };
 
@@ -65,11 +74,14 @@ const CartItem = ({
             return;
         }
 
-        let updatedValue = getValues(cartId);
-        if (type === 'increment') updatedValue += 1;
-        if (type === 'decrement') updatedValue -= 1;
+        let updatedValue = getValues(CART_ITEM_FORM_HANDLE.QUANTITY);
+        if (typeof updatedValue === 'number' && type === 'increment') updatedValue += 1;
+        if (typeof updatedValue === 'number' && type === 'decrement') updatedValue -= 1;
 
-        setValue(cartId, updatedValue, {
+        if (maxQty && updatedValue > maxQty) return;
+        if (updatedValue < minQty) return;
+
+        setValue(CART_ITEM_FORM_HANDLE.QUANTITY, updatedValue, {
             shouldValidate: true,
             shouldDirty: true,
             shouldTouch: true,
@@ -143,9 +155,9 @@ const CartItem = ({
                                 <Columns.Column
                                     xs={7}
                                     lg={12}>
-                                    {price && (
+                                    {priceCurrency && (
                                         <p className="max-lg:text-md lg:text-end tracking-0.1 uppercase font-bold">
-                                            {price}
+                                            {priceCurrency}
                                         </p>
                                     )}
                                 </Columns.Column>
@@ -160,7 +172,10 @@ const CartItem = ({
                                             <Button
                                                 as="button"
                                                 type="button"
-                                                className="md:transition-colors md:hover:text-sooka-primary">
+                                                className="md:transition-colors md:hover:text-sooka-primary"
+                                                onClick={() => {
+                                                    if (onRemove) onRemove({ cartItemId, qty: 0 });
+                                                }}>
                                                 <Trash size={15} />
                                             </Button>
                                         </Columns.Column>
@@ -170,17 +185,12 @@ const CartItem = ({
                                                 input={{
                                                     type: 'number',
                                                     disabled: true,
-                                                    // max: 5,
-                                                    value: 1,
-                                                    onChange: (e) => {
-                                                        console.log('run');
-
-                                                        register(cartItemId).onChange(e);
-                                                    },
+                                                    // value: qty,
                                                     hook: {
                                                         register,
-                                                        name: cartItemId,
+                                                        name: CART_ITEM_FORM_HANDLE.QUANTITY,
                                                         valueAsNumber: true,
+                                                        min: minQty,
                                                         ...(maxQty
                                                             ? {
                                                                   max: {
@@ -193,7 +203,7 @@ const CartItem = ({
                                                 }}
                                                 decrement={{
                                                     type: 'submit',
-                                                    disabled: quantity <= 1,
+                                                    disabled: qty <= 1,
                                                     onClick: () => {
                                                         updateQuantityHandler({
                                                             cartId: cartItemId,
@@ -203,7 +213,7 @@ const CartItem = ({
                                                 }}
                                                 increment={{
                                                     type: 'submit',
-                                                    disabled: maxQty ? quantity >= maxQty : false,
+                                                    disabled: maxQty ? qty >= maxQty : false,
                                                     onClick: () => {
                                                         updateQuantityHandler({
                                                             cartId: cartItemId,

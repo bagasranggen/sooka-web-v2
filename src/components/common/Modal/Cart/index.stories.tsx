@@ -1,8 +1,11 @@
+import { Suspense } from 'react';
 import type { Meta, StoryObj } from '@storybook/nextjs-vite';
 
 import { fn } from 'storybook/test';
 
-import { FORM_CART, MODAL_PURCHASE } from '@/libs/mock';
+import { CART_ITEMS } from '@/libs/mock';
+import { useCartStateContext } from '@/store/context';
+import { NavigationEvents } from '@/libs/hooks';
 
 import Cart from './index';
 
@@ -32,9 +35,36 @@ type Story = StoryObj<typeof meta>;
 export const Default: Story = {
     args: {
         open: true,
-        items: FORM_CART,
-        onSubmit: (data) => {
-            console.log({ data });
-        },
+        // items: FORM_CART,
+        // onSubmit: (data) => {
+        //     console.log({ data });
+        // },
+    },
+    render: (args) => {
+        const { items, setItems, totalPrice, updateCartQuantityHandler } = useCartStateContext();
+
+        return (
+            <>
+                <Suspense fallback={null}>
+                    <NavigationEvents
+                        endHandler={() => {
+                            setItems(CART_ITEMS);
+                        }}
+                    />
+                </Suspense>
+                <Cart
+                    items={items}
+                    onSubmit={(data) => {
+                        console.log({ data });
+                        updateCartQuantityHandler(data);
+                    }}
+                    onRemove={(data) => {
+                        updateCartQuantityHandler(data);
+                    }}
+                    price={totalPrice}
+                    {...args}
+                />
+            </>
+        );
     },
 };

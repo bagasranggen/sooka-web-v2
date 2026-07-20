@@ -1,5 +1,6 @@
 export * from './card';
 export * from './carousel';
+export * from './cart';
 export * from './collage';
 export * from './form';
 export * from './list';
