@@ -8,11 +8,11 @@ import Form, { PurchaseProps as FormPurchaseProps } from '@/components/common/Fo
 import ModalSheet, { ModalSheetProps } from '@/components/common/Modal/ModalSheet';
 
 export type PurchaseProps = {
-    form?: FormPurchaseProps;
+    form?: Omit<FormPurchaseProps, 'onSubmit'>;
     media?: BaseProps['items'][];
     title?: BaseHeadingProps['children'];
     description?: React.ReactNode;
-} & Pick<ModalSheetProps, 'open' | 'onOpenChange'>;
+} & (Pick<ModalSheetProps, 'open' | 'onOpenChange'> & Pick<FormPurchaseProps, 'onSubmit'>);
 
 const Purchase = ({
     open,
@@ -21,6 +21,7 @@ const Purchase = ({
     title,
     description,
     form,
+    onSubmit,
 }: PurchaseProps): React.ReactElement | null => {
     return (
         <ModalSheet
@@ -74,6 +75,7 @@ const Purchase = ({
 
                             <Form.Purchase
                                 className="mt-3"
+                                onSubmit={onSubmit}
                                 {...form}
                             />
                         </div>

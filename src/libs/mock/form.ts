@@ -56,11 +56,13 @@ export const FORM_ORDER: OrderProps['summaries'] = [
     },
 ];
 
+// export const FORM_PURCHASE_MEDIA: PurchaseProps['media'] = [createPicsumImage({ id: 200, width: 500, height: 500 })];
+
 export const FORM_PURCHASE_VARIANTS: PurchaseProps['variants'] = [
     {
         id: 'tes',
         type: 'radio',
-        value: '120000',
+        value: 'Round - 15cm,120000',
         // checked: true,
         label: 'Round - 15cm',
         price: 'Rp120.000',
@@ -69,7 +71,7 @@ export const FORM_PURCHASE_VARIANTS: PurchaseProps['variants'] = [
     {
         id: 'tes2',
         type: 'radio',
-        value: '140000',
+        value: 'Square - 16cm x 16cm,140000',
         checked: true,
         label: 'Square - 16cm x 16cm',
         price: 'Rp140.000',
@@ -82,7 +84,7 @@ export const FORM_PURCHASE_ADDONS: PurchaseProps['addOns'] = [
         id: 'extraCandle',
         media: [createPicsumImage({ width: 200, height: 200 })],
         type: 'checkbox',
-        value: '3000',
+        value: 'extraCandle,Extra Candle,3000',
         // checked: true,
         // required: true,
         label: 'Extra Candle',
@@ -96,7 +98,7 @@ export const FORM_PURCHASE_ADDONS: PurchaseProps['addOns'] = [
         id: 'test',
         media: [createPicsumImage({ id: 200, width: 200, height: 200 })],
         type: 'checkbox',
-        value: '5000',
+        value: 'test,test,5000',
         // required: true,
         label: 'Test',
         price: 'Rp5.000',
@@ -129,9 +131,11 @@ export const FORM_CART: CartProps['items'] = createArrayFromNumber(4).map((_, i)
         title,
         media: [createPicsumImage({ id: 200 + i, width: 500, height: 500 })],
         variant: 'Round - 16cm x 16cm',
-        price: convertIntToCurrency(250000, true),
+        price: 250000,
+        priceCurrency: convertIntToCurrency(250000, true),
         addOns,
         note,
+        qty: 1,
         maxQty,
     };
 });

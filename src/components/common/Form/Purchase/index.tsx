@@ -12,18 +12,19 @@ import PurchaseSection, { PurchaseSectionProps } from '@/components/common/Form/
 
 export const PURCHASE_FORM_HANDLE = {
     VARIANT: 'variant',
-    VARIANT_LABEL: 'variantLabel',
     ADDONS: 'addOns',
     NOTE: 'note',
     TOTAL_PRICE: 'totalPrice',
-};
+    CART_ITEM_ID: 'cartItemId',
+} as const;
 
 export type PurchaseFormFields = {
-    [PURCHASE_FORM_HANDLE.VARIANT]?: string;
-    [PURCHASE_FORM_HANDLE.ADDONS]?: string[];
-    [PURCHASE_FORM_HANDLE.NOTE]?: string;
-    [PURCHASE_FORM_HANDLE.TOTAL_PRICE]?: string;
-} & Record<string, string>;
+    [PURCHASE_FORM_HANDLE.VARIANT]: string;
+    [PURCHASE_FORM_HANDLE.ADDONS]: string[];
+    [PURCHASE_FORM_HANDLE.NOTE]: string;
+    [PURCHASE_FORM_HANDLE.TOTAL_PRICE]?: number;
+    [PURCHASE_FORM_HANDLE.CART_ITEM_ID]: string;
+} & Record<string, string | number>;
 
 export type PurchaseProps = {
     variants?: PurchaseSectionProps['items'];
@@ -39,7 +40,11 @@ const Purchase = ({ className, variants, addOns, onSubmit }: PurchaseProps): Rea
         getValues,
         formState: { errors },
         watch,
-    } = useForm<PurchaseFormFields>();
+    } = useForm<PurchaseFormFields>({
+        defaultValues: {
+            cartItemId: new Date().getTime().toString(),
+        },
+    });
 
     watch(PURCHASE_FORM_HANDLE.VARIANT);
     watch(PURCHASE_FORM_HANDLE.ADDONS);
@@ -50,14 +55,16 @@ const Purchase = ({ className, variants, addOns, onSubmit }: PurchaseProps): Rea
     const total = useMemo(() => {
         let data = 0;
 
-        if (variantPrice && typeof variantPrice === 'string' && checkStringIsNumber(variantPrice)) {
-            data += parseInt(variantPrice);
+        if (variantPrice && typeof variantPrice === 'string') {
+            const [label, price] = variantPrice.split(',');
+            if (checkStringIsNumber(price)) data += parseInt(price);
         }
 
-        if (addonsPrice && addonsPrice.length > 0 && Array.isArray(addonsPrice)) {
+        if (addonsPrice && Array.isArray(addonsPrice) && addonsPrice.length > 0) {
             addonsPrice.forEach((item) => {
-                if (item && typeof item === 'string' && checkStringIsNumber(item)) {
-                    data += parseInt(item);
+                if (item && typeof item === 'string') {
+                    const [slug, label, price] = item.split(',');
+                    if (checkStringIsNumber(price)) data += parseInt(price);
                 }
             });
         }
@@ -66,17 +73,8 @@ const Purchase = ({ className, variants, addOns, onSubmit }: PurchaseProps): Rea
     }, [variantPrice, addonsPrice]);
 
     useEffect(() => {
-        setValue(PURCHASE_FORM_HANDLE.TOTAL_PRICE, total.toString());
+        setValue(PURCHASE_FORM_HANDLE.TOTAL_PRICE, total);
     }, [total]);
-
-    useEffect(() => {
-        if (!variants || variants.length === 0) return;
-        if (!variantPrice) return;
-
-        const selected = variants.find((item) => item.value === variantPrice);
-
-        if (selected?.label) setValue(PURCHASE_FORM_HANDLE.VARIANT_LABEL, selected.label);
-    }, [variants, variantPrice]);
 
     return (
         <form
@@ -92,15 +90,6 @@ const Purchase = ({ className, variants, addOns, onSubmit }: PurchaseProps): Rea
                         name={PURCHASE_FORM_HANDLE.VARIANT}
                         error={errors?.variant?.message}
                         items={variants}
-                    />
-
-                    <Input
-                        type="text"
-                        hook={{
-                            register,
-                            name: PURCHASE_FORM_HANDLE.VARIANT_LABEL,
-                        }}
-                        hidden
                     />
                 </>
             )}
@@ -137,7 +126,7 @@ const Purchase = ({ className, variants, addOns, onSubmit }: PurchaseProps): Rea
                 <Columns className="items-center">
                     <Columns.Column>
                         <p className="font-bold uppercase tracking-0.1 text-md mb-0">
-                            Rp{total > 0 ? convertIntToCurrency(total) : 0}
+                            {convertIntToCurrency(total, true)}
                         </p>
                         <Input
                             type="text"
@@ -147,6 +136,7 @@ const Purchase = ({ className, variants, addOns, onSubmit }: PurchaseProps): Rea
                             hook={{
                                 register,
                                 name: PURCHASE_FORM_HANDLE.TOTAL_PRICE,
+                                valueAsNumber: true,
                             }}
                         />
                     </Columns.Column>
