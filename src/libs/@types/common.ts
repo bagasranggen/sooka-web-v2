@@ -1,4 +1,4 @@
-import React, { JSX } from 'react';
+import React, { ExoticComponent, FragmentProps, JSX } from 'react';
 import { Metadata } from 'next';
 
 export type ObjectProps<Props> = { [key: string]: Props };
@@ -44,3 +44,5 @@ export type FragmentTagsProps = ExoticComponent<FragmentProps>;
 export type ResponsiveProps = 'xs' | 'sm' | 'md' | 'lg' | 'xl' | '2xl' | '3xl';
 
 export type BreakpointsProps = 'xs' | 'sm' | 'md' | 'lg' | 'xl' | 'xxl' | 'xxxl';
+
+export type ParametersProps<Props extends (...args: any[]) => any> = Parameters<Props>[0];

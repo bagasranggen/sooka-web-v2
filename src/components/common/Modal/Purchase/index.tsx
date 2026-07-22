@@ -1,5 +1,7 @@
 import React from 'react';
 
+import { ParametersProps } from '@/libs/@types';
+
 import Columns from '@/components/common/Columns';
 import Carousel from '@/components/common/Carousel';
 import Picture, { BaseProps } from '@/components/common/Picture';
@@ -14,7 +16,7 @@ export type PurchaseProps = {
     title?: BaseHeadingProps['children'];
     description?: React.ReactNode;
     onSubmit?: (
-        data: Parameters<NonNullable<FormPurchaseProps['onSubmit']>>[0],
+        data: ParametersProps<NonNullable<FormPurchaseProps['onSubmit']>>,
         media: PurchaseProps['mediaThumbnail']
     ) => void;
 } & Pick<ModalSheetProps, 'open' | 'onOpenChange'>;
