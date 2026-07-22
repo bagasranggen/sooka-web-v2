@@ -31,7 +31,7 @@
     .modal.modal--modal-sheet.modal--cart {
         .modal__sticky {
             @apply fixed bottom-0 w-full left-0;
-            @apply p-2;
+            @apply p-2!;
             @apply bg-white;
         }
     }

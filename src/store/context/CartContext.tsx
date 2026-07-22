@@ -88,9 +88,10 @@ export const CartStateContextProvider = ({ children }: PropsWithChildren) => {
                     });
                 }
 
-                let note = (item?.note as string) ?? '';
+                let note: string | React.ReactNode | undefined = (item?.note as string) ?? undefined;
                 // if (note) note = note.replace(/\n/g, '</br>');
                 if (note) note = `<p>${note}</p>`;
+                if (typeof note === 'string') note = parse(note);
 
                 data.push({
                     cartItemId: item.cartItemId.toString(),
@@ -98,7 +99,7 @@ export const CartStateContextProvider = ({ children }: PropsWithChildren) => {
                     title: item.title,
                     variant: variantLabel,
                     addOns,
-                    note: parse(note),
+                    note,
                     qty: (item?.qty as number) ?? 1,
                     maxQty: 5,
                     price: item?.totalPrice ?? 0,

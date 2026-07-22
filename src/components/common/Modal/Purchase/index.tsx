@@ -10,14 +10,20 @@ import ModalSheet, { ModalSheetProps } from '@/components/common/Modal/ModalShee
 export type PurchaseProps = {
     form?: Omit<FormPurchaseProps, 'onSubmit'>;
     media?: BaseProps['items'][];
+    mediaThumbnail?: BaseProps['items'];
     title?: BaseHeadingProps['children'];
     description?: React.ReactNode;
-} & (Pick<ModalSheetProps, 'open' | 'onOpenChange'> & Pick<FormPurchaseProps, 'onSubmit'>);
+    onSubmit?: (
+        data: Parameters<NonNullable<FormPurchaseProps['onSubmit']>>[0],
+        media: PurchaseProps['mediaThumbnail']
+    ) => void;
+} & Pick<ModalSheetProps, 'open' | 'onOpenChange'>;
 
 const Purchase = ({
     open,
     onOpenChange,
     media,
+    mediaThumbnail,
     title,
     description,
     form,
@@ -75,7 +81,9 @@ const Purchase = ({
 
                             <Form.Purchase
                                 className="mt-3"
-                                onSubmit={onSubmit}
+                                onSubmit={(data) => {
+                                    if (onSubmit) onSubmit(data, mediaThumbnail);
+                                }}
                                 {...form}
                             />
                         </div>
