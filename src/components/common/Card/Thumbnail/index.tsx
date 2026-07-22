@@ -1,7 +1,10 @@
 import React from 'react';
 
 import Base, { BaseProps as CardBaseProps } from '@/components/common/Card/Base';
-import ThumbnailItem, { ThumbnailItemProps } from '@/components/common/Card/Thumbnail/ThumbnailItem';
+import ThumbnailItem, {
+    ThumbnailItemProps,
+    ThumbnailLabelWithPositionProps,
+} from '@/components/common/Card/Thumbnail/ThumbnailItem';
 import Modal, { PurchaseProps } from '@/components/common/Modal';
 
 export type ThumbnailProps = {
@@ -47,3 +50,5 @@ const Thumbnail = ({
 };
 
 export default Thumbnail;
+
+export type { ThumbnailItemProps, ThumbnailLabelWithPositionProps };

@@ -1,3 +1,5 @@
+'use client';
+
 import { useCallback, useEffect, useState } from 'react';
 
 import { PortalBaseProps, PortalEventsProps } from '@/libs/@types';
