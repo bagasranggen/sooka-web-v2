@@ -1,0 +1,50 @@
+@layer components {
+    .input.input--label {
+        @apply relative;
+
+        input,
+        select,
+        textarea {
+            @apply min-h-[6.7rem];
+            @apply w-full placeholder:opacity-0 bg-transparent focus-visible:outline-none;
+        }
+
+        input,
+        select:not([multiple]) {
+            @apply pt-2;
+        }
+
+        input {
+            @apply text-md;
+            @apply px-2;
+            @apply border-b-2 border-b-sooka-primary/10;
+        }
+
+        textarea {
+            @apply pt-3;
+            @apply -mb-0.5;
+        }
+
+        select {
+            @apply px-1.75;
+
+            &[multiple] {
+                @apply mt-3;
+            }
+        }
+
+        &:not(.input--focus) {
+            /*@apply bg-sooka-primary;*/
+            label {
+                /*@apply peer-placeholder-shown:top-1/2 peer-placeholder-shown:-translate-y-1/2;*/
+            }
+        }
+
+        &.input--has-line {
+            @apply after:content-[''] after:bg-sooka-primary after:transition-[width];
+            @apply after:absolute after:left-0 after:bottom-0;
+            @apply after:w-0 after:h-[.2rem];
+            @apply md:hover:after:w-full focus-within:after:w-full;
+        }
+    }
+}

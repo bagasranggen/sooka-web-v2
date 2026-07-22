@@ -3,6 +3,7 @@ export * from './carousel';
 export * from './cart';
 export * from './collage';
 export * from './form';
+export * from './input';
 export * from './list';
 export * from './marquee';
 export * from './modal';
