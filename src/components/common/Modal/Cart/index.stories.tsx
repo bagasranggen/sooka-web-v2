@@ -36,12 +36,12 @@ export const Default: Story = {
     args: {
         open: true,
         // items: FORM_CART,
-        // onSubmit: (data) => {
-        //     console.log({ data });
-        // },
+        onSubmit: (data, lineItems) => {
+            console.log({ data, lineItems });
+        },
     },
     render: (args) => {
-        const { items, setItems, totalPrice, updateCartQuantityHandler } = useCartStateContext();
+        const { items, setItems, totalPrice, totalPriceCurrency, updateCartQuantityHandler } = useCartStateContext();
 
         return (
             <>
@@ -54,7 +54,7 @@ export const Default: Story = {
                 </Suspense>
                 <Cart
                     items={items}
-                    onSubmit={(data) => {
+                    onQuantityUpdate={(data) => {
                         console.log({ data });
                         updateCartQuantityHandler(data);
                     }}
@@ -62,6 +62,7 @@ export const Default: Story = {
                         updateCartQuantityHandler(data);
                     }}
                     price={totalPrice}
+                    priceCurrency={totalPriceCurrency}
                     {...args}
                 />
             </>

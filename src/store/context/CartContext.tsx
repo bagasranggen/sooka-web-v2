@@ -11,10 +11,11 @@ import { CartProps } from '@/components/common/Modal';
 import { PurchaseFormFields, CartItemFormFields } from '@/components/common/Form';
 
 export type CartState = {
-    items: CartProps['items'];
+    items: ({ noteRaw?: string } & NonNullable<CartProps['items']>[number])[];
     setItems: React.Dispatch<React.SetStateAction<PurchaseFormFields[]>>;
     count: number;
-    totalPrice: React.ReactNode;
+    totalPrice: number;
+    totalPriceCurrency: React.ReactNode;
     updateCartQuantityHandler: (props: CartItemFormFields) => void;
 };
 
@@ -23,6 +24,7 @@ export const CartStateContext = createContext<CartState>({
     setItems: () => {},
     count: 0,
     totalPrice: 0,
+    totalPriceCurrency: 0,
     updateCartQuantityHandler: () => {},
 });
 
@@ -69,7 +71,7 @@ export const CartStateContextProvider = ({ children }: PropsWithChildren) => {
     };
 
     const lineItems = useMemo(() => {
-        const data: CartProps['items'] = [];
+        const data: CartState['items'] = [];
 
         if (items && items.length > 0) {
             items.forEach((item, i) => {
@@ -93,6 +95,9 @@ export const CartStateContextProvider = ({ children }: PropsWithChildren) => {
                 if (note) note = `<p>${note}</p>`;
                 if (typeof note === 'string') note = parse(note);
 
+                let noteRaw: string | undefined = item?.note;
+                if (noteRaw) noteRaw = noteRaw.replace(/\n/g, ' ');
+
                 data.push({
                     cartItemId: item.cartItemId.toString(),
                     media: [createPicsumImage({ id: 220 + i, width: 500, height: 500 })],
@@ -100,6 +105,7 @@ export const CartStateContextProvider = ({ children }: PropsWithChildren) => {
                     variant: variantLabel,
                     addOns,
                     note,
+                    noteRaw,
                     qty: (item?.qty as number) ?? 1,
                     maxQty: 5,
                     price: item?.totalPrice ?? 0,
@@ -119,7 +125,8 @@ export const CartStateContextProvider = ({ children }: PropsWithChildren) => {
         items: lineItems,
         setItems,
         count: lineItems.length,
-        totalPrice: convertIntToCurrency(totalPrice, true),
+        totalPrice: totalPrice,
+        totalPriceCurrency: convertIntToCurrency(totalPrice, true),
         updateCartQuantityHandler,
     };
 
