@@ -83,6 +83,7 @@ const Purchase = ({
 
                             <Form.Purchase
                                 className="mt-3"
+                                title={title as string}
                                 onSubmit={(data) => {
                                     if (onSubmit) onSubmit(data, mediaThumbnail);
                                 }}

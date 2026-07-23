@@ -13,28 +13,33 @@ import Input from '@/components/common/Input';
 import PurchaseSection, { PurchaseSectionProps } from '@/components/common/Form/Purchase/PurchaseSection';
 
 export const PURCHASE_FORM_HANDLE = {
+    TITLE: 'title',
     VARIANT: 'variant',
     ADDONS: 'addOns',
     NOTE: 'note',
     TOTAL_PRICE: 'totalPrice',
     CART_ITEM_ID: 'cartItemId',
+    QUANTITY: 'qty',
 } as const;
 
 export type PurchaseFormFields = {
+    [PURCHASE_FORM_HANDLE.TITLE]: string;
     [PURCHASE_FORM_HANDLE.VARIANT]: string;
     [PURCHASE_FORM_HANDLE.ADDONS]: string[];
     [PURCHASE_FORM_HANDLE.NOTE]: string;
     [PURCHASE_FORM_HANDLE.TOTAL_PRICE]?: number;
     [PURCHASE_FORM_HANDLE.CART_ITEM_ID]: string;
-} & Record<string, string | number>;
+    [PURCHASE_FORM_HANDLE.QUANTITY]: number;
+} & Record<string, string | string[] | number>;
 
 export type PurchaseProps = {
+    title?: string;
     variants?: PurchaseSectionProps['items'];
     addOns?: PurchaseSectionProps['items'];
     onSubmit?: (data: PurchaseFormFields) => void;
 } & ClassnameProps;
 
-const Purchase = ({ className, variants, addOns, onSubmit }: PurchaseProps): React.ReactElement => {
+const Purchase = ({ className, title, variants, addOns, onSubmit }: PurchaseProps): React.ReactElement => {
     const {
         register,
         handleSubmit,
@@ -44,6 +49,8 @@ const Purchase = ({ className, variants, addOns, onSubmit }: PurchaseProps): Rea
         watch,
     } = useForm<PurchaseFormFields>({
         defaultValues: {
+            title,
+            qty: 1,
             cartItemId: new Date().getTime().toString(),
         },
     });

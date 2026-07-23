@@ -3,7 +3,8 @@ import type { Meta, StoryObj } from '@storybook/nextjs-vite';
 import { fn } from 'storybook/test';
 
 import { CARD_THUMBNAIL_WITH_PRICE } from '@/libs/mock';
-import { useOrderStateContext } from '@/store/context';
+import { createCartItem } from '@/libs/factory';
+import { useCartStateContext, useOrderStateContext } from '@/store/context';
 
 import Container from '@/components/common/Container';
 import Thumbnail from './index';
@@ -37,6 +38,7 @@ export const Default: ThumbnailStory = {
     },
     render: (arg) => {
         const { popupIsOpen, setPopupIsOpen, popupContent, setPopupContent } = useOrderStateContext();
+        const { setItems } = useCartStateContext();
 
         return (
             <Container className="my-5">
@@ -45,6 +47,16 @@ export const Default: ThumbnailStory = {
                     onClick={(data) => {
                         setPopupIsOpen(true);
                         if (setPopupContent) setPopupContent(data);
+                    }}
+                    onSubmit={(data, media) => {
+                        console.log({ data, media });
+
+                        const cartItem = createCartItem(data, { media });
+
+                        if (cartItem) {
+                            setItems((prevState) => [...prevState, cartItem]);
+                            setPopupIsOpen(false);
+                        }
                     }}
                     popup={{
                         open: popupIsOpen,

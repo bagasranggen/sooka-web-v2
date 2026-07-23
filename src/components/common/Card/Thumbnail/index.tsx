@@ -12,7 +12,7 @@ export type ThumbnailProps = {
     popup?: {
         content?: Omit<PurchaseProps, 'open' | 'onOpenChange'>;
     } & Pick<PurchaseProps, 'open' | 'onOpenChange'>;
-} & (Omit<CardBaseProps, 'items'> & Pick<ThumbnailItemProps, 'onClick'>);
+} & (Omit<CardBaseProps, 'items'> & Pick<ThumbnailItemProps, 'onClick'> & Pick<PurchaseProps, 'onSubmit'>);
 
 const Thumbnail = ({
     items,
@@ -20,6 +20,7 @@ const Thumbnail = ({
     column = { sm: 6, md: 4, lg: 3 },
     onClick,
     popup,
+    onSubmit,
     ...props
 }: ThumbnailProps): React.ReactElement => {
     return (
@@ -43,6 +44,7 @@ const Thumbnail = ({
             <Modal.Purchase
                 open={popup?.open}
                 onOpenChange={popup?.onOpenChange}
+                onSubmit={onSubmit}
                 {...popup?.content}
             />
         </>

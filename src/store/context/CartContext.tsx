@@ -3,7 +3,6 @@
 import React, { createContext, PropsWithChildren, useMemo, useState } from 'react';
 
 import { checkStringIsNumber, convertIntToCurrency } from '@/libs/utils';
-import { createPicsumImage } from '@/libs/factory';
 
 import parse from 'html-react-parser';
 
@@ -105,7 +104,7 @@ export const CartStateContextProvider = ({ children }: PropsWithChildren) => {
 
                 data.push({
                     cartItemId: item.cartItemId.toString(),
-                    media: [createPicsumImage({ id: 220 + i, width: 500, height: 500 })],
+                    media: (item?.media as any) ?? [],
                     title: item.title,
                     variant: variantLabel,
                     addOns,
@@ -141,9 +140,5 @@ export const CartStateContextProvider = ({ children }: PropsWithChildren) => {
         updateCartQuantityHandler,
     };
 
-    return (
-        <>
-            <CartStateContext.Provider value={defaultContext}>{children}</CartStateContext.Provider>
-        </>
-    );
+    return <CartStateContext.Provider value={defaultContext}>{children}</CartStateContext.Provider>;
 };
