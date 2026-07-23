@@ -6,7 +6,8 @@
 
     .modal.modal--modal-sheet.modal--purchase {
         @apply p-0!;
-        @apply md:h-[calc(100vh-10rem)] max-h-[80dvh] md:max-h-80;
+        @apply md:h-[calc(100vh-10rem)] max-h-[80dvh] md:max-h-[60dvh] lg:max-h-80;
+        @apply xl:max-w-120!;
         @apply overflow-y-auto;
 
         .modal__sticky {
@@ -14,7 +15,7 @@
         }
 
         .modal__carousel {
-            @apply sm:h-[80dvh] md:h-[calc(100vh-10rem)] md:max-h-80;
+            @apply sm:h-[80dvh] md:h-[calc(100vh-10rem)] md:max-h-[60dvh] lg:max-h-80;
 
             .swiper-slide {
                 img {
