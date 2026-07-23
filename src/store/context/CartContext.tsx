@@ -11,6 +11,8 @@ import { CartProps } from '@/components/common/Modal';
 import { PurchaseFormFields, CartItemFormFields } from '@/components/common/Form';
 
 export type CartState = {
+    isOpen: CartProps['open'];
+    setIsOpen: React.Dispatch<React.SetStateAction<CartState['isOpen']>>;
     items: ({ noteRaw?: string } & NonNullable<CartProps['items']>[number])[];
     setItems: React.Dispatch<React.SetStateAction<PurchaseFormFields[]>>;
     count: number;
@@ -20,6 +22,8 @@ export type CartState = {
 };
 
 export const CartStateContext = createContext<CartState>({
+    isOpen: false,
+    setIsOpen: () => {},
     items: [],
     setItems: () => {},
     count: 0,
@@ -29,6 +33,7 @@ export const CartStateContext = createContext<CartState>({
 });
 
 export const CartStateContextProvider = ({ children }: PropsWithChildren) => {
+    const [isOpen, setIsOpen] = useState<CartState['isOpen']>(false);
     const [items, setItems] = useState<PurchaseFormFields[]>([]);
 
     const updateCartQuantityHandler = (props: CartItemFormFields) => {
@@ -121,10 +126,16 @@ export const CartStateContextProvider = ({ children }: PropsWithChildren) => {
         return total + (item?.price ?? 0);
     }, 0);
 
+    const count = lineItems.reduce((total, item) => {
+        return total + (item?.qty ?? 0);
+    }, 0);
+
     const defaultContext = {
+        isOpen,
+        setIsOpen,
         items: lineItems,
         setItems,
-        count: lineItems.length,
+        count,
         totalPrice: totalPrice,
         totalPriceCurrency: convertIntToCurrency(totalPrice, true),
         updateCartQuantityHandler,
