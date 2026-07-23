@@ -1,4 +1,6 @@
-export const NAVIGATION_LINKS = [
+import { NavigationProps } from '@/components/layout/Navigation';
+
+export const NAVIGATION_LINKS: NavigationProps['items'] = [
     {
         href: '/cakes',
         children: 'cakes',
@@ -6,6 +8,12 @@ export const NAVIGATION_LINKS = [
     {
         href: '#',
         children: 'cupcakes & tartlets',
+        child: [
+            {
+                href: '/cakes',
+                children: 'cakes',
+            },
+        ],
     },
     {
         href: '/custom-cakes',

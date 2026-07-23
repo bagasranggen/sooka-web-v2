@@ -5,6 +5,7 @@ import React, { Ref, Suspense, useEffect, useState } from 'react';
 import { ArrayStringProps } from '@/libs/@types';
 import { NavigationEvents, SCREEN_HANDLES, ScreenResizeEvents, usePortal } from '@/libs/hooks';
 import { joinArrayString } from '@/libs/utils';
+import { useCartStateContext } from '@/store/context';
 
 import { useMeasure, useWindowScroll } from 'react-use';
 
@@ -14,6 +15,7 @@ import Offcanvas from '@/components/common/Offcanvas';
 import Container from '@/components/common/Container';
 import NavigationMenu from '@/components/layout/Navigation/NavigationMenu';
 import NavigationMenuMobile from '@/components/layout/Navigation/NavigationMenuMobile';
+import NavigationCart from '@/components/layout/Navigation/NavigationCart';
 
 export type NavigationItemNestedProps = Pick<NavigationItemProps, 'href' | 'children' | 'target'>;
 
@@ -26,6 +28,7 @@ export type NavigationProps = {
 };
 
 const Navigation = ({ items }: NavigationProps): React.ReactElement => {
+    const { count } = useCartStateContext();
     const { show, triggerOpen, triggerClose } = usePortal({});
     const [navRef, { height }] = useMeasure();
     const { y: scrollY } = useWindowScroll();
@@ -69,7 +72,7 @@ const Navigation = ({ items }: NavigationProps): React.ReactElement => {
                 ref={navRef as Ref<HTMLElement>}
                 className={navClass}>
                 <Container>
-                    <div className="flex items-center justify-between">
+                    <div className="flex items-center ">
                         <Button
                             as="anchor"
                             href="/"
@@ -79,7 +82,7 @@ const Navigation = ({ items }: NavigationProps): React.ReactElement => {
                             <Icon.Sooka
                                 id="logoHeader"
                                 color="light"
-                                className="h-[4.5rem]"
+                                className="h-4.5"
                             />
                         </Button>
 
@@ -96,7 +99,7 @@ const Navigation = ({ items }: NavigationProps): React.ReactElement => {
                         </Button>
 
                         <NavigationMenu
-                            className="hidden lg:flex"
+                            className="hidden lg:flex lg:ms-auto"
                             items={items}
                             dropdown={{
                                 active: activeDropdown,
@@ -106,6 +109,13 @@ const Navigation = ({ items }: NavigationProps): React.ReactElement => {
                                     },
                                 },
                             }}
+                        />
+
+                        <NavigationCart
+                            button={{
+                                className: 'ms-3',
+                            }}
+                            count={count}
                         />
                     </div>
                 </Container>
