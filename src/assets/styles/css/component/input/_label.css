@@ -1,13 +1,8 @@
 @layer components {
     .label-input {
         @apply block uppercase transition-all origin-top-left;
-        /*@apply text-[2.5rem] whitespace-nowrap;*/
         @apply whitespace-nowrap;
-        /*@apply tracking-[.6rem];*/
-        /*@apply px-2 py-1;*/
-        /*@apply group-focus-within:scale-50 group-focus-within:font-semibold group-focus-within:translate-x-[1.2rem];*/
         @apply group-focus-within:scale-50 group-focus-within:font-semibold;
-        /*@apply peer-[:not(:placeholder-shown)]:scale-50 peer-[:not(:placeholder-shown)]:font-semibold peer-[:not(:placeholder-shown)]:translate-x-[1.2rem];*/
         @apply peer-[:not(:placeholder-shown)]:scale-50 peer-[:not(:placeholder-shown)]:font-semibold;
 
         &.label-input--standalone {
@@ -15,7 +10,6 @@
         }
 
         &.label-input--active {
-            /*@apply scale-50 translate-x-[1.2rem] font-semibold;*/
             @apply scale-50 font-semibold;
         }
 
@@ -50,24 +44,15 @@
 
     .input.input--label {
         @apply relative;
-        /*@apply bg-sooka-primary;*/
 
         input,
         select,
         textarea {
-            /*@apply min-h-[6.7rem];*/
             @apply w-full placeholder:opacity-0 bg-transparent focus-visible:outline-none;
         }
 
-        input,
-        select:not([multiple]) {
-            @apply pt-2;
-        }
-
         input {
-            /*@apply text-md;*/
-            /*@apply px-2;*/
-            @apply border-b-2 border-b-sooka-primary/10;
+            @apply border-b-2 border-b-sooka-primary/25;
         }
 
         textarea {
@@ -83,37 +68,38 @@
             }
         }
 
-        .input__label {
-            /*@apply block uppercase transition-all origin-top-left;*/
-            /*@apply text-[2.5rem] whitespace-nowrap;*/
-            /*@apply tracking-[.6rem];*/
-            /*@apply px-2 py-1;*/
-        }
-
-        &:not(.input--focus) {
-            /*@apply bg-sooka-primary;*/
-            label {
-                /*@apply peer-placeholder-shown:top-1/2 peer-placeholder-shown:-translate-y-1/2;*/
-            }
-        }
-
         &.input--md {
             input,
             select,
             textarea {
                 @apply min-h-[6.7rem];
-                /*@apply w-full placeholder:opacity-0 bg-transparent focus-visible:outline-none;*/
             }
 
             input {
                 @apply text-md;
                 @apply px-2;
             }
+
+            input,
+            select:not([multiple]) {
+                @apply pt-2;
+            }
         }
 
         &.input--sm {
+            input,
+            select,
+            textarea {
+                @apply min-h-[4.5rem];
+            }
+
             input {
                 @apply px-1;
+            }
+
+            input,
+            select:not([multiple]) {
+                @apply pt-1;
             }
         }
 

@@ -93,7 +93,7 @@ export const CartStateContextProvider = ({ children }: PropsWithChildren) => {
                 let note: string | React.ReactNode | undefined = (item?.note as string) ?? undefined;
                 // if (note) note = note.replace(/\n/g, '</br>');
                 if (note) note = `<p>${note}</p>`;
-                if (typeof note === 'string') note = parse(note);
+                if (note && typeof note === 'string') note = parse(note);
 
                 let noteRaw: string | undefined = item?.note;
                 if (noteRaw) noteRaw = noteRaw.replace(/\n/g, ' ');

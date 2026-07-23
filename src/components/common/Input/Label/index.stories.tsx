@@ -45,6 +45,23 @@ export const DefaultSmall: Story = {
     },
 };
 
+export const Date: Story = {
+    args: {
+        type: 'date',
+        id: 'test',
+        label: 'Test',
+    },
+};
+
+export const DateSmall: Story = {
+    args: {
+        type: 'date',
+        id: 'test',
+        label: 'Test',
+        size: 'sm',
+    },
+};
+
 export const TextArea: Story = {
     args: {
         type: 'textarea',

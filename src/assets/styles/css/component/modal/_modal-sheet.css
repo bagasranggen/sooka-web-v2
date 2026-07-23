@@ -4,12 +4,6 @@
         @apply border-0!;
     }
 
-    /*.modal.modal--modal-sheet.modal--purchase,*/
-    /*.modal.modal--modal-sheet.modal--cart .modal__wrapper {*/
-    /*    @apply md:h-[calc(100vh-10rem)] max-h-[80dvh] md:max-h-80;*/
-    /*    @apply overflow-y-auto;*/
-    /*}*/
-
     .modal.modal--modal-sheet.modal--purchase {
         @apply p-0!;
         @apply md:h-[calc(100vh-10rem)] max-h-[80dvh] md:max-h-80;
@@ -31,21 +25,40 @@
     }
 
     .modal.modal--modal-sheet.modal--cart {
-        @apply lg:h-[calc(100vh-10rem)] lg:max-h-80;
-        @apply lg:overflow-y-auto;
+        @apply max-sm:px-0!;
+        @apply lg:max-xl:px-0!;
+        @apply sm:max-lg:h-[calc(100vh-10rem)] sm:max-lg:max-h-80;
+        @apply xl:h-[calc(100vh-10rem)] xl:max-h-80;
+        @apply sm:max-lg:overflow-y-auto;
+        @apply xl:overflow-y-auto;
+        @apply xl:max-w-120!;
 
         .modal__orders {
-            /*@apply max-lg:h-[calc(100vh-10rem)] max-lg:max-h-[80dvh];*/
-            /*@apply max-lg:overflow-y-auto;*/
+            @apply max-sm:container-fluid;
+            @apply lg:max-xl:container-fluid;
+
+            @apply max-sm:max-h-[30dvh];
+            @apply lg:max-xl:max-h-[45dvh];
+
+            @apply max-sm:mb-[calc(var(--sticky-height)+3rem)];
+            @apply lg:max-xl:mb-[calc(var(--sticky-height)+3rem)];
+
+            @apply max-sm:overflow-y-auto;
+            @apply lg:max-xl:overflow-y-auto;
         }
 
         .modal__sticky {
-            @apply lg:sticky lg:top-0;
+            /* sticky position */
+            @apply sm:max-lg:sticky sm:max-lg:top-0;
+            @apply xl:sticky xl:top-0;
+
+            /* fixed position */
+            @apply lg:max-xl:fixed lg:max-xl:bottom-0 lg:max-xl:left-0;
+            @apply max-sm:fixed max-sm:bottom-0 max-sm:left-0;
+            @apply lg:max-xl:p-2;
+            @apply max-sm:max-xl:p-2;
+            @apply lg:max-xl:bg-white;
+            @apply max-sm:bg-white;
         }
-        /*.modal__sticky {*/
-        /*    @apply fixed bottom-0 w-full left-0;*/
-        /*    @apply p-2!;*/
-        /*    @apply bg-white;*/
-        /*}*/
     }
 }

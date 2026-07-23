@@ -59,8 +59,17 @@ const CartOrder = ({ price, priceCurrency, onSubmit }: CartOrderProps): React.Re
             onSubmit={handleSubmit((data) => {
                 if (onSubmit) onSubmit(data);
             })}>
-            <Columns gutterY={4}>
-                <Columns.Column md={12}>
+            <Heading
+                as="h2"
+                className="text-[2.5rem] md:text-[3rem] leading-2.5 md:leading-3.5 max-lg:mb-0.5">
+                Order Details
+            </Heading>
+
+            <Columns gutterY={{ xs: 2, xl: 4 }}>
+                <Columns.Column
+                    xs={12}
+                    lg={8}
+                    xl={12}>
                     <Columns
                         gutterY={1}
                         gutterX={2}>
@@ -79,10 +88,7 @@ const CartOrder = ({ price, priceCurrency, onSubmit }: CartOrderProps): React.Re
                             />
                         </Columns.Column>
 
-                        <Columns.Column
-                            // xs={7}
-                            md={6}
-                            className="">
+                        <Columns.Column xs={6}>
                             <Input.Label
                                 type="date"
                                 size="sm"
@@ -98,10 +104,7 @@ const CartOrder = ({ price, priceCurrency, onSubmit }: CartOrderProps): React.Re
                             />
                         </Columns.Column>
 
-                        <Columns.Column
-                            // xs={5}
-                            md={6}
-                            className="">
+                        <Columns.Column xs={6}>
                             <Input.Label
                                 type="time"
                                 size="sm"
@@ -117,9 +120,7 @@ const CartOrder = ({ price, priceCurrency, onSubmit }: CartOrderProps): React.Re
                             />
                         </Columns.Column>
 
-                        <Columns.Column
-                            md={12}
-                            className="">
+                        <Columns.Column md={12}>
                             <Input.Label
                                 type="select"
                                 size="sm"
@@ -146,10 +147,7 @@ const CartOrder = ({ price, priceCurrency, onSubmit }: CartOrderProps): React.Re
 
                         {orderCollection === 'delivery' && (
                             <>
-                                <Columns.Column
-                                    md={12}
-                                    // className="order-5"
-                                >
+                                <Columns.Column md={12}>
                                     <Input.Label
                                         type="text"
                                         size="sm"
@@ -164,10 +162,7 @@ const CartOrder = ({ price, priceCurrency, onSubmit }: CartOrderProps): React.Re
                                     />
                                 </Columns.Column>
 
-                                <Columns.Column
-                                    md={12}
-                                    // className="order-6"
-                                >
+                                <Columns.Column md={12}>
                                     <Input.Label
                                         type="text"
                                         size="sm"
@@ -186,12 +181,17 @@ const CartOrder = ({ price, priceCurrency, onSubmit }: CartOrderProps): React.Re
                     </Columns>
                 </Columns.Column>
 
-                <Columns.Column md={12}>
-                    <Columns className="items-center">
+                <Columns.Column
+                    xs={12}
+                    lg={4}
+                    xl={12}>
+                    <Columns
+                        gutterX={1}
+                        className="items-center">
                         <Columns.Column>
                             <Heading
                                 as="h2"
-                                className="text-[3rem] leading-3.5">
+                                className="text-[2.5rem] md:text-[3rem] leading-2.5 md:leading-3.5">
                                 Total
                             </Heading>
                             {priceCurrency && (
@@ -200,45 +200,20 @@ const CartOrder = ({ price, priceCurrency, onSubmit }: CartOrderProps): React.Re
                         </Columns.Column>
 
                         <Columns.Column
-                            xs={6}
+                            xs={7}
                             md={'auto'}
-                            className="text-end">
+                            lg={12}
+                            xl={'auto'}
+                            className="lg:max-xl:text-center text-end">
                             <Button.Arrow
                                 as="button"
-                                type="submit"
-                                // size="lg"
-                            >
+                                type="submit">
                                 Order By Whatsapp
                             </Button.Arrow>
                         </Columns.Column>
                     </Columns>
                 </Columns.Column>
             </Columns>
-
-            {/*<div className="mt-2">*/}
-            {/*    <Columns className="items-center">*/}
-            {/*        <Columns.Column>*/}
-            {/*            <Heading*/}
-            {/*                as="h2"*/}
-            {/*                className="text-[3rem] leading-3.5">*/}
-            {/*                Total*/}
-            {/*            </Heading>*/}
-            {/*            {priceCurrency && <p className="text-md uppercase tracking-0.1 font-bold">{priceCurrency}</p>}*/}
-            {/*        </Columns.Column>*/}
-
-            {/*        <Columns.Column*/}
-            {/*            xs={6}*/}
-            {/*            md={'auto'}*/}
-            {/*            className="text-end">*/}
-            {/*            <Button.Arrow*/}
-            {/*                as="button"*/}
-            {/*                type="submit"*/}
-            {/*                size="lg">*/}
-            {/*                ORDER*/}
-            {/*            </Button.Arrow>*/}
-            {/*        </Columns.Column>*/}
-            {/*    </Columns>*/}
-            {/*</div>*/}
         </form>
     );
 };

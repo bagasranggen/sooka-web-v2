@@ -151,9 +151,12 @@ const CartItem = ({
                         <Columns.Column
                             md={12}
                             lg={4}>
-                            <Columns gutterY={2}>
+                            <Columns
+                                gutterY={2}
+                                className="max-lg:items-center">
                                 <Columns.Column
                                     xs={7}
+                                    md={6}
                                     lg={12}>
                                     {priceCurrency && (
                                         <p className="max-lg:text-md lg:text-end tracking-0.1 uppercase font-bold">
@@ -164,6 +167,7 @@ const CartItem = ({
 
                                 <Columns.Column
                                     xs={5}
+                                    md={6}
                                     lg={12}>
                                     <Columns
                                         gutterX={1}
