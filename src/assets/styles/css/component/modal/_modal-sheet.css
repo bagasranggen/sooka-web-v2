@@ -4,14 +4,16 @@
         @apply border-0!;
     }
 
-    .modal.modal--modal-sheet.modal--purchase,
-    .modal.modal--modal-sheet.modal--cart .modal__wrapper {
-        @apply md:h-[calc(100vh-10rem)] max-h-[80dvh] md:max-h-80;
-        @apply overflow-y-auto;
-    }
+    /*.modal.modal--modal-sheet.modal--purchase,*/
+    /*.modal.modal--modal-sheet.modal--cart .modal__wrapper {*/
+    /*    @apply md:h-[calc(100vh-10rem)] max-h-[80dvh] md:max-h-80;*/
+    /*    @apply overflow-y-auto;*/
+    /*}*/
 
     .modal.modal--modal-sheet.modal--purchase {
         @apply p-0!;
+        @apply md:h-[calc(100vh-10rem)] max-h-[80dvh] md:max-h-80;
+        @apply overflow-y-auto;
 
         .modal__sticky {
             @apply sm:sticky sm:top-0;
@@ -29,10 +31,21 @@
     }
 
     .modal.modal--modal-sheet.modal--cart {
-        .modal__sticky {
-            @apply fixed bottom-0 w-full left-0;
-            @apply p-2!;
-            @apply bg-white;
+        @apply lg:h-[calc(100vh-10rem)] lg:max-h-80;
+        @apply lg:overflow-y-auto;
+
+        .modal__orders {
+            /*@apply max-lg:h-[calc(100vh-10rem)] max-lg:max-h-[80dvh];*/
+            /*@apply max-lg:overflow-y-auto;*/
         }
+
+        .modal__sticky {
+            @apply lg:sticky lg:top-0;
+        }
+        /*.modal__sticky {*/
+        /*    @apply fixed bottom-0 w-full left-0;*/
+        /*    @apply p-2!;*/
+        /*    @apply bg-white;*/
+        /*}*/
     }
 }

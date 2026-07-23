@@ -115,7 +115,7 @@ const CartItem = ({
                         gutterY={3}>
                         <Columns.Column
                             md={12}
-                            lg={9}>
+                            lg={8}>
                             {title && (
                                 <Heading
                                     as="h2"
@@ -150,7 +150,7 @@ const CartItem = ({
 
                         <Columns.Column
                             md={12}
-                            lg={3}>
+                            lg={4}>
                             <Columns gutterY={2}>
                                 <Columns.Column
                                     xs={7}

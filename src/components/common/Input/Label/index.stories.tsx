@@ -36,11 +36,29 @@ export const Default: Story = {
     },
 };
 
+export const DefaultSmall: Story = {
+    args: {
+        type: 'text',
+        id: 'test',
+        label: 'Test',
+        size: 'sm',
+    },
+};
+
 export const TextArea: Story = {
     args: {
         type: 'textarea',
         id: 'test',
         label: 'Test',
+    },
+};
+
+export const TextAreaSmall: Story = {
+    args: {
+        type: 'textarea',
+        id: 'test',
+        label: 'Test',
+        size: 'sm',
     },
 };
 

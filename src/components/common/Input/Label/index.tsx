@@ -10,15 +10,18 @@ const EXCLUDE_SPACING_TYPE = ['select', 'textarea'];
 
 export type LabelProps = {
     label: string;
-} & (Omit<BaseProps, 'id'> & Required<Pick<BaseProps, 'id'>>);
+    size?: 'sm' | 'md';
+} & (Omit<BaseProps, 'id' | 'size'> & Required<Pick<BaseProps, 'id'>>);
 
 const Label = forwardRef<BaseInputRef, LabelProps>(
-    ({ id, label, className, type, error, hidden, onFocus, onBlurCapture, ...props }, ref) => {
+    ({ id, label, className, type, error, size = 'md', hidden, onFocus, onBlurCapture, ...props }, ref) => {
         const [isFocus, setIsFocus] = useState<boolean>(false);
 
         let inputGroupClass: ArrayStringProps = ['group input input--label'];
         if (isFocus) inputGroupClass.push('input--focus');
         if (type !== 'select') inputGroupClass.push('input--has-line');
+        if (size === 'sm') inputGroupClass.push('input--sm');
+        if (size === 'md') inputGroupClass.push('input--md');
         if (hidden) inputGroupClass.push('hidden');
         inputGroupClass = joinArrayString(inputGroupClass);
 
@@ -26,10 +29,11 @@ const Label = forwardRef<BaseInputRef, LabelProps>(
         if (className) inputClass.push(className);
         inputClass = joinArrayString(inputClass);
 
-        let labelClass = '';
+        let labelClass: ArrayStringProps = [];
         if (!isFocus && type !== 'textarea') {
-            labelClass = 'peer-placeholder-shown:top-1/2 peer-placeholder-shown:-translate-y-1/2';
+            labelClass.push('peer-placeholder-shown:top-1/2 peer-placeholder-shown:-translate-y-1/2');
         }
+        labelClass = joinArrayString(labelClass);
 
         return (
             <>
@@ -55,6 +59,7 @@ const Label = forwardRef<BaseInputRef, LabelProps>(
                     <LabelText
                         htmlFor={id}
                         className={labelClass}
+                        size={size}
                         required={props?.required || (props?.hook?.required as boolean)}>
                         {label}
                     </LabelText>

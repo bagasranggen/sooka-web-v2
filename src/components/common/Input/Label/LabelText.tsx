@@ -2,12 +2,13 @@ import React, { PropsWithChildren } from 'react';
 
 import { ArrayStringProps } from '@/libs/@types';
 import { joinArrayString } from '@/libs/utils';
+import { LabelProps } from '@/components/common/Input';
 
 export type LabelTextProps = {
     active?: boolean;
     standalone?: boolean;
     required?: boolean;
-} & (Partial<Pick<HTMLLabelElement, 'className' | 'htmlFor'>> & PropsWithChildren);
+} & (Partial<Pick<HTMLLabelElement, 'className' | 'htmlFor'>> & PropsWithChildren & Pick<LabelProps, 'size'>);
 
 const LabelText = ({
     children,
@@ -15,22 +16,28 @@ const LabelText = ({
     className,
     active,
     standalone,
+    size = 'md',
     required,
 }: LabelTextProps): React.ReactElement => {
-    let labelClass: ArrayStringProps = ['block uppercase transition-all origin-top-left'];
-    labelClass.push('text-[2.5rem] whitespace-nowrap');
-    labelClass.push('tracking-[.6rem]');
-    labelClass.push('px-2 py-1');
-    if (!standalone) labelClass.push('absolute left-0 top-0');
-    if (standalone) labelClass.push('-mb-2.5');
-    labelClass.push(
-        'group-focus-within:scale-50 group-focus-within:font-semibold group-focus-within:translate-x-[1.2rem]'
-    );
-    labelClass.push(
-        'peer-[:not(:placeholder-shown)]:scale-50 peer-[:not(:placeholder-shown)]:font-semibold peer-[:not(:placeholder-shown)]:translate-x-[1.2rem]'
-    );
+    // let labelClass: ArrayStringProps = ['block uppercase transition-all origin-top-left'];
+    let labelClass: ArrayStringProps = ['label-input'];
+    if (size === 'md') labelClass.push('label-input--md');
+    if (size === 'sm') labelClass.push('label-input--sm');
+    if (standalone) labelClass.push('label-input--standalone');
+    if (active) labelClass.push('label-input--active');
+    // labelClass.push('text-[2.5rem] whitespace-nowrap');
+    // labelClass.push('tracking-[.6rem]');
+    // labelClass.push('px-2 py-1');
+    // if (!standalone) labelClass.push('absolute left-0 top-0');
+    // if (standalone) labelClass.push('-mb-2.5');
+    // labelClass.push(
+    //     'group-focus-within:scale-50 group-focus-within:font-semibold group-focus-within:translate-x-[1.2rem]'
+    // );
+    // labelClass.push(
+    //     'peer-[:not(:placeholder-shown)]:scale-50 peer-[:not(:placeholder-shown)]:font-semibold peer-[:not(:placeholder-shown)]:translate-x-[1.2rem]'
+    // );
     // if (!isFocus) labelClass.push('peer-placeholder-shown:top-1/2 peer-placeholder-shown:-translate-y-1/2');
-    if (active) labelClass.push('scale-50 translate-x-[1.2rem] font-semibold');
+    // if (active) labelClass.push('scale-50 translate-x-[1.2rem] font-semibold');
     if (className) labelClass.push(className);
     labelClass = joinArrayString(labelClass);
 

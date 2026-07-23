@@ -59,144 +59,186 @@ const CartOrder = ({ price, priceCurrency, onSubmit }: CartOrderProps): React.Re
             onSubmit={handleSubmit((data) => {
                 if (onSubmit) onSubmit(data);
             })}>
-            <Columns gutterY={3}>
+            <Columns gutterY={4}>
                 <Columns.Column md={12}>
-                    <Input.Label
-                        type="text"
-                        id={CART_ORDER_FORM_HANDLE.NAME}
-                        label="Name"
-                        hook={{
-                            register,
-                            name: CART_ORDER_FORM_HANDLE.NAME,
-                            required: GENERAL_REQUIRED_ERROR_MESSAGE,
-                        }}
-                        error={errors?.[CART_ORDER_FORM_HANDLE.NAME]?.message}
-                    />
-                </Columns.Column>
-
-                <Columns.Column
-                    md={5}
-                    className="order-3 md:order-2">
-                    <Input.Label
-                        type="select"
-                        id={CART_ORDER_FORM_HANDLE.ORDER_COLLECTION}
-                        label="Order Collection"
-                        items={[
-                            {
-                                value: 'pickup',
-                                children: 'Pick Up',
-                            },
-                            {
-                                value: 'delivery',
-                                children: 'Delivery',
-                            },
-                        ]}
-                        hook={{
-                            register,
-                            name: CART_ORDER_FORM_HANDLE.ORDER_COLLECTION,
-                            required: GENERAL_REQUIRED_ERROR_MESSAGE,
-                        }}
-                        error={errors?.[CART_ORDER_FORM_HANDLE.ORDER_COLLECTION]?.message}
-                    />
-                </Columns.Column>
-
-                <Columns.Column
-                    xs={7}
-                    md={4}
-                    className="md:order-3">
-                    <Input.Label
-                        type="date"
-                        min={getCurrentDate()}
-                        id={CART_ORDER_FORM_HANDLE.ORDER_COLLECTION_DATE}
-                        label="Order Date"
-                        hook={{
-                            register,
-                            name: CART_ORDER_FORM_HANDLE.ORDER_COLLECTION_DATE,
-                            required: GENERAL_REQUIRED_ERROR_MESSAGE,
-                        }}
-                        error={errors?.[CART_ORDER_FORM_HANDLE.ORDER_COLLECTION_DATE]?.message}
-                    />
-                </Columns.Column>
-
-                <Columns.Column
-                    xs={5}
-                    md={3}
-                    className="md:order-4">
-                    <Input.Label
-                        type="time"
-                        // step={900}
-                        id={CART_ORDER_FORM_HANDLE.ORDER_COLLECTION_TIME}
-                        label="Time"
-                        hook={{
-                            register,
-                            name: CART_ORDER_FORM_HANDLE.ORDER_COLLECTION_TIME,
-                            required: GENERAL_REQUIRED_ERROR_MESSAGE,
-                        }}
-                        error={errors?.[CART_ORDER_FORM_HANDLE.ORDER_COLLECTION_TIME]?.message}
-                    />
-                </Columns.Column>
-
-                {orderCollection === 'delivery' && (
-                    <>
-                        <Columns.Column
-                            md={12}
-                            className="order-5">
+                    <Columns
+                        gutterY={1}
+                        gutterX={2}>
+                        <Columns.Column md={12}>
                             <Input.Label
                                 type="text"
-                                id={CART_ORDER_FORM_HANDLE.ADDRESS}
-                                label="Location"
+                                size="sm"
+                                id={CART_ORDER_FORM_HANDLE.NAME}
+                                label="Name"
                                 hook={{
                                     register,
-                                    name: CART_ORDER_FORM_HANDLE.ADDRESS,
-                                    required: true,
+                                    name: CART_ORDER_FORM_HANDLE.NAME,
+                                    required: GENERAL_REQUIRED_ERROR_MESSAGE,
                                 }}
-                                error={errors?.[CART_ORDER_FORM_HANDLE.ADDRESS]?.message}
+                                error={errors?.[CART_ORDER_FORM_HANDLE.NAME]?.message}
+                            />
+                        </Columns.Column>
+
+                        <Columns.Column
+                            // xs={7}
+                            md={6}
+                            className="">
+                            <Input.Label
+                                type="date"
+                                size="sm"
+                                min={getCurrentDate()}
+                                id={CART_ORDER_FORM_HANDLE.ORDER_COLLECTION_DATE}
+                                label="Order Date"
+                                hook={{
+                                    register,
+                                    name: CART_ORDER_FORM_HANDLE.ORDER_COLLECTION_DATE,
+                                    required: GENERAL_REQUIRED_ERROR_MESSAGE,
+                                }}
+                                error={errors?.[CART_ORDER_FORM_HANDLE.ORDER_COLLECTION_DATE]?.message}
+                            />
+                        </Columns.Column>
+
+                        <Columns.Column
+                            // xs={5}
+                            md={6}
+                            className="">
+                            <Input.Label
+                                type="time"
+                                size="sm"
+                                // step={900}
+                                id={CART_ORDER_FORM_HANDLE.ORDER_COLLECTION_TIME}
+                                label="Time"
+                                hook={{
+                                    register,
+                                    name: CART_ORDER_FORM_HANDLE.ORDER_COLLECTION_TIME,
+                                    required: GENERAL_REQUIRED_ERROR_MESSAGE,
+                                }}
+                                error={errors?.[CART_ORDER_FORM_HANDLE.ORDER_COLLECTION_TIME]?.message}
                             />
                         </Columns.Column>
 
                         <Columns.Column
                             md={12}
-                            className="order-6">
+                            className="">
                             <Input.Label
-                                type="text"
-                                id={CART_ORDER_FORM_HANDLE.ADDRESS_PINPOINT}
-                                label="Location Pinpoint"
+                                type="select"
+                                size="sm"
+                                id={CART_ORDER_FORM_HANDLE.ORDER_COLLECTION}
+                                label="Order Collection"
+                                items={[
+                                    {
+                                        value: 'pickup',
+                                        children: 'Pick Up',
+                                    },
+                                    {
+                                        value: 'delivery',
+                                        children: 'Delivery',
+                                    },
+                                ]}
                                 hook={{
                                     register,
-                                    name: CART_ORDER_FORM_HANDLE.ADDRESS_PINPOINT,
-                                    required: true,
+                                    name: CART_ORDER_FORM_HANDLE.ORDER_COLLECTION,
+                                    required: GENERAL_REQUIRED_ERROR_MESSAGE,
                                 }}
-                                error={errors?.[CART_ORDER_FORM_HANDLE.ADDRESS_PINPOINT]?.message}
+                                error={errors?.[CART_ORDER_FORM_HANDLE.ORDER_COLLECTION]?.message}
                             />
                         </Columns.Column>
-                    </>
-                )}
+
+                        {orderCollection === 'delivery' && (
+                            <>
+                                <Columns.Column
+                                    md={12}
+                                    // className="order-5"
+                                >
+                                    <Input.Label
+                                        type="text"
+                                        size="sm"
+                                        id={CART_ORDER_FORM_HANDLE.ADDRESS}
+                                        label="Location"
+                                        hook={{
+                                            register,
+                                            name: CART_ORDER_FORM_HANDLE.ADDRESS,
+                                            required: true,
+                                        }}
+                                        error={errors?.[CART_ORDER_FORM_HANDLE.ADDRESS]?.message}
+                                    />
+                                </Columns.Column>
+
+                                <Columns.Column
+                                    md={12}
+                                    // className="order-6"
+                                >
+                                    <Input.Label
+                                        type="text"
+                                        size="sm"
+                                        id={CART_ORDER_FORM_HANDLE.ADDRESS_PINPOINT}
+                                        label="Location Pinpoint"
+                                        hook={{
+                                            register,
+                                            name: CART_ORDER_FORM_HANDLE.ADDRESS_PINPOINT,
+                                            required: true,
+                                        }}
+                                        error={errors?.[CART_ORDER_FORM_HANDLE.ADDRESS_PINPOINT]?.message}
+                                    />
+                                </Columns.Column>
+                            </>
+                        )}
+                    </Columns>
+                </Columns.Column>
+
+                <Columns.Column md={12}>
+                    <Columns className="items-center">
+                        <Columns.Column>
+                            <Heading
+                                as="h2"
+                                className="text-[3rem] leading-3.5">
+                                Total
+                            </Heading>
+                            {priceCurrency && (
+                                <p className="text-md uppercase tracking-0.1 font-bold">{priceCurrency}</p>
+                            )}
+                        </Columns.Column>
+
+                        <Columns.Column
+                            xs={6}
+                            md={'auto'}
+                            className="text-end">
+                            <Button.Arrow
+                                as="button"
+                                type="submit"
+                                // size="lg"
+                            >
+                                Order By Whatsapp
+                            </Button.Arrow>
+                        </Columns.Column>
+                    </Columns>
+                </Columns.Column>
             </Columns>
 
-            <div className="mt-2">
-                <Columns className="items-center">
-                    <Columns.Column>
-                        <Heading
-                            as="h2"
-                            className="text-[3rem] leading-3.5">
-                            Total
-                        </Heading>
-                        {priceCurrency && <p className="text-md uppercase tracking-0.1 font-bold">{priceCurrency}</p>}
-                    </Columns.Column>
+            {/*<div className="mt-2">*/}
+            {/*    <Columns className="items-center">*/}
+            {/*        <Columns.Column>*/}
+            {/*            <Heading*/}
+            {/*                as="h2"*/}
+            {/*                className="text-[3rem] leading-3.5">*/}
+            {/*                Total*/}
+            {/*            </Heading>*/}
+            {/*            {priceCurrency && <p className="text-md uppercase tracking-0.1 font-bold">{priceCurrency}</p>}*/}
+            {/*        </Columns.Column>*/}
 
-                    <Columns.Column
-                        xs={6}
-                        md={'auto'}
-                        className="text-end">
-                        <Button.Arrow
-                            as="button"
-                            type="submit"
-                            size="lg">
-                            ORDER
-                        </Button.Arrow>
-                    </Columns.Column>
-                </Columns>
-            </div>
+            {/*        <Columns.Column*/}
+            {/*            xs={6}*/}
+            {/*            md={'auto'}*/}
+            {/*            className="text-end">*/}
+            {/*            <Button.Arrow*/}
+            {/*                as="button"*/}
+            {/*                type="submit"*/}
+            {/*                size="lg">*/}
+            {/*                ORDER*/}
+            {/*            </Button.Arrow>*/}
+            {/*        </Columns.Column>*/}
+            {/*    </Columns>*/}
+            {/*</div>*/}
         </form>
     );
 };
