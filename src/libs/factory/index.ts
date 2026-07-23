@@ -6,6 +6,7 @@ export * from './createAnimationHandles';
 export * from './createArrayFromNumber';
 export * from './createBackgroundImage';
 export * from './createBreakpointClass';
+export * from './createCartItem';
 export * from './createDynamicElement';
 export * from './createFormInputHandle';
 export * from './createIconItem';
