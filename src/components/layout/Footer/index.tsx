@@ -20,7 +20,7 @@ const Footer = ({ address, businessHour, socialMedia }: FooterProps): React.Reac
                 <Icon.Sooka
                     id="footerLogo"
                     color="light"
-                    className="mx-auto w-xs lg:w-[30rem]"
+                    className="mx-auto w-xs lg:w-30"
                 />
                 <div className="mt-5">
                     <Columns

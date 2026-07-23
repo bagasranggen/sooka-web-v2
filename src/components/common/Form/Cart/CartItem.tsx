@@ -109,7 +109,9 @@ const CartItem = ({
                     {media && <Picture items={media} />}
                 </Columns.Column>
 
-                <Columns.Column md={9}>
+                <Columns.Column
+                    xs={12}
+                    md={9}>
                     <Columns
                         gutterX={2}
                         gutterY={3}>

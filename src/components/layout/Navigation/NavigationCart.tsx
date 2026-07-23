@@ -30,7 +30,7 @@ const NavigationCart = ({ button, count }: NavigationCartProps): React.ReactElem
             as="button"
             {...button}
             className={buttonClass}>
-            <ShoppingBasket size={18} />
+            <ShoppingBasket className="size-2.5 lg:size-[1.8rem]" />
 
             {count && count > 0 ? (
                 <Animation type="fade">

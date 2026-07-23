@@ -5,7 +5,6 @@ import React, { Ref, Suspense, useEffect, useState } from 'react';
 import { ArrayStringProps } from '@/libs/@types';
 import { NavigationEvents, SCREEN_HANDLES, ScreenResizeEvents, usePortal } from '@/libs/hooks';
 import { joinArrayString } from '@/libs/utils';
-import { useCartStateContext } from '@/store/context';
 
 import { useMeasure, useWindowScroll } from 'react-use';
 
@@ -15,7 +14,7 @@ import Offcanvas from '@/components/common/Offcanvas';
 import Container from '@/components/common/Container';
 import NavigationMenu from '@/components/layout/Navigation/NavigationMenu';
 import NavigationMenuMobile from '@/components/layout/Navigation/NavigationMenuMobile';
-import NavigationCart from '@/components/layout/Navigation/NavigationCart';
+import NavigationCart, { NavigationCartProps } from '@/components/layout/Navigation/NavigationCart';
 
 export type NavigationItemNestedProps = Pick<NavigationItemProps, 'href' | 'children' | 'target'>;
 
@@ -25,10 +24,10 @@ export type NavigationItemProps = {
 
 export type NavigationProps = {
     items: NavigationItemProps[];
+    cart?: Pick<NavigationCartProps, 'count'> & Pick<NonNullable<NavigationCartProps['button']>, 'onClick'>;
 };
 
-const Navigation = ({ items }: NavigationProps): React.ReactElement => {
-    const { count } = useCartStateContext();
+const Navigation = ({ items, cart }: NavigationProps): React.ReactElement => {
     const { show, triggerOpen, triggerClose } = usePortal({});
     const [navRef, { height }] = useMeasure();
     const { y: scrollY } = useWindowScroll();
@@ -89,7 +88,7 @@ const Navigation = ({ items }: NavigationProps): React.ReactElement => {
                         <Button
                             as="button"
                             type="button"
-                            className="block lg:hidden"
+                            className="block lg:hidden ms-auto"
                             onClick={() => {
                                 if (!show) triggerOpen();
 
@@ -113,9 +112,10 @@ const Navigation = ({ items }: NavigationProps): React.ReactElement => {
 
                         <NavigationCart
                             button={{
-                                className: 'ms-3',
+                                className: 'ms-2 lg:ms-3',
+                                onClick: cart?.onClick,
                             }}
-                            count={count}
+                            count={cart?.count}
                         />
                     </div>
                 </Container>

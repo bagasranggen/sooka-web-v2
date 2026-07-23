@@ -47,7 +47,8 @@ const Cart = ({
             <Columns>
                 <Columns.Column
                     style={{ '--sticky-height': `${height}px` } as React.CSSProperties}
-                    sm={7}
+                    sm={6}
+                    md={7}
                     lg={12}
                     xl={7}>
                     <div className="modal__orders">
@@ -60,7 +61,8 @@ const Cart = ({
                 </Columns.Column>
 
                 <Columns.Column
-                    sm={5}
+                    sm={6}
+                    md={5}
                     lg={12}
                     xl={5}>
                     <div

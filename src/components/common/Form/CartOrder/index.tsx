@@ -200,7 +200,7 @@ const CartOrder = ({ price, priceCurrency, onSubmit }: CartOrderProps): React.Re
                         </Columns.Column>
 
                         <Columns.Column
-                            xs={7}
+                            xs={6}
                             md={'auto'}
                             lg={12}
                             xl={'auto'}
