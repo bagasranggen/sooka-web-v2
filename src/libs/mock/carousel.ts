@@ -12,6 +12,9 @@ export const CAROUSEL_BANNER: BannerItemProps[] = createArrayFromNumber(4).map((
         ...(item === 0 ? { category: 'new product' } : {}),
         title: 'Strawberry Shortcake',
         description: undefined,
+        cta: {
+            href: '#',
+        },
     };
 });
 
