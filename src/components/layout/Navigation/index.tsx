@@ -40,6 +40,11 @@ const Navigation = ({ items, cart }: NavigationProps): React.ReactElement => {
     if (scrollY > height && scrollYDirection === 'down') navClass.push('-translate-y-full');
     navClass = joinArrayString(navClass);
 
+    let cartClass: ArrayStringProps = [];
+    if (items && items.length > 0) cartClass.push('ms-2 lg:ms-3');
+    if (!items || items.length === 0) cartClass.push('ms-auto');
+    cartClass = joinArrayString(cartClass);
+
     useEffect(() => {
         setPrevScrollY((prevState) => {
             setScrollYDirection(prevState > scrollY ? 'up' : 'down');
@@ -112,7 +117,7 @@ const Navigation = ({ items, cart }: NavigationProps): React.ReactElement => {
 
                         <NavigationCart
                             button={{
-                                className: 'ms-2 lg:ms-3',
+                                className: cartClass,
                                 onClick: cart?.onClick,
                             }}
                             count={cart?.count}
