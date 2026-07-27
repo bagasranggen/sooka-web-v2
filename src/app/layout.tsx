@@ -8,14 +8,10 @@ import '@fontsource/noto-sans-jp/600.css';
 import '@fontsource/noto-sans-jp/800.css';
 import '@/assets/styles/css/main.css';
 
-import { createIconItem, createLinkItem } from '@/libs/factory';
-
-import { axiosClient } from '@/libs/fetcher';
-
-import { Navigation as NavigationProps, Footer as FooterProps } from '@/libs/@types';
 import ContextProvider from '@/store/context';
 
-import Main, { MainProps } from '@/components/layout/Main';
+import Main from '@/components/layout/Main';
+import { LayoutData } from '@/components/pages/Layout/data';
 
 const anglecia = localFont({
     src: '../assets/fonts/Anglecia/AngleciaProDisplay-Regular-webfont.woff2',
@@ -30,63 +26,7 @@ export const metadata: Metadata = {
 };
 
 export default async function RootLayout({ children }: Readonly<PropsWithChildren>) {
-    let data = undefined;
-
-    try {
-        const res = await axiosClient().get('/layout');
-
-        if (res?.data) data = res.data;
-    } catch (e) {
-        console.log(e);
-    }
-
-    const headerNavigation: NavigationProps = data?.headerNavigation;
-    const footerNavigation: FooterProps = data?.footerNavigation;
-
-    const navigation: NonNullable<MainProps['navigation']>['items'] = [];
-    if (headerNavigation?.navigations && headerNavigation.navigations.length > 0) {
-        headerNavigation.navigations.forEach((item) => {
-            const { linkIsValid, link } = createLinkItem(item?.link);
-
-            const child: NonNullable<MainProps['navigation']>['items'][number]['child'] = [];
-
-            if (item?.children && item.children.length > 0) {
-                item.children.forEach((itm) => {
-                    const { linkIsValid, link } = createLinkItem(itm?.link);
-
-                    if (linkIsValid && item?.entryStatus === 'live') {
-                        child.push({
-                            href: link?.href,
-                            target: link?.target,
-                            children: link?.label,
-                        });
-                    }
-                });
-            }
-
-            if (linkIsValid && item?.entryStatus === 'live') {
-                navigation.push({
-                    href: link?.href,
-                    target: link?.target,
-                    children: link?.label,
-                    child,
-                });
-            }
-        });
-    }
-
-    const socialMedia: NonNullable<MainProps['footer']>['socialMedia'] = [];
-    if (footerNavigation?.socialMedia && footerNavigation.socialMedia.length > 0) {
-        footerNavigation.socialMedia.forEach((item) => {
-            const { linkIsValid, link } = createLinkItem(item?.link);
-            const { icon } = createIconItem(item?.icon);
-
-            socialMedia.push({
-                cta: linkIsValid ? link : { href: '#' },
-                icon: icon ?? '',
-            });
-        });
-    }
+    const { navigation, footer } = await LayoutData();
 
     return (
         <ContextProvider>
@@ -96,11 +36,7 @@ export default async function RootLayout({ children }: Readonly<PropsWithChildre
                         navigation={{
                             items: navigation,
                         }}
-                        footer={{
-                            address: footerNavigation?.address,
-                            businessHour: footerNavigation?.businessHours,
-                            socialMedia: socialMedia,
-                        }}>
+                        footer={footer}>
                         <main>{children}</main>
                     </Main>
                 </body>
