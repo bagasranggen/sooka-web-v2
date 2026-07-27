@@ -2,16 +2,32 @@ import React from 'react';
 
 import Columns from '@/components/common/Columns';
 import Heading, { BaseProps as HeadingBaseProps } from '@/components/common/Heading';
-import Form, { OrderProps } from '@/components/common/Form';
-import Overlay from '@/components/common/Overlay';
 import Picture, { BaseProps as PictureBaseProps } from '@/components/common/Picture';
+import Overlay from '@/components/common/Overlay';
+import HalfMediaVariants, { HalfMediaVariantsProps } from '@/components/common/Banner/HalfMedia/HalfMediaVariants';
+import Modal, { PurchaseProps } from '@/components/common/Modal';
 
 export type HalfMediaProps = {
     media: PictureBaseProps['items'];
-    form: OrderProps;
-} & Pick<HeadingBaseProps, 'children'>;
+    variants?: HalfMediaVariantsProps['items'];
+    popup?: {
+        content?: Omit<PurchaseProps, 'open' | 'onOpenChange'>;
+    } & Pick<PurchaseProps, 'open' | 'onOpenChange'>;
+    onClick?: (props: NonNullable<HalfMediaProps['popup']>['content']) => void;
+} & (Pick<HeadingBaseProps, 'children'> &
+    Pick<HalfMediaVariantsProps, 'notes' | 'disabled'> &
+    Pick<PurchaseProps, 'onSubmit'>);
 
-const HalfMedia = ({ media, form, children }: HalfMediaProps): React.ReactElement => {
+const HalfMedia = ({
+    media,
+    variants,
+    disabled,
+    notes,
+    onClick,
+    onSubmit,
+    popup,
+    children,
+}: HalfMediaProps): React.ReactElement => {
     return (
         <>
             <Columns
@@ -42,19 +58,26 @@ const HalfMedia = ({ media, form, children }: HalfMediaProps): React.ReactElemen
                 </Columns.Column>
             </Columns>
 
-            <div className="mt-4">
-                <Columns className="lg:justify-end">
-                    <Columns.Column lg={8}>
-                        <Form.Order
-                            title={form.title}
-                            summaries={form.summaries}
-                            disabled={form.disabled}
-                            notes={form.notes}
-                            onSubmit={form.onSubmit}
-                        />
-                    </Columns.Column>
-                </Columns>
-            </div>
+            {variants && variants.length > 0 && (
+                <HalfMediaVariants
+                    items={variants}
+                    disabled={disabled}
+                    notes={notes}
+                    button={{
+                        onClick: () => {
+                            if (onClick && popup?.content) onClick(popup.content);
+                        },
+                    }}>
+                    Available In
+                </HalfMediaVariants>
+            )}
+
+            <Modal.Purchase
+                open={popup?.open}
+                onOpenChange={popup?.onOpenChange}
+                onSubmit={onSubmit}
+                {...popup?.content}
+            />
         </>
     );
 };
