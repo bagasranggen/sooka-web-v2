@@ -5,7 +5,9 @@ import { INITIAL_VIEWPORTS } from 'storybook/viewport';
 import ContextProvider from '../src/store/context';
 
 import '@fontsource/noto-sans-jp';
+import '@fontsource/noto-sans-jp/500.css';
 import '@fontsource/noto-sans-jp/600.css';
+import '@fontsource/noto-sans-jp/800.css';
 import '../src/assets/styles/css/main.css';
 
 type ViewportProps = Record<
