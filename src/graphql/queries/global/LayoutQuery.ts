@@ -25,6 +25,10 @@ export const LAYOUT_QUERY = gql`
             address
             businessHours
 
+            addressLink {
+                ...link
+            }
+
             socialMedia {
                 ...socialMedia
             }
