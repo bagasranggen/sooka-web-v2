@@ -1,3 +1,5 @@
+'use client';
+
 import React, { PropsWithChildren } from 'react';
 
 import { useCartStateContext } from '@/store/context';
@@ -51,7 +53,7 @@ const Main = ({ navigation, footer, children }: MainProps): React.ReactElement =
                 }}
             />
 
-            {footer && <Footer {...footer} />}
+            <Footer {...footer} />
         </>
     );
 };
