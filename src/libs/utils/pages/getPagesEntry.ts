@@ -31,7 +31,9 @@ export const getPagesEntry = async ({ uri, uriArr }: GetPagesEntryTypes) => {
 
         if (tmp && tmp?.typeHandle) typeHandle = tmp.typeHandle;
         if (!tmp || !tmp?.typeHandle) typeHandle = 'not-found';
-    } catch {}
+    } catch (e) {
+        throw new Error(e as any);
+    }
 
     return { typeHandle, slug };
 };
