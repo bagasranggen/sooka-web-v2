@@ -1,12 +1,13 @@
 import { FLAVOURS } from '@/libs/data';
-import { Flavour, PageDataParamsProps, PageDataProps } from '@/libs/@types';
+import { Flavour, PageDataParamsProps, PageDataProps, Product } from '@/libs/@types';
 import {
     createMarqueeItem,
+    createPicsumImage,
     createPictureImage,
     createProductDetailPrices,
     createProductDetailTag,
 } from '@/libs/factory';
-import { checkMediaStatus } from '@/libs/utils';
+import { checkMediaStatus, convertIntToCurrency } from '@/libs/utils';
 
 import { apolloClient } from '@/libs/fetcher';
 import { PRODUCT_DETAIL_QUERY } from '@/graphql';
@@ -17,6 +18,7 @@ import { ProductDetailIndexProps } from '@/components/pages/ProductDetailIndex';
 import { ProductDetailInfoProps } from '@/components/pages/ProductDetailIndex/ProductDetailInfo';
 import { BaseProps as HeadingBaseProps } from '@/components/common/Heading';
 import { RangeProps } from '@/components/common/Range';
+import { FADE_BANNER_MEDIA, FORM_PURCHASE_ADDONS, FORM_PURCHASE_VARIANTS, MODAL_PURCHASE } from '@/libs/mock';
 
 export const ProductDetailData = async ({
     type,
@@ -27,27 +29,97 @@ export const ProductDetailData = async ({
         variables: { uri },
     });
 
-    const d = data?.products?.docs?.[0];
+    const d: Product | undefined = data?.products?.docs?.[0];
 
     const { data: mediaMain } = checkMediaStatus({
-        item: d?.thumbnail,
+        item: d?.thumbnail as any,
         handles: ['productDetailBanner', 'productDetailMobile'],
+        volumeAssets: 'mediaProducts',
     });
     const { data: mediaSecondary } = checkMediaStatus({
-        item: d?.thumbnailHover,
+        item: d?.thumbnailHover as any,
         handles: ['productDetailSticky', 'productDetailMobile'],
+        volumeAssets: 'mediaProducts',
     });
 
     const notes = createProductDetailTag({ item: d });
 
+    console.log({ d });
+
+    const bannerVariants: ProductDetailIndexProps['entries']['banner']['variants'] = [
+        // {
+        //     title: 'Square - 15cm x 15cm',
+        //     price: 'Rp 120.000',
+        // },
+        // {
+        //     title: 'Round - 15cm x 15cm',
+        //     price: 'Rp 140.000',
+        // },
+    ];
+
+    if (d?.prices && d.prices.length > 0) {
+        d.prices.forEach((item) => {
+            let tmp: NonNullable<ProductDetailIndexProps['entries']['banner']['variants']>[number] | undefined =
+                undefined;
+
+            const price = item?.price;
+
+            console.log({ item });
+            if (price?.note) {
+                tmp = Object.assign(tmp ?? {}, { title: price.note } as any);
+            }
+            if (price?.normalPrice) {
+                tmp = Object.assign(tmp ?? {}, { price: convertIntToCurrency(price.normalPrice, true) } as any);
+            }
+            if (price?.salePrice) {
+                tmp = Object.assign(tmp ?? {}, { price: convertIntToCurrency(price.salePrice, true) } as any);
+            }
+
+            if (tmp && tmp?.price && tmp?.title) bannerVariants.push(tmp);
+        });
+    }
+
+    let bannerPopup: NonNullable<ProductDetailIndexProps['entries']['banner']['popup']>['content'] = {
+        media: [],
+        form: {
+            // variants: bannerVariants,
+        },
+    };
+
+    // media: FADE_BANNER_MEDIA,
+    //     mediaThumbnail: [createPicsumImage({ id: 200, width: 800, height: 800 })],
+    //     title: 'Strawberry Shortcake',
+    //     description: parse(
+    //     `<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Doloremque excepturi nulla perferendis sapiente voluptatibus? Animi, cum ducimus, ipsam iure libero minus perspiciatis quam qui, quis quisquam quo repellat sed tenetur!</p>`
+    // ),
+    //     form: {
+    //     variants: FORM_PURCHASE_VARIANTS,
+    //         addOns: FORM_PURCHASE_ADDONS,
+    // },
+
     const banner: ProductDetailIndexProps['entries']['banner'] = {
         media: [],
         children: '',
-        form: {
-            title: d?.title,
-            summaries: createProductDetailPrices({ prices: d?.prices, addons: d?.addons }),
-            disabled: d?.availability === 'unavailable',
-            notes: typeof notes === 'string' ? notes : undefined,
+        variants: bannerVariants,
+        // form: {
+        //     title: d?.title,
+        //     summaries: createProductDetailPrices({ prices: d?.prices, addons: d?.addons }),
+        //     disabled: d?.availability === 'unavailable',
+        //     notes: typeof notes === 'string' ? notes : undefined,
+        // },
+        // variants: [
+        //     {
+        //         title: 'Square - 15cm x 15cm',
+        //         price: 'Rp 120.000',
+        //     },
+        //     {
+        //         title: 'Round - 15cm x 15cm',
+        //         price: 'Rp 140.000',
+        //     },
+        // ],
+        popup: {
+            // content: MODAL_PURCHASE,
+            content: bannerPopup,
         },
     };
 
@@ -89,6 +161,11 @@ export const ProductDetailData = async ({
         );
     }
 
+    if (banner?.media && banner.media.length > 0) {
+        if (bannerPopup?.media) bannerPopup.media.push(banner.media);
+    }
+    console.log({ banner });
+
     const infos: ProductDetailIndexProps['entries']['infos'] = {
         media: [],
         contents: [],
@@ -105,6 +182,10 @@ export const ProductDetailData = async ({
     }
     if (mediaSecondary?.productDetailMobile) {
         infos.media.push(createPictureImage({ item: mediaSecondary.productDetailMobile }));
+    }
+
+    if (infos?.media && infos.media.length > 0) {
+        if (bannerPopup?.media) bannerPopup.media.push(infos.media);
     }
 
     // Media Content Description

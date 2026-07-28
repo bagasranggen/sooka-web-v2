@@ -5,6 +5,7 @@ import React from 'react';
 import { ArrayStringProps } from '@/libs/@types';
 import { joinArrayString, sendWhatsappMessage } from '@/libs/utils';
 import { createMessageText } from '@/libs/factory';
+import { useOrderStateContext } from '@/store/context';
 
 import Banner, { HalfMediaProps } from '@/components/common/Banner';
 import Columns from '@/components/common/Columns';
@@ -26,6 +27,8 @@ export type ProductDetailIndexProps = {
 };
 
 const ProductDetailIndex = ({ entries }: ProductDetailIndexProps): React.ReactElement => {
+    const { popupIsOpen, setPopupIsOpen } = useOrderStateContext();
+
     let infoClass: ArrayStringProps = ['mt-5 md:mt-10'];
     if (!entries?.marquee || entries.marquee.length === 0) infoClass.push('mb-10 md:mb-15');
     infoClass = joinArrayString(infoClass);
@@ -38,19 +41,14 @@ const ProductDetailIndex = ({ entries }: ProductDetailIndexProps): React.ReactEl
                     className="md:mt-10">
                     <Banner.HalfMedia
                         media={entries.banner.media}
-                        form={{
-                            ...entries.banner.form,
-                            onSubmit: (data) => {
-                                sendWhatsappMessage(
-                                    createMessageText({
-                                        type: 'regular-cake',
-                                        isEncoded: true,
-                                        dimension: data?.price,
-                                        flavour: data?.title,
-                                        addon: data?.addOns ?? undefined,
-                                    })
-                                );
-                            },
+                        variants={entries?.banner?.variants}
+                        popup={{
+                            ...entries.banner.popup,
+                            open: popupIsOpen,
+                            onOpenChange: (open) => setPopupIsOpen(open),
+                        }}
+                        onClick={() => {
+                            setPopupIsOpen(true);
                         }}>
                         {entries.banner.children}
                     </Banner.HalfMedia>
