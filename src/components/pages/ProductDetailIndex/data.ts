@@ -19,6 +19,7 @@ import { ProductDetailInfoProps } from '@/components/pages/ProductDetailIndex/Pr
 import { BaseProps as HeadingBaseProps } from '@/components/common/Heading';
 import { RangeProps } from '@/components/common/Range';
 import { FADE_BANNER_MEDIA, FORM_PURCHASE_ADDONS, FORM_PURCHASE_VARIANTS, MODAL_PURCHASE } from '@/libs/mock';
+import { PurchaseProps } from '@/components/common/Form';
 
 export const ProductDetailData = async ({
     type,
@@ -64,7 +65,7 @@ export const ProductDetailData = async ({
 
             const price = item?.price;
 
-            console.log({ item });
+            // console.log({ item });
             if (price?.note) {
                 tmp = Object.assign(tmp ?? {}, { title: price.note } as any);
             }
@@ -79,11 +80,58 @@ export const ProductDetailData = async ({
         });
     }
 
+    const createPurchasePopupItem = ({ variants: variantsProps }: { variants?: Product['prices'] }) => {
+        const variants: PurchaseProps['variants'] = [];
+
+        if (variantsProps && variantsProps.length > 0) {
+            variantsProps.forEach((item) => {
+                const price = item?.price;
+
+                let value:
+                    | NonNullable<PurchaseProps['variants']>[number]['value']
+                    | NonNullable<PurchaseProps['variants']>[number]['value'][] = [];
+                if (price?.note && Array.isArray(value)) value.push(price.note);
+
+                console.log({ price });
+            });
+        }
+
+        //     variants: FORM_PURCHASE_VARIANTS,
+        // {
+        //     id: 'tes',
+        //         type: 'radio',
+        //     value: 'Round - 15cm,120000',
+        //     // checked: true,
+        //     label: 'Round - 15cm',
+        //     price: 'Rp120.000',
+        //     required: true,
+        // },
+
+        //         addOns: FORM_PURCHASE_ADDONS,
+        // {
+        //     id: 'extraCandle',
+        //         media: [createPicsumImage({ width: 200, height: 200 })],
+        //     type: 'checkbox',
+        //     value: 'extraCandle,Extra Candle,3000',
+        //     // checked: true,
+        //     // required: true,
+        //     label: 'Extra Candle',
+        //     description: 'lorem ipsum dolor sit amet, consectetur adipisicing elit.',
+        //     price: 'Rp3.000',
+        //     input: {
+        //     placeholder: 'Let us know your preferred candle color',
+        // },
+        // },
+
+        return { variants };
+    };
+
     let bannerPopup: NonNullable<ProductDetailIndexProps['entries']['banner']['popup']>['content'] = {
         media: [],
-        form: {
-            // variants: bannerVariants,
-        },
+        // form: {
+        //     // variants: bannerVariants,
+        // },
+        form: createPurchasePopupItem({ variants: d?.prices ?? [] }),
     };
 
     // media: FADE_BANNER_MEDIA,
@@ -161,10 +209,10 @@ export const ProductDetailData = async ({
         );
     }
 
-    if (banner?.media && banner.media.length > 0) {
-        if (bannerPopup?.media) bannerPopup.media.push(banner.media);
-    }
-    console.log({ banner });
+    // if (banner?.media && banner.media.length > 0) {
+    //     if (bannerPopup?.media) bannerPopup.media.push(banner.media);
+    // }
+    // console.log({ banner });
 
     const infos: ProductDetailIndexProps['entries']['infos'] = {
         media: [],
@@ -184,9 +232,9 @@ export const ProductDetailData = async ({
         infos.media.push(createPictureImage({ item: mediaSecondary.productDetailMobile }));
     }
 
-    if (infos?.media && infos.media.length > 0) {
-        if (bannerPopup?.media) bannerPopup.media.push(infos.media);
-    }
+    // if (infos?.media && infos.media.length > 0) {
+    //     if (bannerPopup?.media) bannerPopup.media.push(infos.media);
+    // }
 
     // Media Content Description
     if (d?.description) {
