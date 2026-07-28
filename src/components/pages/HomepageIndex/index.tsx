@@ -30,84 +30,84 @@ const HomepageIndex = ({ entries }: HomepageIndexProps): React.ReactElement => {
         <>
             {entries?.banner && <HomepageBanner items={entries.banner} />}
 
-            {entries?.highlights && entries.highlights.length > 0 && (
-                <Animation type="fade-in">
-                    <HomepageHighlight
-                        className="mt-8 lg:mt-10 last:mb-10 lg:last:mb-20"
-                        items={entries.highlights}
-                    />
-                </Animation>
-            )}
+            {/*{entries?.highlights && entries.highlights.length > 0 && (*/}
+            {/*    <Animation type="fade-in">*/}
+            {/*        <HomepageHighlight*/}
+            {/*            className="mt-8 lg:mt-10 last:mb-10 lg:last:mb-20"*/}
+            {/*            items={entries.highlights}*/}
+            {/*        />*/}
+            {/*    </Animation>*/}
+            {/*)}*/}
 
-            {entries?.story?.description && (
-                <Animation type="fade-in">
-                    <HomepageStory
-                        className="mt-8 lg:mt-20 last:mb-10 lg:last:mb-20"
-                        {...entries?.story}
-                    />
-                </Animation>
-            )}
+            {/*{entries?.story?.description && (*/}
+            {/*    <Animation type="fade-in">*/}
+            {/*        <HomepageStory*/}
+            {/*            className="mt-8 lg:mt-20 last:mb-10 lg:last:mb-20"*/}
+            {/*            {...entries?.story}*/}
+            {/*        />*/}
+            {/*    </Animation>*/}
+            {/*)}*/}
 
-            {entries?.testimonials && entries.testimonials.length > 0 && (
-                <Animation type="fade-in">
-                    <Container
-                        as="section"
-                        className="mt-8 lg:mt-20 last:mb-10 lg:last:mb-20">
-                        <Columns className="justify-center">
-                            <Columns.Column
-                                md={8}
-                                lg={9}>
-                                <Heading
-                                    as="h2"
-                                    size="section"
-                                    className="text-center">
-                                    Testimonials
-                                </Heading>
+            {/*{entries?.testimonials && entries.testimonials.length > 0 && (*/}
+            {/*    <Animation type="fade-in">*/}
+            {/*        <Container*/}
+            {/*            as="section"*/}
+            {/*            className="mt-8 lg:mt-20 last:mb-10 lg:last:mb-20">*/}
+            {/*            <Columns className="justify-center">*/}
+            {/*                <Columns.Column*/}
+            {/*                    md={8}*/}
+            {/*                    lg={9}>*/}
+            {/*                    <Heading*/}
+            {/*                        as="h2"*/}
+            {/*                        size="section"*/}
+            {/*                        className="text-center">*/}
+            {/*                        Testimonials*/}
+            {/*                    </Heading>*/}
 
-                                <div className="mt-8">
-                                    <Carousel.Testimonial items={entries.testimonials} />
-                                </div>
-                            </Columns.Column>
-                        </Columns>
-                    </Container>
-                </Animation>
-            )}
+            {/*                    <div className="mt-8">*/}
+            {/*                        <Carousel.Testimonial items={entries.testimonials} />*/}
+            {/*                    </div>*/}
+            {/*                </Columns.Column>*/}
+            {/*            </Columns>*/}
+            {/*        </Container>*/}
+            {/*    </Animation>*/}
+            {/*)}*/}
 
-            {entries?.imageDivider && entries.imageDivider.length > 0 && (
-                <Animation type="fade-in">
-                    <ImageDivider
-                        className="mt-8 lg:mt-20 last:mb-10 lg:last:mb-20"
-                        media={entries.imageDivider}
-                    />
-                </Animation>
-            )}
+            {/*{entries?.imageDivider && entries.imageDivider.length > 0 && (*/}
+            {/*    <Animation type="fade-in">*/}
+            {/*        <ImageDivider*/}
+            {/*            className="mt-8 lg:mt-20 last:mb-10 lg:last:mb-20"*/}
+            {/*            media={entries.imageDivider}*/}
+            {/*        />*/}
+            {/*    </Animation>*/}
+            {/*)}*/}
 
-            {entries?.orders?.steps && entries.orders.steps.length > 0 && (
-                <Animation type="fade-in">
-                    <Container
-                        as="section"
-                        className="mt-8 lg:mt-20 last:mb-10 lg:last:mb-20">
-                        <Columns className="justify-center">
-                            <Columns.Column lg={8}>
-                                <Heading
-                                    as="h2"
-                                    size="section"
-                                    className="text-center"
-                                    description={
-                                        <RichText className="text-center">{entries?.orders?.children as any}</RichText>
-                                    }>
-                                    First Time <span className="text-sooka-primary">Ordering</span>?
-                                </Heading>
+            {/*{entries?.orders?.steps && entries.orders.steps.length > 0 && (*/}
+            {/*    <Animation type="fade-in">*/}
+            {/*        <Container*/}
+            {/*            as="section"*/}
+            {/*            className="mt-8 lg:mt-20 last:mb-10 lg:last:mb-20">*/}
+            {/*            <Columns className="justify-center">*/}
+            {/*                <Columns.Column lg={8}>*/}
+            {/*                    <Heading*/}
+            {/*                        as="h2"*/}
+            {/*                        size="section"*/}
+            {/*                        className="text-center"*/}
+            {/*                        description={*/}
+            {/*                            <RichText className="text-center">{entries?.orders?.children as any}</RichText>*/}
+            {/*                        }>*/}
+            {/*                        First Time <span className="text-sooka-primary">Ordering</span>?*/}
+            {/*                    </Heading>*/}
 
-                                <List.Number
-                                    className="mt-8"
-                                    items={entries.orders.steps}
-                                />
-                            </Columns.Column>
-                        </Columns>
-                    </Container>
-                </Animation>
-            )}
+            {/*                    <List.Number*/}
+            {/*                        className="mt-8"*/}
+            {/*                        items={entries.orders.steps}*/}
+            {/*                    />*/}
+            {/*                </Columns.Column>*/}
+            {/*            </Columns>*/}
+            {/*        </Container>*/}
+            {/*    </Animation>*/}
+            {/*)}*/}
         </>
     );
 };

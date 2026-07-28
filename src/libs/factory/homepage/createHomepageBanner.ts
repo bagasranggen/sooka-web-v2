@@ -11,10 +11,12 @@ export const createHomepageBanner = (item: any): BannerItemProps => {
     const { data: mediaProduct, hasMobile: mediaProductHasMobile } = checkMediaStatus({
         item: product?.thumbnail,
         handles: ['bannerDesktop', 'bannerTablet', 'bannerMobile'],
+        volumeAssets: 'mediaProducts',
     });
     const { data: mediaCustom, hasMobile: mediaCustomHasMobile } = checkMediaStatus({
         item: item?.media,
         handles: ['bannerDesktop', 'bannerTablet', 'bannerMobile'],
+        // volumeAssets:
     });
 
     let media: BannerItemProps['media'] = mediaCustom?.bannerDesktop?.src;
