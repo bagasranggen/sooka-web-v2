@@ -39,7 +39,7 @@ export const checkMediaStatus = (
                 [handle]: {
                     ...media,
                     src: createAssetsVolumeSource({
-                        item: { ...media, filename: data?.filename },
+                        item: media,
                         volumeAssets: props?.volumeAssets,
                     }),
                     alt: props?.item?.alt ?? props?.item?.filename ?? '',
