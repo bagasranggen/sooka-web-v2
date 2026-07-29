@@ -64,12 +64,6 @@ export const ProductDetailData = async ({
         media: [],
         children: '',
         variants: bannerVariants,
-        // form: {
-        //     title: d?.title,
-        //     summaries: createProductDetailPrices({ prices: d?.prices, addons: d?.addons }),
-        //     disabled: d?.availability === 'unavailable',
-        //     notes: typeof notes === 'string' ? notes : undefined,
-        // },
         popup: {
             content: createPurchasePopupItem({
                 title: d?.title,
@@ -119,11 +113,6 @@ export const ProductDetailData = async ({
         );
     }
 
-    // if (banner?.media && banner.media.length > 0) {
-    //     if (bannerPopup?.media) bannerPopup.media.push(banner.media);
-    // }
-    // console.log({ banner });
-
     const infos: ProductDetailIndexProps['entries']['infos'] = {
         media: [],
         contents: [],
@@ -141,10 +130,6 @@ export const ProductDetailData = async ({
     if (mediaSecondary?.productDetailMobile) {
         infos.media.push(createPictureImage({ item: mediaSecondary.productDetailMobile }));
     }
-
-    // if (infos?.media && infos.media.length > 0) {
-    //     if (bannerPopup?.media) bannerPopup.media.push(infos.media);
-    // }
 
     // Media Content Description
     if (d?.description) {

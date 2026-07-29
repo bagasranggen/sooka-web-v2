@@ -1,5 +1,5 @@
-import { checkMediaStatus } from '../../../../libs/utils/checkMediaStatus';
-import { createPictureImage } from '../../../../libs/factory/createPictureImage';
+import { checkMediaStatus } from '@/libs/utils/checkMediaStatus';
+import { createPictureImage } from '@/libs/factory/createPictureImage';
 
 import { CbGalleryProps } from '@/components/common/ContentBlocks/CbGallery';
 
