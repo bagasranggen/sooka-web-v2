@@ -68,7 +68,7 @@ const ThumbnailItem = ({
     if (disabled) mainMediaClass.push('contrast-50');
     mainMediaClass = joinArrayString(mainMediaClass);
 
-    let hoverMediaClass: ArrayStringProps = ['absolute top-0 opacity-0 md:transition-opacity w-full'];
+    let hoverMediaClass: ArrayStringProps = ['absolute top-0 left-0 opacity-0 md:transition-opacity w-full'];
     hoverMediaClass.push('md:group-hover:opacity-100');
     if (disabled) hoverMediaClass.push('contrast-50');
     hoverMediaClass = joinArrayString(hoverMediaClass);
@@ -94,14 +94,15 @@ const ThumbnailItem = ({
 
     return (
         <Button
-            as="anchor"
+            as="button"
             className="group"
             onClick={(e) => {
                 e.preventDefault();
 
                 if (popup && onClick) onClick(popup);
             }}
-            {...cta}>
+            //    {...cta}
+        >
             <div className="relative">
                 {labelText && <div className={labelClass}>{labelText}</div>}
 
