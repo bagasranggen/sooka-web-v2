@@ -11,7 +11,7 @@ export const PRODUCT_LISTING_INDEX_QUERY = gql`
                 }
 
                 title
-                description
+                description: headerDescription
             }
         }
     }

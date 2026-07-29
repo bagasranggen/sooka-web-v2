@@ -28,6 +28,7 @@ export const FRAGMENT_PRODUCT_DETAIL = gql`
             freshCreamy
             custardySpongy
             tangySweet
+            fruityNutty
         }
     }
 
