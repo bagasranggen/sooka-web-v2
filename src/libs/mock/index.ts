@@ -10,4 +10,5 @@ export * from './modal';
 export * from './navigation';
 export * from './productDetail';
 export * from './productListing';
+export * from './richText';
 export * from './testimonial';
