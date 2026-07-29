@@ -1,4 +1,4 @@
-import { checkMediaStatus, CheckMediaStatusProps } from '../utils/checkMediaStatus';
+import { checkMediaStatus, CheckMediaStatusProps } from '@/libs/utils/checkMediaStatus';
 import { createPictureImage } from './createPictureImage';
 
 import { BaseProps } from '@/components/common/Picture';
