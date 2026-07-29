@@ -1,8 +1,9 @@
 import { Product } from '@/libs/@types';
-import { createPictureImage } from './createPictureImage';
-import { createProductDetailTag } from './productDetail/createProductDetailTag';
-import { convertIntToCurrency } from '../utils/convertIntToCurrency';
-import { checkMediaStatus } from '../utils/checkMediaStatus';
+import { createPictureImage } from '@/libs/factory/createPictureImage';
+import { createProductDetailTag } from '@/libs/factory/productDetail/createProductDetailTag';
+import { createPurchasePopupItem } from '@/libs/factory/createPurchasePopupItem';
+import { convertIntToCurrency } from '@/libs/utils/convertIntToCurrency';
+import { checkMediaStatus } from '@/libs/utils/checkMediaStatus';
 
 import { ThumbnailItemProps } from '@/components/common/Card';
 
@@ -25,10 +26,12 @@ export const createProductItem = ({ item, hasPrice = true, hasBadge = false }: C
     const { data: mediaThumbnail } = checkMediaStatus({
         item: item?.thumbnail as any,
         handles: ['productListingThumbnail', 'productListingThumbnailMobile'],
+        volumeAssets: 'mediaProducts',
     });
     const { data: mediaThumbnailHover } = checkMediaStatus({
         item: item?.thumbnailHover as any,
         handles: ['productListingThumbnail', 'productListingThumbnailMobile'],
+        volumeAssets: 'mediaProducts',
     });
 
     const media: ThumbnailItemProps['media'] = [];
@@ -74,5 +77,12 @@ export const createProductItem = ({ item, hasPrice = true, hasBadge = false }: C
         salePrice,
         disabled,
         label,
+        popup: createPurchasePopupItem({
+            title: item?.title,
+            description: item?.description,
+            media: [(item?.thumbnail as any) ?? {}, (item?.thumbnailHover as any) ?? {}],
+            variants: item?.prices ?? [],
+            addOns: item?.addons ?? [],
+        }),
     };
 };
