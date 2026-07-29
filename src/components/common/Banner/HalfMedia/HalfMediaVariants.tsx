@@ -30,15 +30,15 @@ const HalfMediaVariants = ({
                     {children && (
                         <Heading
                             as="h4"
-                            className="md:mb-1 text-md md:text-[2.4rem] lg:text-[3.7rem] text-center">
+                            className="mb-1 text-[3rem] lg:text-[3.7rem] text-center">
                             {children}
                         </Heading>
                     )}
 
                     {items && items.length > 0 && (
                         <Columns
-                            gutterX={4}
-                            gutterY={2}
+                            gutterX={{ md: 4 }}
+                            gutterY={{ xs: 1, md: 2 }}
                             className="justify-center">
                             {items.map((item: HalfMediaVariantItemProps, i: number) => {
                                 if (!item?.title || !item?.price) return null;
@@ -46,7 +46,7 @@ const HalfMediaVariants = ({
                                 return (
                                     <Columns.Column
                                         key={i}
-                                        xs={'auto'}
+                                        sm={'auto'}
                                         className="text-center">
                                         <Heading
                                             as="h5"
@@ -66,7 +66,7 @@ const HalfMediaVariants = ({
 
                     {!disabled && (
                         <Button.Container
-                            className="mt-3 justify-center"
+                            className="mt-2 justify-center"
                             items={[
                                 {
                                     children: (
