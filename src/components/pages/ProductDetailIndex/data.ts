@@ -157,12 +157,12 @@ export const ProductDetailData = async ({
     const flavour: Flavour | undefined = d?.flavour;
 
     // Content Flavours
-    if (flavour?.showFlavour && flavour?.custardySpongy && flavour?.freshCreamy && flavour?.tangySweet) {
+    if (flavour?.showFlavour) {
         const flavours: [string, number][] = [];
         Object.entries(flavour).forEach(([key, value]) => {
             const excludedKey = ['__typename', 'showFlavour'];
 
-            if (!excludedKey.includes(key)) flavours.push([key, parseInt(value.replace('_', ''))]);
+            if (!excludedKey.includes(key) && value) flavours.push([key, parseInt(value.replace('_', ''))]);
         });
 
         const tmp: RangeProps[] = [];
@@ -218,7 +218,11 @@ export const ProductDetailData = async ({
 
     if (d?.marquee && d.marquee.length > 0) {
         d.marquee.forEach((item: any) => {
-            const marqueeItem = createMarqueeItem({ item, handles: ['productMarquee', 'productMarqueeMobile'] });
+            const marqueeItem = createMarqueeItem({
+                item,
+                handles: ['productMarquee', 'productMarqueeMobile'],
+                volumeAssets: 'mediaProducts',
+            });
 
             if (marqueeItem.length > 0) marquee.push(marqueeItem);
         });
