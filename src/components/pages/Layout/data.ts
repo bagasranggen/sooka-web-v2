@@ -20,8 +20,6 @@ export const LayoutData = async () => {
         // throw new Error(e as any);
     }
 
-    // console.log({ data });
-
     const headerNavigation: Navigation = data?.headerNavigation;
     const footerNavigation: Footer = data?.footerNavigation;
 
@@ -49,6 +47,7 @@ export const LayoutData = async () => {
             if (linkIsValid && item?.entryStatus === 'live') {
                 navigation.push({
                     href: link?.href,
+                    href: link?.href ?? '#',
                     target: link?.target,
                     children: link?.label,
                     child,
@@ -62,7 +61,6 @@ export const LayoutData = async () => {
     if (footerNavigation?.addressLink) {
         const { linkIsValid, link } = createLinkItem(footerNavigation?.addressLink);
 
-        // footer = Object.assign(footer ?? {}, { address: footerNavigation.address });
         if (linkIsValid) {
             footer = Object.assign(footer ?? {}, {
                 address: {
