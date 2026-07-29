@@ -35,8 +35,10 @@ const Navigation = ({ items, cart }: NavigationProps): React.ReactElement => {
     const [scrollYDirection, setScrollYDirection] = useState<'down' | 'up' | null>(null);
     const [activeDropdown, setActiveDropdown] = useState<BaseAnchorProps['children']>();
 
-    let navClass: ArrayStringProps = ['bg-sooka-primary h-[7rem] flex items-center text-light'];
-    navClass.push('sticky top-0 z-1040 transition-transform');
+    let navClass: ArrayStringProps = ['h-[7rem] flex items-center text-light'];
+    if (!show) navClass.push('bg-sooka-primary');
+    if (show) navClass.push('bg-sooka-l-primary');
+    navClass.push('sticky top-0 z-1040 transition-transform transition-colors');
     if (scrollY > height && scrollYDirection === 'down') navClass.push('-translate-y-full');
     navClass = joinArrayString(navClass);
 
@@ -131,7 +133,7 @@ const Navigation = ({ items, cart }: NavigationProps): React.ReactElement => {
                         hide={triggerClose}
                         backdrop={false}
                         from="bottom"
-                        className="h-full max-h-[calc(100vh-7rem)] bg-sooka-primary">
+                        className="h-full max-h-[calc(100vh-7rem)] bg-sooka-l-primary">
                         <NavigationMenuMobile
                             items={items}
                             onSamePath={triggerClose}
