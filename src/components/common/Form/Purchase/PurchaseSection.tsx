@@ -25,6 +25,7 @@ export type PurchaseSectionItemProps = {
 export type PurchaseSectionProps = {
     label?: BaseProps['children'];
     getValues?: UseFormGetValues<any>;
+    active?: string | string[];
     items?: PurchaseSectionItemProps[];
 } & (PropsWithChildren &
     ClassnameProps &
@@ -34,6 +35,7 @@ export type PurchaseSectionProps = {
 
 const PurchaseSection = ({
     getValues,
+    active,
     className,
     items,
     name,
@@ -45,8 +47,6 @@ const PurchaseSection = ({
     let headingClass: ArrayStringProps = ['uppercase tracking-0.2 font-black text-[1.2rem]'];
     if (className) headingClass.push(className);
     headingClass = joinArrayString(headingClass);
-
-    const active = getValues && name ? getValues(name) : undefined;
 
     return (
         <>
