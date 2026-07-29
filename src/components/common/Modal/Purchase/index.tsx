@@ -8,13 +8,14 @@ import Picture, { BaseProps } from '@/components/common/Picture';
 import Heading, { BaseProps as BaseHeadingProps } from '@/components/common/Heading';
 import Form, { PurchaseProps as FormPurchaseProps } from '@/components/common/Form';
 import ModalSheet, { ModalSheetProps } from '@/components/common/Modal/ModalSheet';
+import RichText, { RichTextProps } from '@/components/common/RichText';
 
 export type PurchaseProps = {
     form?: Omit<FormPurchaseProps, 'onSubmit'>;
     media?: BaseProps['items'][];
     mediaThumbnail?: BaseProps['items'];
     title?: BaseHeadingProps['children'];
-    description?: React.ReactNode;
+    description?: RichTextProps['children'];
     onSubmit?: (
         data: ParametersProps<NonNullable<FormPurchaseProps['onSubmit']>>,
         media: PurchaseProps['mediaThumbnail']
@@ -79,7 +80,7 @@ const Purchase = ({
                         )}
 
                         <div className="mt-2">
-                            {description}
+                            {description && <RichText>{description}</RichText>}
 
                             <Form.Purchase
                                 className="mt-3"
