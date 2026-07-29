@@ -69,7 +69,8 @@ export const createProductItem = ({ item, hasPrice = true, hasBadge = false }: C
     if (label) disabled = item?.availability === 'unavailable';
 
     return {
-        cta: { href: item?.url as any },
+        // cta: { href: item?.url as any },
+        cta: { href: '#' },
         media,
         mediaHover,
         title: item?.title ?? '',

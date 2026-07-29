@@ -46,7 +46,7 @@ const HalfMediaVariants = ({
                                 return (
                                     <Columns.Column
                                         key={i}
-                                        sm={'auto'}
+                                        xs={'auto'}
                                         className="text-center">
                                         <Heading
                                             as="h5"
