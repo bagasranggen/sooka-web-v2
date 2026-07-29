@@ -1,4 +1,8 @@
+'use client'
+
 import React from 'react';
+
+import { useOrderStateContext } from '@/store/context';
 
 import Heading, { BaseProps } from '@/components/common/Heading';
 import Columns from '@/components/common/Columns';
@@ -17,6 +21,8 @@ export type ProductListingIndexProps = {
 };
 
 const ProductListingIndex = ({ entries }: ProductListingIndexProps): React.ReactElement => {
+    const { popupIsOpen, setPopupIsOpen, popupContent, setPopupContent } = useOrderStateContext();
+
     return (
         <>
             {entries?.banner && (
@@ -61,6 +67,15 @@ const ProductListingIndex = ({ entries }: ProductListingIndexProps): React.React
                                 row={{ gutterY: 4 }}
                                 column={{ sm: 6, md: 4, xl: 3 }}
                                 items={entries.products}
+                                popup={{
+                                    open: popupIsOpen,
+                                    onOpenChange: (open) => setPopupIsOpen(open),
+                                    content: popupContent,
+                                }}
+                                onClick={(data) => {
+                                    setPopupIsOpen(true);
+                                    if (setPopupContent) setPopupContent(data);
+                                }}
                             />
                         )}
 
