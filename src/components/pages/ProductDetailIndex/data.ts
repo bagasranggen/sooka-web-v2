@@ -1,12 +1,6 @@
 import { FLAVOURS } from '@/libs/data';
-import { Flavour, PageDataParamsProps, PageDataProps, Product } from '@/libs/@types';
-import {
-    createMarqueeItem,
-    createPicsumImage,
-    createPictureImage,
-    createProductDetailPrices,
-    createProductDetailTag,
-} from '@/libs/factory';
+import { ArrayStringProps, Flavour, PageDataParamsProps, PageDataProps, Product } from '@/libs/@types';
+import { createMarqueeItem, createPictureImage, createProductDetailTag, createPurchasePopupItem } from '@/libs/factory';
 import { checkMediaStatus, convertIntToCurrency } from '@/libs/utils';
 
 import { apolloClient } from '@/libs/fetcher';
@@ -18,8 +12,6 @@ import { ProductDetailIndexProps } from '@/components/pages/ProductDetailIndex';
 import { ProductDetailInfoProps } from '@/components/pages/ProductDetailIndex/ProductDetailInfo';
 import { BaseProps as HeadingBaseProps } from '@/components/common/Heading';
 import { RangeProps } from '@/components/common/Range';
-import { FADE_BANNER_MEDIA, FORM_PURCHASE_ADDONS, FORM_PURCHASE_VARIANTS, MODAL_PURCHASE } from '@/libs/mock';
-import { PurchaseProps } from '@/components/common/Form';
 
 export const ProductDetailData = async ({
     type,
@@ -45,18 +37,7 @@ export const ProductDetailData = async ({
 
     const notes = createProductDetailTag({ item: d });
 
-    console.log({ d });
-
-    const bannerVariants: ProductDetailIndexProps['entries']['banner']['variants'] = [
-        // {
-        //     title: 'Square - 15cm x 15cm',
-        //     price: 'Rp 120.000',
-        // },
-        // {
-        //     title: 'Round - 15cm x 15cm',
-        //     price: 'Rp 140.000',
-        // },
-    ];
+    const bannerVariants: ProductDetailIndexProps['entries']['banner']['variants'] = [];
 
     if (d?.prices && d.prices.length > 0) {
         d.prices.forEach((item) => {
@@ -65,7 +46,6 @@ export const ProductDetailData = async ({
 
             const price = item?.price;
 
-            // console.log({ item });
             if (price?.note) {
                 tmp = Object.assign(tmp ?? {}, { title: price.note } as any);
             }
@@ -80,71 +60,6 @@ export const ProductDetailData = async ({
         });
     }
 
-    const createPurchasePopupItem = ({ variants: variantsProps }: { variants?: Product['prices'] }) => {
-        const variants: PurchaseProps['variants'] = [];
-
-        if (variantsProps && variantsProps.length > 0) {
-            variantsProps.forEach((item) => {
-                const price = item?.price;
-
-                let value:
-                    | NonNullable<PurchaseProps['variants']>[number]['value']
-                    | NonNullable<PurchaseProps['variants']>[number]['value'][] = [];
-                if (price?.note && Array.isArray(value)) value.push(price.note);
-
-                console.log({ price });
-            });
-        }
-
-        //     variants: FORM_PURCHASE_VARIANTS,
-        // {
-        //     id: 'tes',
-        //         type: 'radio',
-        //     value: 'Round - 15cm,120000',
-        //     // checked: true,
-        //     label: 'Round - 15cm',
-        //     price: 'Rp120.000',
-        //     required: true,
-        // },
-
-        //         addOns: FORM_PURCHASE_ADDONS,
-        // {
-        //     id: 'extraCandle',
-        //         media: [createPicsumImage({ width: 200, height: 200 })],
-        //     type: 'checkbox',
-        //     value: 'extraCandle,Extra Candle,3000',
-        //     // checked: true,
-        //     // required: true,
-        //     label: 'Extra Candle',
-        //     description: 'lorem ipsum dolor sit amet, consectetur adipisicing elit.',
-        //     price: 'Rp3.000',
-        //     input: {
-        //     placeholder: 'Let us know your preferred candle color',
-        // },
-        // },
-
-        return { variants };
-    };
-
-    let bannerPopup: NonNullable<ProductDetailIndexProps['entries']['banner']['popup']>['content'] = {
-        media: [],
-        // form: {
-        //     // variants: bannerVariants,
-        // },
-        form: createPurchasePopupItem({ variants: d?.prices ?? [] }),
-    };
-
-    // media: FADE_BANNER_MEDIA,
-    //     mediaThumbnail: [createPicsumImage({ id: 200, width: 800, height: 800 })],
-    //     title: 'Strawberry Shortcake',
-    //     description: parse(
-    //     `<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Doloremque excepturi nulla perferendis sapiente voluptatibus? Animi, cum ducimus, ipsam iure libero minus perspiciatis quam qui, quis quisquam quo repellat sed tenetur!</p>`
-    // ),
-    //     form: {
-    //     variants: FORM_PURCHASE_VARIANTS,
-    //         addOns: FORM_PURCHASE_ADDONS,
-    // },
-
     const banner: ProductDetailIndexProps['entries']['banner'] = {
         media: [],
         children: '',
@@ -155,30 +70,25 @@ export const ProductDetailData = async ({
         //     disabled: d?.availability === 'unavailable',
         //     notes: typeof notes === 'string' ? notes : undefined,
         // },
-        // variants: [
-        //     {
-        //         title: 'Square - 15cm x 15cm',
-        //         price: 'Rp 120.000',
-        //     },
-        //     {
-        //         title: 'Round - 15cm x 15cm',
-        //         price: 'Rp 140.000',
-        //     },
-        // ],
         popup: {
-            // content: MODAL_PURCHASE,
-            content: bannerPopup,
+            content: createPurchasePopupItem({
+                title: d?.title,
+                description: d?.description,
+                media: [(d?.thumbnail as any) ?? {}, (d?.thumbnailHover as any) ?? {}],
+                variants: d?.prices ?? [],
+                addOns: d?.addons ?? [],
+            }),
         },
     };
 
     // Banner Title
     const hasBannerTitle = !!d?.bannerTitle;
 
-    let tmpTitle: HeadingBaseProps['children'] = '';
-    let title = d?.title;
-    if (hasBannerTitle) title = d.bannerTitle;
-    title = title.split(hasBannerTitle ? '\n' : ' ');
+    let title: ArrayStringProps = d?.title ?? '';
+    if (hasBannerTitle && d?.bannerTitle) title = d.bannerTitle;
+    if (title && typeof title === 'string') title = title.split(hasBannerTitle ? '\n' : ' ');
 
+    let tmpTitle: HeadingBaseProps['children'] = '';
     if (Array.isArray(title)) {
         title.forEach((item, i, arr) => {
             tmpTitle += `<span>${item}</span>`;
@@ -240,11 +150,11 @@ export const ProductDetailData = async ({
     if (d?.description) {
         infos.contents.push({
             title: 'Description',
-            description: d.description,
+            description: d.description as any,
         });
     }
 
-    const flavour: Flavour = d?.flavour;
+    const flavour: Flavour | undefined = d?.flavour;
 
     // Content Flavours
     if (flavour?.showFlavour && flavour?.custardySpongy && flavour?.freshCreamy && flavour?.tangySweet) {
@@ -279,7 +189,11 @@ export const ProductDetailData = async ({
         d.addons.forEach((item: any) => {
             const price = item?.prices?.[0]?.price;
 
-            const { data: mediaItem } = checkMediaStatus({ item: item?.thumbnail, handles: ['assets400x400'] });
+            const { data: mediaItem } = checkMediaStatus({
+                item: item?.thumbnail,
+                handles: ['assets400x400'],
+                volumeAssets: 'mediaAddons',
+            });
 
             const media = [];
             if (mediaItem?.assets400x400) {
