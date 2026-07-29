@@ -39,7 +39,7 @@ const CbRelatedProducts = ({
                         <Card.Thumbnail
                             className="justify-center"
                             row={{ gutterX: 2, gutterY: 4 }}
-                            column={{ xs: 1, sm: 2, md: 5 }}
+                            column={{ sm: 2, md: 3 }}
                             items={products}
                         />
                     </div>
