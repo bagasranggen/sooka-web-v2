@@ -94,15 +94,14 @@ const ThumbnailItem = ({
 
     return (
         <Button
-            as="button"
+            as="anchor"
             className="group"
             onClick={(e) => {
                 e.preventDefault();
 
                 if (popup && onClick) onClick(popup);
             }}
-            //    {...cta}
-        >
+            {...cta}>
             <div className="relative">
                 {labelText && <div className={labelClass}>{labelText}</div>}
 
