@@ -46,7 +46,6 @@ export const LayoutData = async () => {
 
             if (linkIsValid && item?.entryStatus === 'live') {
                 navigation.push({
-                    href: link?.href,
                     href: link?.href ?? '#',
                     target: link?.target,
                     children: link?.label,

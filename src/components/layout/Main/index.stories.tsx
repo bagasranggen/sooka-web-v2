@@ -41,7 +41,10 @@ export const Default: StoryObj<typeof Main> = {
             items: NAVIGATION_LINKS,
         },
         footer: {
-            address: 'asdawdawd',
+            address: {
+                href: '#',
+                children: 'asdawda',
+            },
             businessHour: 'asdadw - asdadw',
             socialMedia: [
                 {
