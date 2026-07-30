@@ -46,3 +46,6 @@ export const CART_ITEMS: PurchaseFormFields[] = [
         totalPrice: 240000,
     },
 ];
+
+export const CART_ITEMS_STRINGIFY =
+    '[{"title":"Lime, Passion and Coconut","qty":1,"cartItemId":"1785377660332","variant":"Round - 15cm,300000","addOns":false,"note":"","totalPrice":300000,"media":[{"src":"/api/media/kellen-riggin-9-kUppOmsyg-unsplash-1200x900.jpg?volumeAsset=mediaProducts","width":1200,"height":900,"alt":"Sea","media":768},{"src":"/api/media/kellen-riggin-9-kUppOmsyg-unsplash-600x449.jpg?volumeAsset=mediaProducts","width":600,"height":449,"alt":"Sea"}]}]';
