@@ -77,6 +77,7 @@ export const createPurchasePopupItem = ({
                     type: 'radio',
                     value,
                     label: itemPrice?.note ?? '',
+                    description: itemPrice?.additionalInfo ?? '',
                     price: convertIntToCurrency(price, true),
                     required: true,
                     checked: i === 0,

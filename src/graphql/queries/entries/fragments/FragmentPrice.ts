@@ -6,5 +6,6 @@ export const FRAGMENT_PRICE = gql`
         salePrice
         note
         isFree
+        additionalInfo
     }
 `;

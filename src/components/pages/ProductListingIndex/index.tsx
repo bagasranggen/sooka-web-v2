@@ -1,8 +1,8 @@
-'use client'
+'use client';
 
 import React from 'react';
 
-import { useOrderStateContext } from '@/store/context';
+import { useCartStateContext, useOrderStateContext } from '@/store/context';
 
 import Heading, { BaseProps } from '@/components/common/Heading';
 import Columns from '@/components/common/Columns';
@@ -22,6 +22,7 @@ export type ProductListingIndexProps = {
 
 const ProductListingIndex = ({ entries }: ProductListingIndexProps): React.ReactElement => {
     const { popupIsOpen, setPopupIsOpen, popupContent, setPopupContent } = useOrderStateContext();
+    const { addCartItemHandler } = useCartStateContext();
 
     return (
         <>
@@ -75,6 +76,13 @@ const ProductListingIndex = ({ entries }: ProductListingIndexProps): React.React
                                 onClick={(data) => {
                                     setPopupIsOpen(true);
                                     if (setPopupContent) setPopupContent(data);
+                                }}
+                                onSubmit={(data, media) => {
+                                    let item = data;
+                                    if (media && media.length) item = Object.assign(item, { media });
+
+                                    addCartItemHandler(item);
+                                    setPopupIsOpen(false);
                                 }}
                             />
                         )}
