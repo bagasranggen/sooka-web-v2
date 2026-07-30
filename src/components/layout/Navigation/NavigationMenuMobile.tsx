@@ -43,6 +43,8 @@ const NavigationMenuMobile = ({ items, onSamePath }: NavigationMenuMobileProps):
                     children = (
                         <NavigationCollapsible
                             className={btnClass}
+                            href={item?.href ?? '#'}
+                            target={item?.target}
                             items={item.child}
                             button={{
                                 onClick: (e, href) => {

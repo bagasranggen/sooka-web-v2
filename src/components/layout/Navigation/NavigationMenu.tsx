@@ -10,7 +10,7 @@ import NavigationDropdown, { NavigationDropdownProps } from '@/components/layout
 
 export type NavigationMenuProps = {
     items?: NavigationItemProps[];
-    dropdown?: Pick<NavigationDropdownProps, 'trigger' | 'active' | 'href' | 'target'>;
+    dropdown?: Pick<NavigationDropdownProps, 'trigger' | 'active'>;
 } & ClassnameProps;
 
 const NavigationMenu = ({ items, className, dropdown }: NavigationMenuProps): React.ReactElement | null => {
@@ -43,8 +43,8 @@ const NavigationMenu = ({ items, className, dropdown }: NavigationMenuProps): Re
                             items={item.child}
                             active={dropdown?.active}
                             trigger={dropdown?.trigger}
-                            href={dropdown?.href ?? '#'}
-                            target={dropdown?.target}>
+                            href={item?.href ?? '#'}
+                            target={item?.target}>
                             {item.children}
                         </NavigationDropdown>
                     );

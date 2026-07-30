@@ -15,13 +15,15 @@ export type NavigationCollapsibleProps = {
         onClick?: (e: React.MouseEvent<HTMLAnchorElement, React.MouseEvent>, href: BaseAnchorProps['href']) => void;
     };
     onSamePath?: () => void;
-} & PropsWithChildren<ClassnameProps>;
+} & (PropsWithChildren<ClassnameProps> & Pick<BaseAnchorProps, 'href' | 'target'>);
 
 const NavigationCollapsible = ({
     items,
     className,
     children,
     button,
+    href,
+    target,
 }: NavigationCollapsibleProps): React.ReactElement | null => {
     if (!items || items.length === 0) return null;
 
@@ -35,14 +37,23 @@ const NavigationCollapsible = ({
 
     return (
         <Collapsible className="flex flex-col">
-            <CollapsibleTrigger
-                className={triggerBtnClass}
-                onClick={(e) => {
-                    e.stopPropagation();
-                }}>
-                {children}
-                <ChevronDown className="ms-[.75rem] transition-transform group-data-[state=open]:rotate-180" />
-            </CollapsibleTrigger>
+            <div className="flex justify-center gap-0.75">
+                <Button
+                    as="anchor"
+                    className={triggerBtnClass}
+                    href={href}
+                    target={target}>
+                    {children}
+                </Button>
+
+                <CollapsibleTrigger
+                    className={triggerBtnClass}
+                    onClick={(e) => {
+                        e.stopPropagation();
+                    }}>
+                    <ChevronDown className="transition-transform group-data-[state=open]:rotate-180" />
+                </CollapsibleTrigger>
+            </div>
 
             <CollapsibleContent className="overflow-hidden data-[state=open]:animate-collapsible-down data-[state=closed]:animate-collapsible-up">
                 {items.map((item: NavigationItemNestedProps, i: number) => {

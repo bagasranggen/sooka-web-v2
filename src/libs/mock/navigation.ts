@@ -6,7 +6,7 @@ export const NAVIGATION_LINKS: NavigationProps['items'] = [
         children: 'cakes',
     },
     {
-        href: '#',
+        href: '/products',
         children: 'cupcakes & tartlets',
         child: [
             {

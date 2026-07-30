@@ -105,7 +105,7 @@ const Navigation = ({ items, cart }: NavigationProps): React.ReactElement => {
                         </Button>
 
                         <NavigationMenu
-                            className="hidden lg:flex lg:ms-auto"
+                            className="hidden lg:flex lg:items-baseline lg:ms-auto"
                             items={items}
                             dropdown={{
                                 active: activeDropdown,
