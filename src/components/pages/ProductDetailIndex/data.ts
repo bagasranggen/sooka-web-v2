@@ -87,7 +87,7 @@ export const ProductDetailData = async ({
         title.forEach((item, i, arr) => {
             tmpTitle += `<span>${item}</span>`;
 
-            if (i !== arr.length - 1) tmpTitle += '<br/>';
+            if (i !== arr.length - 1) tmpTitle += '&nbsp;<br class="max-md:hidden"/>';
             if (i === arr.length - 1 && typeof tmpTitle === 'string') tmpTitle = parse(tmpTitle);
         });
 
