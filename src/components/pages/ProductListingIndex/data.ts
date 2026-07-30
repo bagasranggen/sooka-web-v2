@@ -1,5 +1,3 @@
-import { notFound } from 'next/navigation';
-
 import { PageDataParamsProps, PageDataProps } from '@/libs/@types';
 import { createProductItem } from '@/libs/factory';
 
@@ -19,11 +17,9 @@ export const ProductListingData = async ({
 
     const category = categoriesData?.entries?.docs?.[0];
 
-    if (!category) return notFound();
-
     const { data: productsData } = await apolloClient.query({
         query: PRODUCT_LISTING_QUERY,
-        variables: { category: category?.id },
+        variables: { category: category?.category?.id },
     });
 
     const banner: ProductListingIndexProps['entries']['banner'] = {
