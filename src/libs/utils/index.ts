@@ -13,6 +13,7 @@ export * from './delay';
 export * from './getCurrentDate';
 export * from './getElementDimension';
 export * from './getElementRect';
+export * from './getEnv';
 export * from './getLocalStorage';
 export * from './getObjectKeyByValue';
 export * from './getRandomNumber';

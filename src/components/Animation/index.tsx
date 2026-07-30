@@ -3,6 +3,7 @@
 import React, { cloneElement, useRef } from 'react';
 
 import { AnimationProps as BaseAnimationProps } from '@/libs/@types';
+import { getEnv } from '@/libs/utils';
 
 import { gsap } from 'gsap';
 import { useGSAP } from '@gsap/react';
@@ -19,6 +20,8 @@ export type AnimationProps = {
 } & BaseAnimationProps;
 
 const Animation = ({ as, type, children, ...props }: AnimationProps): React.ReactElement => {
+    const { animationDisabled } = getEnv();
+
     const animationRef = useRef<null | any>(null);
 
     let animationProps: any = {
@@ -44,6 +47,7 @@ const Animation = ({ as, type, children, ...props }: AnimationProps): React.Reac
 
     useGSAP(
         () => {
+            if (animationDisabled) return;
             if (as) return;
             if (!type) return;
             if (type && !gsap.effects[type]) {
@@ -60,7 +64,7 @@ const Animation = ({ as, type, children, ...props }: AnimationProps): React.Reac
         { scope: animationProps.ref, dependencies: [type, as] }
     );
 
-    return cloneElement(children, animationProps);
+    return cloneElement(children, !animationDisabled ? animationProps : {});
 };
 
 export default Animation;
