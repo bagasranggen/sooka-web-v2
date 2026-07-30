@@ -27,7 +27,7 @@ export type ProductDetailIndexProps = {
 
 const ProductDetailIndex = ({ entries }: ProductDetailIndexProps): React.ReactElement => {
     const { popupIsOpen, setPopupIsOpen } = useOrderStateContext();
-    const { setItems } = useCartStateContext();
+    const { addCartItemHandler } = useCartStateContext();
 
     let infoClass: ArrayStringProps = ['mt-5 md:mt-10'];
     if (!entries?.marquee || entries.marquee.length === 0) infoClass.push('mb-10 md:mb-15');
@@ -51,12 +51,10 @@ const ProductDetailIndex = ({ entries }: ProductDetailIndexProps): React.ReactEl
                             setPopupIsOpen(true);
                         }}
                         onSubmit={(data, media) => {
-                            setItems((prevState) => {
-                                let tmp = data;
-                                if (media && media.length) tmp = Object.assign(tmp, { media });
+                            let item = data;
+                            if (media && media.length) item = Object.assign(item, { media });
 
-                                return [...prevState, tmp];
-                            });
+                            addCartItemHandler(item);
                             setPopupIsOpen(false);
                         }}>
                         {entries.banner.children}

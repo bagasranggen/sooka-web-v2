@@ -2,7 +2,7 @@
 
 import React from 'react';
 
-import { useOrderStateContext } from '@/store/context';
+import { useCartStateContext, useOrderStateContext } from '@/store/context';
 
 import Tabs, { TabProps } from '@/components/common/Tabs';
 import Heading, { BaseProps } from '@/components/common/Heading';
@@ -20,6 +20,7 @@ export type HomepageHighlightProps = {
 
 const HomepageHighlight = ({ items }: HomepageHighlightProps): React.ReactElement | null => {
     const { popupIsOpen, setPopupIsOpen, popupContent, setPopupContent } = useOrderStateContext();
+    const { addCartItemHandler } = useCartStateContext();
 
     if (!items || items.length === 0) return null;
 
@@ -55,6 +56,13 @@ const HomepageHighlight = ({ items }: HomepageHighlightProps): React.ReactElemen
                             onClick={(data) => {
                                 setPopupIsOpen(true);
                                 if (setPopupContent) setPopupContent(data);
+                            }}
+                            onSubmit={(data, media) => {
+                                let item = data;
+                                if (media && media.length) item = Object.assign(item, { media });
+
+                                addCartItemHandler(item);
+                                setPopupIsOpen(false);
                             }}
                         />
                     ),
