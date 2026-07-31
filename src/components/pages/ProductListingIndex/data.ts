@@ -1,11 +1,11 @@
 import { PageDataParamsProps, PageDataProps } from '@/libs/@types';
-import { createProductItem } from '@/libs/factory';
+import { createBackgroundImage, createProductItem } from '@/libs/factory';
+import { checkMediaStatus } from '@/libs/utils';
 
 import { apolloClient } from '@/libs/fetcher';
 import { PRODUCT_LISTING_INDEX_QUERY, PRODUCT_LISTING_QUERY } from '@/graphql';
 
 import { ProductListingIndexProps } from '@/components/pages/ProductListingIndex';
-import { BANNER_MEDIA_MEDIA } from '@/libs/mock';
 
 export const ProductListingData = async ({
     uri,
@@ -23,12 +23,23 @@ export const ProductListingData = async ({
         variables: { category: category?.category?.id },
     });
 
+    const { data: bannerBg } = checkMediaStatus({
+        item: category?.headerBackground as any,
+        handles: ['bannerDesktop', 'bannerTablet', 'bannerMobile'],
+        volumeAssets: 'mediaProducts',
+    });
+
     const banner: ProductListingIndexProps['entries']['banner'] = {
         media: [],
-        // media: BANNER_MEDIA_MEDIA,
         children: category?.title ?? '',
         description: category?.description,
     };
+
+    if (bannerBg?.bannerDesktop && bannerBg?.bannerMobile && banner?.media) {
+        const bannerDesktop = createBackgroundImage({ item: bannerBg.bannerDesktop });
+        const bannerMobile = createBackgroundImage({ item: bannerBg.bannerMobile });
+        if (bannerDesktop && bannerMobile) banner.media = [bannerDesktop, bannerMobile];
+    }
 
     const products: ProductListingIndexProps['entries']['products'] = [];
 
