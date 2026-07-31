@@ -1,57 +1,42 @@
-import { PageUriItemProps } from '@/libs/@types';
+import { Page, PageUriItemProps, Product } from '@/libs/@types';
 
 import { PAGES_HANDLES } from '@/components/pages/handles';
-import { PAGES_LIMIT_DEFAULT } from '@/components/pages/handlesLimit';
 
-import { axiosClient } from '@/libs/fetcher';
+import { apolloClient } from '@/libs/fetcher';
+import { ENTRY_URI_QUERY } from '@/graphql';
 
-export const getPagesUri = async (props?: { limit?: any }) => {
-    const uri: PageUriItemProps[] = [{ slug: [''] }];
+export type GetPagesUriProps = {
+    limit?: any;
+    typeHandles?: string[];
+};
 
-    try {
-        const { data: pagesData } = await axiosClient().get(`/pages`);
+export const getPagesUri = async (props?: GetPagesUriProps) => {
+    const uri: PageUriItemProps[] = [{ slug: [] }];
 
-        let pages:
-            | Record<string, { typeHandle: string; items: PageUriItemProps[] }>
-            | { typeHandle: string; items: PageUriItemProps[] }[]
-            | undefined = undefined;
+    if (props?.typeHandles && props.typeHandles.length > 0) {
+        for (const item of props.typeHandles) {
+            try {
+                const isProducts = item === PAGES_HANDLES.PRODUCT_DETAIL;
 
-        if (pagesData?.pages?.docs && pagesData.pages.docs.length > 0) {
-            pagesData.pages.docs.forEach((item: any) => {
-                const handle = item.typeHandle;
-                const uriArr = item.uri.split('/');
+                let variables = { isProducts };
+                if (!isProducts) variables = Object.assign(variables, { typeHandle: item });
 
-                if (handle === PAGES_HANDLES.HOMEPAGE) return;
+                const { data } = await apolloClient.query({
+                    query: ENTRY_URI_QUERY,
+                    variables,
+                });
 
-                if (pages && !Array.isArray(pages) && pages?.[handle]) {
-                    pages[handle].items.push({ slug: uriArr });
-                }
+                let docs: Product[] | Page[] = data?.Pages?.docs;
+                if (isProducts) docs = data?.Products?.docs;
 
-                if (!Array.isArray(pages) && !pages?.[handle]) {
-                    pages = Object.assign(pages ?? {}, {
-                        [handle]: {
-                            typeHandle: handle,
-                            items: [{ slug: uriArr }],
-                        },
+                if (docs && docs.length > 0) {
+                    docs.forEach((item) => {
+                        if (item?.uri) uri.push({ slug: item.uri.split('/') });
                     });
                 }
-            });
-
-            if (pages) pages = Object.values(pages);
+            } catch {}
         }
-
-        if (pages && Array.isArray(pages)) {
-            pages.forEach(({ typeHandle, items }) => {
-                const limit = props?.limit?.[typeHandle] ?? PAGES_LIMIT_DEFAULT;
-
-                items.forEach((item, i: number) => {
-                    if (limit > PAGES_LIMIT_DEFAULT && limit < i + 1) return;
-
-                    uri.push(item);
-                });
-            });
-        }
-    } catch {}
+    }
 
     return uri;
 };
