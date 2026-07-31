@@ -2,7 +2,7 @@
     .banner.banner--media {
         &.banner--media-bg {
             @apply pb-6;
-            @apply h-[66vh] max-h-65;
+            @apply h-[66dvh] max-h-65;
             @apply flex items-end;
             @apply bg-bottom bg-cover;
             @apply bg-(image:--bg-image-mobile) md:bg-(image:--bg-image-desktop);

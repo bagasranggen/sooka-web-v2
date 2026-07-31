@@ -35,7 +35,7 @@ const Main = ({ navigation, footer, children }: MainProps): React.ReactElement =
             <MainCartButton
                 price={totalPriceCurrency}
                 count={count}
-                className="w-max fixed left-1/2 -translate-x-1/2 bottom-1"
+                className="w-max fixed z-20 left-1/2 -translate-x-1/2 bottom-1"
                 onClick={() => setIsOpen(true)}
             />
 

@@ -17,7 +17,7 @@ export type MainCartButtonProps = {
 const MainCartButton = ({ price, count, className, onClick }: MainCartButtonProps): React.ReactElement | null => {
     let btnClass: ArrayStringProps = ['flex items-center px-1 py-0.75'];
     btnClass.push('md:transition-colors');
-    btnClass.push('bg-sooka-secondary md:hover:bg-sooka-secondary/80');
+    btnClass.push('bg-sooka-secondary md:hover:bg-sooka-secondary/90');
     btnClass.push('text-dark/80');
     if (className) btnClass.push(className);
     btnClass = joinArrayString(btnClass);
