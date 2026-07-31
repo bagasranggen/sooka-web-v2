@@ -21,6 +21,8 @@
         @apply after:absolute after:top-0 after:left-0;
 
         &:after {
+            @apply pointer-events-none;
+
             opacity: var(--overlay-opacity, --value(--overlay-opacity-6));
         }
 
@@ -28,17 +30,27 @@
             @apply after:bg-dark;
         }
 
+        &.overlay--gradient-top,
+        &.overlay--gradient-bottom,
         &.overlay--gradient-left,
         &.overlay--gradient-right {
             @apply after:from-dark;
         }
 
+        &.overlay--gradient-top {
+            @apply after:bg-linear-to-b;
+        }
+
+        &.overlay--gradient-bottom {
+            @apply after:bg-linear-to-t;
+        }
+
         &.overlay--gradient-left {
-            @apply after:bg-gradient-to-r;
+            @apply after:bg-linear-to-r;
         }
 
         &.overlay--gradient-right {
-            @apply after:bg-gradient-to-l;
+            @apply after:bg-linear-to-l;
         }
     }
 }
