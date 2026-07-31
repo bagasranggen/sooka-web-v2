@@ -1,0 +1,20 @@
+@layer components {
+    .banner.banner--media {
+        &.banner--media-bg {
+            @apply pb-6;
+            @apply h-[70vh] max-h-65;
+            @apply flex items-end;
+            @apply bg-bottom bg-cover;
+            @apply bg-(image:--bg-image-mobile) md:bg-(image:--bg-image-desktop);
+
+            .banner__title,
+            .banner__description {
+                @apply text-light;
+            }
+
+            .banner__container {
+                @apply z-20;
+            }
+        }
+    }
+}
