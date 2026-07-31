@@ -5,6 +5,7 @@ import { apolloClient } from '@/libs/fetcher';
 import { PRODUCT_LISTING_INDEX_QUERY, PRODUCT_LISTING_QUERY } from '@/graphql';
 
 import { ProductListingIndexProps } from '@/components/pages/ProductListingIndex';
+import { BANNER_MEDIA_MEDIA } from '@/libs/mock';
 
 export const ProductListingData = async ({
     uri,
@@ -23,6 +24,8 @@ export const ProductListingData = async ({
     });
 
     const banner: ProductListingIndexProps['entries']['banner'] = {
+        media: [],
+        // media: BANNER_MEDIA_MEDIA,
         children: category?.title ?? '',
         description: category?.description,
     };
