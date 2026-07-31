@@ -2,24 +2,23 @@ import React from 'react';
 
 import Heading from '@/components/common/Heading';
 import Columns from '@/components/common/Columns';
-import Carousel, { TestimonialProps } from '@/components/common/Carousel';
+import Carousel, { BannerProps, TestimonialProps } from '@/components/common/Carousel';
 import List, { NumberProps } from '@/components/common/List';
-import ImageDivider, { ImageDividerProps } from '@/components/common/ImageDivider';
 import Container from '@/components/common/Container';
+import Picture, { BaseProps } from '@/components/common/Picture';
 import HomepageStory, { HomepageStoryProps } from '@/components/pages/HomepageIndex/HomepageStory';
 import RichText, { RichTextProps } from '@/components/common/RichText';
 import HomepageHighlight, { HomepageHighlightProps } from '@/components/pages/HomepageIndex/HomepageHighlight';
-import HomepageBanner, { HomepageBannerProps } from '@/components/pages/HomepageIndex/HomepageBanner';
 import Animation from '@/components/Animation';
 
 export type HomepageIndexProps = {
     entries: {
-        banner: HomepageBannerProps['items'];
-        highlights: HomepageHighlightProps['items'];
-        testimonials: TestimonialProps['items'];
-        imageDivider: ImageDividerProps['media'];
-        story: Omit<HomepageStoryProps, 'className'>;
-        orders: {
+        banner?: BannerProps['items'];
+        highlights?: HomepageHighlightProps['items'];
+        testimonials?: TestimonialProps['items'];
+        imageDivider?: BaseProps['items'];
+        story?: Omit<HomepageStoryProps, 'className'>;
+        orders?: {
             steps: NumberProps['items'];
         } & Pick<RichTextProps, 'children'>;
     };
@@ -28,23 +27,29 @@ export type HomepageIndexProps = {
 const HomepageIndex = ({ entries }: HomepageIndexProps): React.ReactElement => {
     return (
         <>
-            {entries?.banner && <HomepageBanner items={entries.banner} />}
+            {entries?.banner && (
+                <section>
+                    <Carousel.Banner items={entries.banner} />
+                </section>
+            )}
 
             {entries?.highlights && entries.highlights.length > 0 && (
                 <Animation type="fade-in">
-                    <HomepageHighlight
-                        className="mt-8 lg:mt-10 last:mb-10 lg:last:mb-20"
-                        items={entries.highlights}
-                    />
+                    <Container
+                        as="section"
+                        className="mt-8 lg:mt-10 last:mb-10 lg:last:mb-20">
+                        <HomepageHighlight items={entries.highlights} />
+                    </Container>
                 </Animation>
             )}
 
             {entries?.story?.description && (
                 <Animation type="fade-in">
-                    <HomepageStory
-                        className="mt-8 lg:mt-20 last:mb-10 lg:last:mb-20"
-                        {...entries?.story}
-                    />
+                    <Container
+                        as="section"
+                        className="mt-8 lg:mt-20 last:mb-10 lg:last:mb-20">
+                        <HomepageStory {...entries?.story} />
+                    </Container>
                 </Animation>
             )}
 
@@ -75,10 +80,12 @@ const HomepageIndex = ({ entries }: HomepageIndexProps): React.ReactElement => {
 
             {entries?.imageDivider && entries.imageDivider.length > 0 && (
                 <Animation type="fade-in">
-                    <ImageDivider
-                        className="mt-8 lg:mt-20 last:mb-10 lg:last:mb-20"
-                        media={entries.imageDivider}
-                    />
+                    <section className="mt-8 lg:mt-20 last:mb-10 lg:last:mb-20">
+                        <Picture
+                            className="md:ms-auto block md:w-[88vw] lg:w-[80vw]"
+                            items={entries.imageDivider}
+                        />
+                    </section>
                 </Animation>
             )}
 

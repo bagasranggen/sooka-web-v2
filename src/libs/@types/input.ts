@@ -1,5 +1,5 @@
 import React from 'react';
-import { Path, UseFormRegister } from 'react-hook-form';
+import { Path, UseFormRegister, RegisterOptions } from 'react-hook-form';
 
 export type InputHookValueProps = { [key: string]: string | number };
 
@@ -8,11 +8,7 @@ export type BaseInputHookProps = {
     register: UseFormRegister<any>;
 };
 
-export type BaseHookOptionProps = {
-    required?: boolean | string;
-    valueAsNumber?: boolean;
-    pattern?: any;
-};
+export type BaseHookOptionProps = RegisterOptions;
 
 export type BaseRegularInputProps = React.InputHTMLAttributes<HTMLInputElement>;
 

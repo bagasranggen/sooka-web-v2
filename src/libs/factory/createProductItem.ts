@@ -1,17 +1,19 @@
 import { Product } from '@/libs/@types';
-import { createPictureImage } from './createPictureImage';
-import { createProductDetailTag } from './productDetail/createProductDetailTag';
-import { convertIntToCurrency } from '../utils/convertIntToCurrency';
-import { checkMediaStatus } from '../utils/checkMediaStatus';
+import { createPictureImage } from '@/libs/factory/createPictureImage';
+import { createProductDetailTag } from '@/libs/factory/productDetail/createProductDetailTag';
+import { createPurchasePopupItem } from '@/libs/factory/createPurchasePopupItem';
+import { convertIntToCurrency } from '@/libs/utils/convertIntToCurrency';
+import { checkMediaStatus } from '@/libs/utils/checkMediaStatus';
 
 import { ThumbnailItemProps } from '@/components/common/Card';
 
 export type CreateProductItemProps = {
     item: Product;
     hasPrice?: boolean;
+    hasBadge?: boolean;
 };
 
-export const createProductItem = ({ item, hasPrice = true }: CreateProductItemProps) => {
+export const createProductItem = ({ item, hasPrice = true, hasBadge = false }: CreateProductItemProps) => {
     const priceItem = item?.prices?.[0]?.price;
     const priceIsSale = !!priceItem?.salePrice;
 
@@ -24,10 +26,12 @@ export const createProductItem = ({ item, hasPrice = true }: CreateProductItemPr
     const { data: mediaThumbnail } = checkMediaStatus({
         item: item?.thumbnail as any,
         handles: ['productListingThumbnail', 'productListingThumbnailMobile'],
+        volumeAssets: 'mediaProducts',
     });
     const { data: mediaThumbnailHover } = checkMediaStatus({
         item: item?.thumbnailHover as any,
         handles: ['productListingThumbnail', 'productListingThumbnailMobile'],
+        volumeAssets: 'mediaProducts',
     });
 
     const media: ThumbnailItemProps['media'] = [];
@@ -40,7 +44,7 @@ export const createProductItem = ({ item, hasPrice = true }: CreateProductItemPr
         );
     }
     if (mediaThumbnail?.productListingThumbnailMobile) {
-        media.push(createPictureImage({ item: mediaThumbnail?.productListingThumbnailMobile }));
+        media.push(createPictureImage({ item: mediaThumbnail?.productListingThumbnailMobile, className: 'w-full' }));
     }
 
     const mediaHover: ThumbnailItemProps['mediaHover'] = [];
@@ -53,17 +57,33 @@ export const createProductItem = ({ item, hasPrice = true }: CreateProductItemPr
         );
     }
     if (mediaThumbnailHover?.productListingThumbnailMobile) {
-        mediaHover.push(createPictureImage({ item: mediaThumbnailHover?.productListingThumbnailMobile }));
+        mediaHover.push(
+            createPictureImage({ item: mediaThumbnailHover?.productListingThumbnailMobile, className: 'w-full' })
+        );
     }
 
+    let label = undefined;
+    if (hasBadge) label = createProductDetailTag({ item });
+
+    let disabled = false;
+    if (label) disabled = item?.availability === 'unavailable';
+
     return {
-        cta: { href: item?.url as any },
+        // cta: { href: item?.url as any },
+        cta: { href: '#' },
         media,
         mediaHover,
         title: item?.title ?? '',
         price,
         salePrice,
-        disabled: item?.availability === 'unavailable',
-        label: createProductDetailTag({ item }),
+        disabled,
+        label,
+        popup: createPurchasePopupItem({
+            title: item?.title,
+            description: item?.description,
+            media: [(item?.thumbnail as any) ?? {}, (item?.thumbnailHover as any) ?? {}],
+            variants: item?.prices ?? [],
+            addOns: item?.addons ?? [],
+        }),
     };
 };

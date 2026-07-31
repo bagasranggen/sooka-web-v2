@@ -6,7 +6,7 @@ import { FRAGMENT_CB_SETTINGS } from '@/graphql/queries/contentBlocks/fragment/F
 import { FRAGMENT_MEDIA } from '@/graphql/queries/fragments/FragmentMedia';
 
 export const FRAGMENT_CB_DUAL_PANEL = gql`
-    fragment cbDualPanel on ContentBlockDualPanel {
+    fragment cbDualPanel on CbDualPanel {
         ${`...cbCommon${CONTENT_BLOCK_INTERFACE[CONTENT_BLOCK_TYPE.DUAL_PANEL]}`}
         ${`...cbSetting${CONTENT_BLOCK_INTERFACE[CONTENT_BLOCK_TYPE.DUAL_PANEL]}`}
         

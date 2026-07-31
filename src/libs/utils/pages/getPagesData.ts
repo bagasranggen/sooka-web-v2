@@ -26,7 +26,10 @@ export const getPagesData = async ({ uri, uriArr, onNotFound }: GetPagesDataType
                 uri,
                 slug: entry?.slug,
             });
-        } catch {}
+        } catch (e) {
+            console.log('err');
+            console.log(e);
+        }
     }
 
     if (entry?.typeHandle && entry.typeHandle === 'not-found') {

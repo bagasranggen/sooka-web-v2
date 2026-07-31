@@ -40,10 +40,10 @@ const Banner = ({ items }: BannerProps): React.ReactElement => {
                 let style = {} as React.CSSProperties;
 
                 if (item?.media) {
-                    style = Object.assign(style, { '--bg-image': item.media });
+                    style = Object.assign(style, { '--bg-image': `${item?.media}` });
                 }
                 if (item?.mediaMobile) {
-                    style = Object.assign(style, { '--bg-image-mobile': item.mediaMobile });
+                    style = Object.assign(style, { '--bg-image-mobile': `${item?.mediaMobile}` });
                 }
 
                 let bgClass: ArrayStringProps = ['bg-cover bg-center'];

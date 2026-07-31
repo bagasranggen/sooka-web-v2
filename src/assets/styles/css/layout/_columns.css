@@ -1,8 +1,8 @@
-@source inline("{sm:,md:,lg:,xl:,2xl:,}column-{1,{2..12..1},12}");
 @source inline("{sm:,md:,lg:,xl:,2xl:,}column-auto");
-@source inline("{sm:,md:,lg:,xl:,2xl:,}column-offset-{1,{2..10..1},12}");
-@source inline("{sm:,md:,lg:,xl:,2xl:,}-column-offset-{1,{2..10..1},12}");
-@source inline("{sm:,md:,lg:,xl:,2xl:,}{gutter-,gutter-x-,gutter-y-}{0,{2..10..1},10}");
+@source inline("{sm:,md:,lg:,xl:,2xl:,}column-{1..12}");
+@source inline("{sm:,md:,lg:,xl:,2xl:,}column-offset-{1..12}");
+@source inline("{sm:,md:,lg:,xl:,2xl:,}-column-offset-{1..12}");
+@source inline("{sm:,md:,lg:,xl:,2xl:,}{gutter-,gutter-x-,gutter-y-}{{0..10}}");
 
 /* column width */
 @theme {
@@ -67,7 +67,7 @@
     }
 
     .row > .column {
-        @apply grow-1 shrink-0;
+        @apply grow-1 shrink-0 basis-0;
     }
 
     .row > [class*='column-'] {

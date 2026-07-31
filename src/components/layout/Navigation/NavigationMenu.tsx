@@ -42,7 +42,9 @@ const NavigationMenu = ({ items, className, dropdown }: NavigationMenuProps): Re
                             className={btnClass}
                             items={item.child}
                             active={dropdown?.active}
-                            trigger={dropdown?.trigger}>
+                            trigger={dropdown?.trigger}
+                            href={item?.href ?? '#'}
+                            target={item?.target}>
                             {item.children}
                         </NavigationDropdown>
                     );

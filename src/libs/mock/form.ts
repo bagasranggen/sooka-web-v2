@@ -1,4 +1,11 @@
-import { OrderProps } from '@/components/common/Form';
+import { createPicsumImage } from '@/libs/factory/createPicsumImage';
+import { createArrayFromNumber } from '@/libs/factory/createArrayFromNumber';
+import { convertIntToCurrency } from '@/libs/utils/convertIntToCurrency';
+
+import parse from 'html-react-parser';
+
+import { CartProps, OrderProps } from '@/components/common/Form';
+import { PurchaseProps } from '@/components/common/Form/Purchase';
 
 export const FORM_ORDER: OrderProps['summaries'] = [
     {
@@ -48,3 +55,87 @@ export const FORM_ORDER: OrderProps['summaries'] = [
         ],
     },
 ];
+
+// export const FORM_PURCHASE_MEDIA: PurchaseProps['media'] = [createPicsumImage({ id: 200, width: 500, height: 500 })];
+
+export const FORM_PURCHASE_VARIANTS: PurchaseProps['variants'] = [
+    {
+        id: 'tes',
+        type: 'radio',
+        value: 'Round - 15cm,120000',
+        // checked: true,
+        label: 'Round - 15cm',
+        price: 'Rp120.000',
+        required: true,
+    },
+    {
+        id: 'tes2',
+        type: 'radio',
+        value: 'Square - 16cm x 16cm,140000',
+        checked: true,
+        label: 'Square - 16cm x 16cm',
+        price: 'Rp140.000',
+        required: true,
+    },
+];
+
+export const FORM_PURCHASE_ADDONS: PurchaseProps['addOns'] = [
+    {
+        id: 'extraCandle',
+        media: [createPicsumImage({ width: 200, height: 200 })],
+        type: 'checkbox',
+        value: 'extraCandle,Extra Candle,3000',
+        // checked: true,
+        // required: true,
+        label: 'Extra Candle',
+        description: 'lorem ipsum dolor sit amet, consectetur adipisicing elit.',
+        price: 'Rp3.000',
+        input: {
+            placeholder: 'Let us know your preferred candle color',
+        },
+    },
+    {
+        id: 'test',
+        media: [createPicsumImage({ id: 200, width: 200, height: 200 })],
+        type: 'checkbox',
+        value: 'test,test,5000',
+        // required: true,
+        label: 'Test',
+        price: 'Rp5.000',
+    },
+];
+
+export const FORM_CART: CartProps['items'] = createArrayFromNumber(4).map((_, i) => {
+    const isOdd = i % 2 === 0;
+
+    let title = 'Strawberry Shortcake';
+    if (isOdd) title = 'Matilda Chocolate Cake';
+
+    let addOns = ['Extra Candle: Red'];
+    if (!isOdd) {
+        addOns.push('Topper: Lorem ipsum dolor sit amet.');
+    }
+
+    let note = undefined;
+    if (isOdd) {
+        note = parse(
+            `<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad animi dolore neque non nostrum perspiciatis suscipit, totam. Aliquam, itaque veritatis.</p>`
+        );
+    }
+
+    let maxQty = 6;
+    if (!isOdd) maxQty = 1;
+
+    return {
+        cartItemId: `${i}${new Date().getTime()}`,
+        title,
+        media: [createPicsumImage({ id: 200 + i, width: 500, height: 500 })],
+        variant: 'Round - 16cm x 16cm',
+        price: 250000,
+        priceCurrency: convertIntToCurrency(250000, true),
+        addOns,
+        note,
+        qty: 1,
+        maxQty,
+    };
+});

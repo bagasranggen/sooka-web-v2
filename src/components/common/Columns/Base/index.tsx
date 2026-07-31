@@ -18,7 +18,7 @@ export type BaseProps = PropsWithChildren<
         React.HTMLAttributes<HTMLElement>
 >;
 
-const Base = ({ className, gutter, gutterX, gutterY, children, ...props }: BaseProps): React.ReactElement => {
+const Base = ({ className, gutter, gutterX = 3, gutterY, children, ...props }: BaseProps): React.ReactElement => {
     const guttersArr = Object.entries({ gutter, gutterX, gutterY });
 
     let rowClass: ArrayStringProps = ['row'];
@@ -30,7 +30,7 @@ const Base = ({ className, gutter, gutterX, gutterY, children, ...props }: BaseP
                 handleClassName = GUTTER_HANDLE[type as keyof typeof GUTTER_HANDLE] as string;
             }
 
-            if (typeValue && typeof typeValue !== 'object') {
+            if ((typeof typeValue === 'number' && typeValue === 0) || (typeValue && typeof typeValue !== 'object')) {
                 if (typeof rowClass !== 'string') {
                     rowClass.push(
                         createBreakpointClass({

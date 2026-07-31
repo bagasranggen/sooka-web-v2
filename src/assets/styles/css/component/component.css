@@ -1,3 +1,7 @@
 @import './content-block/content-block.css';
+@import './input/input.css';
+@import './modal/modal.css';
+
 @import './_icon.css';
 @import './_overlay.css';
+@import './_quantity.css';

@@ -7,7 +7,7 @@ import { joinArrayString } from '@/libs/utils';
 
 import { ChevronDown } from 'lucide-react';
 
-import Button, { BaseProps } from '@/components/common/Button';
+import Button, { BaseAnchorProps, BaseProps } from '@/components/common/Button';
 import {
     DropdownMenu,
     DropdownMenuContent,
@@ -24,7 +24,7 @@ export type NavigationDropdownProps = {
     trigger?: {
         onClick?: (e: React.MouseEvent<HTMLButtonElement, React.MouseEvent>, children: BaseProps['children']) => void;
     } & Omit<DropdownMenuTriggerProps, 'onClick'>;
-} & (Pick<BaseProps, 'children'> & ClassnameProps);
+} & (Pick<BaseProps, 'children'> & Pick<BaseAnchorProps, 'href' | 'target'> & ClassnameProps);
 
 const NavigationDropdown = ({
     className,
@@ -32,6 +32,8 @@ const NavigationDropdown = ({
     children,
     trigger,
     active,
+    href,
+    target,
 }: NavigationDropdownProps): React.ReactElement | null => {
     const [isOpen, setIsOpen] = useState<boolean>(false);
 
@@ -43,6 +45,11 @@ const NavigationDropdown = ({
     triggerBtnClass.push('data-[state=open]:text-dark');
     triggerBtnClass = joinArrayString(triggerBtnClass);
 
+    let parentLinkBtnClass: ArrayStringProps = [];
+    if (className) parentLinkBtnClass.push(className);
+    // parentLinkBtnClass.push('text-light');
+    parentLinkBtnClass = joinArrayString(parentLinkBtnClass);
+
     let linkBtnClass: ArrayStringProps = ['block not-first:mt-1'];
     if (className) linkBtnClass.push(className);
     linkBtnClass.push('text-light');
@@ -52,21 +59,30 @@ const NavigationDropdown = ({
         <DropdownMenu
             modal={false}
             open={isOpen && active === children}>
-            <DropdownMenuTrigger
-                asChild
-                className="group"
-                onClick={(e: any) => {
-                    setIsOpen((prevState) => !prevState);
-
-                    if (trigger?.onClick) trigger.onClick(e, children);
-                }}>
+            <div className="flex gap-0.75">
                 <Button
-                    as="button"
-                    className={triggerBtnClass}>
+                    as="anchor"
+                    className={parentLinkBtnClass}
+                    href={href}
+                    target={target}>
                     {children}
-                    <ChevronDown className="ms-[.75rem] transition-transform group-aria-expanded:rotate-180" />
                 </Button>
-            </DropdownMenuTrigger>
+                <DropdownMenuTrigger
+                    asChild
+                    className="group"
+                    onClick={(e: any) => {
+                        setIsOpen((prevState) => !prevState);
+
+                        if (trigger?.onClick) trigger.onClick(e, children);
+                    }}>
+                    <Button
+                        as="button"
+                        className={triggerBtnClass}>
+                        {/*{children}*/}
+                        <ChevronDown className=" transition-transform group-aria-expanded:rotate-180" />
+                    </Button>
+                </DropdownMenuTrigger>
+            </div>
 
             <DropdownMenuContent
                 align="end"

@@ -4,11 +4,12 @@ import * as CiIcon from 'react-icons/ci';
 
 import Icon from '@/components/common/Icon';
 import Columns from '@/components/common/Columns';
+import Button, { BaseAnchorProps } from '@/components/common/Button';
 import Container from '@/components/common/Container';
 import FooterSocial, { FooterSocialProps } from '@/components/layout/Footer/FooterSocial';
 
 export type FooterProps = {
-    address?: string | null;
+    address?: Partial<Pick<BaseAnchorProps, 'children' | 'href' | 'target'>>;
     businessHour?: string | null;
     socialMedia?: FooterSocialProps['items'];
 };
@@ -20,7 +21,7 @@ const Footer = ({ address, businessHour, socialMedia }: FooterProps): React.Reac
                 <Icon.Sooka
                     id="footerLogo"
                     color="light"
-                    className="mx-auto w-xs lg:w-[30rem]"
+                    className="mx-auto w-xs lg:w-30"
                 />
                 <div className="mt-5">
                     <Columns
@@ -30,9 +31,17 @@ const Footer = ({ address, businessHour, socialMedia }: FooterProps): React.Reac
                             md={6}
                             className="*:mb-0! uppercase tracking-0.2 font-semibold text-[1.2rem] text-center md:text-left">
                             {address && (
-                                <p className="flex items-center justify-center md:justify-start gap-1">
-                                    <CiIcon.CiLocationOn size={14} /> {address}
-                                </p>
+                                <Button
+                                    as={address?.href ? 'anchor' : undefined}
+                                    href={address?.href ?? '#'}
+                                    target={address?.target}
+                                    className="flex items-center justify-center md:justify-start gap-1 md:hover:text-light/80 md:transition-colors">
+                                    <CiIcon.CiLocationOn
+                                        size={16}
+                                        className="min-w-[1.6rem]"
+                                    />{' '}
+                                    {address?.children}
+                                </Button>
                             )}
 
                             {businessHour && <p>{businessHour}</p>}

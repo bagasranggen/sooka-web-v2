@@ -44,3 +44,5 @@ next-env.d.ts
 
 # payload local media
 /media
+*storybook.log
+storybook-static

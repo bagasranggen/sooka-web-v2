@@ -6,7 +6,7 @@ import { FRAGMENT_CB_SETTINGS } from '@/graphql/queries/contentBlocks/fragment/F
 import { FRAGMENT_MEDIA } from '@/graphql/queries/fragments/FragmentMedia';
 
 export const FRAGMENT_CB_GALLERY = gql`
-    fragment cbGallery on ContentBlockGallery {
+    fragment cbGallery on CbGallery {
         ${`...cbCommon${CONTENT_BLOCK_INTERFACE[CONTENT_BLOCK_TYPE.GALLERY]}`}
         ${`...cbSetting${CONTENT_BLOCK_INTERFACE[CONTENT_BLOCK_TYPE.GALLERY]}`}
         

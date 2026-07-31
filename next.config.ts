@@ -10,14 +10,7 @@ const nextConfig: NextConfig = {
     staticPageGenerationTimeout: 1000,
     images: {
         remotePatterns: REMOTE_HOSTNAMES.map((item: string) => ({ hostname: item })),
-    },
-    async rewrites() {
-        return [
-            {
-                source: '/api/media/:path*',
-                destination: `${process.env.CMS_URL}/api/media/:path*`,
-            },
-        ];
+        localPatterns: [{ pathname: '/api/media/*' }],
     },
 };
 

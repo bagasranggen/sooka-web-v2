@@ -1,5 +1,5 @@
-import { checkMediaStatus } from '../../../../libs/utils/checkMediaStatus';
-import { createPictureImage } from '../../../../libs/factory/createPictureImage';
+import { checkMediaStatus } from '@/libs/utils/checkMediaStatus';
+import { createPictureImage } from '@/libs/factory/createPictureImage';
 
 import { CbGalleryProps } from '@/components/common/ContentBlocks/CbGallery';
 
@@ -31,7 +31,7 @@ export const CbGalleryData = (props?: any): Pick<CbGalleryProps, 'items'> => {
             const handles = Object.values(HANDLES);
             const order = i % handles.length;
             const handle = ORDERS?.[order];
-            const { data: media } = checkMediaStatus({ item: item, handles });
+            const { data: media } = checkMediaStatus({ item: item, handles, volumeAssets: 'mediaGalleries' });
 
             const tmp = [];
 

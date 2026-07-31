@@ -8,9 +8,13 @@ import { createDynamicElement } from '@/libs/factory';
 
 import { PAGES_INDEX_HANDLES } from '@/components/pages/handlesIndex';
 import { PAGES_LIMIT_HANDLES } from '@/components/pages/handlesLimit';
+import { PAGES_HANDLES } from '@/components/pages/handles';
 
 export const generateStaticParams = async () => {
-    return await getPagesUri({ limit: PAGES_LIMIT_HANDLES });
+    return await getPagesUri({
+        limit: PAGES_LIMIT_HANDLES,
+        typeHandles: [PAGES_HANDLES.PRODUCT_DETAIL, PAGES_HANDLES.PRODUCT_LISTING, PAGES_HANDLES.STATIC_PAGE],
+    });
 };
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata | null> {

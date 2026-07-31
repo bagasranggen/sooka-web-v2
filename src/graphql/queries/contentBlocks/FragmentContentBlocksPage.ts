@@ -10,12 +10,14 @@ import { FRAGMENT_CB_RELATED_PRODUCTS } from '@/graphql/queries/contentBlocks/fr
 export const FRAGMENT_CONTENT_BLOCKS_PAGE = gql`
     fragment pageContentBlocks on Page {
         contentBlocks {
-            ...cbCallout
-            ...cbDualPanel
-            ...cbGallery
-            ...cbHeading
-            ...cbMarquee
-            ...cbRelatedProducts
+            blocks {
+                ...cbCallout
+                ...cbDualPanel
+                ...cbGallery
+                ...cbHeading
+                ...cbMarquee
+                ...cbRelatedProducts
+            }
         }
     }
 

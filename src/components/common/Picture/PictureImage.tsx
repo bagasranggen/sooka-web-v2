@@ -9,8 +9,6 @@ import { BaseItemProps } from '@/components/common/Picture';
 export type PictureImageProps = BaseItemProps;
 
 const PictureImage = ({ className: classNameProps, ...item }: PictureImageProps): React.ReactElement => {
-    // const { className, srcRetina, ...rest } = item;
-
     let imageClass: ArrayStringProps = [];
     if (classNameProps) imageClass.push(classNameProps);
     imageClass = joinArrayString(imageClass);

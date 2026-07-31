@@ -1,10 +1,14 @@
 import { PageDataProps } from '@/libs/@types';
-import { axiosClient } from '@/libs/fetcher';
+
+import { apolloClient } from '@/libs/fetcher';
+import { PRODUCT_LISTING_QUERY } from '@/graphql';
 
 import { OrderConfirmationIndexProps } from '@/components/pages/OrderConfirmationIndex';
 
 export const OrderConfirmationData = async (): Promise<PageDataProps<OrderConfirmationIndexProps>> => {
-    const { data } = await axiosClient().get(`/products`);
+    const { data } = await apolloClient.query({
+        query: PRODUCT_LISTING_QUERY,
+    });
 
     const products = data?.products?.docs;
 

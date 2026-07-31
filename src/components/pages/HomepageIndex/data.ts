@@ -2,7 +2,8 @@ import { PageDataProps, Homepage } from '@/libs/@types';
 import { createHomepageBanner, createPictureImage, createProductItem } from '@/libs/factory';
 import { checkMediaStatus } from '@/libs/utils';
 
-import { axiosClient } from '@/libs/fetcher';
+import { apolloClient } from '@/libs/fetcher';
+import { HOMEPAGE_QUERY } from '@/graphql';
 
 import parse from 'html-react-parser';
 
@@ -10,7 +11,9 @@ import { HomepageIndexProps } from '@/components/pages/HomepageIndex';
 import { HomepageHighlightItemProps } from '@/components/pages/HomepageIndex/HomepageHighlight';
 
 export const HomepageData = async (): Promise<PageDataProps<HomepageIndexProps>> => {
-    const { data } = await axiosClient().get('/homepage');
+    const { data } = await apolloClient.query({
+        query: HOMEPAGE_QUERY,
+    });
 
     const d: Homepage = data.entry;
 
@@ -56,10 +59,12 @@ export const HomepageData = async (): Promise<PageDataProps<HomepageIndexProps>>
     const { data: mediaMain } = checkMediaStatus({
         item: d?.storyMediaMain as any,
         handles: ['storyMediaDesktop', 'storyMediaMobile'],
+        volumeAssets: 'mediaGlobals',
     });
     const { data: mediaSecondary } = checkMediaStatus({
         item: d?.storyMediaSecondary as any,
         handles: ['storyMediaDesktop', 'storyMediaMobile'],
+        volumeAssets: 'mediaGlobals',
     });
 
     // Story Main Media
@@ -127,6 +132,7 @@ export const HomepageData = async (): Promise<PageDataProps<HomepageIndexProps>>
     const { data: mediaDivider } = checkMediaStatus({
         item: d?.imageDividerMedia as any,
         handles: ['bannerDesktop', 'mediaDividerTablet', 'mediaDividerMobile'],
+        volumeAssets: 'mediaGlobals',
     });
     const mediaDividerHasTabletSize = mediaDivider?.mediaDividerTablet;
     const mediaDividerHasMobileSize = mediaDivider?.mediaDividerMobile;

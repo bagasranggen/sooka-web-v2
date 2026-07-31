@@ -6,14 +6,30 @@ import parse from 'html-react-parser';
 
 import { ProductDetailInfoProps } from '@/components/pages/ProductDetailIndex/ProductDetailInfo';
 import { HalfMediaProps } from '@/components/common/Banner';
+import { MODAL_PURCHASE } from '@/libs/mock/modal';
 
 export const PRODUCT_DETAIL_BANNER: HalfMediaProps = {
-    media: [createPicsumImage({ id: 682, width: 1200, height: 900 })],
-    children: parse(`<span>Straw<span class="text-sooka-primary">berry</span></span> 
-<span>Short<span class="text-sooka-primary">cake</span></span>`),
-    form: {
-        title: 'Strawberry Shortcake',
-        summaries: FORM_ORDER,
+    media: [createPicsumImage({ id: 200, width: 1200, height: 900 })],
+    children: parse(
+        `<span>Straw<span class="text-sooka-primary">berry</span></span>
+        <span>Short<span class="text-sooka-primary">cake</span></span>`
+    ),
+    // form: {
+    //     title: 'Strawberry Shortcake',
+    //     summaries: FORM_ORDER,
+    // },
+    variants: [
+        {
+            title: 'Square - 15cm x 15cm',
+            price: 'Rp 120.000',
+        },
+        {
+            title: 'Round - 15cm x 15cm',
+            price: 'Rp 140.000',
+        },
+    ],
+    popup: {
+        content: MODAL_PURCHASE,
     },
 };
 

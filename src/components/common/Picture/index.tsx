@@ -29,6 +29,8 @@ const Base = forwardRef<HTMLPictureElement, BaseProps>(({ className, items, styl
     if (style) pictureProps = { ...pictureProps, style: style };
     if (events) pictureProps = { ...pictureProps, ...events };
 
+    if (!items || items.length === 0) return null;
+
     return (
         <picture
             ref={ref}

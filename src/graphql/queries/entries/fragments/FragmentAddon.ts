@@ -7,6 +7,8 @@ export const FRAGMENT_ADDON = gql`
     fragment addon on Addon {
         title
         slug
+        hasNote
+        note
 
         thumbnail {
             ...addonThumbnailMedia

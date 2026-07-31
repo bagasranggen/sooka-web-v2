@@ -1,0 +1,73 @@
+import type { Meta, StoryObj } from '@storybook/nextjs-vite';
+
+import { fn } from 'storybook/test';
+
+import { MODAL_PURCHASE, PRODUCT_DETAIL_BANNER } from '@/libs/mock';
+import { useOrderStateContext } from '@/store/context';
+
+import HalfMedia from './index';
+import Container from '@/components/common/Container';
+
+// More on how to set up stories at: https://storybook.js.org/docs/writing-stories#default-export
+const meta = {
+    title: 'Common/Banner/Half Media',
+    component: HalfMedia,
+    decorators: [
+        (Story) => (
+            <Container className="my-5">
+                <Story />
+            </Container>
+        ),
+    ],
+    parameters: {
+        // Optional parameter to center the component in the Canvas. More info: https://storybook.js.org/docs/configure/story-layout
+        layout: 'fullscreen',
+    },
+    // This component will have an automatically generated Autodocs entry: https://storybook.js.org/docs/writing-docs/autodocs
+    // tags: ['autodocs'],
+    // More on argTypes: https://storybook.js.org/docs/api/argtypes
+    // argTypes: {
+    //     backgroundColor: { control: 'color' },
+    // },
+    // Use `fn` to spy on the onClick arg, which will appear in the actions panel once invoked: https://storybook.js.org/docs/essentials/actions#story-args
+    // args: { onClick: fn() },
+} satisfies Meta<typeof HalfMedia>;
+
+export default meta;
+type Story = StoryObj<typeof meta>;
+
+// More on writing stories with args: https://storybook.js.org/docs/writing-stories/args
+
+export const Default: Story = {
+    args: PRODUCT_DETAIL_BANNER,
+    render: (args) => {
+        const { popupIsOpen, setPopupIsOpen } = useOrderStateContext();
+
+        return (
+            <Container className="my-5">
+                <HalfMedia
+                    {...args}
+                    onClick={(data) => {
+                        setPopupIsOpen(true);
+                    }}
+                    onSubmit={(data) => {
+                        console.log({ data });
+                    }}
+                    popup={{
+                        open: popupIsOpen,
+                        onOpenChange: (open) => setPopupIsOpen(open),
+                        content: MODAL_PURCHASE,
+                    }}
+                />
+            </Container>
+        );
+    },
+};
+
+export const Disabled: Story = {
+    args: {
+        ...PRODUCT_DETAIL_BANNER,
+        disabled: true,
+        notes: 'Sold out',
+    },
+};

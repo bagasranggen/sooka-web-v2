@@ -14,6 +14,7 @@ import Offcanvas from '@/components/common/Offcanvas';
 import Container from '@/components/common/Container';
 import NavigationMenu from '@/components/layout/Navigation/NavigationMenu';
 import NavigationMenuMobile from '@/components/layout/Navigation/NavigationMenuMobile';
+import NavigationCart, { NavigationCartProps } from '@/components/layout/Navigation/NavigationCart';
 
 export type NavigationItemNestedProps = Pick<NavigationItemProps, 'href' | 'children' | 'target'>;
 
@@ -23,9 +24,10 @@ export type NavigationItemProps = {
 
 export type NavigationProps = {
     items: NavigationItemProps[];
+    cart?: Pick<NavigationCartProps, 'count'> & Pick<NonNullable<NavigationCartProps['button']>, 'onClick'>;
 };
 
-const Navigation = ({ items }: NavigationProps): React.ReactElement => {
+const Navigation = ({ items, cart }: NavigationProps): React.ReactElement => {
     const { show, triggerOpen, triggerClose } = usePortal({});
     const [navRef, { height }] = useMeasure();
     const { y: scrollY } = useWindowScroll();
@@ -33,10 +35,17 @@ const Navigation = ({ items }: NavigationProps): React.ReactElement => {
     const [scrollYDirection, setScrollYDirection] = useState<'down' | 'up' | null>(null);
     const [activeDropdown, setActiveDropdown] = useState<BaseAnchorProps['children']>();
 
-    let navClass: ArrayStringProps = ['bg-sooka-primary h-[7rem] flex items-center text-light'];
-    navClass.push('sticky top-0 z-1040 transition-transform');
+    let navClass: ArrayStringProps = ['h-[7rem] flex items-center text-light'];
+    if (!show) navClass.push('bg-sooka-primary');
+    if (show) navClass.push('bg-sooka-l-primary');
+    navClass.push('sticky top-0 z-1040 transition-transform transition-colors');
     if (scrollY > height && scrollYDirection === 'down') navClass.push('-translate-y-full');
     navClass = joinArrayString(navClass);
+
+    let cartClass: ArrayStringProps = [];
+    if (items && items.length > 0) cartClass.push('ms-2 lg:ms-3');
+    if (!items || items.length === 0) cartClass.push('ms-auto');
+    cartClass = joinArrayString(cartClass);
 
     useEffect(() => {
         setPrevScrollY((prevState) => {
@@ -69,7 +78,7 @@ const Navigation = ({ items }: NavigationProps): React.ReactElement => {
                 ref={navRef as Ref<HTMLElement>}
                 className={navClass}>
                 <Container>
-                    <div className="flex items-center justify-between">
+                    <div className="flex items-center ">
                         <Button
                             as="anchor"
                             href="/"
@@ -79,14 +88,14 @@ const Navigation = ({ items }: NavigationProps): React.ReactElement => {
                             <Icon.Sooka
                                 id="logoHeader"
                                 color="light"
-                                className="h-[4.5rem]"
+                                className="h-4.5"
                             />
                         </Button>
 
                         <Button
                             as="button"
                             type="button"
-                            className="block lg:hidden"
+                            className="block lg:hidden ms-auto"
                             onClick={() => {
                                 if (!show) triggerOpen();
 
@@ -96,7 +105,7 @@ const Navigation = ({ items }: NavigationProps): React.ReactElement => {
                         </Button>
 
                         <NavigationMenu
-                            className="hidden lg:flex"
+                            className="hidden lg:flex lg:items-baseline lg:ms-auto"
                             items={items}
                             dropdown={{
                                 active: activeDropdown,
@@ -107,6 +116,14 @@ const Navigation = ({ items }: NavigationProps): React.ReactElement => {
                                 },
                             }}
                         />
+
+                        <NavigationCart
+                            button={{
+                                className: cartClass,
+                                onClick: cart?.onClick,
+                            }}
+                            count={cart?.count}
+                        />
                     </div>
                 </Container>
 
@@ -116,7 +133,7 @@ const Navigation = ({ items }: NavigationProps): React.ReactElement => {
                         hide={triggerClose}
                         backdrop={false}
                         from="bottom"
-                        className="h-full max-h-[calc(100vh-7rem)] bg-sooka-primary">
+                        className="h-full max-h-[calc(100vh-7rem)] bg-sooka-l-primary">
                         <NavigationMenuMobile
                             items={items}
                             onSamePath={triggerClose}

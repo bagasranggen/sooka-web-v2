@@ -9,6 +9,7 @@ export type FragmentMediaProps = {
 export const FRAGMENT_MEDIA = (props?: FragmentMediaProps) => {
     const base = `
         src: url
+        filename
         width
         height
     `;
@@ -35,7 +36,6 @@ export const FRAGMENT_MEDIA = (props?: FragmentMediaProps) => {
         ${`
             fragment ${fragmentName} on ${assetVolume} {
                 ${base}
-                filename
                 alt
                 
                 ${sizes ? `sizes {${sizes}}` : ''}

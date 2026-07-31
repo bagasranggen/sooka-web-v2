@@ -5,7 +5,7 @@ import { FRAGMENT_CB_SETTINGS } from '@/graphql/queries/contentBlocks/fragment/F
 import { FRAGMENT_CB_COMMON } from '@/graphql/queries/contentBlocks/fragment/FragmentCbCommon';
 
 export const FRAGMENT_CB_HEADING = gql`
-    fragment cbHeading on ContentBlockHeading {
+    fragment cbHeading on CbHeading {
         title
         description
         

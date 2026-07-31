@@ -19,9 +19,9 @@ export async function GET(req: NextRequest) {
 
     try {
         revalidatePath(path, type);
-        return Response.json({ revalidated: true, now: Date.now() });
+        return NextResponse.json({ revalidated: true, now: Date.now() });
     } catch {
-        return Response.json({
+        return NextResponse.json({
             revalidated: false,
             now: Date.now(),
             message: 'Missing path to revalidate',

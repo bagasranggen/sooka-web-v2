@@ -12,5 +12,49 @@ export const CAROUSEL_BANNER: BannerItemProps[] = createArrayFromNumber(4).map((
         ...(item === 0 ? { category: 'new product' } : {}),
         title: 'Strawberry Shortcake',
         description: undefined,
+        cta: {
+            href: '#',
+        },
     };
 });
+
+export const FADE_BANNER_MEDIA_SINGLE = [
+    [
+        createPicsumImage({
+            width: 1000,
+            height: 800,
+            media: 992,
+        }),
+        createPicsumImage({
+            width: 800,
+            height: 500,
+        }),
+    ],
+];
+
+export const FADE_BANNER_MEDIA = [
+    [
+        createPicsumImage({
+            width: 1000,
+            height: 800,
+            media: 992,
+        }),
+        createPicsumImage({
+            width: 800,
+            height: 500,
+        }),
+    ],
+    [
+        createPicsumImage({
+            id: 200,
+            width: 1000,
+            height: 800,
+            media: 992,
+        }),
+        createPicsumImage({
+            id: 200,
+            width: 800,
+            height: 500,
+        }),
+    ],
+];

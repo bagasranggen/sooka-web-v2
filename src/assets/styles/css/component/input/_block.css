@@ -1,0 +1,14 @@
+@layer components {
+    .input.input--block {
+        label {
+            @apply block;
+            @apply border;
+            @apply px-2 py-1;
+            @apply cursor-pointer;
+            @apply transition-colors;
+            @apply md:group-hover:bg-sooka-primary/30 md:group-hover:border-sooka-primary/30;
+            @apply peer-checked:bg-sooka-primary peer-checked:text-light;
+            @apply md:peer-checked:hover:bg-sooka-primary/80;
+        }
+    }
+}

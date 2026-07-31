@@ -1,14 +1,10 @@
 import { FLAVOURS } from '@/libs/data';
-import { Flavour, PageDataParamsProps, PageDataProps } from '@/libs/@types';
-import {
-    createMarqueeItem,
-    createPictureImage,
-    createProductDetailPrices,
-    createProductDetailTag,
-} from '@/libs/factory';
-import { checkMediaStatus } from '@/libs/utils';
+import { ArrayStringProps, Flavour, PageDataParamsProps, PageDataProps, Product } from '@/libs/@types';
+import { createMarqueeItem, createPictureImage, createProductDetailTag, createPurchasePopupItem } from '@/libs/factory';
+import { checkMediaStatus, convertIntToCurrency } from '@/libs/utils';
 
-import { axiosClient } from '@/libs/fetcher';
+import { apolloClient } from '@/libs/fetcher';
+import { PRODUCT_DETAIL_QUERY } from '@/graphql';
 
 import parse from 'html-react-parser';
 
@@ -19,45 +15,79 @@ import { RangeProps } from '@/components/common/Range';
 
 export const ProductDetailData = async ({
     type,
-    slug,
+    uri,
 }: PageDataParamsProps): Promise<PageDataProps<ProductDetailIndexProps>> => {
-    const { data } = await axiosClient().get(`/products?slug=${slug}`);
+    const { data } = await apolloClient.query({
+        query: PRODUCT_DETAIL_QUERY,
+        variables: { uri },
+    });
 
-    const d = data?.products?.docs?.[0];
+    const d: Product | undefined = data?.products?.docs?.[0];
 
     const { data: mediaMain } = checkMediaStatus({
-        item: d?.thumbnail,
+        item: d?.thumbnail as any,
         handles: ['productDetailBanner', 'productDetailMobile'],
+        volumeAssets: 'mediaProducts',
     });
     const { data: mediaSecondary } = checkMediaStatus({
-        item: d?.thumbnailHover,
+        item: d?.thumbnailHover as any,
         handles: ['productDetailSticky', 'productDetailMobile'],
+        volumeAssets: 'mediaProducts',
     });
+
+    const notes = createProductDetailTag({ item: d });
+
+    const bannerVariants: ProductDetailIndexProps['entries']['banner']['variants'] = [];
+
+    if (d?.prices && d.prices.length > 0) {
+        d.prices.forEach((item) => {
+            let tmp: NonNullable<ProductDetailIndexProps['entries']['banner']['variants']>[number] | undefined =
+                undefined;
+
+            const price = item?.price;
+
+            if (price?.note) {
+                tmp = Object.assign(tmp ?? {}, { title: price.note } as any);
+            }
+            if (price?.normalPrice) {
+                tmp = Object.assign(tmp ?? {}, { price: convertIntToCurrency(price.normalPrice, true) } as any);
+            }
+            if (price?.salePrice) {
+                tmp = Object.assign(tmp ?? {}, { price: convertIntToCurrency(price.salePrice, true) } as any);
+            }
+
+            if (tmp && tmp?.price && tmp?.title) bannerVariants.push(tmp);
+        });
+    }
 
     const banner: ProductDetailIndexProps['entries']['banner'] = {
         media: [],
         children: '',
-        form: {
-            title: d?.title,
-            summaries: createProductDetailPrices({ prices: d?.prices, addons: d?.addons }),
-            disabled: d?.availability === 'unavailable',
-            notes: createProductDetailTag({ item: d }),
+        variants: bannerVariants,
+        popup: {
+            content: createPurchasePopupItem({
+                title: d?.title,
+                description: d?.description,
+                media: [(d?.thumbnail as any) ?? {}, (d?.thumbnailHover as any) ?? {}],
+                variants: d?.prices ?? [],
+                addOns: d?.addons ?? [],
+            }),
         },
     };
 
     // Banner Title
     const hasBannerTitle = !!d?.bannerTitle;
 
-    let tmpTitle: HeadingBaseProps['children'] = '';
-    let title = d?.title;
-    if (hasBannerTitle) title = d.bannerTitle;
-    title = title.split(hasBannerTitle ? '\n' : ' ');
+    let title: ArrayStringProps = d?.title ?? '';
+    if (hasBannerTitle && d?.bannerTitle) title = d.bannerTitle;
+    if (title && typeof title === 'string') title = title.split(hasBannerTitle ? '\n' : ' ');
 
+    let tmpTitle: HeadingBaseProps['children'] = '';
     if (Array.isArray(title)) {
         title.forEach((item, i, arr) => {
             tmpTitle += `<span>${item}</span>`;
 
-            if (i !== arr.length - 1) tmpTitle += '<br/>';
+            if (i !== arr.length - 1) tmpTitle += '&nbsp;<br class="max-md:hidden"/>';
             if (i === arr.length - 1 && typeof tmpTitle === 'string') tmpTitle = parse(tmpTitle);
         });
 
@@ -105,19 +135,19 @@ export const ProductDetailData = async ({
     if (d?.description) {
         infos.contents.push({
             title: 'Description',
-            description: d.description,
+            description: d.description as any,
         });
     }
 
-    const flavour: Flavour = d?.flavour;
+    const flavour: Flavour | undefined = d?.flavour;
 
     // Content Flavours
-    if (flavour?.showFlavour && flavour?.custardySpongy && flavour?.freshCreamy && flavour?.tangySweet) {
+    if (flavour?.showFlavour) {
         const flavours: [string, number][] = [];
         Object.entries(flavour).forEach(([key, value]) => {
             const excludedKey = ['__typename', 'showFlavour'];
 
-            if (!excludedKey.includes(key)) flavours.push([key, parseInt(value.replace('_', ''))]);
+            if (!excludedKey.includes(key) && value) flavours.push([key, parseInt(value.replace('_', ''))]);
         });
 
         const tmp: RangeProps[] = [];
@@ -144,7 +174,11 @@ export const ProductDetailData = async ({
         d.addons.forEach((item: any) => {
             const price = item?.prices?.[0]?.price;
 
-            const { data: mediaItem } = checkMediaStatus({ item: item?.thumbnail, handles: ['assets400x400'] });
+            const { data: mediaItem } = checkMediaStatus({
+                item: item?.thumbnail,
+                handles: ['assets400x400'],
+                volumeAssets: 'mediaAddons',
+            });
 
             const media = [];
             if (mediaItem?.assets400x400) {
@@ -169,7 +203,11 @@ export const ProductDetailData = async ({
 
     if (d?.marquee && d.marquee.length > 0) {
         d.marquee.forEach((item: any) => {
-            const marqueeItem = createMarqueeItem({ item, handles: ['productMarquee', 'productMarqueeMobile'] });
+            const marqueeItem = createMarqueeItem({
+                item,
+                handles: ['productMarquee', 'productMarqueeMobile'],
+                volumeAssets: 'mediaProducts',
+            });
 
             if (marqueeItem.length > 0) marquee.push(marqueeItem);
         });

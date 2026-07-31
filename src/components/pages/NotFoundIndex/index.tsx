@@ -9,10 +9,10 @@ export type NotFoundIndexProps = {};
 const NotFoundIndex = ({}: NotFoundIndexProps): React.ReactElement => {
     return (
         <>
-            <Container className="mt-[30rem] lg:mt-[40rem] xl:mt-[20rem] mb-[30rem] lg:mb-[40rem] xl:mb-[20rem] text-center">
+            <Container className="mt-30 lg:mt-40 xl:mt-20 mb-30 lg:mb-40 xl:mb-20 text-center">
                 <Heading
                     as="h1"
-                    className="text-[4rem] md:text-[13rem] leading-8 md:leading-[12rem]">
+                    className="text-[4rem] md:text-[13rem] leading-8 md:leading-12">
                     Crumbs!
                 </Heading>
 
