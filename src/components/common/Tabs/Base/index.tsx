@@ -24,7 +24,7 @@ const Base = ({ items, className }: BaseProps): React.ReactElement => {
     let listClass: ArrayStringProps = ['flex mb-3'];
     listClass.push('justify-start md:justify-center');
     listClass.push('whitespace-nowrap md:whitespace-normal');
-    listClass.push('overflow-x-auto');
+    listClass.push('overflow-x-auto overflow-y-hidden');
     if (className) listClass.push(className);
     listClass = joinArrayString(listClass);
 

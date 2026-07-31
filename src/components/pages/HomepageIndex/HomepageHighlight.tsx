@@ -45,7 +45,7 @@ const HomepageHighlight = ({ items }: HomepageHighlightProps): React.ReactElemen
                         <Card.Thumbnail
                             className="justify-center"
                             row={{ gutterY: 4 }}
-                            column={{ sm: 6, md: 3 }}
+                            column={{ sm: 6, md: 4, lg: 3 }}
                             items={item.items}
                             // onSubmit={onSubmit}
                             popup={{
