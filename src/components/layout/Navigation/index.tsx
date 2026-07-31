@@ -43,7 +43,7 @@ const Navigation = ({ items, cart }: NavigationProps): React.ReactElement => {
     navClass = joinArrayString(navClass);
 
     let cartClass: ArrayStringProps = [];
-    if (items && items.length > 0) cartClass.push('ms-2 lg:ms-3');
+    if (items && items.length > 0) cartClass.push('ms-auto lg:ms-3');
     if (!items || items.length === 0) cartClass.push('ms-auto');
     cartClass = joinArrayString(cartClass);
 
@@ -92,18 +92,6 @@ const Navigation = ({ items, cart }: NavigationProps): React.ReactElement => {
                             />
                         </Button>
 
-                        <Button
-                            as="button"
-                            type="button"
-                            className="block lg:hidden ms-auto"
-                            onClick={() => {
-                                if (!show) triggerOpen();
-
-                                if (show) triggerClose();
-                            }}>
-                            <Icon.Toggle active={show} />
-                        </Button>
-
                         <NavigationMenu
                             className="hidden lg:flex lg:items-baseline lg:ms-auto"
                             items={items}
@@ -124,6 +112,18 @@ const Navigation = ({ items, cart }: NavigationProps): React.ReactElement => {
                             }}
                             count={cart?.count}
                         />
+
+                        <Button
+                            as="button"
+                            type="button"
+                            className="block lg:hidden ms-2"
+                            onClick={() => {
+                                if (!show) triggerOpen();
+
+                                if (show) triggerClose();
+                            }}>
+                            <Icon.Toggle active={show} />
+                        </Button>
                     </div>
                 </Container>
 
