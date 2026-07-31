@@ -1,6 +1,6 @@
-import { Component } from '@/libs/@types';
+import { Component, RefComponent } from '@/libs/@types';
 
-import Base, { BaseProps } from '@/components/common/Heading/Base';
+import Base, { BaseHeadingRef, BaseProps } from '@/components/common/Heading/Base';
 import Number, { NumberProps } from '@/components/common/Heading/Number';
 
 export type * from '@/components/common/Heading/Base';
@@ -10,4 +10,4 @@ type HeadingComposition = {
     Number: Component<NumberProps>;
 };
 
-export default Object.assign<Component<BaseProps>, HeadingComposition>(Base, { Number });
+export default Object.assign<RefComponent<BaseProps, BaseHeadingRef>, HeadingComposition>(Base, { Number });
