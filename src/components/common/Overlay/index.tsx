@@ -4,7 +4,7 @@ import { ArrayStringProps, CreateArrayWithLengthX, NumericRange } from '@/libs/@
 import { joinArrayString } from '@/libs/utils';
 
 export type OverlayProps = {
-    variant: 'solid' | 'gradient-left' | 'gradient-right';
+    variant: 'solid' | 'gradient-left' | 'gradient-right' | 'gradient-top' | 'gradient-bottom';
     opacity: NumericRange<CreateArrayWithLengthX<0>, 6>;
     children: React.ReactElement;
 };
@@ -13,6 +13,8 @@ const Overlay = ({ variant, opacity, children }: OverlayProps) => {
     let overlayClass: ArrayStringProps = ['overlay'];
     if (variant === 'gradient-right') overlayClass.push('overlay--gradient-right');
     if (variant === 'gradient-left') overlayClass.push('overlay--gradient-left');
+    if (variant === 'gradient-top') overlayClass.push('overlay--gradient-top');
+    if (variant === 'gradient-bottom') overlayClass.push('overlay--gradient-bottom');
     overlayClass.push(`overlay--${opacity * 10}`);
     overlayClass = joinArrayString(overlayClass);
 

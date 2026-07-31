@@ -39,12 +39,12 @@ const Footer = ({ address, businessHour, socialMedia }: FooterProps): React.Reac
                                     <CiIcon.CiLocationOn
                                         size={16}
                                         className="min-w-[1.6rem]"
-                                    />{' '}
+                                    />
                                     {address?.children}
                                 </Button>
                             )}
 
-                            {businessHour && <p>{businessHour}</p>}
+                            {businessHour && <p className={address ? 'mt-0.5' : ''}>{businessHour}</p>}
                         </Columns.Column>
                         <Columns.Column
                             md={6}

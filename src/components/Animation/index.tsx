@@ -61,7 +61,7 @@ const Animation = ({ as, type, children, ...props }: AnimationProps): React.Reac
             // gsap.effects[type](props.ref.current, config, id);
             gsap.effects[type](animationProps.ref.current, config);
         },
-        { scope: animationProps.ref, dependencies: [type, as] }
+        { dependencies: [type, as] }
     );
 
     return cloneElement(children, !animationDisabled ? animationProps : {});

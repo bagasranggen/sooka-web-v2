@@ -1,3 +1,4 @@
+export * from './banner';
 export * from './card';
 export * from './carousel';
 export * from './cart';

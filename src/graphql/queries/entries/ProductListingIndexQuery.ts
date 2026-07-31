@@ -1,20 +1,30 @@
 import { gql } from '@apollo/client';
 
 import { FRAGMENT_CATEGORY } from '@/graphql/queries/entries/fragments/FragmentCategory';
+import { FRAGMENT_MEDIA } from '@/graphql/queries/fragments/FragmentMedia';
 
 export const PRODUCT_LISTING_INDEX_QUERY = gql`
     query ProductListingIndexQuery($uri: String) {
         entries: Pages(where: { uri: { equals: $uri } }) {
             docs {
+                title
+                description: headerDescription
+
+                headerBackground {
+                    ...bannerBgMedia
+                }
+
                 category {
                     ...category
                 }
-
-                title
-                description: headerDescription
             }
         }
     }
 
     ${FRAGMENT_CATEGORY}
+    ${FRAGMENT_MEDIA({
+        name: 'bannerBg',
+        on: 'MediaProduct',
+        sizesHandles: ['bannerDesktop', 'bannerTablet', 'bannerMobile'],
+    })}
 `;
