@@ -2,7 +2,7 @@ import { PageDataParamsProps, PageDataProps } from '@/libs/@types';
 
 import { createContentBlocks } from '@/libs/factory';
 
-import { apolloClient, axiosClient } from '@/libs/fetcher';
+import { apolloClient } from '@/libs/fetcher';
 
 import { StaticPageIndexProps } from './index';
 import { PAGE_QUERY } from '@/graphql';

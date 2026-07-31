@@ -6,8 +6,6 @@ export async function GET(req: NextRequest, { params }: { params: Promise<{ file
     const volumeAsset = searchParams?.get('volumeAsset') ?? '';
     const filename = (await params)?.filename;
 
-    console.log({ volumeAsset, filename });
-
     const signedUrl = await getS3SignedUrl({
         volumeAsset,
         filename,
