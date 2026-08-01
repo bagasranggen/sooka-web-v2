@@ -4,23 +4,31 @@ import { createPicsumImage } from '@/libs/factory/createPicsumImage';
 
 import { ThumbnailProps } from '@/components/common/Card';
 
-export const CARD_THUMBNAIL_WITH_PRICE: ThumbnailProps['items'] = createArrayFromNumber(4).map((item) => ({
-    cta: {
-        href: '/cakes/strawberry-shortcake',
-    },
-    media: [
-        createPicsumImage({ id: 237, width: 400, height: 619, media: 768 }),
-        createPicsumImage({ id: 237, width: 400, height: 400 }),
-    ],
-    mediaHover: [
-        createPicsumImage({ id: 22, width: 400, height: 619, media: 768 }),
-        createPicsumImage({ id: 22, width: 400, height: 400 }),
-    ],
-    title: 'Strawberry Shortcake',
-    price: item === 0 ? '500.000' : '230.000',
-    ...(item === 0 ? { salePrice: '230.000' } : {}),
-    popup: MODAL_PURCHASE,
-}));
+export const CARD_THUMBNAIL_WITH_PRICE: ThumbnailProps['items'] = createArrayFromNumber(4).map((item, i) => {
+    let label: NonNullable<ThumbnailProps['items']>[number]['label'] = undefined;
+    if (i === 0) label = { children: 'Sale', position: 'top-right' };
+    if (i === 3) label = 'Sold Out';
+
+    return {
+        cta: {
+            href: '/cakes/strawberry-shortcake',
+        },
+        media: [
+            createPicsumImage({ id: 237, width: 400, height: 619, media: 768 }),
+            createPicsumImage({ id: 237, width: 400, height: 400 }),
+        ],
+        mediaHover: [
+            createPicsumImage({ id: 22, width: 400, height: 619, media: 768 }),
+            createPicsumImage({ id: 22, width: 400, height: 400 }),
+        ],
+        title: 'Strawberry Shortcake',
+        label,
+        price: item === 0 ? '500.000' : '230.000',
+        ...(item === 0 ? { salePrice: '230.000' } : {}),
+        disabled: i === 3,
+        popup: MODAL_PURCHASE,
+    };
+});
 
 export const CARD_THUMBNAIL_WITHOUT_PRICE = createArrayFromNumber(4).map(() => ({
     cta: {

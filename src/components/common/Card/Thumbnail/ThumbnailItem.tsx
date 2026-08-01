@@ -41,6 +41,10 @@ const ThumbnailItem = ({
 }: ThumbnailItemProps): React.ReactElement => {
     const hasPrice = !!price;
 
+    let btnClass: ArrayStringProps = ['group'];
+    if (disabled) btnClass.push('pointer-events-none');
+    btnClass = joinArrayString(btnClass);
+
     let titleClass: ArrayStringProps = ['mt-1 md:transition-colors md:group-hover:text-sooka-primary'];
     if (hasPrice) titleClass.push('text-[1.4rem]');
     if (!hasPrice) titleClass.push('uppercase font-semibold tracking-0.2');
@@ -86,7 +90,7 @@ const ThumbnailItem = ({
     let regularPriceBlock = undefined;
     if (salePrice && price) {
         regularPriceBlock = (
-            <p className="mt-1 text-[1.4rem] tracking-0.1 uppercase font-semibold opacity-60">
+            <p className="mt-0.5 -mb-1 text-[1.4rem] tracking-0.1 uppercase font-semibold opacity-60">
                 <s>RP{price}</s>
             </p>
         );
@@ -95,11 +99,11 @@ const ThumbnailItem = ({
     return (
         <Button
             as="anchor"
-            className="group"
+            className={btnClass}
             onClick={(e) => {
                 e.preventDefault();
 
-                if (popup && onClick) onClick(popup);
+                if (!disabled && popup && onClick) onClick(popup);
             }}
             {...cta}>
             <div className="relative">
@@ -116,8 +120,8 @@ const ThumbnailItem = ({
                 />
             </div>
             <h3 className={titleClass}>{title}</h3>
-            {priceBlock}
             {regularPriceBlock}
+            {priceBlock}
         </Button>
     );
 };
