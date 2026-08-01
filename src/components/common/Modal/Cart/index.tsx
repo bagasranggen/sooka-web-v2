@@ -5,10 +5,12 @@ import React, { Ref } from 'react';
 import { ParametersProps } from '@/libs/@types';
 
 import { useMeasure } from 'react-use';
+import { X } from 'lucide-react';
 
 import Form, { CartOrderProps, CartProps as FormCartProps } from '@/components/common/Form';
-import ModalSheet, { ModalSheetProps } from '@/components/common/Modal/ModalSheet';
 import Columns from '@/components/common/Columns';
+import Button from '@/components/common/Button';
+import ModalSheet, { ModalSheetProps } from '@/components/common/Modal/ModalSheet';
 
 export type CartProps = {
     onSubmit?: (
@@ -44,6 +46,16 @@ const Cart = ({
                 showCloseButton: false,
                 side: 'bottom',
             }}>
+            <Button
+                as="button"
+                type="button"
+                className="modal__close"
+                onClick={() => {
+                    if (onOpenChange) onOpenChange(false);
+                }}>
+                <X size={16} />
+            </Button>
+
             <Columns>
                 <Columns.Column
                     style={{ '--sticky-height': `${height}px` } as React.CSSProperties}

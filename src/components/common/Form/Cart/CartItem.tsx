@@ -96,20 +96,6 @@ const CartItem = ({
         [data]
     );
 
-    const titleComponent = (
-        <>
-            {title && (
-                <Heading
-                    as="h2"
-                    className="text-[2.5rem] md:text-[3rem] leading-3 md:leading-3.5">
-                    {title}
-                </Heading>
-            )}
-
-            {variant && <p className="max-md:text-[1.4rem] md:mt-1.5 mb-0">Variant: {variant}</p>}
-        </>
-    );
-
     return (
         <form
             className={className}
@@ -120,21 +106,14 @@ const CartItem = ({
                 gutterX={{ xs: 2, lg: 3 }}
                 gutterY={1}>
                 <Columns.Column
-                    // xs={6}
-                    // md={3}
                     xs={12}
-                    md={3}>
+                    md={3}
+                    className="max-md:hidden">
                     <Columns gutterX={2}>
                         <Columns.Column
                             xs={4}
                             md={12}>
                             {media && <Picture items={media} />}
-                        </Columns.Column>
-
-                        <Columns.Column
-                            xs={8}
-                            className="md:hidden">
-                            {titleComponent}
                         </Columns.Column>
                     </Columns>
                 </Columns.Column>
@@ -144,12 +123,22 @@ const CartItem = ({
                     md={9}>
                     <Columns
                         gutterX={2}
-                        gutterY={3}>
+                        gutterY={{
+                            xs: 1,
+                            lg: 3,
+                        }}>
                         <Columns.Column
                             md={12}
-                            lg={8}
-                            className={!addOns || addOns.length === 0 ? 'max-md:hidden' : ''}>
-                            <div className="max-md:hidden">{titleComponent}</div>
+                            lg={8}>
+                            {title && (
+                                <Heading
+                                    as="h2"
+                                    className="text-[2.2rem] md:text-[3rem] leading-3 md:leading-3.5">
+                                    {title}
+                                </Heading>
+                            )}
+
+                            {variant && <p className="max-md:text-[1.4rem] md:mt-1.5 mb-0">Variant: {variant}</p>}
 
                             {addOns && addOns.length > 0 && (
                                 <>
@@ -185,7 +174,7 @@ const CartItem = ({
                                     md={6}
                                     lg={12}>
                                     {priceCurrency && (
-                                        <p className="text-[1.8rem] md:max-lg:text-md lg:text-end tracking-0.1 uppercase font-bold">
+                                        <p className="text-[1.6rem] md:max-lg:text-md lg:text-end tracking-0.1 uppercase font-bold">
                                             {priceCurrency}
                                         </p>
                                     )}
@@ -197,6 +186,7 @@ const CartItem = ({
                                     lg={12}>
                                     <Columns
                                         gutterX={1}
+                                        gutterY={0}
                                         className="items-center justify-end">
                                         <Columns.Column xs="auto">
                                             <Button

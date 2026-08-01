@@ -26,22 +26,34 @@
     }
 
     .modal.modal--modal-sheet.modal--cart {
+        @apply max-md:pt-1!;
         @apply max-sm:px-0!;
         @apply lg:max-xl:px-0!;
-        @apply sm:max-lg:h-[calc(100vh-10rem)] sm:max-lg:max-h-80;
+        @apply max-md:h-dvh max-md:max-h-dvh;
+        @apply lg:max-lg:h-[80dvh] lg:max-lg:max-h-dvh;
         @apply xl:h-[calc(100vh-10rem)] xl:max-h-80;
         @apply sm:max-lg:overflow-y-auto;
         @apply xl:overflow-y-auto;
         @apply xl:max-w-120!;
 
+        .modal__close {
+            @apply fixed top-0.5 right-0.5;
+            @apply md:hidden;
+            @apply p-0.25;
+            @apply text-light;
+            @apply bg-sooka-secondary;
+        }
+
         .modal__orders {
             @apply max-sm:container-fluid;
             @apply lg:max-xl:container-fluid;
 
-            @apply max-sm:max-h-[30vh];
-            @apply lg:max-xl:max-h-[45vh];
+            @apply max-sm:max-h-[calc(100dvh-3rem-var(--sticky-height))];
+            /*@apply lg:max-xl:max-h-[45vh];*/
+            @apply lg:max-xl:max-h-[calc(80dvh-3rem-var(--sticky-height))];
 
-            @apply max-sm:mb-[calc(var(--sticky-height)+3rem)];
+            /*@apply max-sm:mb-[calc(var(--sticky-height)+2rem)];*/
+            @apply max-sm:pb-1;
             @apply lg:max-xl:mb-[calc(var(--sticky-height)+3rem)];
 
             @apply max-sm:overflow-y-auto;
