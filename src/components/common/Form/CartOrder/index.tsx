@@ -14,6 +14,7 @@ import Button from '@/components/common/Button';
 
 export const CART_ORDER_FORM_HANDLE = {
     NAME: 'name',
+    PHONE_NUMBER: 'phoneNumber',
     TOTAL_PRICE: 'totalPrice',
     ORDER_COLLECTION: 'orderCollection',
     ORDER_COLLECTION_DATE: 'orderCollectionDate',
@@ -24,6 +25,7 @@ export const CART_ORDER_FORM_HANDLE = {
 
 export type CartOrderFormFields = {
     [CART_ORDER_FORM_HANDLE.NAME]: string;
+    [CART_ORDER_FORM_HANDLE.PHONE_NUMBER]: string;
     [CART_ORDER_FORM_HANDLE.TOTAL_PRICE]: number;
     [CART_ORDER_FORM_HANDLE.ORDER_COLLECTION]: string;
     [CART_ORDER_FORM_HANDLE.ORDER_COLLECTION_DATE]: string;
@@ -65,7 +67,7 @@ const CartOrder = ({ price, priceCurrency, onSubmit }: CartOrderProps): React.Re
                 Order Details
             </Heading>
 
-            <Columns gutterY={{ xs: 2, xl: 4 }}>
+            <Columns gutterY={{ xs: 1, xl: 4 }}>
                 <Columns.Column
                     xs={12}
                     lg={8}
@@ -85,6 +87,20 @@ const CartOrder = ({ price, priceCurrency, onSubmit }: CartOrderProps): React.Re
                                     required: GENERAL_REQUIRED_ERROR_MESSAGE,
                                 }}
                                 error={errors?.[CART_ORDER_FORM_HANDLE.NAME]?.message}
+                            />
+                        </Columns.Column>
+                        <Columns.Column md={12}>
+                            <Input.Label
+                                type="tel"
+                                size="sm"
+                                id={CART_ORDER_FORM_HANDLE.PHONE_NUMBER}
+                                label="Contact Number"
+                                hook={{
+                                    register,
+                                    name: CART_ORDER_FORM_HANDLE.PHONE_NUMBER,
+                                    required: GENERAL_REQUIRED_ERROR_MESSAGE,
+                                }}
+                                error={errors?.[CART_ORDER_FORM_HANDLE.PHONE_NUMBER]?.message}
                             />
                         </Columns.Column>
 
@@ -208,7 +224,8 @@ const CartOrder = ({ price, priceCurrency, onSubmit }: CartOrderProps): React.Re
                             <Button.Arrow
                                 as="button"
                                 type="submit">
-                                Order By Whatsapp
+                                Order By <span className="sm:hidden">WA</span>
+                                <span className="max-sm:hidden">Whatsapp</span>
                             </Button.Arrow>
                         </Columns.Column>
                     </Columns>

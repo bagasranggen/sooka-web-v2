@@ -11,7 +11,13 @@ export const FRAGMENT_PRODUCT_DETAIL = gql`
             ...meta
         }
 
+        availability
+
         badge {
+            ...tag
+        }
+
+        unavailableLabel {
             ...tag
         }
 

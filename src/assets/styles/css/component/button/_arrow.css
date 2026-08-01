@@ -1,0 +1,60 @@
+@layer components {
+    .btn.btn--arrow {
+        @apply pt-0.5 pb-0.75;
+        @apply inline-flex items-center;
+        @apply overflow-hidden;
+        @apply rounded-full;
+        @apply md:transition-colors md:hover:text-white;
+        @apply max-md:text-white;
+        @apply md:duration-500;
+
+        .btn__icon {
+            @apply md:duration-500;
+            @apply md:after:duration-500;
+
+            @apply absolute;
+            @apply top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2;
+            @apply md:-rotate-45;
+            @apply md:group-hover:rotate-0;
+            @apply md:transition-transform;
+
+            @apply after:content-[""] after:bg-sooka-secondary;
+            @apply after:z-[-1] after:absolute after:top-1/2 after:left-1/2 after:-translate-x-1/2 after:-translate-y-1/2;
+            @apply after:w-full;
+            @apply after:aspect-square after:rounded-full;
+            @apply after:pointer-events-none;
+
+            @apply after:transition-transform;
+            @apply md:group-hover:after:scale-(--btn-arrow-scale);
+            @apply max-md:after:scale-(--btn-arrow-scale);
+        }
+
+        .btn__text {
+            @apply z-10;
+        }
+
+        .btn__circle {
+            @apply bg-sooka-secondary relative aspect-square rounded-full;
+        }
+
+        &.btn--md {
+            @apply pl-2 pr-1;
+
+            .btn__circle {
+                @apply ms-0.5 w-[1.8rem];
+            }
+        }
+
+        &.btn--lg {
+            @apply pl-3.5 pr-2.5;
+
+            .btn__text {
+                @apply text-md md:text-[3rem];
+            }
+
+            .btn__circle {
+                @apply ms-1.5 w-[2.6rem];
+            }
+        }
+    }
+}

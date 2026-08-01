@@ -96,17 +96,47 @@ const CartItem = ({
         [data]
     );
 
+    const titleComponent = (
+        <>
+            {title && (
+                <Heading
+                    as="h2"
+                    className="text-[2.5rem] md:text-[3rem] leading-3 md:leading-3.5">
+                    {title}
+                </Heading>
+            )}
+
+            {variant && <p className="max-md:text-[1.4rem] md:mt-1.5 mb-0">Variant: {variant}</p>}
+        </>
+    );
+
     return (
         <form
             className={className}
             onSubmit={handleSubmit((data) => {
                 setData(data);
             })}>
-            <Columns gutterY={1}>
+            <Columns
+                gutterX={{ xs: 2, lg: 3 }}
+                gutterY={1}>
                 <Columns.Column
-                    xs={6}
+                    // xs={6}
+                    // md={3}
+                    xs={12}
                     md={3}>
-                    {media && <Picture items={media} />}
+                    <Columns gutterX={2}>
+                        <Columns.Column
+                            xs={4}
+                            md={12}>
+                            {media && <Picture items={media} />}
+                        </Columns.Column>
+
+                        <Columns.Column
+                            xs={8}
+                            className="md:hidden">
+                            {titleComponent}
+                        </Columns.Column>
+                    </Columns>
                 </Columns.Column>
 
                 <Columns.Column
@@ -117,22 +147,15 @@ const CartItem = ({
                         gutterY={3}>
                         <Columns.Column
                             md={12}
-                            lg={8}>
-                            {title && (
-                                <Heading
-                                    as="h2"
-                                    className="text-[3rem] leading-3.5">
-                                    {title}
-                                </Heading>
-                            )}
-
-                            {variant && <p className="mt-1.5 mb-0">Variant: {variant}</p>}
+                            lg={8}
+                            className={!addOns || addOns.length === 0 ? 'max-md:hidden' : ''}>
+                            <div className="max-md:hidden">{titleComponent}</div>
 
                             {addOns && addOns.length > 0 && (
                                 <>
-                                    <div className="mt-1">Addon(s):</div>
+                                    <div className="mt-1 max-md:text-[1.4rem]">Addon(s):</div>
                                     <List
-                                        className="ms-1.5 list-disc"
+                                        className="ms-1.5 list-disc max-md:text-[1.4rem]"
                                         items={addOns.map((item) => {
                                             return {
                                                 children: <p>{item}</p>,
@@ -143,10 +166,10 @@ const CartItem = ({
                             )}
 
                             {note && (
-                                <>
+                                <div className="max-md:text-[1.4rem]">
                                     <div className="mt-1">Note:</div>
                                     {note}
-                                </>
+                                </div>
                             )}
                         </Columns.Column>
 
@@ -155,20 +178,21 @@ const CartItem = ({
                             lg={4}>
                             <Columns
                                 gutterY={2}
+                                gutterX={2}
                                 className="max-lg:items-center">
                                 <Columns.Column
-                                    xs={7}
+                                    xs={6}
                                     md={6}
                                     lg={12}>
                                     {priceCurrency && (
-                                        <p className="max-lg:text-md lg:text-end tracking-0.1 uppercase font-bold">
+                                        <p className="text-[1.8rem] md:max-lg:text-md lg:text-end tracking-0.1 uppercase font-bold">
                                             {priceCurrency}
                                         </p>
                                     )}
                                 </Columns.Column>
 
                                 <Columns.Column
-                                    xs={5}
+                                    xs={6}
                                     md={6}
                                     lg={12}>
                                     <Columns
