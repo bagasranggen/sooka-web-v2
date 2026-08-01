@@ -1,8 +1,10 @@
 import { PurchaseFormFields } from '@/components/common/Form';
+import { createPicsumImage } from '@/libs/factory';
 
 export const CART_ITEMS: PurchaseFormFields[] = [
     {
         cartItemId: new Date().getTime().toString(),
+        media: [createPicsumImage({ id: 200, width: 500, height: 500 })] as any,
         title: 'Strawberry Fields',
         variant: 'Square - 16cm x 16cm,240000',
         addOns: ['extraCandle,Extra Candle,3000', 'paperTopping,Paper Topping,5000'] as any,
@@ -14,6 +16,7 @@ export const CART_ITEMS: PurchaseFormFields[] = [
     },
     {
         cartItemId: '2' + new Date().getTime().toString(),
+        media: [createPicsumImage({ id: 200, width: 500, height: 500 })] as any,
         title: 'Matilda Chocolate Cake',
         variant: 'Square - 16cm x 16cm,240000',
         addOns: [] as any,
@@ -25,6 +28,7 @@ export const CART_ITEMS: PurchaseFormFields[] = [
     },
     {
         cartItemId: '3' + new Date().getTime().toString(),
+        media: [createPicsumImage({ id: 200, width: 500, height: 500 })] as any,
         title: 'Matilda Chocolate Cake',
         variant: 'Square - 16cm x 16cm,240000',
         addOns: [] as any,
@@ -36,6 +40,7 @@ export const CART_ITEMS: PurchaseFormFields[] = [
     },
     {
         cartItemId: '4' + new Date().getTime().toString(),
+        media: [createPicsumImage({ id: 200, width: 500, height: 500 })] as any,
         title: 'Matilda Chocolate Cake',
         variant: 'Square - 16cm x 16cm,240000',
         addOns: [] as any,

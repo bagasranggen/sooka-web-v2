@@ -30,8 +30,8 @@
         }
 
         &.label-input--sm {
-            @apply text-[1.8rem];
-            @apply tracking-[.3rem];
+            @apply text-[1.4rem] sm:text-[1.8rem];
+            @apply tracking-0.2 sm:tracking-0.3;
             @apply px-1 py-1;
             @apply group-focus-within:translate-x-[0.7rem];
             @apply peer-[:not(:placeholder-shown)]:translate-x-[0.7rem];
@@ -90,7 +90,7 @@
             input,
             select,
             textarea {
-                @apply min-h-[4.5rem];
+                @apply min-h-3.75 sm:min-h-4.5;
             }
 
             input {
