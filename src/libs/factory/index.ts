@@ -17,6 +17,7 @@ export * from './createMarqueeItem';
 export * from './createMessageText';
 export * from './createPicsumImage';
 export * from './createPictureImage';
+export * from './createPriceItem';
 export * from './createPurchasePopupItem';
 export * from './createProductItem';
 export * from './createWhatsappMessage';

@@ -65,6 +65,7 @@ export const FORM_PURCHASE_VARIANTS: PurchaseProps['variants'] = [
         value: 'Round - 15cm,120000',
         // checked: true,
         label: 'Round - 15cm',
+        regularPrice: 'Rp250.000',
         price: 'Rp120.000',
         required: true,
     },

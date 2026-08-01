@@ -16,6 +16,7 @@ import Animation from '@/components/Animation';
 export type PurchaseSectionItemProps = {
     label?: string;
     description?: string;
+    regularPrice?: string;
     price?: string;
     media?: BasePictureProps['items'];
     hasExtraNote?: boolean;
@@ -47,6 +48,12 @@ const PurchaseSection = ({
     let headingClass: ArrayStringProps = ['uppercase tracking-0.2 font-black text-[1.2rem]'];
     if (className) headingClass.push(className);
     headingClass = joinArrayString(headingClass);
+
+    let labelClass: ArrayStringProps = [
+        'peer-not-checked:[&_p:nth-child(2)]:text-dark/30 peer-checked:[&_p:nth-child(2)]:text-light/70',
+    ];
+    labelClass.push('peer-not-checked:[&_s]:text-dark/30 peer-checked:[&_s]:text-light/70');
+    labelClass = joinArrayString(labelClass);
 
     return (
         <>
@@ -87,7 +94,7 @@ const PurchaseSection = ({
                                         type={item.type}
                                         value={item.value}
                                         checked={item.checked}
-                                        labelClassName="peer-not-checked:[&_p:nth-child(2)]:text-dark/30 peer-checked:[&_p:nth-child(2)]:text-light/70"
+                                        labelClassName={labelClass}
                                         hook={{
                                             register,
                                             name: name,
@@ -137,10 +144,16 @@ const PurchaseSection = ({
                                             </Columns.Column>
 
                                             <Columns.Column md="auto">
+                                                {item?.regularPrice && (
+                                                    <s className="text-[1.2rem] uppercase font-semibold tracking-0.1">
+                                                        {item.regularPrice}
+                                                    </s>
+                                                )}
+
                                                 {item?.price && (
-                                                    <p className="uppercase tracking-0.1 font-bold text-[1.8rem] md:text-[1.4rem] leading-1.5">
+                                                    <b className="block uppercase tracking-0.1 text-[1.8rem] md:text-[1.4rem] leading-1.5">
                                                         {item.price}
-                                                    </p>
+                                                    </b>
                                                 )}
                                             </Columns.Column>
                                         </Columns>

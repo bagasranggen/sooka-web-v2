@@ -1,6 +1,7 @@
 import { ArrayStringProps, MediaProduct, Product } from '@/libs/@types';
 import { checkMediaStatus, convertIntToCurrency, joinArrayString, toCamelCase } from '@/libs/utils';
 import { createPictureImage } from '@/libs/factory/createPictureImage';
+import { createPriceItem } from '@/libs/factory/createPriceItem';
 
 import { PurchaseProps } from '@/components/common/Modal';
 
@@ -64,7 +65,7 @@ export const createPurchasePopupItem = ({
     if (variantsProps && variantsProps.length > 0) {
         variantsProps.forEach((item, i) => {
             const itemPrice = item?.price;
-            const price = itemPrice?.salePrice ?? itemPrice?.normalPrice ?? 0;
+            const { price, priceRegular } = createPriceItem({ item: itemPrice });
 
             let value: ArrayStringProps = [];
             if (itemPrice?.note) value.push(itemPrice.note);
@@ -78,6 +79,7 @@ export const createPurchasePopupItem = ({
                     value,
                     label: itemPrice?.note ?? '',
                     description: itemPrice?.additionalInfo ?? '',
+                    regularPrice: priceRegular ? convertIntToCurrency(priceRegular, true) : undefined,
                     price: convertIntToCurrency(price, true),
                     required: true,
                     checked: i === 0,
@@ -106,7 +108,8 @@ export const createPurchasePopupItem = ({
             }
 
             const itemPrice = item?.prices?.[0]?.price;
-            const price = itemPrice?.salePrice ?? itemPrice?.normalPrice ?? 0;
+            const { price, priceRegular, priceIsFree } = createPriceItem({ item: itemPrice });
+
             const label = item?.title ?? '';
             const slug = toCamelCase(label);
 
@@ -131,7 +134,8 @@ export const createPurchasePopupItem = ({
                     value,
                     label,
                     description: itemPrice?.note ?? '',
-                    price: itemPrice?.isFree ? 'free' : convertIntToCurrency(price, true),
+                    regularPrice: priceRegular ? convertIntToCurrency(priceRegular, true) : undefined,
+                    price: priceIsFree ? 'free' : convertIntToCurrency(price, true),
                     input,
                 });
             }
