@@ -67,6 +67,10 @@ const CartOrder = ({ price, priceCurrency, onSubmit }: CartOrderProps): React.Re
                 Order Details
             </Heading>
 
+            <small className="block text-[1.2rem] leading-1.5 mb-0.5">
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad illum ipsa ipsum iste molestias obcaecati
+            </small>
+
             <Columns gutterY={{ xs: 1, xl: 4 }}>
                 <Columns.Column
                     xs={12}

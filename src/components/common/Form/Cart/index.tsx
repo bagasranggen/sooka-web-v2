@@ -16,7 +16,7 @@ const Cart = ({ className, items, onSubmit, onRemove }: CartProps): React.ReactE
         <>
             {items.map((item, i: number, array) => {
                 let wrapperClass: ArrayStringProps = [];
-                if (i !== 0) wrapperClass.push('mt-3 pt-3 border-t');
+                if (i !== 0) wrapperClass.push('mt-1 md:mt-3 pt-1 md:pt-3 border-t');
                 // if (i === array.length - 1) formClass.push('pb-3 border-b');
                 if (className) wrapperClass.push(className);
                 wrapperClass = joinArrayString(wrapperClass);
