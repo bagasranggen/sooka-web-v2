@@ -97,3 +97,14 @@ export const SelectMultiple: Story = {
         items: INPUT_SELECT_OPTIONS,
     },
 };
+
+export const Time: Story = {
+    args: {
+        type: 'time',
+        id: 'test',
+        label: 'Test',
+        min: '16:50',
+        // multiple: true,
+        // items: INPUT_SELECT_OPTIONS,
+    },
+};
