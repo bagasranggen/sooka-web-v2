@@ -40,9 +40,11 @@ const Purchase = ({
             onOpenChange={onOpenChange}
             modal={{
                 showCloseButton: false,
+                onOpenAutoFocus: (e) => e.preventDefault(),
             }}
             sheet={{
                 showCloseButton: false,
+                onOpenAutoFocus: (e) => e.preventDefault(),
                 side: 'bottom',
             }}
             className="modal--purchase">

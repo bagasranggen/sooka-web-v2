@@ -3,7 +3,10 @@ import React, { PropsWithChildren } from 'react';
 import { Sheet as ShadcnSheet, SheetContent } from '@/components/shadcn/Sheet';
 
 export type SheetProps = {
-    content?: Pick<React.ComponentPropsWithoutRef<typeof SheetContent>, 'side' | 'showCloseButton' | 'className'>;
+    content?: Pick<
+        React.ComponentPropsWithoutRef<typeof SheetContent>,
+        'side' | 'showCloseButton' | 'onOpenAutoFocus' | 'className'
+    >;
 } & (Pick<React.ComponentPropsWithoutRef<typeof ShadcnSheet>, 'open' | 'onOpenChange'> & PropsWithChildren);
 
 const Sheet = ({ open, onOpenChange, content, children }: SheetProps): React.ReactElement => {
