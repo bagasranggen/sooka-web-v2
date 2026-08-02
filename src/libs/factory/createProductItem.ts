@@ -23,23 +23,26 @@ export const createProductItem = ({ item, hasPrice = true, hasBadge = false }: C
     let salePrice: ThumbnailItemProps['salePrice'] = undefined;
     if (hasPrice && priceIsSale) salePrice = convertIntToCurrency(priceItem?.salePrice ?? 0);
 
-    const { data: mediaThumbnail } = checkMediaStatus({
+    const { data: mediaThumbnail, hasPortrait: mediaThumbnailHasPortrait } = checkMediaStatus({
         item: item?.thumbnail as any,
         handles: ['productListingThumbnail', 'productListingThumbnailMobile'],
         volumeAssets: 'mediaProducts',
     });
-    const { data: mediaThumbnailHover } = checkMediaStatus({
+    const { data: mediaThumbnailHover, hasPortrait: mediaThumbnailHoverHasPortrait } = checkMediaStatus({
         item: item?.thumbnailHover as any,
         handles: ['productListingThumbnail', 'productListingThumbnailMobile'],
         volumeAssets: 'mediaProducts',
     });
 
+    const thumbnail = mediaThumbnailHasPortrait ? mediaThumbnail?.portraitAssets : mediaThumbnail;
+    const thumbnailHover = mediaThumbnailHoverHasPortrait ? mediaThumbnailHover?.portraitAssets : mediaThumbnailHover;
+
     const media: ThumbnailItemProps['media'] = [];
-    if (mediaThumbnail?.productListingThumbnail) {
+    if (thumbnail?.productListingThumbnail) {
         media.push(
             createPictureImage({
-                item: mediaThumbnail?.productListingThumbnail,
-                media: mediaThumbnail?.productListingThumbnailMobile ? 768 : undefined,
+                item: thumbnail?.productListingThumbnail,
+                media: thumbnail?.productListingThumbnailMobile ? 768 : undefined,
             })
         );
     }
@@ -48,17 +51,17 @@ export const createProductItem = ({ item, hasPrice = true, hasBadge = false }: C
     }
 
     const mediaHover: ThumbnailItemProps['mediaHover'] = [];
-    if (mediaThumbnailHover?.productListingThumbnail) {
+    if (thumbnailHover?.productListingThumbnail) {
         mediaHover.push(
             createPictureImage({
-                item: mediaThumbnailHover?.productListingThumbnail,
-                media: mediaThumbnailHover?.productListingThumbnailMobile ? 768 : undefined,
+                item: thumbnailHover?.productListingThumbnail,
+                media: thumbnailHover?.productListingThumbnailMobile ? 768 : undefined,
             })
         );
     }
-    if (mediaThumbnailHover?.productListingThumbnailMobile) {
+    if (thumbnailHover?.productListingThumbnailMobile) {
         mediaHover.push(
-            createPictureImage({ item: mediaThumbnailHover?.productListingThumbnailMobile, className: 'w-full' })
+            createPictureImage({ item: thumbnailHover?.productListingThumbnailMobile, className: 'w-full' })
         );
     }
 
