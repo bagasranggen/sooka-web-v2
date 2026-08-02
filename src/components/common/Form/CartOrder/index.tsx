@@ -37,10 +37,11 @@ export type CartOrderFormFields = {
 export type CartOrderProps = {
     price?: number;
     priceCurrency?: React.ReactNode;
+    note?: React.ReactNode;
     onSubmit?: (data: CartOrderFormFields) => void;
 };
 
-const CartOrder = ({ price, priceCurrency, onSubmit }: CartOrderProps): React.ReactElement => {
+const CartOrder = ({ price, priceCurrency, note, onSubmit }: CartOrderProps): React.ReactElement => {
     const {
         register,
         handleSubmit,
@@ -68,9 +69,7 @@ const CartOrder = ({ price, priceCurrency, onSubmit }: CartOrderProps): React.Re
                 Order Details
             </Heading>
 
-            <small className="block text-[1.2rem] leading-1.5 mb-0.5">
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad illum ipsa ipsum iste molestias obcaecati
-            </small>
+            {note && <small className="block text-[1.2rem] leading-1.5 mb-0.5">{note}</small>}
 
             <Columns gutterY={{ xs: 1, xl: 4 }}>
                 <Columns.Column
