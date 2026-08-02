@@ -30,6 +30,7 @@ export const FRAGMENT_PRODUCT_INFO = gql`
     ${FRAGMENT_MEDIA({
         name: 'thumbnail',
         on: 'MediaProduct',
+        hasPortrait: true,
         sizesHandles: [
             'bannerDesktop',
             'bannerTablet',

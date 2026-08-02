@@ -4,10 +4,11 @@ export type FragmentMediaProps = {
     on: 'MediaGlobal' | 'MediaProduct' | 'MediaAddon' | 'MediaGallery' | 'MediaMarquee' | 'MediaDualPanel';
     name?: string;
     sizesHandles?: string[];
+    hasPortrait?: boolean;
 };
 
 export const FRAGMENT_MEDIA = (props?: FragmentMediaProps) => {
-    const base = `
+    const baseQuery = `
         src: url
         filename
         width
@@ -20,7 +21,7 @@ export const FRAGMENT_MEDIA = (props?: FragmentMediaProps) => {
             sizes += ' ';
             sizes += `
                 ${handle} {
-                    ${base}
+                    ${baseQuery}
                 }
             `;
         });
@@ -32,13 +33,29 @@ export const FRAGMENT_MEDIA = (props?: FragmentMediaProps) => {
     let assetVolume = 'Media';
     if (props?.on) assetVolume = props.on;
 
+    let sizesQuery = '';
+    if (sizes) sizesQuery = `sizes {${sizes}}`;
+
+    let portraitQuery = '';
+    if (props?.hasPortrait) {
+        portraitQuery = `
+            portraitAssets {
+                ${baseQuery}
+                
+                ${sizesQuery}
+            }
+        `;
+    }
+
     return gql`
         ${`
             fragment ${fragmentName} on ${assetVolume} {
-                ${base}
+                ${baseQuery}
                 alt
                 
-                ${sizes ? `sizes {${sizes}}` : ''}
+                ${sizesQuery}
+               
+                ${portraitQuery}
             }
         `}
     `;
