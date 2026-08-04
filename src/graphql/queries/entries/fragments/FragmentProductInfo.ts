@@ -35,6 +35,7 @@ export const FRAGMENT_PRODUCT_INFO = gql`
             'bannerDesktop',
             'bannerTablet',
             'bannerMobile',
+            'productPopupBanner',
             'productDetailBanner',
             'productDetailSticky',
             'productDetailMobile',
