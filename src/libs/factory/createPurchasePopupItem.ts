@@ -31,19 +31,23 @@ export const createPurchasePopupItem = ({
             if (typeof item === 'number') return;
             if (!item?.src) return;
 
-            const { data } = checkMediaStatus({
+            const { data, hasPortrait } = checkMediaStatus({
                 item: item as any,
-                handles: ['productDetailBanner', 'productDetailMobile'],
+                handles: ['productPopupBanner', 'productDetailBanner', 'productDetailMobile'],
                 volumeAssets: 'mediaProducts',
             });
 
+            let portrait = hasPortrait ? data?.portraitAssets : data;
+
             const tmp: NonNullable<PurchaseProps['media']>[number] = [];
 
-            if (data?.productDetailBanner) {
+            console.log({ data });
+
+            if (portrait?.productPopupBanner) {
                 tmp.push(
                     createPictureImage({
-                        item: data.productDetailBanner,
-                        media: data?.productDetailMobile ? 768 : undefined,
+                        item: portrait.productPopupBanner,
+                        media: portrait?.productDetailMobile ? 768 : undefined,
                     })
                 );
             }
